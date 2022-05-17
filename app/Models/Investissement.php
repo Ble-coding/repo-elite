@@ -17,8 +17,10 @@ class Investissement extends Model
     'customer_id',
     //  'suppleant_id',
     'montant',
-    'investiman',
-    //  'suppleant',
+    'envoie_id',
+    'client_id',
+    'intervenant_id',
+    'particulier_id',
        'forfait_id','status',
          'choix','bonus', 'jalon', 
          'compteur',
@@ -37,9 +39,10 @@ protected static function booted() {
 
 
 
-public function suppleant(){
-    return $this->belongsTo('App\Models\Suppleant');
-}
+// public function intervenant(){
+//     return $this->belongsTo('App\Models\Customer');
+// }
+
 
 public function customer(){
     return $this->belongsTo('App\Models\Customer');
@@ -57,9 +60,9 @@ public function customer(){
         return $this->belongsTo('App\Models\Forfait' );
     }
 
-    // public function forfait(){
-    //     return $this->belongsTo(Forfait::class, 'forfait_id');
-    // }
+    public function particulier(){
+        return $this->belongsTo('App\Models\Particulier' );
+    }
     public function diminishes(){
         return $this->hasMany('App\Models\Diminish');
     }

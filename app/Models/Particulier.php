@@ -50,16 +50,33 @@ public function user(){
 public function depots(){
     return $this->hasMany('App\Models\Depot');
 }
+
+public function investissements(){
+    return $this->hasMany('App\Models\Investissement');
+}
+
 public function soldes(){
     return $this->hasMany('App\Models\Solde');
 }
 public function retraits(){
     return $this->hasMany('App\Models\Retrait');
 }
+public function tracs(){
+    return $this->hasMany('App\Models\Trac');
+}
+public function bonuses(){
+    return $this->hasMany('App\Models\Bonus');
+}
+
 public function piece(){
     return $this->belongsTo('App\Models\Piece');
 }
 public function type(){
     return $this->belongsTo('App\Models\Type');
 }
+
+public function diminishes(){
+    return $this->hasMany('App\Models\Diminish');
+}
+
 }

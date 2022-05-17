@@ -144,7 +144,7 @@
                                                 <div class="row">
                                                     <div class="col-12"> 
                                                         {{--  --}}
-                                                        <button  disabled style="background-color:#ff0017; color:#fff" class="btn btn-block px-4"> {{ __('S\'inscrire') }}</button>
+                                                        <button   style="background-color:#ff0017; color:#fff" class="btn btn-block px-4"> {{ __('S\'inscrire') }}</button>
                                                     </div>
                                                     <div class="col-12 mt-1 text-center">
                                                         <span class="text-bold text-center">INSCRIPTION INDISPONIBLE POUR LE MOMENT</span>

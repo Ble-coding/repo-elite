@@ -176,6 +176,11 @@ class CustomersController extends Controller
         return view('customer.show', compact('customer'));
     }
 
+    public function print(Customer $customer)
+ {
+        return view('customer.print', compact('customer'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

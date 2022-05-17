@@ -17,8 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('montantB');
             // $table->string('montant');
-            $table->string('investiman');
+            // $table->string('investiman');
             $table->unsignedbigInteger('customer_id')->index()->nullable();
+            $table->unsignedbigInteger('particulier_id')->index()->nullable();
+            $table->unsignedbigInteger('client_id')->index()->nullable();
+            $table->unsignedbigInteger('intervenant_id')->index()->nullable();
             $table->string('bonus')->nullable();
 
             //  $table->string('retire');
@@ -28,6 +31,10 @@ return new class extends Migration
             $table->timestamps();
             // $table->foreign('forfait_id')->references('id')->on('forfaits');
             $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('intervenant_id')->references('id')->on('customers');
+            $table->foreign('particulier_id')->references('id')->on('particuliers');
+
         });
     }
 

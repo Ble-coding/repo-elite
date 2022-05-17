@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedbigInteger('forfait_id')->index();
             $table->string('montant');
-            $table->string('investiman');
+            // $table->string('investiman');
+            $table->unsignedbigInteger('particulier_id')->index()->nullable();
+            $table->unsignedbigInteger('client_id')->index()->nullable();
+            $table->unsignedbigInteger('intervenant_id')->index()->nullable();
              $table->enum('choix',['Oui','Non'])->default('Non');
             $table->enum('jalon',['Oui','Non'])->default('Non');
             $table->unsignedbigInteger('customer_id')->index()->nullable();
@@ -27,11 +30,17 @@ return new class extends Migration
              $table->bigInteger('compteur');
              $table->string('retire');
              $table->string('total');
+            //  $table->string('compte');
+             $table->unsignedbigInteger('envoie_id')->index()->nullable();
              $table->string('soustract');
              $table->dateTime('date_termine')->nullable();
             $table->timestamps();
             $table->foreign('forfait_id')->references('id')->on('forfaits');
             $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('envoie_id')->references('id')->on('envoies');
+            $table->foreign('intervenant_id')->references('id')->on('customers');
+            $table->foreign('particulier_id')->references('id')->on('particuliers');
         });
     }
 

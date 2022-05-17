@@ -103,11 +103,11 @@
 																		<th class="border-bottom-0 w-20">Numéro compte</th>
 																		<th class="border-bottom-0 w-20">Nom & prénoms</th>	
 																		<th class="border-bottom-0 w-15">Date de naissance</th>
-																		<th class="border-bottom-0 w-30">Email</th>
+																		{{-- <th class="border-bottom-0 w-30">Email</th> --}}
 																		<th class="border-bottom-0 w-30">Tel</th>
-																		@can('manage-users')
+																		{{-- @can('manage-users')
 																		<th class="border-bottom-0 w-30">Admin</th>
-																		@endcan
+																		@endcan --}}
 																	
 																		<th class="border-bottom-0 w-10">Actions</th>
 																	</tr>
@@ -121,7 +121,7 @@
 																		$image = DB::table('customers')->where('id', 1)->first();
 																		$images = explode('|', $customer->image);
 																	   @endphp  
-																		 <td>
+																		 <td> 
 																			{{-- <span class="avatar brround avatar-md d-block">	 --}}																			
 																				<div class="user-pic">
 																					<img src="{{URL::to($images[0])}}" style="height:40px;width:40px" alt="img" class="avatar avatar-md brround">
@@ -131,21 +131,22 @@
 																		<td>{{$customer->code}}</td>
 																		 <td>{{$customer->name}} {{$customer->prename}}</td>       
 																		 <td>{{\Carbon\Carbon::parse($customer->datenaiss)->format('d/m/Y')}}</td> 
-																		 <td>{{$customer->email}}</td> 
-																		 <td>{{$customer->tel}}</td>   
-																		  @can('manage-users')
+																		 {{-- <td></td>  --}}
+																		 <td>{{$customer->tel}} <br> {{$customer->email}}</td>   
+																		  {{-- @can('manage-users')
 																		  <td>{{$customer->user->name}} -- {{implode(' , ', $customer->user->roles()->pluck('name')->toArray())}}</td> 
-																		  @endcan  
+																		  @endcan   --}}
 																		                                                 
 																		 <td>
 																			{{-- @can('show-customers') --}}
 																			<a href="{{ route('customers.show' , ['customer' => $customer->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
+																			<a href="{{ route('customers.print' , ['customer' => $customer->id]) }}" style="background-color:#eee;" class="btn btn-">🖨️</a>
 																			{{-- @endcan --}} 
 																			@can('edit-customers')
 																			   <a href="{{ route('customers.edit' , ['customer' => $customer->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a>
 																			   @endcan
 																			   {{-- @can('delete-customers') --}}
-																			   <form class="d-inline" method="POST" action="{{ route('customers.destroy' , ['customer' => $customer->id]) }}">
+											 								   <form class="d-inline" method="POST" action="{{ route('customers.destroy' , ['customer' => $customer->id]) }}">
 																				@csrf
 																				@method('DELETE')
 																				<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client. Cette action est irréversible ?');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>

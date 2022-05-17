@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Piece;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Redirect;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
+use Illuminate\Support\Facades\Redirect;
+
+
 class UsersController extends Controller
 {
     public function __construct()
@@ -72,8 +78,8 @@ class UsersController extends Controller
 $user->save();
 
 
-
-        return Redirect::route('admin.users.create')->with('message','Les informations de l\'utilisateur ' . $user->name .' ont bien été enregistrées.');
+ 
+        return Redirect::route('admin.users.index')->with('message','Les informations de l\'utilisateur ' . $user->name .' ont bien été enregistrées.');
     }
 
     /**
@@ -116,14 +122,29 @@ $user->save();
      */
     public function update(Request $request, User $user)
     {
+
+ 
+        
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error","Votre mot de passe actuel ne correspond pas au mot de passe que vous avez fourni. Veuillez réessayer");
+        }
+
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()->with("error","Le nouveau mot de passe ne peut pas être le même que votre mot de passe actuel. Veuillez choisir un autre mot de passe.");
+        }
+
+        //Change Password
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new-password'));
         $user->roles()->sync($request->roles);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = $request->input('password');
+        // $user->password = $request->input('password');
         // $user->password = Hash::make($request->input('password'));
         $user->prename = $request->input('prename');
-        $user->tel = $request->input('tel');
-    
+        $user->tel = $request->input('tel'); 
 $user->save();
 
         return redirect()->route('admin.users.index')->with('message','Les informations de l\'utilisateur ' . $user->name .' ont bien été modifiées.');
@@ -165,11 +186,9 @@ $user->save();
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'prename' => ['required', 'string', 'max:255'],
-            'datenaiss' => ['required', 'string', 'max:255'],
-            'numpiece' => ['required', 'string', 'max:255'],
-            'dateexp' => ['required', 'string', 'max:255'],
-            // 'typepiece' => ['required', 'string', 'max:255'],
-            'piece_id' => 'required|integer',
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:6|confirmed',
+           
             'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
             'roles' => 'required'
         ]);

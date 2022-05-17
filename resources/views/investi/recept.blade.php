@@ -44,7 +44,9 @@
                     <div class="jumbotron">
                         <h1 class="display-3">Salut!</h1>
                 
-                                <p class="lead">Vous etes sur le point d'effectuer un retrait de bonus {{ number_format($investi->total, 0, ',', ' ') }} Fcfa du compte {{$investi->customer->code}} de {{$investi->customer->name}} {{$investi->customer->prename}}. 
+                                <p class="lead">Vous etes sur le point d'effectuer un retrait de bonus 
+                                    <strong>{{ number_format($investi->total, 0, ',', ' ') }}</strong> Fcfa du compte <strong>{{$investi->intervenant->code}}</strong> de  
+                                    <strong>{{$investi->intervenant->name}} {{$investi->intervenant->prename}}</strong>. 
 
                             Veuillez vous assurer de l'accord du client et d'avoir également la somme en caisse à lui remettre.
                              Cette action est irreversible.</p>

@@ -20,6 +20,10 @@ class Solde extends Model
 public function retraits(){
     return $this->hasMany('App\Models\Retrait');
 }
+
+public function transferts(){
+    return $this->hasMany('App\Models\Transfert');
+}
     public function particulier(){
         return $this->belongsTo('App\Models\Particulier');
     }

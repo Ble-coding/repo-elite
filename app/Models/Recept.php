@@ -32,6 +32,10 @@ public function user(){
     return $this->belongsTo('App\Models\User');
 }
 
+public function intervenant(){
+    return $this->belongsTo('App\Models\Customer');
+}
+
 public function customer(){
     return $this->belongsTo('App\Models\Customer');
 }

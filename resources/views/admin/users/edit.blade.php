@@ -9,7 +9,7 @@
 							<div class="page-leftheader">
 								<h4 class="page-title mb-0">Administration</h4>
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#"><i class="fe fe-file-text mr-2 fs-14"></i>Sous utilisateurs</a></li>
+									<li class="breadcrumb-item"><a href="#"><i class="fe fe-file-text mr-2 fs-14"></i>Admin</a></li>
 									<li class="breadcrumb-item active" aria-current="page"><a href="#">Edit Admin</a></li>
 								</ol>
 							</div>
@@ -23,13 +23,19 @@
 @endsection
 @section('content')
 
+@if(session()->has('message'))
+	<div class="alert alert-success" role="alert">
+		{{ session()->get('message') }}
+	</div>
+@endif
+
 <div class="row">
 <div class="col-md-2">
 
 </div>
 <div class="card col-md-8">
     <div class="card-header">
-        <h3 class="card-title">Modification des informations du sous utilisateurs {{ $user->name}}</h3>
+        <h3 class="card-title">Modification des informations de Admin {{ $user->name}}</h3>
     </div>
     <div class="card-body">
         <div class="row">
@@ -38,10 +44,11 @@
             </div>
             <div class="col-md-10">
            
-                                                        <form class="form-horizontal" action="{{ route('admin.users.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">   
+                {{-- password.update --}}
+                  <form class="form-horizontal" action="{{ route('admin.users.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">   
                                                             @method('PATCH')                                    
                                                                 @include('includes.formuser')
-                                                            <div class="text-wrap">
+                                                             <div class="text-wrap">
                                                             <div class="btn-list text-right">
                                                                 <button type="submit" style="background:#262626; color:#fff" class="btn btn">Modifier</button>
                                                             </div>

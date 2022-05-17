@@ -78,6 +78,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Recept');
     }
 
+    public function transferts(){
+        return $this->hasMany('App\Models\Transfert');
+    }
+
     public function decaisses(){
         return $this->hasMany('App\Models\Decaisse');
     }

@@ -21,6 +21,9 @@ Route::get('/404', function () {
     return view('404');   
 });  
 
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->middleware(['auth'])->name('home');
 // Route::get('home/chart', [App\Http\Controllers\HomeController::class, 'chart']);
  
@@ -34,6 +37,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->middl
 // Route::patch('/visiteur/{visiteur}', [App\Http\Controllers\VisiteursController::class, 'update'])->name('visiteur.update');
 // Route::delete('/visiteur/{visiteur}', [App\Http\Controllers\VisiteursController::class, 'destroy'])->name('visiteur.destroy');
 // Route::put('/visiteur/{visiteur}/restore', [App\Http\Controllers\VisiteursController::class, 'restore'])->name('visiteur.restore');
+ 
+Route::resource('/transferts', 'App\Http\Controllers\TransfertsController');
 
 
 Route::prefix('elite')->name('elite.')->group(function() {
@@ -101,10 +106,7 @@ Route::put('/forfaits/{forfait}/restore', [App\Http\Controllers\ForfaitsControll
   
 // });
 
-//Epargne_Particuliers  ->middleware('can:manage-particuliers')
-// Route::prefix('epargne_particulier')->middleware('can:manage-particuliers')->name('epargne_particulier.')->group(function() {
-//     Route::resource('/epargne_particuliers', 'App\Http\Controllers\Epargne_ParticuliersController');
-// });
+
 
 // Route::resource('/particuliers', 'App\Http\Controllers\ParticuliersController');
 Route::get('/particuliers', [App\Http\Controllers\ParticuliersController::class, 'index' ])->name('particuliers.index');
@@ -153,6 +155,7 @@ Route::get('/customers', [App\Http\Controllers\CustomersController::class, 'inde
 Route::get('/customers/create', [App\Http\Controllers\CustomersController::class, 'create'])->name('customers.create');
 Route::post('/customers', [App\Http\Controllers\CustomersController::class, 'store'])->name('customers.store');
 Route::get('/customers/{customer}', [App\Http\Controllers\CustomersController::class, 'show'])->name('customers.show');
+Route::get('/customers/print/{customer}', [App\Http\Controllers\CustomersController::class, 'print'])->name('customers.print');
 Route::get('/customers/{customer}/edit', [App\Http\Controllers\CustomersController::class, 'edit'])->name('customers.edit');
 Route::patch('/customers/{customer}', [App\Http\Controllers\CustomersController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{customer}', [App\Http\Controllers\CustomersController::class, 'destroy'])->name('customers.destroy');

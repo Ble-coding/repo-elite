@@ -1,10 +1,10 @@
 @csrf
 <div class="input-group mb-4">
     <div class="input-group-prepend">
-        <div class="input-group-text">
-            <i class="fe fe-user"></i>
+        <div class="input-group-text"> 
+            <i class="fe fe-user"></i> 
         </div>
-    </div>
+    </div> 
     <input  value="{{ old('name') ?? $user->name }}" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="{{ __('Nom') }}" id="name" name="name">
                  @error('name')
                           <div class="invalid-feedback">
@@ -51,6 +51,57 @@
             </div>
     @enderror
 </div>
+
+
+
+
+
+<div class="input-group mb-4">
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+            <i class="fe fe-lock"></i>
+        </div>
+    </div>
+    <input name="current-password" class="form-control {{ $errors->has('current-password') ? ' has-error' : '' }}"  id="current-password" type="password"  placeholder="Mot de passe actuel" required>
+
+        @if ($errors->has('current-password'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('current-password') }}</strong>
+                </span>
+            @endif
+    </div>
+
+
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <i class="fe fe-lock"></i>
+            </div>
+        </div>
+        <input name="new-password" class="form-control {{ $errors->has('new-password') ? ' has-error' : '' }}"  id="new-password" type="password"  placeholder="Nouveau mot de passe" required>
+    
+                @if ($errors->has('new-password'))
+                   <span class="help-block">
+                        <strong>{{ $errors->first('new-password') }}</strong>
+                    </span>
+                @endif
+    </div>
+
+
+
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <i class="fe fe-lock"></i>
+            </div>
+        </div>
+        <input name="new-password-confirm" class="form-control {{ $errors->has('new-password') ? ' has-error' : '' }}"  id="new-password-confirm" type="password"  placeholder="Confirmation mot de passe" required>
+    
+    </div>
+
+
+
+
 
 
 {{-- <div class="input-group mb-4">
@@ -113,23 +164,11 @@
    </div>
 @enderror
             </div> --}}
-
-            <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fe fe-lock"></i>
-                    </div>
-                </div>
-                <input  value="{{ old('password') ?? $user->password }}" class="form-control @error('password') is-invalid @enderror" type="password" placeholder="{{ __('Mot de passe') }}" id="password" name="password">
-                @error('password')
-                         <div class="invalid-feedback">
-                                           {{ $errors->first('password') }}
-                        </div>
-                @enderror
-                        </div>
+ 
+            {{-- 
 
                        
-                                    @if(Route::is('admin.users.create') )
+                                    
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -137,9 +176,8 @@
                                             </div>
                                         </div>
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="{{ __('Confirmation mot de passe') }}">
-                                                </div>
-                                @endif
-
+                                    </div> --}}
+                                
 
 
 

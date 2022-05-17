@@ -18,8 +18,11 @@ class Somme extends Model
     //     'jalon',
 
         'montant',
-    'investiman',
+    'envoie_id',
      'customer_id',
+     'client_id',
+     'intervenant_id',
+     'particulier_id',
        'forfait_id','status',
          'choix','bonus', 'jalon', 'compteur',
          'retire', 'total','soustract','date_termine',
@@ -38,20 +41,30 @@ public function forfait(){
 }
 
 
-public function suppleant(){
-    return $this->belongsTo('App\Models\Suppleant');
+public function client(){
+    return $this->belongsTo('App\Models\Client');
 }
 public function customer(){
     return $this->belongsTo('App\Models\Customer');
 }
-// public function diminish(){
-//     return $this->belongsTo('App\Models\Diminish');
-// }
+public function transferts(){
+    return $this->hasMany('App\Models\Transfert');
+} 
 
+public function transfts(){
+    return $this->hasMany('App\Models\Transfert');
+} 
 public function diminishes(){
     return $this->hasMany('App\Models\Diminish');
 }
-    public function investi(){
-        return $this->belongsTo('App\Models\Investissement');
+    public function particulier(){
+        return $this->belongsTo('App\Models\Particulier');
     }
+
+    public function intervenant(){
+        return $this->belongsTo('App\Models\Customer');
+    } 
+   
+ 
+    
 }

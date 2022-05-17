@@ -24,6 +24,10 @@ class Sode extends Model
     public function depositarys(){
         return $this->hasMany('App\Models\Depositary');
     }
+
+    public function transferts(){
+        return $this->hasMany('App\Models\Transfert');
+    }
     public function removes(){
         return $this->hasMany('App\Models\Remove');
     }

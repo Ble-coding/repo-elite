@@ -29,7 +29,23 @@
 </div>
 <div class="card col-md-10">
     <div class="card-header">
-        <h3 class="card-title">Retrait du compte {{substr($investi->investiman, 0, 8)}} de {{substr($investi->investiman, 12)}} </h3>
+        <h3 class="card-title">Retrait du compte    @if ($investi->particulier_id !== Null)
+            <td>{{$investi->particulier->code}} </td>
+        @elseif($investi->client_id !== Null)
+            <td>{{$investi->client->code}}</td>
+        @elseif($investi->customer_id !== Null)
+        <td>{{$investi->customer->code}}</td>
+        @else
+         
+        @endif de    @if ($investi->particulier_id !== Null)
+            <td>{{$investi->particulier->name}} {{$investi->particulier->prename}}</td>
+        @elseif($investi->client_id !== Null)
+            <td> {{$investi->client->name}} {{$investi->client->prename}}</td>
+        @elseif($investi->customer_id !== Null)
+        <td>{{$investi->customer->name}} {{$investi->customer->prename}}</td>
+        @else
+         
+        @endif</h3>
     </div>
     <div class="card-body">
         <div class="row">
@@ -48,7 +64,23 @@
                      
                                    
                                 @if($investi->compteur = 1)
-                                <p class="lead">Vous etes sur le point d'effectuer un retrait de {{ number_format($v + $investi->montant, 0, ',', ' ') }} Fcfa du compte {{substr($investi->investiman, 0, 8)}} de {{substr($investi->investiman, 11)}}. 
+                                <p class="lead">Vous etes sur le point d'effectuer un retrait de {{ number_format($v + $investi->montant, 0, ',', ' ') }} Fcfa du compte @if ($investi->particulier_id !== Null)
+                                    <td>{{$investi->particulier->code}} </td>
+                                @elseif($investi->client_id !== Null)
+                                    <td>{{$investi->client->code}}</td>
+                                @elseif($investi->customer_id !== Null)
+                                <td>{{$investi->customer->code}}</td>
+                                @else
+                                 
+                                @endif de    @if ($investi->particulier_id !== Null)
+                                    <td>{{$investi->particulier->name}} {{$investi->particulier->prename}}</td>
+                                @elseif($investi->client_id !== Null)
+                                    <td> {{$investi->client->name}} {{$investi->client->prename}}</td>
+                                @elseif($investi->customer_id !== Null)
+                                <td>{{$investi->customer->name}} {{$investi->customer->prename}}</td>
+                                @else
+                                 
+                                @endif. 
                                 @else
                                 Impossible 
                                 @endif
@@ -58,9 +90,41 @@
                             <div style="display:none" >{{$v1 = $v0/$investi->forfait->duree}}</div> 
                
                             @if ($investi->compteur > 1)
-                            <p class="lead">Vous etes sur le point d'effectuer un retrait de {{ number_format($v1, 0, ',', ' ') }} Fcfa du compte {{substr($investi->investiman, 0, 8)}} de {{substr($investi->investiman, 12)}}.   
+                            <p class="lead">Vous etes sur le point d'effectuer un retrait de {{ number_format($v1, 0, ',', ' ') }} Fcfa du compte @if ($investi->particulier_id !== Null)
+                                <td>{{$investi->particulier->code}} </td>
+                            @elseif($investi->client_id !== Null)
+                                <td>{{$investi->client->code}}</td>
+                            @elseif($investi->customer_id !== Null)
+                            <td>{{$investi->customer->code}}</td>
+                            @else
+                             
+                            @endif de    @if ($investi->particulier_id !== Null)
+                                <td>{{$investi->particulier->name}} {{$investi->particulier->prename}}</td>
+                            @elseif($investi->client_id !== Null)
+                                <td> {{$investi->client->name}} {{$investi->client->prename}}</td>
+                            @elseif($investi->customer_id !== Null)
+                            <td>{{$investi->customer->name}} {{$investi->customer->prename}}</td>
+                            @else
+                             
+                            @endif.   
                             @elseif($investi->compteur = 1)
-                            <p class="lead">Vous etes sur le point d'effectuer un retrait de {{ number_format($v1 + $investi->montant, 0, ',', ' ') }} Fcfa du compte {{substr($investi->investiman, 0, 8)}} de {{substr($investi->investiman, 12)}}. 
+                            <p class="lead">Vous etes sur le point d'effectuer un retrait de {{ number_format($v1 + $investi->montant, 0, ',', ' ') }} Fcfa du compte @if ($investi->particulier_id !== Null)
+                                <td>{{$investi->particulier->code}} </td>
+                            @elseif($investi->client_id !== Null)
+                                <td>{{$investi->client->code}}</td>
+                            @elseif($investi->customer_id !== Null)
+                            <td>{{$investi->customer->code}}</td>
+                            @else
+                             
+                            @endif de    @if ($investi->particulier_id !== Null)
+                                <td>{{$investi->particulier->name}} {{$investi->particulier->prename}}</td>
+                            @elseif($investi->client_id !== Null)
+                                <td> {{$investi->client->name}} {{$investi->client->prename}}</td>
+                            @elseif($investi->customer_id !== Null)
+                            <td>{{$investi->customer->name}} {{$investi->customer->prename}}</td>
+                            @else
+                             
+                            @endif. 
                             @else
                             Impossible 
                             @endif

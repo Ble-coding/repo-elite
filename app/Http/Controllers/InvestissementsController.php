@@ -3,8 +3,6 @@
 namespace App\Http\Controllers; 
 
 use App\Models\Trac;
-
-use NumberFormatter;
 use App\Models\Bonus;
 use App\Models\Somme;
 use App\Models\Client;
@@ -28,6 +26,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Envoie;
 
 
 class InvestissementsController extends Controller
@@ -58,13 +57,13 @@ class InvestissementsController extends Controller
 //      , 'suppleants.email AS email_parrain')
 //    ->get();
 
-         $investis = Investissement::where('status', 1)->with('client','customer','suppleant','forfait')
+         $investis = Investissement::where('status', 1)->with('client','customer','particulier','forfait')
         ->get();
 
-        $transactions = Investissement::where('status', 0)->with('customer','suppleant','forfait')
+        $transactions = Investissement::where('status', 0)->with('customer','particulier','forfait', 'client',)
         ->get();
 
-        $sommes = Somme::where('status', 1)->with('customer','forfait')
+        $sommes = Somme::where('status', 1)->with('customer','forfait', 'customer','client','particulier')
         ->get();
 
       
@@ -79,27 +78,27 @@ class InvestissementsController extends Controller
 
     //   dd($result1);
 
- $customs = Customer::selectRaw("
-            id ,
-            code ,prename ,email , tel ,name
-        ");
-$clients = Client::selectRaw("
-        id ,
-        code ,prename ,email , tel ,name
-    ");
+//  $customs = Customer::selectRaw("
+//             id ,
+//             code ,prename ,email , tel ,name
+//         ");
+// $clients = Client::selectRaw("
+//         id ,
+//         code ,prename ,email , tel ,name
+//     ");
 
-$particuliers = Particulier::selectRaw("
-    id ,
-    code ,prename ,email , tel ,name
-")->unionAll($clients)
-->unionAll($customs)
-->groupBy('id')
-->groupBy('code')
-->groupBy('name')
-->groupBy('prename')
-->groupBy('tel')
-->groupBy('email')
-->get();
+// $particuliers = Particulier::selectRaw("
+//     id ,
+//     code ,prename ,email , tel ,name
+// ")->unionAll($clients)
+// ->unionAll($customs)
+// ->groupBy('id')
+// ->groupBy('code')
+// ->groupBy('name')
+// ->groupBy('prename')
+// ->groupBy('tel')
+// ->groupBy('email')
+// ->get();
 
 // dd($particuliers);
 
@@ -135,8 +134,10 @@ $particuliers = Particulier::selectRaw("
 
  
         $suppleants = Customer::all();
-        // $custome = Customer::get();
-        // $particulieres = Particulier::get();
+        $customers = Customer::all();
+        $particuliers = Particulier::all();
+        $clients = Client::all();
+        $envoies = Envoie::all();
 
         // $resulte = $custome->merge($particulieres);
 
@@ -178,7 +179,8 @@ $particuliers = Particulier::selectRaw("
     //  dd($customers);
 
     return view('investi.index' , compact('investis', 'investi', 'particuliers', 'forfaits',
-    'diminishes', 'sumMontantInvesti','suppleants','sommes','transactions',
+    'diminishes', 'sumMontantInvesti','suppleants','sommes','transactions','customers'
+    ,'particuliers','clients','envoies'
         ));
   
 
@@ -188,9 +190,9 @@ $particuliers = Particulier::selectRaw("
 
      public function initial()
     {  
-        $bonus = Bonus::with('customer')->where('total', '!=', 0)->get();
-        $tracs = Trac::with('customer')->get();
-        $recepts = Recept::with('customer')->get();
+        $bonus = Bonus::with('intervenant')->where('total', '!=', 0)->get();
+        $tracs = Trac::with('intervenant')->get();
+        $recepts = Recept::with('intervenant')->get();
         return view('investi.initial' , compact('bonus','tracs','recepts'));
     }
 
@@ -209,12 +211,14 @@ $particuliers = Particulier::selectRaw("
         // dd(request('code_bonus'));
                 $recept = new Recept();
                 $recept->code_bonus  = request('code_bonus'); 
-                $recept->customer_id  = request('customer_id');
+                $recept->intervenant_id  = request('intervenant_id');
+
+                // dd(request('intervenant_id'));
 
         $solde = Bonus::where([
-            ['customer_id', '=',  $recept->customer_id],
+            ['intervenant_id', '=',  $recept->intervenant_id],
              ['id', '=',  $recept->code_bonus],
-        ])->with('customer')->first();
+        ])->with('intervenant')->first();
 
    
               if($solde) 
@@ -222,12 +226,12 @@ $particuliers = Particulier::selectRaw("
                 $recept->montant = $total;
                 $recept->save();
                 $solde->decrement('total', $recept->montant);
-                Mail::to($solde->customer->email)->send(new BonusMarkdownMail($investi));
+                // Mail::to($solde->intervenant->email)->send(new BonusMarkdownMail($investi));
               }     
                
        
 
-    return redirect()->route('investir.bonus.initial')->with('message', 'Félicitation, le retrait de bonus de '.$solde->customer->name . ' '. $solde->customer->prename.' a bien été enregistré.');
+    return redirect()->route('investir.bonus.initial')->with('message', 'Félicitation, le retrait de bonus de a bien été enregistré.');
     }
     /**
      * Show the form for creating a new resource.
@@ -260,7 +264,11 @@ $particuliers = Particulier::selectRaw("
 
             $investi->choix = request('choix');
             // $investi->status = 1;
-            $investi->investiman = request('investiman');
+            // $investi->investiman = request('investiman');
+            $investi->particulier_id = request('particulier_id');
+            $investi->client_id = request('client_id');
+            $investi->envoie_id = request('envoie_id');
+            $investi->customer_id = request('customer_id');
             $investi->jalon = request('jalon');
 
             if ($investi->jalon == 'Oui') {
@@ -284,11 +292,11 @@ $particuliers = Particulier::selectRaw("
 
             if($investi->choix == 'Oui'){
                 // $investi->suppleant = request('suppleant');
-                $investi->customer_id = request('customer_id');
+                $investi->intervenant_id = request('intervenant_id');
             } else{
-                $investi->customer_id = Null;             
+                $investi->intervenant_id = Null;             
             }
-            $investi->bonus =   $investi->customer_id ==  '' ? 0 : $bonus;
+            $investi->bonus =   $investi->intervenant_id ==  '' ? 0 : $bonus;
             $investi->forfait_id = request('forfait_id');
             // $investi->compteur = request('forfait_id');
 
@@ -297,10 +305,10 @@ $particuliers = Particulier::selectRaw("
             if($min <= request('montant') && request('montant') <= $max ){
                 $investi->montant = request('montant');
                 // $somme = Somme::where([
-                //      ['customer', '=', $request->customer],
+                //      ['intervenant', '=', $request->intervenant],
                 //      ['jalon', '=', $request->jalon],
                 //      ['choix', '=', $request->choix],
-                //      ['customer', '=', $request->customer],
+                //      ['intervenant', '=', $request->intervenant],
                 //     ['forfait_id', '=', $request->forfait_id],
                 // ])->with('forfait')->first();
                
@@ -314,7 +322,11 @@ $particuliers = Particulier::selectRaw("
                             $somme->montant = request('montant');
                             $somme->choix = request('choix');
                             // $somme->status = 1;
-                            $somme->investiman = request('investiman');
+                            // $somme->investiman = request('investiman');
+                            $somme->particulier_id = request('particulier_id');
+                            $somme->client_id = request('client_id');
+                            $somme->customer_id = request('customer_id');
+                            $somme->envoie_id = request('envoie_id');
                             $somme->jalon = request('jalon');
                             if($somme->jalon == 'Oui'){
                                 $sommeJm = ($somme->montant * $pourcentageJ ) / 100 ;
@@ -334,22 +346,29 @@ $particuliers = Particulier::selectRaw("
                             }
 
                             if($somme->choix == 'Oui'){
-                                $somme->customer_id = request('customer_id');
+                                $somme->intervenant_id = request('intervenant_id');
 
 
-                                $trac = new Trac();
+                                 $trac = new Trac();
                                 $trac->montantB = request('montant'); 
-                                $trac->investiman = request('investiman');
+                                // $trac->investiman = request('investiman');
+                                $trac->particulier_id = request('particulier_id');
+                                $trac->client_id = request('client_id');
+                                
                                 $trac->customer_id = request('customer_id');
+                                $trac->intervenant_id = request('intervenant_id');
                                 $trac->bonus =  $bonus;
                                 $trac->total = $trac->montantB * ($trac->bonus) / 100;
                                 $trac->save();
 
                                 $solde = Bonus::where([
-                                    ['customer_id', '=', $trac->customer_id],
-                                    ['investiman', '=',  $trac->investiman],
-                                    // ['customer', '=',   $trac->total],
-                                ])->with('customer')->first();
+                                    ['intervenant_id', '=', $trac->intervenant_id],
+                                    // ['investiman', '=',  $trac->investiman],
+                                    ['particulier_id', '=',  $trac->particulier_id],
+                                    ['customer_id', '=',  $trac->customer_id],
+                                    ['client_id', '=',  $trac->client_id],
+                                    // ['intervenant', '=',   $trac->total],
+                                ])->with('intervenant')->first();
                         
                             
                                 if ($solde) {
@@ -359,8 +378,11 @@ $particuliers = Particulier::selectRaw("
                                 else {
                                     $ajout = new Bonus();
                                 $ajout->montantB = request('montant'); 
-                                $ajout->investiman= request('investiman');
+                                // $ajout->investiman= request('investiman');
+                                $ajout->particulier_id = request('particulier_id');
+                                $ajout->client_id = request('client_id');                           
                                 $ajout->customer_id = request('customer_id');
+                                $ajout->intervenant_id = request('intervenant_id');
                                 $ajout->bonus =  $bonus;
                                 $ajout->total = $ajout->montantB * ($ajout->bonus) / 100;
                                 $ajout->save();
@@ -369,9 +391,9 @@ $particuliers = Particulier::selectRaw("
                                 
                                    
                             } else{
-                                $somme->customer_id = Null;
+                                $somme->intervenant_id = Null;
                             }
-                            $somme->bonus =   $somme->customer_id  ==  '' ? 0 : $bonus;
+                            $somme->bonus =   $somme->intervenant_id  ==  '' ? 0 : $bonus;
                             $somme->forfait_id = request('forfait_id');
                     
 
@@ -379,7 +401,7 @@ $particuliers = Particulier::selectRaw("
                             $somme->save();
                     // }
  
-                    // dd($somme->customer = request('customer'));
+                    // dd($somme->intervenant = request('intervenant'));
                 $investi->save();
 
                 
@@ -422,30 +444,52 @@ public function storeded(Request $request , Investissement $investi)
     $diminish = new Diminish();
   
     
-    $diminish->investiman = request('investiman');
+    // $diminish->investiman = request('investiman');
+    
+  
+    // $diminish->envoie_id = request('envoie_id');
+    
     $diminish->jalon = request('jalon'); 
     $diminish->forfait_id = request('forfait_id');
-    $diminish->code_inv = request('code_inv'); 
+    $diminish->code_inv = request('code_inv');
+ $diminish->particulier_id = request('particulier_id');
+$diminish->client_id = request('client_id');
+$diminish->customer_id = request('customer_id');
 
-    // dd($diminish->code_inv);
+ 
+    // dd( $diminish->code_inv);
+
+    // $value = $diminish->particulier_id + $diminish->client_id + $diminish->customer_id;
+
+
     
 
                  $somme = Somme::where([
-                     ['investiman', '=', $diminish->investiman],
+                    //  ['investiman', '=', $diminish->investiman],
+                    // ['envoie_id', '=', $diminish->envoie_id],
+                    // ['investiman', '=',  $trac->investiman],
+                    ['particulier_id', '=',  $diminish->particulier_id ],
+                    ['customer_id', '=',  $diminish->customer_id ],
+                    ['client_id', '=', $diminish->client_id ],
                      ['jalon', '=', $diminish->jalon],
                      ['id', '=', $diminish->code_inv],
                     ['forfait_id', '=', $diminish->forfait_id],
                 ])->with('forfait')->first();
 
+                // dd( $somme);
             //     $investissement = Somme::where([
-            //         ['customer', '=', $diminish->customer],
+            //         ['intervenant', '=', $diminish->intervenant],
             //         ['jalon', '=', $diminish->jalon],
             //         ['id', '=', $diminish->code_inv],
             //        ['forfait_id', '=', $diminish->forfait_id],
             //    ])->with('forfait')->first();
 
             $sommeMontant =  Somme::where([
-                ['investiman', '=', $diminish->investiman],
+                // ['envoie_id', '=', $diminish->envoie_id],
+                // ['investiman', '=',  $trac->investiman],
+                ['particulier_id', '=',  $diminish->particulier_id],
+                ['customer_id', '=',  $diminish->customer_id],
+                ['client_id', '=',  $diminish->client_id],
                 ['jalon', '=', $diminish->jalon],
                 ['id', '=', $diminish->code_inv],
                ['forfait_id', '=', $diminish->forfait_id],
@@ -454,21 +498,33 @@ public function storeded(Request $request , Investissement $investi)
         
 
                 $sommeRetire =  Somme::where([
-                    ['investiman', '=', $diminish->investiman],
+                    // ['envoie_id', '=', $diminish->envoie_id],
+                    // ['investiman', '=',  $trac->investiman],
+                    ['particulier_id', '=',  $diminish->particulier_id],
+                    ['customer_id', '=',  $diminish->customer_id],
+                    ['client_id', '=',  $diminish->client_id],
                     ['jalon', '=', $diminish->jalon],
                     ['id', '=', $diminish->code_inv],
                    ['forfait_id', '=', $diminish->forfait_id],
                 ])->with('forfait')->first()['retire'];
             
                 $sommeTotal =  Somme::where([
-                    ['investiman', '=', $diminish->investiman],
+                    // ['envoie_id', '=', $diminish->envoie_id],
+                    // ['investiman', '=',  $trac->investiman],
+                    ['particulier_id', '=',  $diminish->particulier_id],
+                    ['customer_id', '=',  $diminish->customer_id],
+                    ['client_id', '=',  $diminish->client_id],
                     ['jalon', '=', $diminish->jalon],
                     ['id', '=', $diminish->code_inv],
                    ['forfait_id', '=', $diminish->forfait_id],
                 ])->with('forfait')->first()['total'];
             
                 $sommeDuree =  Somme::where([
-                    ['investiman', '=', $diminish->investiman],
+                    // ['envoie_id', '=', $diminish->envoie_id],
+                    // ['investiman', '=',  $trac->investiman],
+                    ['particulier_id', '=',  $diminish->particulier_id],
+                    ['customer_id', '=',  $diminish->customer_id],
+                    ['client_id', '=',  $diminish->client_id],
                     ['jalon', '=', $diminish->jalon],
                     ['id', '=', $diminish->code_inv],
                    ['forfait_id', '=', $diminish->forfait_id],
@@ -534,13 +590,14 @@ public function storeded(Request $request , Investissement $investi)
                 }
            
 
+
   
 
    
 
    
     
-    // dd($diminish->customer);
+    // dd($diminish->intervenant);
    
   
   
@@ -572,59 +629,48 @@ public function storeded(Request $request , Investissement $investi)
         if (Gate::denies('edit-investis')){
             return redirect()->route('investi.index');
         } 
-        $customs = Customer::selectRaw("
-        id ,
-        code ,prename ,email , tel ,name
-    ");
-$clients = Client::selectRaw("
-    id ,
-    code ,prename ,email , tel ,name
-");
+//         $customs = intervenant::selectRaw("
+//         id ,
+//         code ,prename ,email , tel ,name
+//     ");
+// $clients = Client::selectRaw("
+//     id ,
+//     code ,prename ,email , tel ,name
+// ");
 
-$particuliers = Particulier::selectRaw("
-id ,
-code ,prename ,email , tel ,name
-")->unionAll($clients)
-->unionAll($customs)
-->groupBy('id')
-->groupBy('code')
-->groupBy('name')
-->groupBy('prename')
-->groupBy('tel')
-->groupBy('email')
-->get();
-        // $custom = Customer::get();
+// $particuliers = Particulier::selectRaw("
+// id ,
+// code ,prename ,email , tel ,name
+// ")->unionAll($clients)
+// ->unionAll($customs)
+// ->groupBy('id')
+// ->groupBy('code')
+// ->groupBy('name')
+// ->groupBy('prename')
+// ->groupBy('tel')
+// ->groupBy('email')
+// ->get();
+        // $custom = intervenant::get();
         // $particuliers = Particulier::get();
 
         // $result = $custom->merge($particuliers);
 
         // $clients = Client::get();
 
-        // $customers = $result->merge($clients);
+        // $intervenants = $result->merge($clients);
 
         $suppleants = Customer::all();
-  
-        // $custome = Customer::get();
-        // $particulieres = Particulier::get();
+        $intervenants = Customer::all();
+        $particuliers = Particulier::all();
+        $clients = Client::all();
+        $envoies = Envoie::all();
 
-        // $resulte = $custome->merge($particulieres);
 
-        // $clientse = Client::get();
-
-        // $suppleants = $resulte->merge($clientse);
-        // $societ = DB::table('customers')->union(DB::table('clients'))
-        // ->union(DB::table('particuliers'))
-        // ->get();
-
-        
-        // $customers = DB::table('customers')->union(DB::table('clients'))
-        // ->union(DB::table('particuliers'))
-        // ->get();
 
         $forfaits = Forfait::all();
         return view('investi.edit',compact('investi',
-        'particuliers',
-         'suppleants','forfaits'));
+        'particuliers','intervenants','clients','suppleants',
+         'envoies','forfaits'));
     }
 
     /**
@@ -637,7 +683,7 @@ code ,prename ,email , tel ,name
     public function update(Request $request , Investissement $investi)
     {
 
-        $investi->customer_id = request('customer_id');
+        $investi->intervenant_id = request('intervenant_id');
         $investi->investiman;
         $investi->forfait_id = $request->input('forfait_id');
         $investi->montant = $request->input('montant');
@@ -664,9 +710,13 @@ code ,prename ,email , tel ,name
     private function validator(){
 
         return request()->validate([
-            'investiman' => ['required', 'string'],
+            // 'investiman' => ['required', 'string'],
             'code_bonus' => ['required', 'integer'],
             'forfait_id' => 'required|integer',
+            'intervenant_id' => 'required|integer',
+            'client_id' => 'required|integer',
+            'envoie_id' => 'required|integer',
+            'particulier_id' => 'required|integer',
             'montant' => 'required|integer',
             'suppleant' => ['required', 'string'],
             'customer_id' => ['required', 'integer'],

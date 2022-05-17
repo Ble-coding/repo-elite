@@ -164,8 +164,6 @@ public function storded(Request $request , Vente $vente)
     {
 
         // $request->validate([
- 
-        
 
         //     'sexe' => 'in:F,M',
         //     'situation' => 'in:Marie,Celibataire',
@@ -395,7 +393,7 @@ public function storeded(Request $request , Vente $vente)
     $rachat->payment = request('payment'); 
     $rachat->vente_id = request('vente_id');
     
-    // dd($rachat->visiteur_id);
+    dd($rachat->payment);
                 // dd($rachat->name);
                 // dd($rachat->prename);
                 // dd($rachat->immatricule);

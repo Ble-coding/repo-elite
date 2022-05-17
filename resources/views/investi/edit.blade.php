@@ -29,8 +29,17 @@
 </div>
 <div class="card col-md-8">
     <div class="card-header">
-        <div style="display:none">{{$v = $investi->investiman}}</div> 
-        <h3 class="card-title">Modification des informations de l'investissement du {{\Carbon\Carbon::parse($investi->updated_at)->format('d/m/Y')}} de {{substr($v, 12)}}
+        {{-- <div style="display:none">{{$v = $investi->investiman}}</div>  --}}
+        <h3 class="card-title">Modification des informations de l'investissement du {{\Carbon\Carbon::parse($investi->updated_at)->format('d/m/Y')}} de 
+            @if ($investi->particulier_id !== Null)
+            <td>{{$investi->particulier->code}} - {{$investi->particulier->name}} {{$investi->particulier->prename}}</td>
+        @elseif($investi->client_id !== Null)
+            <td>{{$investi->client->code}} - {{$investi->client->name}} {{$investi->client->prename}}</td>
+        @elseif($investi->intervenant_id !== Null)
+        <td>{{$investi->intervenant->code}} - {{$investi->intervenant->name}} {{$investi->intervenant->prename}}</td>
+        @else
+         
+        @endif
    </h3>
     </div>
     <div class="card-body">
@@ -73,7 +82,29 @@
             </div>
 @endsection
 @section('js')
-<script type="text/javascript"> 
+
+
+<script type="text/javascript">
+
+function mySelectfunction(){
+    getValue = document.getElementById("envoie_id").value;
+    if(getValue == 4){
+        document.getElementById("img1").style.display = "block";
+        document.getElementById("img2").style.display = "none";
+        document.getElementById("img3").style.display = "none";
+    }
+    if(getValue == 5){
+        document.getElementById("img1").style.display = "none";
+        document.getElementById("img2").style.display = "block";
+        document.getElementById("img3").style.display = "none";
+    }
+    if(getValue == 6){
+        document.getElementById("img1").style.display = "none";
+        document.getElementById("img2").style.display = "none";
+        document.getElementById("img3").style.display = "block";
+    }
+
+}
     function displayForm(c){ 
         if(c.value == "Oui"){ 
 
@@ -87,6 +118,7 @@
         } 
      }         
 </script>  
+
 		<!--INTERNAL Select2 js -->
 		<script src="{{URL::asset('assets/plugins/select2/select2.full.min.js')}}"></script>
 		<script src="{{URL::asset('assets/js/select2.js')}}"></script>

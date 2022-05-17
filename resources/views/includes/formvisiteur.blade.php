@@ -88,7 +88,7 @@
             @enderror 
         </div>
     </div>
-    <div class="form-group col-md-6 mb-4">
+    <div class="form-group col-md-6 mb-4"> 
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     <i class="fe fe-check-square"></i>

@@ -19,9 +19,12 @@ class Diminish extends Model
     //    'forfait_id',
     //     'jalon',
     //     'montant',
-        'investiman',
+        // 'investiman',
         //  'suppleant',
            'forfait_id',
+           'client_id',
+           'intervenant_id',
+           'particulier_id',
         //    'status',
             //  'choix',
             //  'bonus', 
@@ -49,6 +52,17 @@ protected static function booted() {
         return $this->belongsTo('App\Models\Investissement');
     }
     public function customer(){
+        return $this->belongsTo('App\Models\Customer');
+    }
+
+    public function client(){
+        return $this->belongsTo('App\Models\Client');
+    }
+
+    public function particulier(){
+        return $this->belongsTo('App\Models\Particulier');
+    }
+    public function intervenant(){
         return $this->belongsTo('App\Models\Customer');
     }
 

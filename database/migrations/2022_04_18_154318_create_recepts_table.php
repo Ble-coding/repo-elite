@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('recepts', function (Blueprint $table) {
             $table->id();
             $table->string('montant');
-            $table->unsignedbigInteger('customer_id')->index();
+            $table->unsignedbigInteger('intervenant_id')->index();
             $table->bigInteger('user_id');
             $table->bigInteger('code_bonus');
             
             $table->timestamps();
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('intervenant_id')->references('id')->on('customers');
         });
     }
 

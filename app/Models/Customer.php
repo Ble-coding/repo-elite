@@ -46,6 +46,8 @@ public function user(){
 }
 
 
+
+
 public function type(){
     return $this->belongsTo('App\Models\Type');
 }
@@ -54,6 +56,9 @@ public function sommes(){
     return $this->hasMany('App\Models\Somme');
 }
 
+public function tracs(){
+    return $this->hasMany('App\Models\Trac');
+}
 public function bonuses(){
     return $this->hasMany('App\Models\Bonus');
 }

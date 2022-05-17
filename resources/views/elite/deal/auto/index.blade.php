@@ -56,13 +56,15 @@
 		<div class="tabs-menu ">
 			<!-- Tabs -->
 			<ul class="nav panel-tabs">
-                @can('manage-particuliers')
+                {{-- @can('manage-visiteurs') --}}
 				<li class=""><a href="#tab1" class="active" data-toggle="tab">Nouveaux clients </a></li>
-                @endcan
+                {{-- @endcan --}}
+				@can('manage-particuliers')
 				<li><a href="#tab2" data-toggle="tab">Client</a></li>
-				{{-- @can('manage-particuliers')
+				@endcan
+				{{-- 
 				 <li><a href="{{route('elite.elites.create')}}">Vente</a></li>
-				@endcan --}}
+				 --}}
                 @can('manage-visiteurs')
 					<li><a href="#tab3" data-toggle="tab">Liste ventes</a></li>
 					 <li><a href="#tab4" data-toggle="tab">Versement effectués</a></li>
@@ -78,8 +80,9 @@
 	</div>
 	<div class="panel-body tabs-menu-body">
 		<div class="tab-content">
+		
 
-            @can('manage-particuliers')
+			@can('manage-particuliers')
                 <div class="tab-pane " id="tab2">				
                     <div class="card col-md-10">
                         <div class="card-header">
@@ -178,8 +181,10 @@
 						</div>
 					</form> 
                 </div> 
-            @endcan
+       
+				@endcan
 
+					{{-- @can('manage-visiteurs') --}}
 			<div class="tab-pane active" id="tab1">				
 				<div class="card col-md-10">
 					<div class="card-header">
@@ -259,6 +264,7 @@
 					</div>
 					<!-- End Row -->
 			</div>
+			{{-- @endcan --}}
 
 			<div class="tab-pane" id="tab3">				
 				<div class="card col-md-10">
@@ -415,257 +421,255 @@
 					</div>
 					<!-- End Row -->
 			</div>	
-			
-
-			
-<div class="tab-pane" id="tab4">				
-    <div class="card col-md-10">
-        <div class="card-header">
-            <h3 class="card-title">Liste des Versements effectués</h3>
-        </div>
-    </div>
-        <!-- Row -->
-        <div class="row flex-lg-nowrap">
-            <div class="col-12">
-                <div class="row flex-lg-nowrap">
-                    <div class="col-12 mb-3">  
-                        <div class="e-panel card">
-                            <div class="card-body">
-                                <div class="e-table">
-                                    <div class="table-responsive table-lg mt-3">
-                                        <table class="table table-bordered border-top text-nowrap" id="example-1">
-                                            <thead>
-                                                <tr>
-                                                    <th class="align-top border-bottom-0 wd-5"></th>
-                                                    <th class="border-bottom-0 w-20">Date</th>
-                                                            <th class="border-bottom-0 w-20">Id vent.</th>
-                                                            <th class="border-bottom-0 w-20">Nom & prénoms</th>	
-                                                            <th class="border-bottom-0 w-30">Tel</th>
-                                                            <th class="border-bottom-0 w-15">Immat véhicule</th>
-                                                            @can('manage-users')
-                                                            <th class="border-bottom-0 w-15">Type paiement</th>
-                                                            <th class="border-bottom-0 w-15">Val vente</th>
-                                                            {{-- <th class="border-bottom-0 w-30">Admin</th> --}}
-                                                            @endcan
-                                                            {{-- <th class="border-bottom-0 w-15">Val rachat</th> --}}
-                                                            <th class="border-bottom-0 w-10">montant versé</th>
-															{{-- <th class="border-bottom-0 w-10">Actions</th> --}}
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if(!empty($rachats) && $rachats->count())
-                                                    @foreach($rachats as $rachat) 
-                                                    <tr>
-                                                        <th scope="row">{{$rachat->id}}</th>
-                                                        <td>{{\Carbon\Carbon::parse($rachat->created_at)->format('d/m/Y')}}</td>           		
-                                                           <td>{{$rachat->vente->contrat}}</td>
-                                                            <td>{{$rachat->vente->name}} {{$rachat->vente->prename}}</td>       
-                                                            <td>{{$rachat->vente->tel}} </td> 
-                                                            <td>{{$rachat->vente->immatricule}} -- <br> {{$rachat->vente->marque}}</td>  
-                                                            
-                                                             @can('manage-users')
-                                                             <td>{{$rachat->payment}}</td> 
-                                                             <td>{{ number_format($rachat->vente->montant, 0, ',', ' ') }}</td> 
-                                                             {{-- <td>{{$rachat->user->name}} -- {{implode(' , ', $rachat->user->roles()->pluck('name')->toArray())}}</td>  --}}
-                                                             @endcan  
-                                                                
-                                                          
-                                                             <td>{{ number_format($rachat->montant, 0, ',', ' ') }}</td> 
-															 {{-- <td>
-																@can('manage-ventes') 
-																@if ($vente->compteur !== 0)
-																<a href="{{ route('elite.printers.printer' , ['vente' => $vente->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
-																@else
+					
+			<div class="tab-pane" id="tab4">				
+				<div class="card col-md-10">
+					<div class="card-header">
+						<h3 class="card-title">Liste des Versements effectués</h3>
+					</div>
+				</div>
+					<!-- Row -->
+					<div class="row flex-lg-nowrap">
+						<div class="col-12">
+							<div class="row flex-lg-nowrap">
+								<div class="col-12 mb-3">  
+									<div class="e-panel card">
+										<div class="card-body">
+											<div class="e-table">
+												<div class="table-responsive table-lg mt-3">
+													<table class="table table-bordered border-top text-nowrap" id="example-1">
+														<thead>
+															<tr>
+																<th class="align-top border-bottom-0 wd-5"></th>
+																<th class="border-bottom-0 w-20">Date</th>
+																		<th class="border-bottom-0 w-20">Id vent.</th>
+																		<th class="border-bottom-0 w-20">Nom & prénoms</th>	
+																		<th class="border-bottom-0 w-30">Tel</th>
+																		<th class="border-bottom-0 w-15">Immat véhicule</th>
+																		@can('manage-users')
+																		<th class="border-bottom-0 w-15">Type paiement</th>
+																		<th class="border-bottom-0 w-15">Val vente</th>
+																		{{-- <th class="border-bottom-0 w-30">Admin</th> --}}
+																		@endcan
+																		{{-- <th class="border-bottom-0 w-15">Val rachat</th> --}}
+																		<th class="border-bottom-0 w-10">montant versé</th>
+																		{{-- <th class="border-bottom-0 w-10">Actions</th> --}}
+															</tr>
+														</thead>
+														<tbody>
+															@if(!empty($rachats) && $rachats->count())
+																@foreach($rachats as $rachat) 
+																<tr>
+																	<th scope="row">{{$rachat->id}}</th>
+																	<td>{{\Carbon\Carbon::parse($rachat->created_at)->format('d/m/Y')}}</td>           		
+																	<td>{{$rachat->vente->contrat}}</td>
+																		<td>{{$rachat->vente->name}} {{$rachat->vente->prename}}</td>       
+																		<td>{{$rachat->vente->tel}} </td> 
+																		<td>{{$rachat->vente->immatricule}} -- <br> {{$rachat->vente->marque}}</td>  
+																		
+																		@can('manage-users')
+																		<td>{{$rachat->payment}}</td> 
+																		<td>{{ number_format($rachat->vente->montant, 0, ',', ' ') }}</td> 
+																		{{-- <td>{{$rachat->user->name}} -- {{implode(' , ', $rachat->user->roles()->pluck('name')->toArray())}}</td>  --}}
+																		@endcan  
+																			
 																	
-																@endif
-															@endcan 
-															 </td> --}}
-                                                         
-                                                    </tr>
-                                                    @endforeach
-                                                    @else
-                                                                        <tr>
-                                                                                <td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
-                                                                            </tr>
-                                                    @endif													
-                                            </tbody>
-                                        </table>					
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Row -->
-</div>
+																		<td>{{ number_format($rachat->montant, 0, ',', ' ') }}</td> 
+																		{{-- <td>
+																			@can('manage-ventes') 
+																			@if ($vente->compteur !== 0)
+																			<a href="{{ route('elite.printers.printer' , ['vente' => $vente->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
+																			@else
+																				
+																			@endif
+																		@endcan 
+																		</td> --}}
+																	
+																</tr>
+																@endforeach
+																@else
+																					<tr>
+																							<td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
+																						</tr>
+																@endif													
+														</tbody>
+													</table>					
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Row -->
+			</div>
 
-<div class="tab-pane" id="tab5">				
-    <div class="card col-md-10">
-        <div class="card-header">
-            <h3 class="card-title">Liste des transactions terminées</h3>
-        </div>
-    </div>
-        <!-- Row -->
-        <div class="row flex-lg-nowrap">
-            <div class="col-12">
-                <div class="row flex-lg-nowrap">
-                    <div class="col-12 mb-3">  
-                        <div class="e-panel card">
-                            <div class="card-body">
-                                <div class="e-table">
-                                    <div class="table-responsive table-lg mt-3">
-                                        <table class="table table-bordered border-top text-nowrap" id="example1">
-                                            <thead>
-                                                <tr>
-                                                    <th class="align-top border-bottom-0 wd-5"></th>
-													<th class="border-bottom-0 w-30">N°contrat</th> 
-                                                    <th class="border-bottom-0 w-20">Date</th>
-                                                            <th class="border-bottom-0 w-20">Nom & prénoms</th>	
-                                                            <th class="border-bottom-0 w-20">Tel</th>	
-                                                            <th class="border-bottom-0 w-15">Immat véhicule</th>
-                                                        
-                                                            @can('manage-users')
-                                                            <th class="border-bottom-0 w-15">Type paiement</th>
-                                                            <th class="border-bottom-0 w-10">montant vente</th> 
-                                                            {{-- <th class="border-bottom-0 w-30">Admin</th> --}}
-                                                            @endcan
-                                                            <th class="border-bottom-0 w-15">Val rachat</th>
+			<div class="tab-pane" id="tab5">				
+				<div class="card col-md-10">
+					<div class="card-header">
+						<h3 class="card-title">Liste des transactions terminées</h3>
+					</div>
+				</div>
+					<!-- Row -->
+					<div class="row flex-lg-nowrap">
+						<div class="col-12">
+							<div class="row flex-lg-nowrap">
+								<div class="col-12 mb-3">  
+									<div class="e-panel card">
+										<div class="card-body">
+											<div class="e-table">
+												<div class="table-responsive table-lg mt-3">
+													<table class="table table-bordered border-top text-nowrap" id="example1">
+														<thead>
+															<tr>
+																<th class="align-top border-bottom-0 wd-5"></th>
+																<th class="border-bottom-0 w-30">N°contrat</th> 
+																<th class="border-bottom-0 w-20">Date</th>
+																		<th class="border-bottom-0 w-20">Nom & prénoms</th>	
+																		<th class="border-bottom-0 w-20">Tel</th>	
+																		<th class="border-bottom-0 w-15">Immat véhicule</th>
+																	
+																		@can('manage-users')
+																		<th class="border-bottom-0 w-15">Type paiement</th>
+																		<th class="border-bottom-0 w-10">montant vente</th> 
+																		{{-- <th class="border-bottom-0 w-30">Admin</th> --}}
+																		@endcan
+																		<th class="border-bottom-0 w-15">Val rachat</th>
 
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if(!empty($transactions) && $transactions->count())
-                                                    @foreach($transactions as $transaction) 
-                                                    <tr>
-                                                        <th scope="row">{{$transaction->id}}</th>
-														<td>{{$transaction->contrat}}</td>
-                                                        <td>{{\Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y')}}</td>           		
+															</tr>
+														</thead>
+														<tbody>
+															@if(!empty($transactions) && $transactions->count())
+																@foreach($transactions as $transaction) 
+																<tr>
+																	<th scope="row">{{$transaction->id}}</th>
+																	<td>{{$transaction->contrat}}</td>
+																	<td>{{\Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y')}}</td>           		
 
-                                                            <td>{{$transaction->name}} {{$transaction->prename}}</td>       
-                                                            <td>{{$transaction->tel}} </td> 
-                                                            <td>{{$transaction->immatricule}} {{$transaction->marque}}</td>  
-                                                            
-                                                            @can('manage-users')
-                                                            <td>{{$transaction->payment}} -- {{$transaction->duree}} mois</td> 
-                                                            <td>{{ number_format($transaction->montant, 0, ',', ' ') }}</td>
-                                                            {{-- <td>{{$transaction->user->name}} -- {{implode(' , ', $transaction->user->roles()->pluck('name')->toArray())}}</td>  --}}
-                                                            @endcan  
-                                                                
-                                                        
-                                                            @if ($transaction->payment == 'Unique')
-                                                            <div style="display:none">{{$v = ($transaction->montant * $bonus) / 100   }}</div>
-                                                                
-                                                                    <div style="display:none" >{{$viol = $v + $transaction->montant}} </div>  
-                                                                    <td>{{ number_format($viol, 0, ',', ' ') }}</td> 
-                                                                
+																		<td>{{$transaction->name}} {{$transaction->prename}}</td>       
+																		<td>{{$transaction->tel}} </td> 
+																		<td>{{$transaction->immatricule}} {{$transaction->marque}}</td>  
+																		
+																		@can('manage-users')
+																		<td>{{$transaction->payment}} -- {{$transaction->duree}} mois</td> 
+																		<td>{{ number_format($transaction->montant, 0, ',', ' ') }}</td>
+																		{{-- <td>{{$transaction->user->name}} -- {{implode(' , ', $transaction->user->roles()->pluck('name')->toArray())}}</td>  --}}
+																		@endcan  
+																			
+																	
+																		@if ($transaction->payment == 'Unique')
+																		<div style="display:none">{{$v = ($transaction->montant * $bonus) / 100   }}</div>
+																			
+																				<div style="display:none" >{{$viol = $v + $transaction->montant}} </div>  
+																				<td>{{ number_format($viol, 0, ',', ' ') }}</td> 
+																			
 
-                                                            @else
-                                                            <div style="display:none" >{{$v0 = ($transaction->montant * (($bonus) /100))}}</div> 
-                                                            <div style="display:none" >{{$v1 = ($v0 + $transaction->montant)/$transaction->duree}}</div> 
-                                                            
-                                                        
-                                                                    <td>{{ number_format($v1 * $transaction->duree, 0, ',', ' ') }}</td>  
-                                                            
-                                                            @endif
+																		@else
+																		<div style="display:none" >{{$v0 = ($transaction->montant * (($bonus) /100))}}</div> 
+																		<div style="display:none" >{{$v1 = ($v0 + $transaction->montant)/$transaction->duree}}</div> 
+																		
+																	
+																				<td>{{ number_format($v1 * $transaction->duree, 0, ',', ' ') }}</td>  
+																		
+																		@endif
 
-                                                            {{--  <td>
-                                                                <a href="{{ route('elite.elites.show' , ['visiteur' => $visiteur->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
+																		{{--  <td>
+																			<a href="{{ route('elite.elites.show' , ['visiteur' => $visiteur->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
 
-                                                            </td> --}}
-                                                        
-                                                    </tr>
-                                                    @endforeach
-                                                    @else
-                                                                        <tr>
-                                                                                <td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
-                                                                            </tr>
-                                                    @endif													
-                                            </tbody>
-                                        </table>					
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Row -->
-</div>	
+																		</td> --}}
+																	
+																</tr>
+																@endforeach
+																@else
+																					<tr>
+																							<td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
+																						</tr>
+																@endif													
+														</tbody>
+													</table>					
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Row -->
+			</div>	
 
-<div class="tab-pane" id="tab6">				
-    <div class="card col-md-10">
-        <div class="card-header">
-            <h3 class="card-title">Reste pour le versement</h3>
-        </div>
-    </div>
-        <!-- Row -->
-        <div class="row flex-lg-nowrap">
-            <div class="col-12">
-                <div class="row flex-lg-nowrap">
-                    <div class="col-12 mb-3">  
-                        <div class="e-panel card">
-                            <div class="card-body">
-                                <div class="e-table">
-                                    <div class="table-responsive table-lg mt-3">
-                                        <table class="table table-bordered border-top text-nowrap" id="example">
-                                            <thead>
-                                                <tr>
-                                                    <th class="align-top border-bottom-0 wd-5"></th>
-                                                    {{-- <th class="border-bottom-0 w-20">Numéro de compte</th> --}}
-                                                            <th class="border-bottom-0 w-20">Nom & prénoms</th>	
-                                                            <th class="border-bottom-0 w-20">Tel</th>	
-                                                            <th class="border-bottom-0 w-15">Immat véhicule</th>
-                                                        
-                                                            @can('manage-users')
-                                                            <th class="border-bottom-0 w-15">Type paiement</th>
-                                                            {{-- <th class="border-bottom-0 w-10">montant vente</th>  --}}
-                                                            {{-- <th class="border-bottom-0 w-30">Admin</th> --}}
-                                                            @endcan
-                                                            <th class="border-bottom-0 w-15">Reste</th>
+			<div class="tab-pane" id="tab6">				
+				<div class="card col-md-10">
+					<div class="card-header">
+						<h3 class="card-title">Reste pour le versement</h3>
+					</div>
+				</div>
+					<!-- Row -->
+					<div class="row flex-lg-nowrap">
+						<div class="col-12">
+							<div class="row flex-lg-nowrap">
+								<div class="col-12 mb-3">  
+									<div class="e-panel card">
+										<div class="card-body">
+											<div class="e-table">
+												<div class="table-responsive table-lg mt-3">
+													<table class="table table-bordered border-top text-nowrap" id="example">
+														<thead>
+															<tr>
+																<th class="align-top border-bottom-0 wd-5"></th>
+																{{-- <th class="border-bottom-0 w-20">Numéro de compte</th> --}}
+																		<th class="border-bottom-0 w-20">Nom & prénoms</th>	
+																		<th class="border-bottom-0 w-20">Tel</th>	
+																		<th class="border-bottom-0 w-15">Immat véhicule</th>
+																	
+																		@can('manage-users')
+																		<th class="border-bottom-0 w-15">Type paiement</th>
+																		{{-- <th class="border-bottom-0 w-10">montant vente</th>  --}}
+																		{{-- <th class="border-bottom-0 w-30">Admin</th> --}}
+																		@endcan
+																		<th class="border-bottom-0 w-15">Reste</th>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if(!empty($sommes) && $sommes->count())
-                                                    @foreach($sommes as $somme) 
-                                                    <tr>
-                                                        <th scope="row">{{$somme->id}}</th>
-                                                        {{-- <td>{{$somme->code}}</td>       		 --}}
-                                                            <td>{{$somme->name}} {{$somme->prename}}</td>       
-                                                            <td>{{$somme->tel}} </td> 
-                                                            <td>{{$somme->immatricule}} {{$somme->marque}}</td>  
-                                                            
-                                                            @can('manage-users')
-                                                            <td>{{$somme->payment}} -- {{$somme->duree}} mois</td> 
-                                                            @endcan  
+															</tr>
+														</thead>
+														<tbody>
+															@if(!empty($sommes) && $sommes->count())
+																@foreach($sommes as $somme) 
+																<tr>
+																	<th scope="row">{{$somme->id}}</th>
+																	{{-- <td>{{$somme->code}}</td>       		 --}}
+																		<td>{{$somme->name}} {{$somme->prename}}</td>       
+																		<td>{{$somme->tel}} </td> 
+																		<td>{{$somme->immatricule}} {{$somme->marque}}</td>  
+																		
+																		@can('manage-users')
+																		<td>{{$somme->payment}} -- {{$somme->duree}} mois</td> 
+																		@endcan  
 
-                                                                    <td>{{ number_format($somme->soustract, 0, ',', ' ') }}</td> 
+																				<td>{{ number_format($somme->soustract, 0, ',', ' ') }}</td> 
 
-                                                            
-                                                    </tr>
-                                                    @endforeach
-                                                    @else
-                                                                        <tr>
-                                                                                <td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
-                                                                            </tr>
-                                                    @endif													
-                                            </tbody>
-                                        </table>	
-                                        {{-- {{ $sommes->links() }}				 --}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Row -->
-</div>
+																		
+																</tr>
+																@endforeach
+																@else
+																					<tr>
+																							<td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
+																						</tr>
+																@endif													
+														</tbody>
+													</table>	
+													{{-- {{ $sommes->links() }}				 --}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Row -->
+			</div>
 					
 		</div>
 	</div>

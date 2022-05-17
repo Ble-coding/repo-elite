@@ -18,7 +18,7 @@
             Client
         </div>
     </div>
-    <input id="customer_id" type="text" class="form-control" name="customer_id" value="{{ $investi->customer_id}}" autocomplete="customer_id">
+    <input id="intervenant_id" type="text" class="form-control" name="intervenant_id" value="{{ $investi->intervenant_id}}" autocomplete="intervenant_id">
 </div> 
 
 

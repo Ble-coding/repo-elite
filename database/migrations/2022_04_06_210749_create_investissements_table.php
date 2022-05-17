@@ -18,7 +18,11 @@ return new class extends Migration
             $table->unsignedbigInteger('forfait_id')->index();
              $table->unsignedbigInteger('customer_id')->index()->nullable();
             $table->string('montant');
-            $table->string('investiman');
+            // $table->string('investiman');
+            $table->unsignedbigInteger('envoie_id')->index()->nullable();
+            $table->unsignedbigInteger('particulier_id')->index()->nullable();
+            $table->unsignedbigInteger('client_id')->index()->nullable();
+            $table->unsignedbigInteger('intervenant_id')->index()->nullable();
             $table->enum('choix',['Oui','Non'])->default('Non');
             $table->enum('jalon',['Oui','Non'])->default('Non');
             // $table->string('suppleant')->nullable();
@@ -30,20 +34,13 @@ return new class extends Migration
             //  $table->string('retire');
             $table->bigInteger('user_id');
             $table->timestamps();
+       
             $table->foreign('forfait_id')->references('id')->on('forfaits');
-
-
-            // $table->unsignedbigInteger('customer_id')->index();
-            // $table->unsignedbigInteger('forfait_id')->index();
-            // $table->string('montant');
-            // $table->string('customer');
-            // $table->string('suppleant');
-            // $table->unsignedbigInteger('suppleant_id')->index();
-            // $table->timestamps();
-        
             $table->foreign('customer_id')->references('id')->on('customers');
-            // $table->foreign('forfait_id')->references('id')->on('forfaits');
-            // $table->foreign('suppleant_id')->references('id')->on('suppleants');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('envoie_id')->references('id')->on('envoies');
+            $table->foreign('intervenant_id')->references('id')->on('customers');
+            $table->foreign('particulier_id')->references('id')->on('particuliers');
         });
     }
 

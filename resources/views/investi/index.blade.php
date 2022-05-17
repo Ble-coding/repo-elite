@@ -120,7 +120,7 @@
 																	<th class="border-bottom-0 w-15">Montant à retiré</th>
 																	@can('manage-users') 	
 																	<th class="border-bottom-0 w-15">Montant total</th>
-																	<th class="border-bottom-0 w-15">Admin</th>
+																	{{-- <th class="border-bottom-0 w-15">Admin</th> --}}
 																	@endcan
 																	{{-- <th class="border-bottom-0 w-15">Actions</th> --}}												
 																	<th class="border-bottom-0 w-10">Actions</th>
@@ -134,9 +134,22 @@
 																<tr>
 															 		<th scope="row">{{$investi->id}}</th>
 																	{{-- <div style="display:none">{{$v = $investi->investiman}}</div>  --}}
-															 	 <div style="display:none">{{$v = $investi->investiman}}</div> 
-															 	{{--	<td>{{substr($v, 12, 35)}}</td> --}}
-																	 <td>{{substr($v, 10)}}</td>
+															 	 {{-- <div style="display:none">{{$v = $investi->investiman}}</div> 
+															 <td>{{substr($v, 12, 35)}}</td> --}}
+																 @if ($investi->particulier_id !== Null)
+																	 <td>{{$investi->particulier->code}} - {{$investi->particulier->name}} {{$investi->particulier->prename}}</td>
+																 @elseif($investi->client_id !== Null)
+																	 <td>{{$investi->client->code}} - {{$investi->client->name}} {{$investi->client->prename}}</td>
+																 @elseif($investi->customer_id !== Null)
+																 <td>{{$investi->customer->code}} - {{$investi->customer->name}} {{$investi->customer->prename}}</td>
+																 @else
+																  
+																 @endif
+
+																{{-- {{ $investi}} --}}
+																
+
+
 																	<td>{{\Carbon\Carbon::parse($investi->created_at)->format('d/m/Y')}}</td> 
 															 			@if ($investi->jalon == 'Oui')
 																		 <div style="display:none">{{$dateviw = \Carbon\Carbon::parse($investi->created_at)->addMonth($investi->forfait->duree)->subDay(1)->format('d/m/Y')}}</div>
@@ -189,7 +202,7 @@
 																		<td>{{ number_format($vio, 0, ',', ' ') }}</td> 
 																
 
-																		<td>{{$investi->user->name}} </td>  
+																		{{-- <td>{{$investi->user->name}} </td>   --}}
 																		@endcan	
 															 		 @else 
 																		 <div style="display:none" >{{$v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $investi->forfait->duree) /100))}}</div> 
@@ -210,7 +223,7 @@
 																		<div style="display:none" >{{$vi = $v0 + $investi->montant}} </div>  
 																		<td>{{ number_format($vi, 0, ',', ' ') }}</td> 
 																
-																		<td>{{$investi->user->name}} </td>  
+																		{{-- <td>{{$investi->user->name}} </td>   --}}
 																		@endcan	
 															  	    @endif 
 																										   									
@@ -254,13 +267,17 @@
 																			{{-- @can('show-investis') --}}
 																			<a href="{{ route('investir.investis.show' , ['investi' => $investi->id]) }}" style="background-color:#fff" class="btn btn-">👀</a> 
 																			{{-- @endcan --}}
-																			@if ( \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($investi->created_at))  &&  \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($investi->created_at)->addDay(30)) )
+
+
+																			{{-- @if ( \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($investi->created_at))  &&  \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($investi->created_at)->addDay(30)) )
 																		 <a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a> 
 																			@else
 																		
 																			
-																			@endif
-																			{{-- <a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a> --}}
+																			@endif --}}
+
+
+																			<a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
 
 																			
 																		
@@ -274,7 +291,7 @@
 															  
 																					@else
 																		 
-																					@can('edit-investis')
+																					{{-- @can('edit-investis')
 																					<a href="{{ route('investir.investis.edit' , ['investi' => $investi->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a> 			
 																					@endcan
 																					@can('delete-investis')
@@ -283,7 +300,7 @@
 																								@method('DELETE')
 																									<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet investissemnt ?');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
 																							</form>   
-																					@endcan		
+																					@endcan		 --}}
 																				@endif
 																			{{-- @can('edit-investis')
 																			<a href="{{ route('investir.investis.edit' , ['investi' => $investi->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a> 			
@@ -341,12 +358,12 @@
 																<th class="border-bottom-0 w-20">Date</th>
 																<th class="border-bottom-0 w-20">Id Inv.</th>
 																<th class="border-bottom-0 w-20">Forfait</th>
-																<th class="border-bottom-0 w-20">Numéro de compte</th>
+																{{-- <th class="border-bottom-0 w-20">Numéro de compte</th> --}}
 										 							<th class="border-bottom-0 w-20">Client</th>
 																	<th class="border-bottom-0 w-10">montant retiré</th>
 																	@can('manage-users')																						
 																	<th class="border-bottom-0 w-15">Jalonnement</th>
-																	<th class="border-bottom-0 w-15">Admin</th>
+																	{{-- <th class="border-bottom-0 w-15">Admin</th> --}}
 																	{{-- <th class="border-bottom-0 w-10">Actions</th> --}}
 																	@endcan
 															
@@ -360,15 +377,22 @@
 																	 <td>{{\Carbon\Carbon::parse($diminish->created_at)->format('d/m/Y')}}</td>
 																	 <td>{{$diminish->code_inv}}</td>
 																	 <td>{{$diminish->forfait->libelle_Forfait}}</td>
-																	 <div style="display:none">{{$v = $diminish->investiman}}</div> 
-															 		<td>{{substr($v, 0, 8)}}</td>
-																	 <div style="display:none">{{$v = $diminish->investiman}}</div> 
-															 		<td>{{substr($v, 11)}}</td>
+																	 {{-- <div style="display:none">{{$v = $diminish->investiman}}</div> 
+															 		<td>{{substr($v, 0, 8)}}</td> --}}
+																	 @if ($diminish->particulier_id !== Null)
+																	 <td>{{$diminish->particulier->code}} - {{$diminish->particulier->name}} {{$diminish->particulier->prename}}</td>
+																 @elseif($diminish->client_id !== Null)
+																	 <td>{{$diminish->client->code}} - {{$diminish->client->name}} {{$diminish->client->prename}}</td>
+																 @elseif($diminish->customer_id !== Null)
+																 <td>{{$diminish->customer->code}} - {{$diminish->customer->name}} {{$diminish->customer->prename}}</td>
+																 @else
+																  
+																 @endif
 																	<td>{{ number_format($diminish->montant, 0, ',', ' ') }}</td>
 																	
 																	@can('manage-users') 	
 																	<td>{{$diminish->jalon}}</td> 					 	
-																	  <td>{{ $diminish->user->name }}</td>	 									   									
+																	  {{-- <td>{{ $diminish->user->name }}</td>	 									   									 --}}
 																	{{-- <td> --}}
 																			{{-- @can('show-diminishes') --}}
 																				{{-- @if ( $now >= \Carbon\Carbon::parse($investi->created_at)->addMonth($investi->duree)->format('d/m/Y')) --}}
@@ -455,11 +479,11 @@
 														<thead>
 															<tr>
 																<th class="align-top border-bottom-0 wd-5"></th>
-																<th class="border-bottom-0 w-20">Numéro de compte</th>
+																{{-- <th class="border-bottom-0 w-20">Numéro de compte</th> --}}
 																<th class="border-bottom-0 w-20">Date</th>
 																	{{-- <th class="border-bottom-0 w-20">Numéro de compte</th> --}}
 										 							<th class="border-bottom-0 w-20">Client</th>
-																	<th class="border-bottom-0 w-20">Parrain</th>
+																	{{-- <th class="border-bottom-0 w-20">Parrain</th> --}}
 																	<th class="border-bottom-0 w-10">montant Min & forfait</th>
 																	<th class="border-bottom-0 w-15">Montant investi</th>
 																	<th class="border-bottom-0 w-15">Montant retiré</th>
@@ -478,14 +502,24 @@
 																@foreach($transactions as $transaction)
 																<tr>
 															 		<th scope="row">{{$transaction->id}}</th>
-																	<div style="display:none">{{$v = $transaction->investiman}}</div> 
-															 		<td>{{substr($v, 0, 8)}}</td>
+																	{{-- <div style="display:none">{{$v = $transaction->investiman}}</div> 
+															 		<td>{{substr($v, 0, 8)}}</td> --}}
 																	<td>{{\Carbon\Carbon::parse($transaction->date_termine)->format('d/m/Y')}}</td> 
 															 																												
-															 		<div style="display:none">{{$v = $transaction->investiman}}</div> 
+															 		{{-- <div style="display:none">{{$v = $transaction->investiman}}</div> 
 															 		<td>{{substr($v, 11)}}</td>
-															 		
-																	<td>{{$transaction->customer->name}} {{$transaction->customer->prename}}</td>
+															 		 --}}
+																	  @if ($transaction->particulier_id !== Null)
+																	  <td>{{$transaction->particulier->code}} - {{$transaction->particulier->name}} {{$transaction->particulier->prename}}</td>
+																  @elseif($transaction->client_id !== Null)
+																	  <td>{{$transaction->client->code}} - {{$transaction->client->name}} {{$transaction->client->prename}}</td>
+																  @elseif($transaction->customer_id !== Null)
+																  <td>{{$transaction->customer->code}} - {{$transaction->customer->name}} {{$transaction->customer->prename}}</td>
+																  @else
+																   
+																  @endif
+																  {{-- <td>{{$transaction->suppleant->name}} {{$transaction->customer->prename}}</td> --}}
+																	{{-- <td>{{$transaction->intervenant->name}} {{$transaction->intervenant->prename}}</td> --}}
 															 		{{-- <td> {{$transaction->name  }} {{$transaction->prename  }}--{{$transaction->email }}---{{$transaction->tel }}</td>  --}}
 																	{{-- <td><strong style="color:#262626;">{{$transaction->suppleant->code_parrain  }}</strong> - {{$transaction->suppleant->name  }}  {{$transaction->suppleant->prename  }}--{{$transaction->suppleant->email  }}---{{$transaction->suppleant->tel  }}</td> --}}
 																	<td> {{ number_format($transaction->forfait->montantMin  , 0, ',', ' ' ) }} - {{$transaction->forfait->libelle_Forfait  }}</td> 
@@ -606,9 +640,9 @@
 														<thead>
 															<tr>
 																<th class="align-top border-bottom-0 wd-5"></th>
-																<th class="border-bottom-0 w-20">Numéro de compte</th>
+																{{-- <th class="border-bottom-0 w-20">Numéro de compte</th> --}}
 										 							<th class="border-bottom-0 w-20">Client</th>
-																	<th class="border-bottom-0 w-20">Parrain</th>
+																	{{-- <th class="border-bottom-0 w-20">Parrain</th> --}}
 																	<th class="border-bottom-0 w-10">montant & forfait</th>
 																	<th class="border-bottom-0 w-15">Jalonnement</th>
 																	<th class="border-bottom-0 w-15">Solde</th>
@@ -624,12 +658,22 @@
 																@foreach($sommes as $somme)
 																<tr>
 															 		<th scope="row">{{$somme->id}}</th>
-																	<div style="display:none">{{$v = $somme->investiman}}</div> 
-															 		<td>{{substr($v, 0, 8)}}</td>																								
-															 		<div style="display:none">{{$v = $somme->investiman}}</div> 
-															 		<td>{{substr($v, 11)}}</td>
+																	{{-- <div style="display:none">{{$v = $somme->investiman}}</div> 
+															 		<td>{{substr($v, 0, 8)}}</td>																								 --}}
+															 		{{-- <div style="display:none">{{$v = $somme->investiman}}</div> 
+															 		<td>{{substr($v, 11)}}</td> --}}
 															 		{{-- <div style="display:none">{{$vo = $somme->suppleant}}</div>  --}}
-																	 <td></td>
+																	 @if ($somme->particulier_id !== Null)
+																	 <td>{{$somme->particulier->code}} - {{$somme->particulier->name}} {{$somme->particulier->prename}}</td>
+																 @elseif($somme->client_id !== Null)
+																	 <td>{{$somme->client->code}} - {{$somme->client->name}} {{$somme->client->prename}}</td>
+																 @elseif($somme->customer_id !== Null)
+																 <td>{{$somme->customer->code}} - {{$somme->customer->name}} {{$somme->customer->prename}}</td>
+																 @else
+																  
+																 @endif
+
+																 {{-- <td>{{$somme->customer->code}} - {{$somme->customer->name}} {{$somme->customer->prename}}</td> --}}
 																	<td> {{ number_format($somme->forfait->montantMin  , 0, ',', ' ' ) }} - {{$somme->forfait->libelle_Forfait  }}</td> 															 	
 															  		<td>{{ $somme->jalon }}</td> 
 															  		<td>{{ number_format($somme->soustract, 0, ',', ' ') }}</td> 
@@ -664,6 +708,27 @@
 
 
 <script type="text/javascript"> 
+
+	function mySelectfunction(){
+		getValue = document.getElementById("envoie_id").value;
+		if(getValue == 4){
+			document.getElementById("img1").style.display = "block";
+			document.getElementById("img2").style.display = "none";
+			document.getElementById("img3").style.display = "none";
+		}
+		if(getValue == 5){
+			document.getElementById("img1").style.display = "none";
+			document.getElementById("img2").style.display = "block";
+			document.getElementById("img3").style.display = "none";
+		}
+		if(getValue == 6){
+			document.getElementById("img1").style.display = "none";
+			document.getElementById("img2").style.display = "none";
+			document.getElementById("img3").style.display = "block";
+		}
+	
+	}
+
     function displayForm(c){ 
         if(c.value == "Oui"){ 
 

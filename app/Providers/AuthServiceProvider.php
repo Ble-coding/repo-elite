@@ -78,7 +78,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('manage-visiteurs', function($visiteur) {       
-            return $visiteur->hasAnyRole(['Comptable','Administrateur']);
+            return $visiteur->hasAnyRole(['Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-visiteurs', function($visiteur) {       
@@ -95,7 +95,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('manage-ventes', function($vente) {       
-            return $vente->hasAnyRole(['Comptable','Administrateur']);
+            return $vente->hasAnyRole(['Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-ventes', function($vente) {       
@@ -202,7 +202,7 @@ class AuthServiceProvider extends ServiceProvider
 
          //solde
          Gate::define('manage-solds', function($sold) {       
-            return $sold->hasAnyRole(['Comptable','Administrateur']);
+            return $sold->hasAnyRole(['Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-solds', function($sold) {       
@@ -255,7 +255,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manage-depositarys', function($depositary) {       
-            return $depositary->hasAnyRole(['Comptable','Administrateur']);
+            return $depositary->hasAnyRole(['Comptable', 'Caissiere','Administrateur']);
         });
 
         Gate::define('show-depositarys', function($depositary) {       
@@ -288,7 +288,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manage-deposes', function($depose) {       
-            return $depose->hasAnyRole(['Comptable','Administrateur']);
+            return $depose->hasAnyRole(['Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-deposes', function($depose) {       
@@ -305,7 +305,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('manage-retraits', function($depot) {       
-            return $depot->hasAnyRole(['Comptable','Administrateur']);
+            return $depot->hasAnyRole(['Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-retraits', function($depot) {       
@@ -323,7 +323,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('manage-diminishes', function($diminish) {       
-            return $diminish->hasAnyRole(['Comptable','Administrateur']);
+            return $diminish->hasAnyRole(['Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-diminishes', function($diminish) {       
@@ -342,7 +342,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //retrait
         Gate::define('manage-removes', function($remove) {       
-            return $remove->hasAnyRole(['Comptable','Administrateur']);
+            return $remove->hasAnyRole(['Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-removes', function($remove) {       
@@ -359,7 +359,7 @@ class AuthServiceProvider extends ServiceProvider
 
            //retrait
            Gate::define('manage-retraits', function($retrait) {       
-            return $retrait->hasAnyRole(['Comptable','Administrateur']);
+            return $retrait->hasAnyRole(['Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-retraits', function($retrait) {       
@@ -377,7 +377,7 @@ class AuthServiceProvider extends ServiceProvider
 
    //withadral
    Gate::define('manage-withadrals', function($withadral) {       
-    return $withadral->hasAnyRole(['Comptable','Administrateur']);
+    return $withadral->hasAnyRole(['Comptable','Caissiere','Administrateur']);
 });
 
 Gate::define('show-withadrals', function($withadral) {       
@@ -395,7 +395,7 @@ Gate::define('delete-withadrals', function($withadral) {
 
 
 Gate::define('manage-widraws', function($widraw) {       
-    return $widraw->hasAnyRole(['Comptable','Administrateur']);
+    return $widraw->hasAnyRole(['Comptable','Caissiere','Administrateur']);
 });
 
 Gate::define('show-widraws', function($widraw) {       

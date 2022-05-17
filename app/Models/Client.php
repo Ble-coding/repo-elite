@@ -62,11 +62,19 @@ public function diminishes(){
     return $this->hasMany('App\Models\Diminish');
 }
 
+public function tracs(){
+    return $this->hasMany('App\Models\Trac');
+}
+
 // public function sommes(){
 //     return $this->hasMany('App\Models\Somme');
 // }
 public function type(){
     return $this->belongsTo('App\Models\Type');
+}
+
+public function bonuses(){
+    return $this->hasMany('App\Models\Bonus');
 }
 
 public function sodes(){

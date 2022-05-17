@@ -57,7 +57,7 @@
 			<ul class="nav panel-tabs">
 				<li class=""><a href="#tab1" class="active" data-toggle="tab">Bonus</a></li>
 				 <li><a href="#tab2" data-toggle="tab">Retraits effectués</a></li>
-				<li><a href="#tab3" data-toggle="tab">Transactions terminées</a></li>
+				<li><a href="#tab3" data-toggle="tab">Traçabilité</a></li>
 				{{--<li><a href="#tab4" data-toggle="tab">Solde</a></li> --}}
 			</ul>
 		</div>
@@ -105,7 +105,7 @@
 															 		<th scope="row">{{$investi->id}}</th>
                                                                      <td>{{\Carbon\Carbon::parse($investi->created_at)->format('d/m/Y')}}</td>						  
 															 		
-															 		<td>{{$investi->customer->name}} {{$investi->customer->prename}}</td>
+															 		<td>{{$investi->intervenant->name}} {{$investi->intervenant->prename}}</td>
 
 																	@can('manage-users') 	
 																	<td>{{ number_format($investi->montantB, 0, ',', ' ') }}</td> 
@@ -182,7 +182,7 @@
 															 		<th scope="row">{{$investi->id}}</th>
                                                                      <td>{{\Carbon\Carbon::parse($investi->created_at)->format('d/m/Y')}}</td>						  
 															 		
-															 		<td>{{$investi->customer->name}} {{$investi->customer->prename}} -- {{$investi->customer->tel}}  {{$investi->customer->email}}</td>
+															 		<td>{{$investi->intervenant->name}} {{$investi->intervenant->prename}} -- {{$investi->intervenant->tel}}  {{$investi->intervenant->email}}</td>
 
 																	{{-- @can('manage-users') 	
 																	<td>{{ number_format($investi->montantB, 0, ',', ' ') }}</td> 
@@ -259,7 +259,7 @@
 															 		<th scope="row">{{$investi->id}}</th>
                                                                      <td>{{\Carbon\Carbon::parse($investi->created_at)->format('d/m/Y')}}</td>						  
 															 		
-															 		<td>{{$investi->customer->name}} {{$investi->customer->prename}} --  {{$investi->customer->tel}}  {{$investi->customer->email}}</td>
+															 		<td>{{$investi->intervenant->name}} {{$investi->intervenant->prename}} --  {{$investi->intervenant->tel}}  {{$investi->intervenant->email}}</td>
 
 																	@can('manage-users') 	
 																	<td>{{ number_format($investi->montantB, 0, ',', ' ') }}</td> 

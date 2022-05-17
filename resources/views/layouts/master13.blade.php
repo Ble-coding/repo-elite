@@ -31,8 +31,8 @@
 						<br><br><br><br><br>
 						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 						<br><br><br><br><br><br><br><br><br><br><br><br>
-						<br><br><br><br>
-						<br><br><br><br>
+						<br>
+						
 						@include('layouts.footer1')
 		</div><!-- End Page -->
 			@include('layouts.footer-scripts')
