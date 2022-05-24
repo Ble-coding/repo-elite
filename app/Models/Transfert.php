@@ -13,13 +13,12 @@ class Transfert extends Model
 
     protected $table = 'transferts';
 
-
-    protected $fillable = ['solde_id',
-    'sode_id',
-     'somme_id','olde_id',
-     'ode_id',
-      'omme_id', 'montant', 'code',
-       'reception_id','envoie_id',
+    protected $fillable = ['solde_id','olde_id',
+    'sode_id', 'ode_id',
+    'sold_id','old_id',
+     'sod_id','od_id',
+ 'montant', 'code',
+       'receive_id','send_id',
          'user_id',
 ];
 
@@ -46,8 +45,12 @@ public function solde(){
 public function sode(){
     return $this->belongsTo('App\Models\Sode');
 }
-public function somme(){
-    return $this->belongsTo('App\Models\Somme');
+public function sold(){
+    return $this->belongsTo('App\Models\Sold');
+}
+
+public function sod(){
+    return $this->belongsTo('App\Models\Sod');
 }
 
 
@@ -59,15 +62,19 @@ public function olde(){
 public function ode(){
     return $this->belongsTo('App\Models\Sode');
 }
-public function omme(){
-    return $this->belongsTo('App\Models\Somme');
+public function old(){
+    return $this->belongsTo('App\Models\Sold');
 }
 
-public function reception(){
-    return $this->belongsTo('App\Models\Reception');
+public function od(){
+    return $this->belongsTo('App\Models\Sod');
 }
-public function envoie(){
-    return $this->belongsTo('App\Models\Envoie');
+
+public function receive(){
+    return $this->belongsTo('App\Models\Receive');
+}
+public function send(){
+    return $this->belongsTo('App\Models\Send');
 }
 
 

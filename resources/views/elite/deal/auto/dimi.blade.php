@@ -81,7 +81,7 @@ margin: auto;
     <div class="div defaut_invisible position-ref">
         <div class=" content p-5 row">
             <div class="col-12 total mb-2" style="border-right:1px solid #262626;background:#fff;border-left:1px solid #262626">
-               <div class="row espace">
+                <div class="row espace">
                     <div class="col-12">                
                       <table class="table">
                               <thead>
@@ -125,7 +125,17 @@ margin: auto;
 
                               @if ($vente->payment == 'Unique')
                               {{-- <h6>Versement</h6> --}}
-                                  <div style="display:none" >{{$v = ($vente->montant * $bonus) / 100   }}</div>
+                              @if($vente->duree == 1)
+                              <div style="display:none" >{{$v = ($vente->montant * (($bonus) /100))}}</div> 
+                          
+                          @elseif ($vente->duree == 2) 
+                              <div style="display:none" >{{$v = ($vente->montant * (($bonus1) /100))}}</div> 
+                          @elseif($vente->duree == 3)
+                              <div style="display:none" >{{$v = ($vente->montant * (($bonus2) /100))}}</div> 
+                           @else 
+                          Erreur        
+                          
+                          @endif
                            
                                          
                                       @if($vente->compteur = 1)
@@ -133,7 +143,17 @@ margin: auto;
                                         <th style="color:#262626;" rowspan="2">{{ number_format($v + $vente->montant, 0, ',', ' ') }}</th>
                                     @endif
                                 @else
-                                <div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100)) }}</div> 
+                                @if($vente->duree == 1)
+                                <div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100))}}</div> 
+                            
+                            @elseif ($vente->duree == 2) 
+                                <div style="display:none" >{{$v0 = ($vente->montant * (($bonus1) /100))}}</div> 
+                            @elseif($vente->duree == 3)
+                                <div style="display:none" >{{$v0 = ($vente->montant * (($bonus2) /100))}}</div> 
+                            @else 
+                            Erreur        
+                            
+                            @endif
                                 <div style="display:none" >{{$v1 = ($v0 + $vente->montant)/$vente->duree}}</div> 
                    
                                 @if ($vente->compteur >= 1)
@@ -197,7 +217,6 @@ margin: auto;
                  {{-- <hr/> --}}
                  <div class="p-5 ligne_horizontal">✄</div> 
 
-                 
                  <div class="row espace">
                     <div class="col-12">                
                       <table class="table">
@@ -229,8 +248,8 @@ margin: auto;
                           </div>
                           <div class="col-md-3">
                               <div class="col">Émis le : {{\Carbon\Carbon::now()->format('d/m/Y')}}</div>
-                              <div class="col"><strong> ELITE CREDIT </strong></div>
-                              <div class="col"><strong>ELITE DEAL AUTO </strong></div>
+                              <div class="col"><strong> ELITE AUTO </strong></div>
+                              <div class="col"><strong>ELITE DEAL CI </strong></div>
                           </div>
                       </div> 
                     </div>
@@ -242,7 +261,17 @@ margin: auto;
 
                               @if ($vente->payment == 'Unique')
                               {{-- <h6>Versement</h6> --}}
-                                  <div style="display:none" >{{$v = ($vente->montant * $bonus) / 100   }}</div>
+                              @if($vente->duree == 1)
+                              <div style="display:none" >{{$v = ($vente->montant * (($bonus) /100))}}</div> 
+                          
+                          @elseif ($vente->duree == 2) 
+                              <div style="display:none" >{{$v = ($vente->montant * (($bonus1) /100))}}</div> 
+                          @elseif($vente->duree == 3)
+                              <div style="display:none" >{{$v = ($vente->montant * (($bonus2) /100))}}</div> 
+                           @else 
+                          Erreur        
+                          
+                          @endif
                            
                                          
                                       @if($vente->compteur = 1)
@@ -250,7 +279,17 @@ margin: auto;
                                         <th style="color:#262626;" rowspan="2">{{ number_format($v + $vente->montant, 0, ',', ' ') }}</th>
                                     @endif
                                 @else
-                                <div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100)) }}</div> 
+                                @if($vente->duree == 1)
+                                <div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100))}}</div> 
+                            
+                            @elseif ($vente->duree == 2) 
+                                <div style="display:none" >{{$v0 = ($vente->montant * (($bonus1) /100))}}</div> 
+                            @elseif($vente->duree == 3)
+                                <div style="display:none" >{{$v0 = ($vente->montant * (($bonus2) /100))}}</div> 
+                            @else 
+                            Erreur        
+                            
+                            @endif
                                 <div style="display:none" >{{$v1 = ($v0 + $vente->montant)/$vente->duree}}</div> 
                    
                                 @if ($vente->compteur >= 1)
@@ -264,7 +303,7 @@ margin: auto;
                               <td style=" border-color: #fff!important; color:#262626"></td>
                           </tr>
                           <tr>
-                              <td style="color:#262626" > MONTANT Versé (EN FCFA LETTRE) </td>
+                               <td style="color:#262626" > MONTANT Versé (EN FCFA LETTRE) </td>
                               <td style="color:#262626" > {{$chiffre}}</td>
                               <td style=" border-color: #fff!important; color:#262626"> </td>
                           </tr>
@@ -291,6 +330,7 @@ margin: auto;
                         </div> 
                     </div> 
                     <div class="mt-8 col-lg-12">
+
                         <div class="row">
                             <div class="col-md-2"> <strong></strong> </div>
                             <div class="col-md-8"> 
@@ -309,6 +349,7 @@ margin: auto;
                         </div>
                     </div> --}}
                 </div>
+        
                     <div class="page-rightheader">
                         <div class="btn btn-list">
                             {{-- <a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a>  --}}
@@ -350,7 +391,21 @@ margin: auto;
 
                         @if ($vente->payment == 'Unique')
                         {{-- <h6>Versement</h6> --}}
-                            <div style="display:none" >{{$v = ($vente->montant * $bonus) / 100   }}</div>
+
+                        @if($vente->duree == 1)
+                            <div style="display:none" >{{$v = ($vente->montant * (($bonus) /100))}}</div> 
+                        
+                        @elseif ($vente->duree == 2) 
+                            <div style="display:none" >{{$v = ($vente->montant * (($bonus1) /100))}}</div> 
+                        @elseif($vente->duree == 3)
+                            <div style="display:none" >{{$v = ($vente->montant * (($bonus2) /100))}}</div> 
+                         @else 
+                        Erreur        
+                        
+                        @endif
+
+
+                            {{-- <div style="display:none" >{{$v = ($vente->montant * $bonus0) / 100   }}</div> --}}
                      
                                    
                                 @if($vente->compteur = 1)
@@ -361,7 +416,21 @@ margin: auto;
 
                         @else
                         <h6>Versement n° {{$v = $vente->duree - $vente->compteur + 1    }}</h6>
-                            <div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100)) }}</div> 
+
+                        @if($vente->duree == 1)
+                            <div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100))}}</div> 
+                        
+                        @elseif ($vente->duree == 2) 
+                            <div style="display:none" >{{$v0 = ($vente->montant * (($bonus1) /100))}}</div> 
+                        @elseif($vente->duree == 3)
+                            <div style="display:none" >{{$v0 = ($vente->montant * (($bonus2) /100))}}</div> 
+                        @else 
+                        Erreur        
+                        
+                        @endif
+
+
+                            {{-- <div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100)) }}</div>  --}}
                             <div style="display:none" >{{$v1 = ($v0 + $vente->montant)/$vente->duree}}</div> 
                
                             @if ($vente->compteur >= 1)

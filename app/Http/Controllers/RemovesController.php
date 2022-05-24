@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Nut;
 use App\Models\Sode;
 use App\Models\Client;
 use App\Models\Remove; 
@@ -82,6 +83,21 @@ class RemovesController extends Controller
         return Redirect::route('remove.removes.index');
     }
 
+
+    public function printer(Remove $remove)
+    {   
+
+        $chiffre =  Nut::convert_number_to_words($remove->montant);
+
+        // $pourcentage = ($vente->montant * $bonus ) / 100;
+        // $rachat =  $pourcentage + $vente->montant;
+
+        // $regain =  Nut::convert_number_to_words($rachat);
+        return view('remove.printer', compact('remove',
+        'chiffre'
+        // ,'bonus','rachats','regain'
+    ));
+    }
     /**
      * Display the specified resource.
      *

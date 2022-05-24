@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers; 
 
+use App\Helpers\Nut;
 use App\Models\Trac;
 use App\Models\Bonus;
 use App\Models\Somme;
-use App\Models\Client;
 // use Illuminate\Support\Facades\Mail; 
+use App\Models\Client;
+use App\Models\Envoie;
 use App\Models\Recept;
 use App\Helpers\Helper;
 use App\Models\Forfait;
@@ -26,7 +28,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Envoie;
 
 
 class InvestissementsController extends Controller
@@ -254,7 +255,9 @@ class InvestissementsController extends Controller
 
         
             $investi = new Investissement();
+            $reference = Helper::Generator(new Investissement, 'reference', 8, 'REF');
            
+          
             $bonus = Parrainage::where('id', 1)->select('bonus')->first()['bonus'];
             $duree = Forfait::where('id', request('forfait_id'))->select('duree')->first()['duree'];
             $pourcentageJ = Forfait::where('id', request('forfait_id'))->select('pourcentageJ')->first()['pourcentageJ'];
@@ -263,6 +266,7 @@ class InvestissementsController extends Controller
             $max = Forfait::where('id', request('forfait_id'))->select('montantMax')->first()['montantMax'];
 
             $investi->choix = request('choix');
+            $investi->reference = $reference;
             // $investi->status = 1;
             // $investi->investiman = request('investiman');
             $investi->particulier_id = request('particulier_id');
@@ -430,10 +434,11 @@ class InvestissementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
+ 
     public function stored(Investissement $investi)
     {   
-    return view('investi.dimi', compact('investi'));
+        $chiffre =  Nut::convert_number_to_words( $investi->montant);
+    return view('investi.dimi', compact('investi','chiffre'));
     }
 
 
@@ -604,6 +609,19 @@ $diminish->customer_id = request('customer_id');
     return Redirect::route('investir.investis.index')->with('message', 'Félicitation, le retrait a bien été enregistré.');
     }
 
+    public function print(Investissement $investi)
+    {   
+
+        $chiffre =  Nut::convert_number_to_words( $investi->montant);
+
+        // $pourcentage = ($vente->montant * $bonus ) / 100;
+        // $rachat =  $pourcentage + $vente->montant;
+
+        // $regain =  Nut::convert_number_to_words($rachat);
+        return view('investi.print', compact('investi','chiffre'
+        // ,'bonus','rachats','regain'
+        ));
+    }
 
   
 

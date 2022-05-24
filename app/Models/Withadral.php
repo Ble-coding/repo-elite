@@ -14,7 +14,7 @@ class Withadral extends Model
 
     protected $fillable = ['montant',
     'name_retirant','prename_retirant','tel_retirant','piece_id',
-    'sold_id',
+    'sold_id','motif',
     'numpiece','reference','add_retirant',
     'user_id'
 

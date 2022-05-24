@@ -90,7 +90,7 @@
 																 <td>{{$forfait->libelle_Forfait}}</td>
 																 <td>{{$forfait->duree}}</td>
 																	 {{-- <td>{{\Carbon\Carbon::parse($forfait->duree)->format('m/Y')}}</td>  --}}
-																 <td>{{$forfait->pourcentageJ}}% -{{$forfait->pourcentageJ}}%</td> 
+																 <td>{{$forfait->pourcentageM}}% -{{$forfait->pourcentageJ}}%</td> 
 
 																 
 																

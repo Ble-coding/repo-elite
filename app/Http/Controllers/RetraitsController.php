@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Nut;
 use App\Models\Solde;
+use App\Models\Depot; 
 use App\Models\Retrait;
 use App\Models\Particulier; 
-use App\Models\Depot; 
 use Illuminate\Http\Request;
 use App\Mail\RetraitMarkdownMail;  
 use Illuminate\Support\Facades\Gate;
@@ -105,6 +106,21 @@ class RetraitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function printer(Retrait $retrait)
+    {   
+
+        $chiffre =  Nut::convert_number_to_words($retrait->montant);
+
+        // $pourcentage = ($vente->montant * $bonus ) / 100;
+        // $rachat =  $pourcentage + $vente->montant;
+
+        // $regain =  Nut::convert_number_to_words($rachat);
+        return view('retrait.printer', compact('retrait',
+        'chiffre'
+        // ,'bonus','rachats','regain'
+        ));
+    }
     public function edit(Retrait $retrait)
     {
         if (Gate::denies('edit-retraits')){ 

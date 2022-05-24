@@ -49,8 +49,14 @@ class ElitesController extends Controller
    $partSups = Vente::onlyTrashed()->get();
         
         $bonus = Valeur::where('id', 1)->select('pourcentage')->first()['pourcentage'];
+        // $bonus0 = Valeur::where('id', 4)->select('pourcentage')->first()['pourcentage'];
+        $bonus1 = Valeur::where('id', 2)->select('pourcentage')->first()['pourcentage'];
+        $bonus2 = Valeur::where('id', 3)->select('pourcentage')->first()['pourcentage'];
+
         return view('elite.deal.auto.index', compact('visiteurs','Sups',
-    'vente','pieces','bonus','rachats','transactions','sommes','ventes','decaisses', 'partSups'));
+    'vente','pieces','bonus2',
+    // '',
+    'bonus1','bonus','rachats','transactions','sommes','ventes','decaisses', 'partSups'));
     }
 
 
@@ -58,6 +64,8 @@ class ElitesController extends Controller
     public function stord(Vente $vente)
     {   
         $bonus = Valeur::where('id', 1)->select('pourcentage')->first()['pourcentage'];
+        $bonus1 = Valeur::where('id', 2)->select('pourcentage')->first()['pourcentage'];
+        $bonus2 = Valeur::where('id', 3)->select('pourcentage')->first()['pourcentage'];
         $rachats = Vente::where('status', 0)->where('id', $vente)->select('created_at')->first();
         $chiffre =  Nut::convert_number_to_words($vente->montant);
 
@@ -66,7 +74,7 @@ class ElitesController extends Controller
 
         $regain =  Nut::convert_number_to_words($rachat);
 
-        return view('elite.deal.auto.decaisse', compact('vente','bonus','rachats','chiffre','regain'));
+        return view('elite.deal.auto.decaisse', compact('vente','bonus','bonus','bonus2','rachats','chiffre','regain'));
     }
 
 
@@ -201,8 +209,14 @@ public function storded(Request $request , Vente $vente)
         $vente = new Vente();
         $contrat = Helper::Generator(new Vente, 'contrat', 5, 'CON');
         $code = Helper::IDGenerator(new Vente, 'code', 6, '40');
+        // $type = Valeur::all();
+        // $type = Valeur::select('typing')->get();
         $bonus = Valeur::where('id', 1)->select('pourcentage')->first()['pourcentage'];
-   
+        $bonus1 = Valeur::where('id', 2)->select('pourcentage')->first()['pourcentage'];
+        $bonus2 = Valeur::where('id', 3)->select('pourcentage')->first()['pourcentage'];
+        // $ = Valeur::where('id', 4)->select('pourcentage')->first()['pourcentage'];
+
+        // dd($type->typing);
         $vente->nationnalite = request('nationnalite');
         $vente->name = request('name');
         $vente->prename = request('prename');
@@ -215,7 +229,6 @@ public function storded(Request $request , Vente $vente)
         $vente->adresse = request('adresse');
         $vente->code = $code;
         $vente->contrat = $contrat;
-        $vente->duree = request('duree');
         $vente->montant = request('montant'); 
         $vente->carte_grise = request('carte_grise');    
         $vente->marque = request('marque');
@@ -225,8 +238,10 @@ public function storded(Request $request , Vente $vente)
         $vente->couleur = request('couleur');
         $vente->immatricule = request('immatricule');
          $vente->payment = request('payment');
+         $vente->duree = request('duree');
 
-        if ($vente->payment== 'Unique') {
+         
+         if ($vente->payment== 'Unique') {
             $vente->compteur = 1;
         } else{ 
             $vente->compteur = $vente->duree;
@@ -252,21 +267,39 @@ public function storded(Request $request , Vente $vente)
                         $somm->dateexp = request('dateexp');
                         $somm->numpiece = request('numpiece');
                         $somm->adresse = request('adresse');
-                        $somm->duree = request('duree');
                         // $somm->visiteur_id = request('visiteur_id');
                         $somm->carte_grise = request('carte_grise');
                         $somm->immatricule = request('immatricule');
+                        $somm->duree = request('duree');
     
-                          $somm->payment = request('payment');
+                        
+                          $somm->payment = request('payment'); 
                         if($somm->payment == 'Unique'){
-                            $pourcentage = ($somm->montant * $bonus ) / 100 ;
+                            if($somm->duree == 1){
+                                $pourcentage = ($somm->montant * $bonus ) / 100 ;
+                            }else if ($somm->duree == 2) {
+                                $pourcentage = ($somm->montant * $bonus1 ) / 100 ;
+                            } else if($somm->duree == 3){
+                                $pourcentage = ($somm->montant * $bonus2 ) / 100 ;
+                            } else {
+                            return 'Error';         
+                            }
                             $rachat =  $pourcentage + $somm->montant;
                             $somm->retire =   $rachat;
                             $somm->total =   $rachat;
                             $somm->soustract =  $rachat;
+                            // dd($somm->soustract);
                             $somm->compteur = 1;
                         } else{                    
-                            $pourcentage = ( $somm->montant * ($bonus / 100)  );
+                            if($somm->duree == 1){
+                                $pourcentage = ($somm->montant * $bonus ) / 100 ;
+                            }else if ($somm->duree == 2) {
+                                $pourcentage = ($somm->montant * $bonus1 ) / 100 ;
+                            } else if($somm->duree == 3){
+                                $pourcentage = ($somm->montant * $bonus2 ) / 100 ;
+                            } else {
+                            return 'Error';         
+                            }
                             $rachat = ($pourcentage + $somm->montant)/$somm->duree ;
                             $somm->retire = $rachat;
                             $somm->total = $rachat * $somm->duree  ;
@@ -297,14 +330,27 @@ public function storded(Request $request , Vente $vente)
     {   
 
         $bonus = Valeur::where('id', 1)->select('pourcentage')->first()['pourcentage'];
+        $bonus1 = Valeur::where('id', 2)->select('pourcentage')->first()['pourcentage'];
+        $bonus2 = Valeur::where('id', 3)->select('pourcentage')->first()['pourcentage'];
+        // $ = Valeur::where('id', 4)->select('pourcentage')->first()['pourcentage'];
         $rachats = Vente::where('status', 0)->where('id', $vente)->select('created_at')->first();
         $chiffre =  Nut::convert_number_to_words($vente->montant);
 
-        $pourcentage = ($vente->montant * $bonus ) / 100;
+     if($vente->duree == 1){
+                                $pourcentage = ($vente->montant * $bonus ) / 100 ;
+                            }elseif ($vente->duree == 2) {
+                                $pourcentage = ($vente->montant * $bonus1 ) / 100 ;
+                            } else if($vente->duree == 3){
+                                $pourcentage = ($vente->montant * $bonus2 ) / 100 ;
+                            } else {
+                            return 'Error';         
+                        }
         $rachat =  $pourcentage + $vente->montant;
 
         $regain =  Nut::convert_number_to_words($rachat);
-        return view('elite.deal.auto.print', compact('vente','bonus','rachats','chiffre','regain'));
+        return view('elite.deal.auto.print', compact('vente',
+        // 'bonus0',
+        'bonus2','bonus1','bonus','rachats','chiffre','regain'));
     }
 
     // public function vers(Vente $vente)
@@ -349,21 +395,48 @@ public function storded(Request $request , Vente $vente)
     public function stored(Vente $vente)
     {   
 
+        // $bonus = Valeur::where('id', 1)->select('pourcentage')->first()['pourcentage'];
         $bonus = Valeur::where('id', 1)->select('pourcentage')->first()['pourcentage'];
+        $bonus1 = Valeur::where('id', 2)->select('pourcentage')->first()['pourcentage'];
+        $bonus2 = Valeur::where('id', 3)->select('pourcentage')->first()['pourcentage'];
+        // $bonus0 = Valeur::where('id', 4)->select('pourcentage')->first()['pourcentage'];
+
         $rachats = Vente::where('status', 0)->where('id', $vente)->select('created_at')->first();
         
 
 
             
         if($vente->payment == 'Unique'){
-            $v = ($vente->montant * $bonus) / 100 ;
+            // $v = ($vente->montant * $bonus) / 100 ;
+            
+            if($vente->duree == 1){
+                $v = ($vente->montant * $bonus) / 100 ;
+            }elseif ($vente->duree == 2) {
+                $v = ($vente->montant * $bonus1) / 100 ;
+            } else if($vente->duree == 3){
+                $v = ($vente->montant * $bonus2) / 100 ;
+            } else {
+            return 'Error';         
+        }
+        
             if($vente->compteur = 1){
                $calcul = $v + $vente->montant;
                $chiffre =  Nut::convert_number_to_words( $calcul);
             }
         }else{
 
-            $v0 = ($vente->montant * (($bonus) /100));
+            
+
+            if($vente->duree == 1){
+                $v0 = ($vente->montant * (($bonus) /100));
+            }elseif ($vente->duree == 2) {
+                $v0 = ($vente->montant * (($bonus1) /100));
+            } else if($vente->duree == 3){
+                $v0 = ($vente->montant * (($bonus2) /100));
+            } else {
+            return 'Error';         
+        }
+
             $v1 = ($v0 + $vente->montant)/$vente->duree;
 
        
@@ -380,7 +453,9 @@ public function storded(Request $request , Vente $vente)
 
         $regain =  Nut::convert_number_to_words($rachat);
 
-        return view('elite.deal.auto.dimi', compact('vente','bonus','rachats','chiffre','regain'));
+        return view('elite.deal.auto.dimi', compact('vente',
+        // 'bonus0',
+         'bonus','bonus1','bonus2','rachats','chiffre','regain'));
     }
 
 
@@ -393,7 +468,7 @@ public function storeded(Request $request , Vente $vente)
     $rachat->payment = request('payment'); 
     $rachat->vente_id = request('vente_id');
     
-    dd($rachat->payment);
+    // dd($rachat->payment);
                 // dd($rachat->name);
                 // dd($rachat->prename);
                 // dd($rachat->immatricule);
@@ -527,18 +602,28 @@ public function storeded(Request $request , Vente $vente)
      */
     public function show(Vente $vente)
     {
-    
         $bonus = Valeur::where('id', 1)->select('pourcentage')->first()['pourcentage'];
+        $bonus1 = Valeur::where('id', 2)->select('pourcentage')->first()['pourcentage'];
+        $bonus2 = Valeur::where('id', 3)->select('pourcentage')->first()['pourcentage'];
         $rachats = Vente::where('status', 0)->where('id', $vente)->select('created_at')->first();
         $chiffre =  Nut::convert_number_to_words($vente->montant);
 
         $pourcentage = ($vente->montant * $bonus ) / 100;
+        if($vente->duree == 1)
+                {$pourcentage = ($vente->montant * (($bonus1) /100));}
+        else if($vente->duree == 2) 
+					{$pourcentage = ($vente->montant * (($bonus1) /100));} 
+                    else if($vente->duree == 3) 
+					{$pourcentage = ($vente->montant * (($bonus2) /100));} 
+									else {
+											return 'Erreur';  }      
+											
         $rachat =  $pourcentage + $vente->montant;
 
         $regain =  Nut::convert_number_to_words($rachat);
 
      
-        return view('elite.deal.auto.show', compact('vente','bonus','rachats','chiffre','regain'
+        return view('elite.deal.auto.show', compact('vente','bonus','bonus1','bonus2','rachats','chiffre','regain'
     ));
     
       

@@ -213,7 +213,18 @@ margin: auto;
 											<div>Nombre de mois : {{ $vente->duree }}mois</div>
 										</tr>
 										<tr>
-											<div style="display: none">  {{$pourcentage = ($vente->montant * $bonus ) / 100}}</div>
+											@if($vente->duree == 1)
+												<div style="display:none" >{{$pourcentage = ($vente->montant * (($bonus) /100))}}</div> 
+											
+											@elseif ($vente->duree == 2) 
+												<div style="display:none" >{{$pourcentage = ($vente->montant * (($bonus1) /100))}}</div> 
+											 @elseif($vente->duree == 3)
+												<div style="display:none" >{{$pourcentage = ($vente->montant * (($bonus2) /100))}}</div> 
+											 @else 
+											Erreur        
+											
+											@endif
+											{{-- <div style="display: none">  {{$pourcentage = ($vente->montant * $bonus ) / 100}}</div> --}}
 											<div style="display: none">  {{$rachat =  $pourcentage + $vente->montant}}</div>
 											<div>Montant de rachat (en chiffre) :  {{ number_format($rachat, 0, ',', ' ') }}</div>
 										</tr>
@@ -232,11 +243,30 @@ margin: auto;
 								<tr>
 													@if ($vente->payment == 'Unique')
 														<td >Paiement : {{$vente->payment}}</td>
-														<td >Date du paiement  :</td>
+														<td >Date du paiement  :<div style="display:none">{{$unique = \Carbon\Carbon::parse($vente->created_at)->addMonth($vente->duree)->subDay(1)->format('d/m/Y')}}</div>
+															<td>{{$unique}}</td> </td>
 													@else
 													<div class="row">
 														<td >Modalités de rachat : {{$vente->payment}}</td>
-														<td >Date du 1er paiement  :</td>
+														<td >Date du 1er paiement  :<div style="display:none">{{$datei = \Carbon\Carbon::now()->format('m')}}</div>
+															<div style="display:none">{{$datev = \Carbon\Carbon::now()->addMonth(1)->format('m')}}</div>								
+															<div style="display:none">{{$date = (int) $datei  }}</div> {{-- 4 --}}
+															<div style="display:none">{{$datek = (int) $datev }}</div> 
+															<div style="display:none">{{$datek = $datev - $date }}</div> 
+															 <div style="display:none">{{$datep = $datek + $datei }}</div>
+															 <div style="display:none">{{$dates = "$datep" }}</div>
+															<div style="display:none">{{$aLongTimeAgo = \Carbon\Carbon::parse('12-'.$dates.'-2022')->format('m')}}</div>
+															<div style="display:none">{{$dateu = \Carbon\Carbon::parse($vente->created_at)->format('d')}}</div>
+															<div style="display:none">{{$datel = \Carbon\Carbon::parse($vente->created_at)->format('Y')}}</div>
+															<div style="display:none">{{$dat = \Carbon\Carbon::parse($dateu.'-'.$aLongTimeAgo.'-'.$datel)->format('d/m/Y')}}</div>
+															<div style="display:none">{{$datevi = \Carbon\Carbon::parse($vente->created_at)->addMonth($vente->duree)->format('d/m/Y')}}</div>
+															<div style="display:none">{{$dateRemoveDay = \Carbon\Carbon::parse($dateu.'-'.$aLongTimeAgo.'-'.$datel)->subDay(1)->format('d/m/Y')}}</div>
+																	 @if ($dat <= $datevi)
+															 <td>{{$dateRemoveDay}}  </td> 
+																	@else
+															 <td>Paiement en attente du {{$dateRemoveDay}}</td>	
+																	@endif
+																	</td>
 													</div>
 
 													@endif

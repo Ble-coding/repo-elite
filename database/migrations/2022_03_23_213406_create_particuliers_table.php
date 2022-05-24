@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('nationnalite');
             // $table->string('sexe');
             $table->enum('sexe',['F','M'])->default('M');
-            $table->bigInteger('user_id');
+            // $table->bigInteger('user_id');
             $table->string('lieu_habitation');
             // $table->string('situation');
             $table->enum('situation',['Marie','Celibataire'])->default('Celibataire');

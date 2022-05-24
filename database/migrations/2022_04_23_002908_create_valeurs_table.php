@@ -16,6 +16,7 @@ return new class extends Migration
     //     Schema::create('valeurs', function (Blueprint $table) {
     //         $table->id();
     //         $table->string('pourcentage')->default(0);
+    //$table->string('typing')->default('unique');
     //         $table->timestamps();
     //     });
     // }

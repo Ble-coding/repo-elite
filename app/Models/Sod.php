@@ -23,6 +23,9 @@ class Sod extends Model
         return $this->belongsTo('App\Models\Society');
     }
 
+    public function transferts(){
+        return $this->hasMany('App\Models\Transfert');
+    }
     public function widraws(){
         return $this->hasMany('App\Models\Widraw');
     }

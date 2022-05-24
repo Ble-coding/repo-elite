@@ -14,8 +14,8 @@ class Retrait extends Model
   
         protected $fillable = ['montant',
     'name_retirant','prename_retirant','tel_retirant','piece_id',
-    'solde_id',
-    'numpiece','reference','add_retirant',
+    'solde_id', 
+    'numpiece','reference','add_retirant', 'motif',
     'user_id'
 
 ];

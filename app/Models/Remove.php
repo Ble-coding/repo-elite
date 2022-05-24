@@ -14,7 +14,7 @@ class Remove extends Model
 
     protected $fillable = ['montant',
     'name_retirant','prename_retirant','tel_retirant','piece_id',
-    'sode_id',
+    'sode_id','motif',
     'numpiece','reference','add_retirant',
     'user_id'
 

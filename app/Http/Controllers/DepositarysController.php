@@ -267,6 +267,7 @@ public function storeded(Request $request , Sode $depositary)
         $reference = Helper::Generator(new Remove, 'reference', 8, 'REF');
         $remove->reference = $reference;
         $remove->sode_id = request('sode_id');
+        $remove->motif = request('motif');    
         $remove->add_retirant = request('add_retirant');       
         $remove->name_retirant = request('name_retirant'); 
         $remove->prename_retirant = request('prename_retirant'); 

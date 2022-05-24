@@ -27,4 +27,7 @@ class Sold extends Model
     // public function deposits(){
     //     return $this->hasMany('App\Models\Deposit');
     // }
+    public function transferts(){
+        return $this->hasMany('App\Models\Transfert');
+    }
 }

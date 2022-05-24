@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Helpers\Nut;
 use App\Models\Sold;
+use App\Models\Deposit;
 use App\Models\Withadral;
 use App\Models\Entreprise;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Deposit;
 
 
 class WithadralsController extends Controller
@@ -87,6 +88,22 @@ class WithadralsController extends Controller
     
 
     return Redirect::route('withadral.withadrals.index');
+    }
+
+
+    public function printer(Withadral $withadral)
+    {   
+
+        $chiffre =  Nut::convert_number_to_words($withadral->montant);
+
+        // $pourcentage = ($vente->montant * $bonus ) / 100;
+        // $rachat =  $pourcentage + $vente->montant;
+
+        // $regain =  Nut::convert_number_to_words($rachat);
+        return view('withadral.printer', compact('withadral',
+        'chiffre'
+        // ,'bonus','rachats','regain'
+    ));
     }
 
     /**

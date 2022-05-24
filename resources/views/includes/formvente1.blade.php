@@ -23,7 +23,7 @@
                     Mois
                 </div>
             </div>
-            <input  value="{{ old('duree') ?? $vente->duree }}" class="form-control @error('duree') is-invalid @enderror" type="number" min="0" max="3" placeholder="{{ __('Durée') }}" id="duree" name="duree">
+            <input  value="{{ old('duree') ?? $vente->duree }}" class="form-control @error('duree') is-invalid @enderror" type="number" min="1" max="3" placeholder="{{ __('Durée') }}" id="duree" name="duree">
             @error('duree')
                      <div class="invalid-feedback">
                                        {{ $errors->first('duree') }}

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('name_retirant');
             $table->string('prename_retirant');
             $table->string('numpiece');
+            $table->text('motif');
             $table->string('reference');
             $table->string('tel_retirant');
             $table->string('add_retirant');

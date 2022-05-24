@@ -33,6 +33,7 @@ return new class extends Migration
              $table->dateTime('date_termine')->nullable();
             //  $table->string('retire');
             $table->bigInteger('user_id');
+            $table->string('reference');
             $table->timestamps();
        
             $table->foreign('forfait_id')->references('id')->on('forfaits');

@@ -118,20 +118,52 @@
 
 
 
-<div class="input-group mb-4">
-    {{-- <div class="form-group col-md-4 mb-0">
-        <div class="input-group mb-4"> --}}
-            <div class="input-group-prepend">
+    
+<div class="form-row">
+    <div class="form-group col-md-6 mb-4"> 
+        <div class="input-group mb-4">
+            <div class="input-group-prepend ">
                 <div class="input-group-text">
-                    <i class="fe fe-italic"></i>
+                    <label class="col-md-2 form-label">Motif</label>
                 </div>
             </div>
-            <input id="montant" type="text" class="form-control @error('montant') is-invalid @enderror" name="montant" value="{{ old('montant') ?? $widraw->montant  }}"  autocomplete="montant" placeholder="{{ __('Montant du retrait') }}" autofocus>
-            @error('montant')
-            <div class="invalid-feedback">
-                            {{ $errors->first('montant') }}
+            <div class="col-md-6">
+                    <textarea class="form-control @error('motif') is-invalid @enderror" id="motif" name="motif" placeholder="Entrez....." rows="3">{{ old('motif') ?? $widraw->motif }}</textarea>
+                    @error('motif')
+                     <div class="invalid-feedback">
+                     {{ $errors->first('motif') }}
+                     </div>
+                      @enderror
             </div>
-        @enderror
-        {{-- </div>										
-    </div> --}}
+    
+        </div>
+    </div>
+    <div class="form-group col-md-4 mb-0">
+        <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fe fe-italic"></i>
+                    </div>
+                </div>
+                <input id="montant" type="text" class="form-control @error('montant') is-invalid @enderror" name="montant" value="{{ old('montant') ?? $widraw->montant  }}"  autocomplete="montant" placeholder="{{ __('Montant du retrait') }}" autofocus>
+                @error('montant')
+                    <div class="invalid-feedback">
+                                    {{ $errors->first('montant') }}
+                    </div>
+                @enderror										
+          </div>
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+

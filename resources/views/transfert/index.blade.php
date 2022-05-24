@@ -178,55 +178,46 @@
 																<tr>
 																	<th scope="row">{{$transfert->id}}</th>
 																	<td>{{\Carbon\Carbon::parse($transfert->created_at)->format('d/m/Y')}}</td> 
-																	<td>{{$transfert->envoie->name}} </td>
+																	<td>{{$transfert->send->name}} </td>
 
 																	@if ($transfert->solde_id !== Null)
 																	   <td>{{$transfert->solde->particulier->code}} <br>{{$transfert->solde->particulier->name}} {{$transfert->solde->particulier->prename}}</td>
 																	@elseif($transfert->sode_id !== Null)
 																		<td>{{$transfert->sode->client->code}} <br>{{$transfert->sode->client->name}} {{$transfert->sode->client->prename}}</td>
-
-																				@if ($transfert->somme->particulier_id !== Null)
-																					<td>{{$transfert->somme->particulier->code}} <br>{{$transfert->somme->particulier->name}} {{$transfert->somme->particulier->prename}}</td>
-																				@elseif($transfert->somme->client_id !== Null)
-																					<td>{{$transfert->somme->client->code}} <br>{{$transfert->somme->client->name}} {{$transfert->somme->client->prename}}</td>
-																				{{-- @dd($transfert->somme->customer) --}}
-																				 @elseif($transfert->somme->customer_id !== Null)
-																				
-																				<td>{{$transfert->somme->customer->code}} <br>{{$transfert->somme->customer->name}} {{$transfert->somme->customer->prename}}</td> 																			@else	
+																	@elseif($transfert->sold_id !== Null)
+																		<td>{{$transfert->sold->entreprise->code}} <br>{{$transfert->sold->entreprise->name}}</td>
+																	@elseif($transfert->sod_id !== Null)
+																		<td>{{$transfert->sod->society->code}} <br>{{$transfert->sod->society->name}} </td>
+																	@else	
 																			
 																			
-																			@endif 
+																	@endif 
 																		{{-- @dd($transfert->somme->customer) --}}
 																	{{-- @elseif($transfert->somme_id !== Null)
 																		
 																		<td>{{$transfert->somme->customer->code}} <br>{{$transfert->somme->customer->name}} {{$transfert->somme->customer->prename}}</td> --}}
-																	@else	
+																	{{-- @else	
 																	
 																	
-																	@endif 
+																	@endif  --}}
 
-																	<td>{{$transfert->reception->name}} </td> 
+																	<td>{{$transfert->receive->name}} </td> 
 																		@if ($transfert->olde_id !== Null)
 																		<td>{{$transfert->olde->particulier->code}} <br>{{$transfert->olde->particulier->name}} {{$transfert->olde->particulier->prename}}</td>
 																		@elseif($transfert->ode_id !== Null)
 																			<td>{{$transfert->ode->client->code}} <br>{{$transfert->ode->client->name}} {{$transfert->ode->client->prename}}</td>
-																			@elseif($transfert->omme_id !== Null)
-
-																			@if ($transfert->omme->particulier_id !== Null)
-																					<td>{{$transfert->omme->particulier->code}} <br>{{$transfert->omme->particulier->name}} {{$transfert->omme->particulier->prename}}</td>
-																				@elseif($transfert->omme->client_id !== Null)
-																					<td>{{$transfert->omme->client->code}} <br>{{$transfert->omme->client->name}} {{$transfert->omme->client->prename}}</td>
-																				{{-- @dd($transfert->omme->customer) --}}
-																				 @elseif($transfert->omme->customer_id !== Null)
+																	@elseif($transfert->old_id !== Null)
+																		<td>{{$transfert->old->entreprise->code}} <br>{{$transfert->old->entreprise->name}}</td>
+																		@elseif($transfert->od_id !== Null)
+																			<td>{{$transfert->od->society->code}} <br>{{$transfert->od->society->name}} </td>
+																		@else	
 																				
-																				<td>{{$transfert->omme->customer->code}} <br>{{$transfert->omme->customer->name}} {{$transfert->omme->customer->prename}}</td> 																			@else	
-																			
-																			
-																			@endif 
+																				
+																		@endif 
 																			{{-- @dd($transfert->somme->customer) --}}
 																			{{-- <td>{{$transfert->omme->customer->code}} <br>{{$transfert->omme->customer->name}} {{$transfert->omme->customer->prename}}</td> --}}
-																		@else 
-																	@endif
+																		{{-- @else 
+																	@endif --}}
 
 
 																	<td>{{ number_format($transfert->montant, 0, ',', ' ') }}</td> 
@@ -276,65 +267,72 @@
 @endsection
 @section('js')
 <script>
+
+	// function valueGet(){
+	// 	// var name_element = document.getElementsByName('solde_id');
+  	// 	var x = name_element.mySecondfunction();
+	// 	  console.log(x);
+	// }
+
+
 	function mySelectfunction(){
-		getValue = document.getElementById("envoie_id").value;
-		if(getValue == 4){
+		getValue = document.getElementById("send_id").value;
+		if(getValue == 1){
 			document.getElementById("img1").style.display = "block";
 			document.getElementById("img2").style.display = "none";
 			document.getElementById("img3").style.display = "none";
+			document.getElementById("img4").style.display = "none";
 		}
-		if(getValue == 5){
+		if(getValue == 2){
 			document.getElementById("img1").style.display = "none";
 			document.getElementById("img2").style.display = "block";
 			document.getElementById("img3").style.display = "none";
+			document.getElementById("img4").style.display = "none";
 		}
-		if(getValue == 6){
+		if(getValue == 3){
 			document.getElementById("img1").style.display = "none";
 			document.getElementById("img2").style.display = "none";
 			document.getElementById("img3").style.display = "block";
+			document.getElementById("img4").style.display = "none";
+		}
+		if(getValue == 4){
+			document.getElementById("img1").style.display = "none";
+			document.getElementById("img2").style.display = "none";
+			document.getElementById("img3").style.display = "none";
+			document.getElementById("img4").style.display = "block";
 		}
 	
 	}
 
 	function mySecondfunction(){
-		getValue = document.getElementById("reception_id").value;
-		if(getValue == 4){
+		getValue = document.getElementById("receive_id").value;
+		if(getValue == 1){
 			document.getElementById("help1").style.display = "block";
 			document.getElementById("help2").style.display = "none";
 			document.getElementById("help3").style.display = "none";
+			document.getElementById("help4").style.display = "none";
 		}
-		if(getValue == 5){
+		if(getValue == 2){
 			document.getElementById("help1").style.display = "none";
 			document.getElementById("help2").style.display = "block";
 			document.getElementById("help3").style.display = "none";
+			document.getElementById("help4").style.display = "none";
 		}
-		if(getValue == 6){
+		if(getValue == 3){
 			document.getElementById("help1").style.display = "none";
 			document.getElementById("help2").style.display = "none";
 			document.getElementById("help3").style.display = "block";
+			document.getElementById("help4").style.display = "none";
+		}
+
+		if(getValue == 4){
+			document.getElementById("help1").style.display = "none";
+			document.getElementById("help2").style.display = "none";
+			document.getElementById("help3").style.display = "none";
+			document.getElementById("help4").style.display = "block";
 		}
 	
 	}
-
-
-// 	$('#form-button-submit').on('click', function(e){
-//    e.preventDefault();
-
-//    var name = $('input#name').val(),
-//        email = $('input#email').val(),
-//        comments = $('textarea#comments').val(),
-//        formData = 'name=' + name + '&email=' + email + '&comments=' + comments;
-
-//     $.ajax({
-//       type: 'post',
-//       url: 'js/sendEmail.php',
-//       data: formData,
-//       success: function(results) {
-//         $('ul#response').html(results);
-//       }
-//     });
-// });
-
 
 </script>
 

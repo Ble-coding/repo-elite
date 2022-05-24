@@ -82,7 +82,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::KKagFQIU3rYDHI1w',
+            '_route' => 'generated::mB8YQqtzHlvxpk3A',
           ),
           1 => NULL,
           2 => 
@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::TxCKA9yqEyjFFQ5g',
+            '_route' => 'generated::CIBxfYWmTxoGUXrf',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::v7sii7d1XPXS87Wv',
+            '_route' => 'generated::k8JPpuAkk56JzJIa',
           ),
           1 => NULL,
           2 => 
@@ -142,7 +142,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::IAEx87PZXEmxDE1j',
+            '_route' => 'generated::buA77JtMStuaA2KF',
           ),
           1 => NULL,
           2 => 
@@ -1566,7 +1566,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::zVFNxUH9BnIQgUPh',
+            '_route' => 'generated::AZd40qeSku8kuAOP',
           ),
           1 => NULL,
           2 => 
@@ -1602,7 +1602,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::owm2RbfS2ZqPeS0x',
+            '_route' => 'generated::PptXxrgXFal5PVwo',
           ),
           1 => NULL,
           2 => 
@@ -1732,7 +1732,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ggChxE3ay0ReDdrb',
+            '_route' => 'generated::uSUfErcwo5GpIrvj',
           ),
           1 => NULL,
           2 => 
@@ -1767,7 +1767,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/transferts/([^/]++)(?|(*:30)|/edit(*:42)|(*:49))|/e(?|lite/(?|decaisses/([^/]++)/stord(*:94)|vente(?|s/([^/]++)(?|(*:122)|/restore(*:138))|/([^/]++)/edit(*:161))|rachats/([^/]++)/stored(*:193)|prints/([^/]++)/print(*:222))|ntreprises/(?|([^/]++)(*:253)|print/([^/]++)(*:275)|([^/]++)(?|/(?|edit(*:302)|restore(*:317))|(*:326))))|/admin/(?|users/([^/]++)(?|(*:364)|/(?|edit(*:380)|restore(*:395))|(*:404))|forfaits/([^/]++)(?|(*:433)|/(?|edit(*:449)|restore(*:464))|(*:473)))|/par(?|ticuliers/(?|([^/]++)(*:511)|print/([^/]++)(*:533)|([^/]++)(?|/(?|edit(*:560)|restore(*:575))|(*:584)))|rains/([^/]++)(?|(*:611)|/edit(*:624)|(*:632)))|/c(?|lients/(?|([^/]++)(*:665)|print/([^/]++)(*:687)|([^/]++)(?|/(?|edit(*:714)|restore(*:729))|(*:738)))|ustomers/(?|([^/]++)(*:768)|print/([^/]++)(*:790)|([^/]++)(?|/(?|edit(*:817)|restore(*:832))|(*:841))))|/so(?|cieties/(?|([^/]++)(*:877)|print/([^/]++)(*:899)|([^/]++)(?|/(?|edit(*:926)|restore(*:941))|(*:950)))|ld(?|e/soldes/([^/]++)(?|(*:985)|/edit(*:998)|(*:1006))|/solds/([^/]++)(?|(*:1034)|/edit(*:1048)|(*:1057)))|d(?|e/sodes/([^/]++)(?|(*:1091)|/edit(*:1105)|(*:1114))|/sods/([^/]++)(?|(*:1141)|/edit(*:1155)|(*:1164)))|mme/sommes/([^/]++)(?|(*:1197)|/edit(*:1211)|(*:1220)))|/v(?|aleurs/([^/]++)(?|(*:1254)|/edit(*:1268)|(*:1277))|erify\\-email/([^/]++)/([^/]++)(*:1317))|/d(?|epo(?|t/(?|depots/([^/]++)(?|(*:1361)|/(?|edit(*:1378)|restore(*:1394))|(*:1404))|prints/([^/]++)/print(*:1435)|retraits/([^/]++)/stored(*:1468))|s(?|it(?|ary/(?|depositarys/([^/]++)(?|(*:1517)|/(?|edit(*:1534)|restore(*:1550))|(*:1560))|prints/([^/]++)/print(*:1591)|removes/([^/]++)/stored(*:1623))|/(?|deposits/([^/]++)(?|(*:1657)|/(?|edit(*:1674)|restore(*:1690))|(*:1700))|prints/([^/]++)/print(*:1731)|withadrals/([^/]++)/stored(*:1766)))|e/(?|deposes/([^/]++)(?|(*:1801)|/(?|edit(*:1818)|restore(*:1834))|(*:1844))|prints/([^/]++)/print(*:1875)|widraws/([^/]++)/stored(*:1907))))|iminish/diminishes/([^/]++)(?|(*:1949)))|/re(?|trait/retraits/([^/]++)(?|(*:1992)|/restore(*:2009))|move/removes/([^/]++)(?|(*:2043)|/restore(*:2060))|set\\-password/([^/]++)(*:2092))|/wi(?|thadral/withadrals/([^/]++)(?|(*:2138)|/restore(*:2155))|draw/widraws/([^/]++)(?|(*:2189)|/restore(*:2206)))|/investir/(?|bonus/([^/]++)/edited(*:2251)|investis/([^/]++)(?|(*:2280)|/edit(*:2294)|(*:2303))|diminishes/([^/]++)/stored(*:2339)))/?$}sDu',
+      0 => '{^(?|/transferts/([^/]++)(?|(*:30)|/edit(*:42)|(*:49))|/e(?|lite/(?|decaisses/([^/]++)/stord(*:94)|vente(?|s/([^/]++)(?|(*:122)|/restore(*:138))|/([^/]++)/edit(*:161))|rachats/([^/]++)/stored(*:193)|prints/([^/]++)/print(*:222))|ntreprises/(?|([^/]++)(*:253)|print/([^/]++)(*:275)|([^/]++)(?|/(?|edit(*:302)|restore(*:317))|(*:326))))|/admin/(?|users/([^/]++)(?|(*:364)|/(?|edit(*:380)|restore(*:395))|(*:404))|forfaits/([^/]++)(?|(*:433)|/(?|edit(*:449)|restore(*:464))|(*:473)))|/par(?|ticuliers/(?|([^/]++)(*:511)|print/([^/]++)(*:533)|([^/]++)(?|/(?|edit(*:560)|restore(*:575))|(*:584)))|rains/([^/]++)(?|(*:611)|/edit(*:624)|(*:632)))|/c(?|lients/(?|([^/]++)(*:665)|print/([^/]++)(*:687)|([^/]++)(?|/(?|edit(*:714)|restore(*:729))|(*:738)))|ustomers/(?|([^/]++)(*:768)|print/([^/]++)(*:790)|([^/]++)(?|/(?|edit(*:817)|restore(*:832))|(*:841))))|/so(?|cieties/(?|([^/]++)(*:877)|print/([^/]++)(*:899)|([^/]++)(?|/(?|edit(*:926)|restore(*:941))|(*:950)))|ld(?|e/soldes/([^/]++)(?|(*:985)|/edit(*:998)|(*:1006))|/solds/([^/]++)(?|(*:1034)|/edit(*:1048)|(*:1057)))|d(?|e/sodes/([^/]++)(?|(*:1091)|/edit(*:1105)|(*:1114))|/sods/([^/]++)(?|(*:1141)|/edit(*:1155)|(*:1164)))|mme/sommes/([^/]++)(?|(*:1197)|/edit(*:1211)|(*:1220)))|/v(?|aleurs/([^/]++)(?|(*:1254)|/edit(*:1268)|(*:1277))|erify\\-email/([^/]++)/([^/]++)(*:1317))|/d(?|epo(?|t/(?|depots/([^/]++)(?|(*:1361)|/(?|edit(*:1378)|restore(*:1394))|(*:1404))|prints/([^/]++)/print(*:1435)|retraits/([^/]++)/stored(*:1468))|s(?|it(?|ary/(?|depositarys/([^/]++)(?|(*:1517)|/(?|edit(*:1534)|restore(*:1550))|(*:1560))|prints/([^/]++)/print(*:1591)|removes/([^/]++)/stored(*:1623))|/(?|deposits/([^/]++)(?|(*:1657)|/(?|edit(*:1674)|restore(*:1690))|(*:1700))|prints/([^/]++)/print(*:1731)|withadrals/([^/]++)/stored(*:1766)))|e/(?|deposes/([^/]++)(?|(*:1801)|/(?|edit(*:1818)|restore(*:1834))|(*:1844))|prints/([^/]++)/print(*:1875)|widraws/([^/]++)/stored(*:1907))))|iminish/diminishes/([^/]++)(?|(*:1949)))|/re(?|trait/(?|retraits/([^/]++)(?|(*:1995)|/restore(*:2012))|prints/([^/]++)/printer(*:2045))|move/(?|removes/([^/]++)(?|(*:2082)|/restore(*:2099))|prints/([^/]++)/printer(*:2132))|set\\-password/([^/]++)(*:2164))|/wi(?|thadral/(?|withadrals/([^/]++)(?|(*:2213)|/restore(*:2230))|prints/([^/]++)/printer(*:2263))|draw/(?|prints/([^/]++)/printer(*:2304)|widraws/([^/]++)(?|(*:2332)|/restore(*:2349))))|/investir/(?|bonus/([^/]++)/edited(*:2395)|investis/([^/]++)(?|(*:2424)|/edit(*:2438)|(*:2447))|prints/([^/]++)/print(*:2478)|diminishes/([^/]++)/stored(*:2513)))/?$}sDu',
     ),
     3 => 
     array (
@@ -4233,7 +4233,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1992 => 
+      1995 => 
       array (
         0 => 
         array (
@@ -4294,7 +4294,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2009 => 
+      2012 => 
       array (
         0 => 
         array (
@@ -4316,7 +4316,30 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2043 => 
+      2045 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'retrait.printer.printer',
+          ),
+          1 => 
+          array (
+            0 => 'retrait',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      2082 => 
       array (
         0 => 
         array (
@@ -4377,7 +4400,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2060 => 
+      2099 => 
       array (
         0 => 
         array (
@@ -4399,7 +4422,30 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2092 => 
+      2132 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'remove.printer.printer',
+          ),
+          1 => 
+          array (
+            0 => 'remove',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      2164 => 
       array (
         0 => 
         array (
@@ -4422,7 +4468,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2138 => 
+      2213 => 
       array (
         0 => 
         array (
@@ -4483,7 +4529,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2155 => 
+      2230 => 
       array (
         0 => 
         array (
@@ -4505,7 +4551,53 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2189 => 
+      2263 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'withadral.printer.printer',
+          ),
+          1 => 
+          array (
+            0 => 'withadral',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      2304 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'widraw.printer.printer',
+          ),
+          1 => 
+          array (
+            0 => 'widraw',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      2332 => 
       array (
         0 => 
         array (
@@ -4566,7 +4658,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2206 => 
+      2349 => 
       array (
         0 => 
         array (
@@ -4588,7 +4680,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2251 => 
+      2395 => 
       array (
         0 => 
         array (
@@ -4611,7 +4703,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2280 => 
+      2424 => 
       array (
         0 => 
         array (
@@ -4634,7 +4726,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2294 => 
+      2438 => 
       array (
         0 => 
         array (
@@ -4657,7 +4749,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2303 => 
+      2447 => 
       array (
         0 => 
         array (
@@ -4698,7 +4790,30 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2339 => 
+      2478 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'investir.prints.printer',
+          ),
+          1 => 
+          array (
+            0 => 'investi',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      2513 => 
       array (
         0 => 
         array (
@@ -4845,7 +4960,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::KKagFQIU3rYDHI1w' => 
+    'generated::mB8YQqtzHlvxpk3A' => 
     array (
       'methods' => 
       array (
@@ -4866,7 +4981,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::KKagFQIU3rYDHI1w',
+        'as' => 'generated::mB8YQqtzHlvxpk3A',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4882,7 +4997,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::TxCKA9yqEyjFFQ5g' => 
+    'generated::CIBxfYWmTxoGUXrf' => 
     array (
       'methods' => 
       array (
@@ -4905,7 +5020,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::TxCKA9yqEyjFFQ5g',
+        'as' => 'generated::CIBxfYWmTxoGUXrf',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4921,7 +5036,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::v7sii7d1XPXS87Wv' => 
+    'generated::k8JPpuAkk56JzJIa' => 
     array (
       'methods' => 
       array (
@@ -4943,7 +5058,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::v7sii7d1XPXS87Wv',
+        'as' => 'generated::k8JPpuAkk56JzJIa',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4959,7 +5074,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::IAEx87PZXEmxDE1j' => 
+    'generated::buA77JtMStuaA2KF' => 
     array (
       'methods' => 
       array (
@@ -4981,7 +5096,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::IAEx87PZXEmxDE1j',
+        'as' => 'generated::buA77JtMStuaA2KF',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9001,6 +9116,43 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'retrait.printer.printer' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'retrait/prints/{retrait}/printer',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\RetraitsController@printer',
+        'controller' => 'App\\Http\\Controllers\\RetraitsController@printer',
+        'as' => 'retrait.printer.printer',
+        'namespace' => NULL,
+        'prefix' => '/retrait',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'retrait.retraits.destroy' => 
     array (
       'methods' => 
@@ -9564,6 +9716,43 @@ app('router')->setCompiledRoutes(
         'uses' => 'App\\Http\\Controllers\\RemovesController@destroy',
         'controller' => 'App\\Http\\Controllers\\RemovesController@destroy',
         'as' => 'remove.removes.destroy',
+        'namespace' => NULL,
+        'prefix' => '/remove',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'remove.printer.printer' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'remove/prints/{remove}/printer',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\RemovesController@printer',
+        'controller' => 'App\\Http\\Controllers\\RemovesController@printer',
+        'as' => 'remove.printer.printer',
         'namespace' => NULL,
         'prefix' => '/remove',
         'where' => 
@@ -10609,6 +10798,43 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'withadral.printer.printer' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'withadral/prints/{withadral}/printer',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\WithadralsController@printer',
+        'controller' => 'App\\Http\\Controllers\\WithadralsController@printer',
+        'as' => 'withadral.printer.printer',
+        'namespace' => NULL,
+        'prefix' => '/withadral',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'withadral.withadrals.destroy' => 
     array (
       'methods' => 
@@ -11101,6 +11327,43 @@ app('router')->setCompiledRoutes(
         'as' => 'depose.deposes.restore',
         'namespace' => NULL,
         'prefix' => '/depose',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'widraw.printer.printer' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'widraw/prints/{widraw}/printer',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\WidrawsController@printer',
+        'controller' => 'App\\Http\\Controllers\\WidrawsController@printer',
+        'as' => 'widraw.printer.printer',
+        'namespace' => NULL,
+        'prefix' => '/widraw',
         'where' => 
         array (
         ),
@@ -12329,6 +12592,43 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'investir.prints.printer' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'investir/prints/{investi}/print',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\InvestissementsController@print',
+        'controller' => 'App\\Http\\Controllers\\InvestissementsController@print',
+        'as' => 'investir.prints.printer',
+        'namespace' => NULL,
+        'prefix' => '/investir',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'investir.diminishes.stored' => 
     array (
       'methods' => 
@@ -12621,7 +12921,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::zVFNxUH9BnIQgUPh' => 
+    'generated::AZd40qeSku8kuAOP' => 
     array (
       'methods' => 
       array (
@@ -12642,7 +12942,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::zVFNxUH9BnIQgUPh',
+        'as' => 'generated::AZd40qeSku8kuAOP',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12696,7 +12996,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::owm2RbfS2ZqPeS0x' => 
+    'generated::PptXxrgXFal5PVwo' => 
     array (
       'methods' => 
       array (
@@ -12717,7 +13017,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::owm2RbfS2ZqPeS0x',
+        'as' => 'generated::PptXxrgXFal5PVwo',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13037,7 +13337,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::ggChxE3ay0ReDdrb' => 
+    'generated::uSUfErcwo5GpIrvj' => 
     array (
       'methods' => 
       array (
@@ -13058,7 +13358,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::ggChxE3ay0ReDdrb',
+        'as' => 'generated::uSUfErcwo5GpIrvj',
       ),
       'fallback' => false,
       'defaults' => 

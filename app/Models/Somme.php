@@ -47,13 +47,13 @@ public function client(){
 public function customer(){
     return $this->belongsTo('App\Models\Customer');
 }
-public function transferts(){
-    return $this->hasMany('App\Models\Transfert');
-} 
+// public function transferts(){
+//     return $this->hasMany('App\Models\Transfert');
+// } 
 
-public function transfts(){
-    return $this->hasMany('App\Models\Transfert');
-} 
+// public function transfts(){
+//     return $this->hasMany('App\Models\Transfert');
+// } 
 public function diminishes(){
     return $this->hasMany('App\Models\Diminish');
 }

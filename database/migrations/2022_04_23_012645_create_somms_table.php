@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             
-            $table->string('code');
+            // $table->string('code');
             $table->string('name');
             $table->string('prename');
             $table->string('tel');

@@ -265,7 +265,8 @@
 																			{{-- @endif	 --}}
 
 																			{{-- @can('show-investis') --}}
-																			<a href="{{ route('investir.investis.show' , ['investi' => $investi->id]) }}" style="background-color:#fff" class="btn btn-">👀</a> 
+																			{{-- <a href="{{ route('investir.investis.show' , ['investi' => $investi->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>  --}}
+																			<a href="{{ route('investir.prints.printer' , ['investi' => $investi->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
 																			{{-- @endcan --}}
 
 

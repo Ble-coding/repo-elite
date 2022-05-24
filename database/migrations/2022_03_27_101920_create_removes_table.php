@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedbigInteger('sode_id')->index();
             $table->string('montant');
+            $table->text('motif');
             $table->string('name_retirant');
             $table->string('prename_retirant');
             $table->string('numpiece');

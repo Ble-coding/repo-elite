@@ -187,18 +187,18 @@ margin: auto;
                     <div class="col-lg-12">
                         
                       <table class="table" border="1">
-                          <tr>
-                              <th style="color:#262626">N° DU CASH DEAL</th>
-                              <th style="color:#262626" rowspan="2">MONTANT DU CASH DEAL (EN CHIFFRE)</th>
-                              <th style="color:#262626;" rowspan="2">{{ number_format($vente->montant, 0, ',', ' ') }}</th>
-                              <th style=" border-color: #fff!important; width: 20%;:#262626"></th>
-                          </tr>
+                        <tr>
+                            <th style="color:#262626">N° ELITE DEAL AUTO</th>
+                            <th style="color:#262626" rowspan="2">MONTANT ELITE DEAL AUTO (EN CHIFFRE)</th>
+                            <th style="color:#262626;" rowspan="2">{{ number_format($vente->montant, 0, ',', ' ') }}</th>
+                            <th style=" border-color: #fff!important; width: 20%;:#262626"></th>
+                        </tr>
                           <tr>
                               <td rowspan="2"> {{$vente->contrat}}</td>
                               <td style=" border-color: #fff!important; color:#262626"></td>
                           </tr>
                           <tr>
-                              <td> MONTANT DU CASH DEAL (EN LETTRE) </td>
+                              <td> MONTANT ELITE DEAL AUTO (EN LETTRE) </td>
                               <td> {{$chiffre}}</td>
                               <td style=" border-color: #fff!important; color:#262626"> </td>
                           </tr>

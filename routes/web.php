@@ -194,6 +194,7 @@ Route::put('/depots/{depot}/restore', [App\Http\Controllers\DepotsController::cl
 
 Route::prefix('retrait')->name('retrait.')->group(function() {
 Route::get('/retraits/{retrait}', [App\Http\Controllers\RetraitsController::class, 'edit'])->name('retraits.edit');
+Route::get('/prints/{retrait}/printer/', [App\Http\Controllers\RetraitsController::class, 'printer'])->name('printer.printer');
 Route::delete('/retraits/{retrait}', [App\Http\Controllers\RetraitsController::class, 'destroy'])->name('retraits.destroy');
 Route::patch('/retraits/{retrait}', [App\Http\Controllers\RetraitsController::class, 'update'])->name('retraits.update');
 Route::put('/retraits/{retrait}/restore', [App\Http\Controllers\RetraitsController::class, 'restore'])->name('retraits.restore');
@@ -219,6 +220,7 @@ Route::put('/depositarys/{depositary}/restore', [App\Http\Controllers\Depositary
 Route::prefix('remove')->name('remove.')->group(function() {
     Route::get('/removes/{remove}', [App\Http\Controllers\RemovesController::class, 'edit'])->name('removes.edit');
     Route::delete('/removes/{remove}', [App\Http\Controllers\RemovesController::class, 'destroy'])->name('removes.destroy');
+    Route::get('/prints/{remove}/printer/', [App\Http\Controllers\RemovesController::class, 'printer'])->name('printer.printer');
     Route::patch('/removes/{remove}', [App\Http\Controllers\RemovesController::class, 'update'])->name('removes.update');
     Route::put('/removes/{remove}/restore', [App\Http\Controllers\RemovesController::class, 'restore'])->name('removes.restore');
  });
@@ -260,6 +262,7 @@ Route::put('/deposits/{deposit}/restore', [App\Http\Controllers\DepositsControll
 
 Route::prefix('withadral')->name('withadral.')->group(function() {
 Route::get('/withadrals/{withadral}', [App\Http\Controllers\WithadralsController::class, 'edit'])->name('withadrals.edit');
+Route::get('/prints/{withadral}/printer/', [App\Http\Controllers\WithadralsController::class, 'printer'])->name('printer.printer');
 Route::delete('/withadrals/{withadral}', [App\Http\Controllers\WithadralsController::class, 'destroy'])->name('withadrals.destroy');
 Route::patch('/withadrals/{withadral}', [App\Http\Controllers\WithadralsController::class, 'update'])->name('withadrals.update');
 Route::put('/withadrals/{withadral}/restore', [App\Http\Controllers\WithadralsController::class, 'restore'])->name('withadrals.restore');
@@ -287,6 +290,7 @@ Route::put('/deposes/{depose}/restore', [App\Http\Controllers\DeposesController:
 
 Route::prefix('widraw')->name('widraw.')->group(function() {
     // Route::resource('/widraws', 'App\Http\Controllers\WidrawsController');
+    Route::get('/prints/{widraw}/printer/', [App\Http\Controllers\WidrawsController::class, 'printer'])->name('printer.printer');
     Route::get('/widraws/{widraw}', [App\Http\Controllers\WidrawsController::class, 'edit'])->name('widraws.edit');
     Route::delete('/widraws/{widraw}', [App\Http\Controllers\WidrawsController::class, 'destroy'])->name('widraws.destroy');
     Route::patch('/widraws/{widraw}', [App\Http\Controllers\WidrawsController::class, 'update'])->name('widraws.update');
@@ -324,9 +328,11 @@ Route::get('/bonus/{investi}/edited/', [App\Http\Controllers\InvestissementsCont
 Route::post('/bonus', [App\Http\Controllers\InvestissementsController::class, 'enregistre'])->name('bonus.enregistre');
 Route::post('/investis', [App\Http\Controllers\InvestissementsController::class, 'store'])->name('investis.store');
 // Route::post('/diminishes', [App\Http\Controllers\InvestissementsController::class, 'stored'])->name('diminishes.stored');
+
 Route::get('/investis/create', [App\Http\Controllers\InvestissementsController::class, 'create'])->name('investis.create');
 Route::get('/investis/{investi}', [App\Http\Controllers\InvestissementsController::class, 'show'])->name('investis.show');
 Route::get('/investis/{investi}/edit/', [App\Http\Controllers\InvestissementsController::class, 'edit'])->name('investis.edit');
+Route::get('/prints/{investi}/print/', [App\Http\Controllers\InvestissementsController::class, 'print'])->name('prints.printer');
 Route::get('/diminishes/{investi}/stored/', [App\Http\Controllers\InvestissementsController::class, 'stored'])->name('diminishes.stored');
 Route::post('/diminishes', [App\Http\Controllers\InvestissementsController::class, 'storeded'])->name('diminishes.storeded');
 Route::patch('/investis/{investi}', [App\Http\Controllers\InvestissementsController::class, 'update'])->name('investis.update');

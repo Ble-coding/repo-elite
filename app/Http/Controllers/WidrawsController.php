@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Sod;
+use App\Helpers\Nut;
+use App\Models\Depose;
 use App\Models\Widraw;
 use App\Models\Society;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Depose;
 
 class WidrawsController extends Controller
 {
@@ -82,6 +83,21 @@ class WidrawsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function printer(Widraw $widraw)
+    {   
+
+        $chiffre =  Nut::convert_number_to_words($widraw->montant);
+
+        // $pourcentage = ($vente->montant * $bonus ) / 100;
+        // $rachat =  $pourcentage + $vente->montant;
+
+        // $regain =  Nut::convert_number_to_words($rachat);
+        return view('widraw.printer', compact('widraw',
+        'chiffre'
+        // ,'bonus','rachats','regain'
+      ));
+    }
     public function show(Widraw $widraw)
     {
         return view('widraw.show', compact('widraw'));

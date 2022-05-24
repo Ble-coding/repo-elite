@@ -42,54 +42,85 @@
 		{{ session()->get('message') }}
 	</div>
 @endif
-<div class="row">
-	<div class="col-md-1">
-	</div>   
-	<div class="card col-md-10">
-			<div class="card-header">
-				<h3 class="card-title">Valeur</h3>
-			</div>
-		<div class="card-body">
-			<div class="row">
-				<div class="col-md-1">
 
-				</div>
-				<div class="col-md-10">
-							{{-- @include('includes.formparticulier') --}}
-
-							<div class="input-group mb-4">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-									Valeur de rachat
-									</div>
-								</div>
-								@foreach($valeurs as $valeur)
-								<input id="pourcentage" type="number" class="form-control @error('pourcentage') is-invalid @enderror" name="pourcentage" value="{{ old('pourcentage') ?? $valeur->pourcentage}}" autocomplete="pourcentage" disabled placeholder="{{$valeur->pourcentage}}">
-								
-								{{-- @error('bonus')
-									<div class="invalid-feedback">
-													{{ $errors->first('bonus') }}
-								</div>
-								@enderror --}}
-							</div>
-				</div>
-				<div class="col-md-1">
-			
-				</div>                  
-			</div>
-			<div class="text-wrap">
-				<div class="btn-list text-right">
-
-					@can('edit-users')
-                           <a href="{{ route('valeurs.edit' , ['valeur' => $valeur->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a>
-                      @endcan
-				</div>
-			</div> 
-			@endforeach
+ 
+<div class="panel panel-primary">
+	<div class="tab-menu-heading">
+		<div class="tabs-menu ">
+			<!-- Tabs -->
+			{{-- <ul class="nav panel-tabs">
+				@can('manage-users')
+					<li><a href="#tab1" data-toggle="tab">Valeurs</a></li>	
+				@endcan						
+			</ul> --}}
 		</div>
 	</div>
-	<div class="col-md-1">
-	</div>   
+	<div class="panel-body tabs-menu-body">
+		<div class="tab-content">
+			@can('manage-users')
+				{{-- <div class="tab-pane" id="tab1">				 --}}
+					<div class="card col-md-10">
+						<div class="card-header">
+							<h3 class="card-title">Liste des valeurs de rachat par durée</h3>
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="row flex-lg-nowrap">
+						<div class="col-12">
+							<div class="row flex-lg-nowrap">
+								<div class="col-12 mb-3">
+									<div class="e-panel card">
+										<div class="card-body">
+											<div class="e-table">
+												<div class="table-responsive table-lg mt-3">
+													<table class="table table-bordered border-top text-nowrap" id="example2">
+														<thead>
+															<tr>
+																<th class="align-top border-bottom-0 wd-5"></th>
+																<th class="border-bottom-0 w-20">Pourcen.</th>
+																{{-- <th class="border-bottom-0 w-20">Tranche.</th> --}}
+																<th class="border-bottom-0 w-10">Actions</th>
+															</tr>
+														</thead>
+														<tbody>
+															@if(!empty($valeurs) && $valeurs->count())
+															@foreach($valeurs as $valeur)
+															<tr>
+															<th scope="row">{{$valeur->id}}</th>
+															<td>{{$valeur->pourcentage}}</td>
+															{{-- <td>{{$valeur->typing}}</td> --}}
+																<td>
+																	
+																	@can('edit-users')
+																		<a href="{{ route('valeurs.edit' , ['valeur' => $valeur->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a>
+															  		@endcan
+															
+																	
+																</td>
+			
+															</tr>
+																@endforeach
+															@else
+																				<tr>
+																						<td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
+																					</tr>
+															@endif
+														
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Row -->
+				{{-- </div> --}}
+			@endcan
+		</div>
+	</div>
 </div>
 
 @endsection

@@ -180,7 +180,7 @@ margin: auto;
     </div>
 </div> --}} 
 
-<div  id="hidden" class="row">
+<div   class="row">
     <div class="col-md-1">
 
     </div>
@@ -217,8 +217,8 @@ margin: auto;
                                                                       
                                                                 <div class="text-wrap">
                                                                     <div class="btn-list text-right">
-                                                                        {{-- <button type="submit" style="background:#FF0017; color:#fff" class="btn btn">Retirer</button> --}}
-                                                                        <input type="button" style="background:#FF0017; color:#fff" class="btn btn" value="Retirer" onclick="PrintMeSubmitMe(this); return false;">
+                                                                        <button type="submit" style="background:#FF0017; color:#fff" class="btn btn">Retirer</button>
+                                                                        {{-- <input type="button" style="background:#FF0017; color:#fff" class="btn btn" value="Retirer" onclick="PrintMeSubmitMe(this); return false;"> --}}
                                                                     </div>
                                                                 </div>
                                                             </form>

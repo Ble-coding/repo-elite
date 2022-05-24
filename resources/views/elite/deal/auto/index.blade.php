@@ -343,7 +343,20 @@
 																		 @endcan  
 																			
 																		 @if ($vente->payment == 'Unique')
-																		 <div style="display:none">{{$v = ($vente->montant * $bonus) / 100   }}</div>
+																		 {{-- <div style="display:none">{{$v = ($vente->montant * $bonus0) / 100   }}</div> --}}
+
+																		 @if($vente->duree == 1)
+																			<div style="display:none" >{{$v = ($vente->montant * (($bonus) /100))}}</div> 
+																		
+																		@elseif ($vente->duree == 2) 
+																			<div style="display:none" >{{$v = ($vente->montant * (($bonus1) /100))}}</div> 
+																		 @elseif($vente->duree == 3)
+																			<div style="display:none" >{{$v = ($vente->montant * (($bonus2) /100))}}</div> 
+																		 @else 
+																		Erreur        
+																		
+																		@endif
+
 																			 @if($vente->compteur = 1)
 																				  <div style="display:none" >{{$viol = $v + $vente->montant}} </div>  
 																				  <td>{{ number_format($viol, 0, ',', ' ') }}</td> 
@@ -352,7 +365,20 @@
 																			 @endif	
 			
 																		 @else
-																		 <div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100))}}</div> 
+																		 
+																		@if($vente->duree == 1)
+																			<div style="display:none" >{{$v0 = ($vente->montant * (($bonus) /100))}}</div> 
+																		
+																		@elseif ($vente->duree == 2) 
+																			<div style="display:none" >{{$v0 = ($vente->montant * (($bonus1) /100))}}</div> 
+																		@elseif($vente->duree == 3)
+																			<div style="display:none" >{{$v0 = ($vente->montant * (($bonus2) /100))}}</div> 
+																		 @else 
+																		Erreur        
+																		
+																		@endif
+
+											
 																		 <div style="display:none" >{{$v1 = ($v0 + $vente->montant)/$vente->duree}}</div> 
 																			 @if ($vente->compteur >=1)
 																	  
@@ -560,14 +586,41 @@
 																			
 																	
 																		@if ($transaction->payment == 'Unique')
-																		<div style="display:none">{{$v = ($transaction->montant * $bonus) / 100   }}</div>
+
+																			@if($transaction->duree == 1)
+																				<div style="display:none" >{{$v = ($transaction->montant * (($bonus) /100))}}</div> 
+																			
+																			@elseif ($transaction->duree == 2) 
+																				<div style="display:none" >{{$v = ($transaction->montant * (($bonus1) /100))}}</div> 
+																			 @elseif($transaction->duree == 3)
+																				<div style="display:none" >{{$v = ($transaction->montant * (($bonus2) /100))}}</div> 
+																			@else 
+																			Erreur        
+																			
+																			@endif
+
+																		{{-- <div style="display:none">{{$v = ($transaction->montant * $bonus) / 100   }}</div> --}}
 																			
 																				<div style="display:none" >{{$viol = $v + $transaction->montant}} </div>  
 																				<td>{{ number_format($viol, 0, ',', ' ') }}</td> 
 																			
 
 																		@else
-																		<div style="display:none" >{{$v0 = ($transaction->montant * (($bonus) /100))}}</div> 
+																		{{-- <div style="display:none" >{{$v0 = ($transaction->montant * (($bonus) /100))}}</div>  --}}
+
+																		@if($transaction->duree == 1)
+																			<div style="display:none" >{{$v0 = ($transaction->montant * (($bonus) /100))}}</div> 
+																		
+																		@elseif ($transaction->duree == 2) 
+																			<div style="display:none" >{{$v0 = ($transaction->montant * (($bonus1) /100))}}</div> 
+																		 @elseif($transaction->duree == 3)
+																			<div style="display:none" >{{$v0 = ($transaction->montant * (($bonus2) /100))}}</div> 
+																		@else 
+																		Erreur        
+																		
+																		@endif
+
+
 																		<div style="display:none" >{{$v1 = ($v0 + $transaction->montant)/$transaction->duree}}</div> 
 																		
 																	

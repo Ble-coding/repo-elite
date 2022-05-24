@@ -11,14 +11,14 @@ return new class extends Migration
      *
      * @return void
      */
-    // public function up()
-    // {
-    //     Schema::create('receptions', function (Blueprint $table) {
-    //         $table->id();
-    //         $table->string('name')->default('Epargne');
-    //         $table->timestamps();
-    //     });
-    // }
+    public function up()
+    {
+        Schema::create('sends', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->default('Epargne');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('receptions');
+        Schema::dropIfExists('sends');
     }
 };

@@ -44,7 +44,7 @@
                     <i class="fe fe-check-square"></i>
                 </div> 
             </div>
-            <input  value="{{ old('immatricule') ?? $vente->immatricule }}" class="form-control @error('immatricule') is-invalid @enderror" type="tel" placeholder="{{ __('Immatricula.') }}" id="immatricule" name="immatricule">
+            <input  value="{{ old('immatricule') ?? $vente->immatricule }}" class="form-control @error('immatricule') is-invalid @enderror" type="text" placeholder="{{ __('Immatricula.') }}" id="immatricule" name="immatricule">
             @error('immatricule')
                     <div class="invalid-feedback">
                                     {{ $errors->first('immatricule') }}

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Depot;
 use App\Models\Forfait;
 use Illuminate\Http\Request;
 use App\Models\Investissement;
 use Illuminate\Support\Facades\DB;
+use Spatie\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
@@ -25,12 +27,24 @@ class HomeController extends Controller
     public function index()
     {
 
-        
-        $forfaits = Forfait::with('investissements')->get();
+        // $nbrClients = Depot::withCount('client')->get();
+        $nbrParticuliers = DB::table('depots')->count('particulier_id');
+        $sumMontantDepotEpargne = DB::table('depots')->sum('montantD');
 
+        $nbrClients = DB::table('depositaries')->count('client_id');
+        $sumMontantDepositaryCourant = DB::table('depositaries')->sum('montantD');
+
+        $nbrEntreprises = DB::table('deposits')->count('entreprise_id');
+        $sumMontantDepositEpargne = DB::table('deposits')->sum('montantD');
+
+        $nbrSocietys = DB::table('deposes')->count('society_id');
+        $sumMontantDeposeCourant = DB::table('deposes')->sum('montantD');
+
+        $forfaits = Forfait::paginate(5);
   
 
-        return view('home' , compact('forfaits'));
+        return view('home' , compact('forfaits','nbrClients','nbrParticuliers','sumMontantDepositaryCourant',
+        'sumMontantDepositEpargne','nbrEntreprises','sumMontantDepotEpargne','nbrSocietys','sumMontantDeposeCourant'));
 
 
     //     $dataPoints = [];

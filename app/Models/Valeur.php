@@ -12,6 +12,7 @@ class Valeur extends Model
     protected $table = 'valeurs';
     protected $fillable = [
    'pourcentage',
+//    'typing',
    'user_id'
 ];
 

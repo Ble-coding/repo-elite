@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('widraws', function (Blueprint $table) {
             $table->id();
             $table->unsignedbigInteger('sod_id')->index();
-       
+            $table->text('motif');
             $table->string('montant');
             $table->string('name_retirant');
             $table->string('prename_retirant');

@@ -43,6 +43,7 @@ class ValeursController extends Controller
     {
         $request->validate([     
             'pourcentage' => ['required', 'string', 'max:255'],  
+            'typing' => ['required', 'string', 'max:255'], 
         ]);
 
         $valeur = Valeur::create([

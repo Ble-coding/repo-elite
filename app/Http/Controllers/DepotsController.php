@@ -212,7 +212,7 @@ $depot->save();
             return view('404'); 
         }elseif($sodle->montantR =  $sodle->montantD){
             $sodle->rendu = 0;
-        } 
+        }   
 }
             
 
@@ -282,6 +282,7 @@ public function storeded(Request $request , Solde $depot)
         $retrait->tel_retirant = request('tel_retirant'); 
         $retrait->numpiece = request('numpiece'); 
     $retrait->piece_id = request('piece_id');
+    $retrait->motif = request('motif');
         $retrait->montant = $request->input('montant');
         $retrait->save();
         $solde->decrement('montantD', $retrait->montant);
@@ -347,6 +348,8 @@ public function storeded(Request $request , Solde $depot)
         // ,'bonus','rachats','regain'
     ));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

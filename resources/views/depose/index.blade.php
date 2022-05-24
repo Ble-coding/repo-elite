@@ -332,6 +332,7 @@
 																	{{-- <td>{{ number_format($depot->total_quantity, 0, ',', ' ') }}</td>--}}
 																	 <td>
 
+																		<a href="{{ route('widraw.printer.printer' , ['widraw' => $widraw->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
 																				{{-- @if ( \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($depot->created_at))  &&  \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($depot->created_at)->addDay(3))    )
 
 																			@else

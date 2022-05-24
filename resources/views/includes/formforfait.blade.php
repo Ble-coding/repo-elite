@@ -24,7 +24,7 @@
         </div>
     </div> --}}
     {{-- <input  value="{{ old('duree') ?? $forfait->duree }}" class="form-control @error('duree') is-invalid @enderror" type="month" placeholder="{{ __('Durée') }}" id="duree" name="duree"> --}}
-    <input  value="{{ old('duree') ?? $forfait->duree }}" class="form-control @error('duree') is-invalid @enderror" type="number" placeholder="{{ __('Durée') }}" id="duree" name="duree">
+    <input  value="{{ old('duree') ?? $forfait->duree }}" min="1"  class="form-control @error('duree') is-invalid @enderror" type="number" placeholder="{{ __('Durée') }}" id="duree" name="duree">
                  @error('duree')
                           <div class="invalid-feedback">
                                             {{ $errors->first('duree') }}
@@ -46,7 +46,7 @@
         @endif
         </div>
     </div>
-    <input  value="{{ old('pourcentageM') ?? $forfait->pourcentageM }}" class="form-control @error('pourcentageM') is-invalid @enderror" type="number" placeholder="{{ __('Pourcentage Mensuel') }}" id="pourcentageM" name="pourcentageM">
+    <input  value="{{ old('pourcentageM') ?? $forfait->pourcentageM }}" min="1" class="form-control @error('pourcentageM') is-invalid @enderror" type="number" placeholder="{{ __('Pourcentage Mensuel') }}" id="pourcentageM" name="pourcentageM">
     @error('pourcentageM')
              <div class="invalid-feedback">
                                {{ $errors->first('pourcentageM') }}
@@ -64,7 +64,7 @@
            
         </div>
     </div>
-    <input  value="{{ old('pourcentageJ') ?? $forfait->pourcentageJ }}" class="form-control @error('pourcentageJ') is-invalid @enderror" type="number" placeholder="{{ __('Pourcentage Jalonnement') }}" id="pourcentageJ" name="pourcentageJ">
+    <input  value="{{ old('pourcentageJ') ?? $forfait->pourcentageJ }}" min="1" class="form-control @error('pourcentageJ') is-invalid @enderror" type="number" placeholder="{{ __('Pourcentage Jalonnement') }}" id="pourcentageJ" name="pourcentageJ">
     @error('pourcentageJ')
              <div class="invalid-feedback">
                                {{ $errors->first('pourcentageJ') }}

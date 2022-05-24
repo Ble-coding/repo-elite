@@ -24,7 +24,7 @@ class Investissement extends Model
        'forfait_id','status',
          'choix','bonus', 'jalon', 
          'compteur',
-         'date_termine',
+         'date_termine', 'reference',
     'user_id'
 
 ];

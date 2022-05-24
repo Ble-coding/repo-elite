@@ -237,6 +237,7 @@ $depose->save();
         $widraw = new Widraw();
         $reference = Helper::Generator(new Widraw, 'reference', 8, 'REF');
         $widraw->reference = $reference;
+        $widraw->motif = request('motif');
         $widraw->add_retirant = request('add_retirant');
         $widraw->sod_id = request('sod_id');       
         $widraw->name_retirant = request('name_retirant'); 

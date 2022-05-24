@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('montant');
             $table->string('name_retirant');
             $table->string('prename_retirant');
+            $table->text('motif');
             $table->string('numpiece');
             $table->string('add_retirant');
             $table->string('reference');
