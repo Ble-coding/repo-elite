@@ -9,7 +9,7 @@ class Helper
         $data = $model::orderBy('id','desc')->first();
         if(!$data){
             $og_length = $length;
-         $last_numb = substr(str_shuffle("0123456789"), 0, 8);
+         $last_numb = substr(str_shuffle("0123456789"), 0, 6);
          $last_number = substr(str_shuffle("0123456789"), 0, 2);
         }else{
           
