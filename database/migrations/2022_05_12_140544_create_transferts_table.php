@@ -21,15 +21,19 @@ return new class extends Migration
             $table->unsignedbigInteger('sold_id')->index()->nullable();
             $table->unsignedbigInteger('sode_id')->index()->nullable();
             $table->unsignedbigInteger('sod_id')->index()->nullable();
-            // $table->unsignedbigInteger('somme_id')->index()->nullable();
+            $table->unsignedbigInteger('credit_id')->index()->nullable();
+            
            
             $table->unsignedbigInteger('receive_id')->index();
             $table->unsignedbigInteger('olde_id')->index()->nullable();
             $table->unsignedbigInteger('old_id')->index()->nullable();
             $table->unsignedbigInteger('ode_id')->index()->nullable();
             $table->unsignedbigInteger('od_id')->index()->nullable();
+            $table->unsignedbigInteger('redit_id')->index()->nullable();
             // $table->unsignedbigInteger('omme_id')->index()->nullable();
 
+
+            $table->bigInteger('status')->default(1);
 
             $table->unsignedbigInteger('user_id');
             $table->string('code');
@@ -42,6 +46,7 @@ return new class extends Migration
             $table->foreign('sold_id')->references('id')->on('solds');
             $table->foreign('sode_id')->references('id')->on('sodes');
             $table->foreign('sod_id')->references('id')->on('sods');
+            $table->foreign('credit_id')->references('id')->on('credits');
             
             $table->foreign('receive_id')->references('id')->on('receives');
 
@@ -49,6 +54,7 @@ return new class extends Migration
             $table->foreign('old_id')->references('id')->on('solds');
             $table->foreign('ode_id')->references('id')->on('sodes');
             $table->foreign('od_id')->references('id')->on('sods');
+            $table->foreign('redit_id')->references('id')->on('credits');
         });
     }
 

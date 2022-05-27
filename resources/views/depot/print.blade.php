@@ -161,11 +161,21 @@ margin: auto;
                             <div class="col-md-9 text-left">
                               <div class="col">Nous portons au credit du compte n° <span class="mr-2">{{$depot->particulier->code}}</span>   XOF :</div>
                               <div class="col">Soit {{ $chiffre }}  </div>
+
                             </div>
                             {{-- <div class="col-md-2">
-                            </div> --}}
+                            </div> --}} 
                             <div class="col-md-3">
-                              <div class="col">{{ number_format($depot->montantD, 0, ',', ' ') }}</div>
+                              {{-- <div class="col">{{ number_format($depot->montantD, 0, ',', ' ') }}</div> --}}
+
+                              
+                              @if ($depot->timbre == "Oui")
+                              <div style="display:none" class="col"> {{ $v = $depot->montantD + 100}}  </div>  
+                             <div class="col">{{ number_format($v, 0, ',', ' ') }} </div>  
+                            @else
+                            <div class="col">{{ number_format($depot->montantD, 0, ',', ' ') }} </div> 
+                            @endif
+
                               <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                             </div>
                         </div> 
@@ -275,11 +285,21 @@ margin: auto;
                            <div class="col-md-9 text-left">
                              <div class="col">Nous portons au credit du compte n° <span class="mr-2">{{$depot->particulier->code}}</span>   XOF :</div>
                              <div class="col">Soit {{ $chiffre }}  </div>
+
                            </div>
                            {{-- <div class="col-md-2">
-                           </div> --}}
+                           </div> --}} 
                            <div class="col-md-3">
-                             <div class="col">{{ number_format($depot->montantD, 0, ',', ' ') }}</div>
+                             {{-- <div class="col">{{ number_format($depot->montantD, 0, ',', ' ') }}</div> --}}
+
+                             
+                             @if ($depot->timbre == "Oui")
+                             <div style="display:none" class="col"> {{ $v = $depot->montantD + 100}}  </div>  
+                            <div class="col">{{ number_format($v, 0, ',', ' ') }} </div>  
+                           @else
+                           <div class="col">{{ number_format($depot->montantD, 0, ',', ' ') }} </div> 
+                           @endif
+
                              <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                            </div>
                        </div> 

@@ -27,7 +27,7 @@
                                                                 <i class="fe fe-mail"></i>
                                                             </div>
                                                         </div>
-                                                        <input disabled id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" :value="old('email', $request->email)" autocomplete="email" autofocus placeholder="{{ __('Email') }}">
+                                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" :value="old('email', $request->email)" autocomplete="email" autofocus placeholder="{{ __('Email') }}">
                                                             @error('email')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -59,9 +59,9 @@
                                                         <div class="col-12">
                                                             <button style="background-color:#ff0017; color:#fff" class="btn btn-block px-4"> {{ __('Modifier') }}</button>
                                                         </div>
-                                                        <div class="col-12 mt-1 text-center">
+                                                        {{-- <div class="col-12 mt-1 text-center">
                                                             <span class="text-bold text-center">INDISPONIBLE POUR LE MOMENT</span>
-                                                      </div>
+                                                      </div> --}}
                                                     </div>
                                                 </div>
                                             </div>

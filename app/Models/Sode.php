@@ -28,6 +28,10 @@ class Sode extends Model
     public function transferts(){
         return $this->hasMany('App\Models\Transfert');
     }
+
+    public function validates(){
+        return $this->hasMany('App\Models\Validate');
+    }
     public function removes(){
         return $this->hasMany('App\Models\Remove');
     }

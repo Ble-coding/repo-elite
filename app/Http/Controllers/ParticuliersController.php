@@ -160,10 +160,10 @@ class ParticuliersController extends Controller
 
         ]);
   
-        if( $particulier ){
-            // event(new ParticulierHasRegisteredEvent($particulier));
-            Mail::to($particulier->email)->send(new ParticulierMarkdownMail($particulier));
-        }
+        // if( $particulier ){
+        //     // event(new ParticulierHasRegisteredEvent($particulier));
+        //     Mail::to($particulier->email)->send(new ParticulierMarkdownMail($particulier));
+        // }
         
  
         // $suppleant = Suppleant::create([

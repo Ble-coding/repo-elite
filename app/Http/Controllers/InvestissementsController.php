@@ -437,7 +437,35 @@ class InvestissementsController extends Controller
  
     public function stored(Investissement $investi)
     {   
-        $chiffre =  Nut::convert_number_to_words( $investi->montant);
+       
+
+        if ($investi->jalon == 'Oui'){
+            $v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100 ;
+            if($investi->compteur = 1){
+                $viol = $v + $investi->montant;
+                $chiffre =  Nut::convert_number_to_words($viol);
+            }
+        }
+
+        else {
+           $v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $investi->forfait->duree) /100)); 
+           $v1 = $v0/$investi->forfait->duree;
+
+            if ($investi->compteur > 1) {
+                $chiffre =  Nut::convert_number_to_words($v1);
+            }
+           
+       
+            else if($investi->compteur = 1) {
+                $vtrack = $v1 + $investi->montant;
+
+                $chiffre =  Nut::convert_number_to_words($vtrack);
+            }
+          
+               
+        }
+                                 
+
     return view('investi.dimi', compact('investi','chiffre'));
     }
 

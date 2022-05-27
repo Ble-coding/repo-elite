@@ -88,10 +88,13 @@
 		<div class="tabs-menu ">
 			<!-- Tabs -->
 			<ul class="nav panel-tabs">
-                @can('manage-particuliers')
+                @can('manage-deposes')
 				<li class=""><a href="#tab1" class="active" data-toggle="tab">Transferts</a></li>
                 @endcan
-				<li><a href="#tab2" data-toggle="tab">Liste</a></li>
+				@can('manage-users')
+				<li><a href="#tab2" data-toggle="tab">En attente</a></li>
+				@endcan
+				<li><a href="#tab3" data-toggle="tab">Validé</a></li>
 
 			</ul>
 		</div>
@@ -99,14 +102,14 @@
 	<div class="panel-body tabs-menu-body">
 		<div class="tab-content">
 
-            {{-- @can('manage-particuliers') --}}
+            @can('manage-deposes')
                 <div class="tab-pane active" id="tab1">				
                     <div class="card col-md-10">
                         <div class="card-header">
                             <h3 class="card-title">Création</h3>
                         </div>
                     </div>
-                    <form id="form_horizontal" class="form-horizontal" action="{{ route('transferts.store') }}" method="POST" enctype="multipart/form-data"> 
+                    <form id="form_horizontal" class="form-horizontal" action="{{ route('transfert.transferts.store') }}" method="POST" enctype="multipart/form-data"> 
 						@csrf
 						<div class="row">
 							<div class="col-md-1">
@@ -142,8 +145,9 @@
 			
 					</form> 
                 </div> 
-            {{-- @endcan --}}
+            @endcan
 
+			@can('manage-users')
 			<div class="tab-pane " id="tab2">				
 				<div class="card col-md-10">
 					<div class="card-header">
@@ -169,7 +173,7 @@
 																		<th class="border-bottom-0 w-20">Reception</th>	
 																		<th class="border-bottom-0 w-20">Destinataire</th>	
 																		<th class="border-bottom-0 w-15">Montant</th>																
-																		{{-- <th class="border-bottom-0 w-10">Actions</th> --}}
+																		<th class="border-bottom-0 w-10">Actions</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -188,7 +192,9 @@
 																		<td>{{$transfert->sold->entreprise->code}} <br>{{$transfert->sold->entreprise->name}}</td>
 																	@elseif($transfert->sod_id !== Null)
 																		<td>{{$transfert->sod->society->code}} <br>{{$transfert->sod->society->name}} </td>
-																	@else	
+																	@elseif($transfert->credit_id !== Null)
+																	<td> {{ $transfert->credit->name }}</td>
+																	@else
 																			
 																			
 																	@endif 
@@ -210,7 +216,9 @@
 																		<td>{{$transfert->old->entreprise->code}} <br>{{$transfert->old->entreprise->name}}</td>
 																		@elseif($transfert->od_id !== Null)
 																			<td>{{$transfert->od->society->code}} <br>{{$transfert->od->society->name}} </td>
-																		@else	
+																		@elseif($transfert->redit_id !== Null)
+																			<td> {{ $transfert->redit->name }}</td>
+																		@else
 																				
 																				
 																		@endif 
@@ -222,7 +230,122 @@
 
 																	<td>{{ number_format($transfert->montant, 0, ',', ' ') }}</td> 
 																	
+																	<td>  
+																		<a href="{{ route('transfert.validates.stored' , ['transfert' => $transfert->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																			{{-- @can('manage-particuliers')
+																			  <a href="{{ route('elite.elites.show' , ['vente' => $vente->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
+																			  @endcan 
+																			  @can('manage-visiteurs')
+																			   <a href="{{ route('elite.decaisses.stord' , ['vente' => $vente->id]) }}" style="background-color:#eee;" class="btn btn-">🎟️</a> 
+                                                                            @endcan --}}
+																		</td>
+																				 
+																</tr>
+																@endforeach
+																@else
+																					<tr>
+																							<td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
+																						</tr>
+																@endif													
+														</tbody>
+													</table>	
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Row -->
+			</div>
+			@endcan 
+		
+
+			<div class="tab-pane " id="tab3">				
+				<div class="card col-md-10">
+					<div class="card-header">
+						<h3 class="card-title">Liste des transferts validé</h3>
+					</div>
+				</div>
+					<!-- Row -->
+					<div class="row flex-lg-nowrap">
+						<div class="col-12">
+							<div class="row flex-lg-nowrap">
+								<div class="col-12 mb-3">  
+									<div class="e-panel card">
+										<div class="card-body">
+											<div class="e-table">
+												<div class="table-responsive table-lg mt-3">
+													<table class="table table-bordered border-top text-nowrap" id="example3">
+														<thead>
+															<tr>
+																<th class="align-top border-bottom-0 wd-5"></th>
+																<th class="border-bottom-0 w-20">Date T.</th>
+																<th class="border-bottom-0 w-20">Envoie</th>
+																		<th class="border-bottom-0 w-20">Expediteur</th>
+																		<th class="border-bottom-0 w-20">Reception</th>	
+																		<th class="border-bottom-0 w-20">Destinataire</th>	
+																		<th class="border-bottom-0 w-15">Montant</th>																
+																		{{-- <th class="border-bottom-0 w-10">Actions</th> --}}
+															</tr>
+														</thead>
+														<tbody>
+															@if(!empty($valides) && $valides->count())
+															@foreach($valides as $valide) 
+																<tr>
+																	<th scope="row">{{$valide->id}}</th>
+																	<td>{{\Carbon\Carbon::parse($valide->created_at)->format('d/m/Y')}}</td> 
+																	<td>{{$valide->send->name}} </td>
+
+																	@if ($valide->solde_id !== Null)
+																	   <td>{{$valide->solde->particulier->code}} <br>{{$valide->solde->particulier->name}} {{$valide->solde->particulier->prename}}</td>
+																	@elseif($valide->sode_id !== Null)
+																		<td>{{$valide->sode->client->code}} <br>{{$valide->sode->client->name}} {{$valide->sode->client->prename}}</td>
+																	@elseif($valide->sold_id !== Null)
+																		<td>{{$valide->sold->entreprise->code}} <br>{{$valide->sold->entreprise->name}}</td>
+																	@elseif($valide->sod_id !== Null)
+																		<td>{{$valide->sod->society->code}} <br>{{$valide->sod->society->name}} </td>
+																	@elseif($valide->credit_id !== Null)
+																		<td> {{ $valide->credit->name }}</td>
+																	@else
+																			
+																	@endif 
+																		{{-- @dd($valide->somme->customer) --}}
+																	{{-- @elseif($valide->somme_id !== Null)
+																		
+																		<td>{{$valide->somme->customer->code}} <br>{{$valide->somme->customer->name}} {{$valide->somme->customer->prename}}</td> --}}
+																	{{-- @else	
+																	
+																	
+																	@endif  --}}
+
+																	<td>{{$valide->receive->name}} </td> 
+																		@if ($valide->olde_id !== Null)
+																		<td>{{$valide->olde->particulier->code}} <br>{{$valide->olde->particulier->name}} {{$valide->olde->particulier->prename}}</td>
+																		@elseif($valide->ode_id !== Null)
+																			<td>{{$valide->ode->client->code}} <br>{{$valide->ode->client->name}} {{$valide->ode->client->prename}}</td>
+																	@elseif($valide->old_id !== Null)
+																		<td>{{$valide->old->entreprise->code}} <br>{{$valide->old->entreprise->name}}</td>
+																		@elseif($valide->od_id !== Null)
+																			<td>{{$valide->od->society->code}} <br>{{$valide->od->society->name}} </td>
+																			@elseif($valide->redit_id !== Null)
+																			<td> {{ $valide->redit->name }}</td>
+																		@else
+																				
+																				
+																		@endif 
+																			{{-- @dd($valide->somme->customer) --}}
+																			{{-- <td>{{$valide->omme->customer->code}} <br>{{$valide->omme->customer->name}} {{$valide->omme->customer->prename}}</td> --}}
+																		{{-- @else 
+																	@endif --}}
+
+
+																	<td>{{ number_format($valide->montant, 0, ',', ' ') }}</td> 
+																	
 																	{{-- <td>   --}}
+																		{{-- <a href="{{ route('transfert.validates.stored' , ['transfert' => $transfert->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a> --}}
 																			{{-- @can('manage-particuliers')
 																			  <a href="{{ route('elite.elites.show' , ['vente' => $vente->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
 																			  @endcan 
@@ -251,8 +374,6 @@
 					</div>
 					<!-- End Row -->
 			</div>
-
-		
 					
 		</div>
 	</div>
@@ -282,24 +403,35 @@
 			document.getElementById("img2").style.display = "none";
 			document.getElementById("img3").style.display = "none";
 			document.getElementById("img4").style.display = "none";
+			document.getElementById("img5").style.display = "none";
 		}
 		if(getValue == 2){
 			document.getElementById("img1").style.display = "none";
 			document.getElementById("img2").style.display = "block";
 			document.getElementById("img3").style.display = "none";
 			document.getElementById("img4").style.display = "none";
+			document.getElementById("img5").style.display = "none";
 		}
 		if(getValue == 3){
 			document.getElementById("img1").style.display = "none";
 			document.getElementById("img2").style.display = "none";
 			document.getElementById("img3").style.display = "block";
 			document.getElementById("img4").style.display = "none";
+			document.getElementById("img5").style.display = "none";
 		}
 		if(getValue == 4){
 			document.getElementById("img1").style.display = "none";
 			document.getElementById("img2").style.display = "none";
 			document.getElementById("img3").style.display = "none";
 			document.getElementById("img4").style.display = "block";
+			document.getElementById("img5").style.display = "none";
+		}
+		if(getValue == 5){
+			document.getElementById("img1").style.display = "none";
+			document.getElementById("img2").style.display = "none";
+			document.getElementById("img3").style.display = "none";
+			document.getElementById("img4").style.display = "none";
+			document.getElementById("img5").style.display = "block";
 		}
 	
 	}
@@ -311,18 +443,21 @@
 			document.getElementById("help2").style.display = "none";
 			document.getElementById("help3").style.display = "none";
 			document.getElementById("help4").style.display = "none";
+			document.getElementById("help5").style.display = "none";
 		}
 		if(getValue == 2){
 			document.getElementById("help1").style.display = "none";
 			document.getElementById("help2").style.display = "block";
 			document.getElementById("help3").style.display = "none";
 			document.getElementById("help4").style.display = "none";
+			document.getElementById("help5").style.display = "none";
 		}
 		if(getValue == 3){
 			document.getElementById("help1").style.display = "none";
 			document.getElementById("help2").style.display = "none";
 			document.getElementById("help3").style.display = "block";
 			document.getElementById("help4").style.display = "none";
+			document.getElementById("help5").style.display = "none";
 		}
 
 		if(getValue == 4){
@@ -330,6 +465,14 @@
 			document.getElementById("help2").style.display = "none";
 			document.getElementById("help3").style.display = "none";
 			document.getElementById("help4").style.display = "block";
+			document.getElementById("help5").style.display = "none";
+		}
+		if(getValue == 5){
+			document.getElementById("help1").style.display = "none";
+			document.getElementById("help2").style.display = "none";
+			document.getElementById("help3").style.display = "none";
+			document.getElementById("help4").style.display = "none";
+			document.getElementById("help5").style.display = "block";
 		}
 	
 	}

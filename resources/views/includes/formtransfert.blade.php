@@ -183,6 +183,28 @@
                     </div>
                 @enderror 
             </div>
+
+            <div id="img5" style="display:none;" class="form-group col-md-6 mb-4"> 
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                    ELITE CREDIT
+                    </div>
+                </div>
+                <select class="form-control select2-show-search @error('credit_id') is-invalid @enderror" name="credit_id">
+                    <optgroup label="Credit">
+                        <option value="">Choisir</option>	
+                        @foreach($credits as $credit)	
+                        <option value="{{ $credit->id }}" {{  $transfert->credit_id == $credit->id ? 'selected' :  ''}}>
+                            {{ $credit->name }}</option>
+                        @endforeach                        
+                    </optgroup>							
+                </select>
+                @error('credit_id')
+                    <div class="invalid-feedback">
+                                    {{ $errors->first('credit_id') }}
+                    </div>
+                @enderror 
+            </div>
         
             
             <div id="help1"  class="form-group col-md-6 mb-4"> 
@@ -273,6 +295,28 @@
                     </div>
                 @enderror 
             </div>
+
+            <div id="help5" style="display:none;" class="form-group col-md-6 mb-4"> 
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                    ELITE CREDIT
+                    </div>
+                </div>
+                <select class="form-control select2-show-search @error('redit_id') is-invalid @enderror" name="redit_id">
+                    <optgroup label="Credit">
+                        <option value="">Choisir</option>	
+                        @foreach($credits as $credit)	
+                        <option value="{{ $credit->id }}" {{  $transfert->credit_id == $credit->id ? 'selected' :  ''}}>
+                            {{ $credit->name }}</option>
+                        @endforeach                        
+                    </optgroup>							
+                </select>
+                @error('redit_id')
+                    <div class="invalid-feedback">
+                                    {{ $errors->first('redit_id') }}
+                    </div>
+                @enderror 
+            </div>
         </div>
           
         <div class="form-row">
@@ -281,7 +325,7 @@
                     <div class="input-group-text">
                         <i class="fe fe-italic"></i>
                     </div>
-                    <input id="montant" type="text" class="form-control @error('montant') is-invalid @enderror" name="montant" value="{{ old('montant') ?? $transfert->montant  }}"  autocomplete="montant" placeholder="{{ __('Montant à envoyé') }}" autofocus>
+                    <input id="montant" type="text" class="form-control @error('montant') is-invalid @enderror" name="montant" value="{{ old('montant') ?? $transfert->montant  }}"  autocomplete="montant" placeholder="{{ __('Montant à envoyer') }}" autofocus>
                     @error('montant')
                         <div class="invalid-feedback">
                                 {{ $errors->first('montant') }}

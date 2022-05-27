@@ -27,4 +27,8 @@ public function transferts(){
     public function particulier(){
         return $this->belongsTo('App\Models\Particulier');
     }
+
+    public function validates(){
+        return $this->hasMany('App\Models\Validate');
+    }
 }

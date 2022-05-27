@@ -14,10 +14,10 @@ class Transfert extends Model
     protected $table = 'transferts';
 
     protected $fillable = ['solde_id','olde_id',
-    'sode_id', 'ode_id',
+    'sode_id', 'ode_id', 'credit_id', 'redit_id',
     'sold_id','old_id',
      'sod_id','od_id',
- 'montant', 'code',
+ 'montant', 'code',  'status',
        'receive_id','send_id',
          'user_id',
 ];
@@ -53,6 +53,10 @@ public function sod(){
     return $this->belongsTo('App\Models\Sod');
 }
 
+public function credit(){
+    return $this->belongsTo('App\Models\Credit');
+}
+
 
 public function olde(){
     return $this->belongsTo('App\Models\Solde');
@@ -68,6 +72,11 @@ public function old(){
 
 public function od(){
     return $this->belongsTo('App\Models\Sod');
+}
+
+
+public function redit(){
+    return $this->belongsTo('App\Models\Credit');
 }
 
 public function receive(){

@@ -9,9 +9,9 @@
                 }
 
 
-            }
+            }  
 
-            @media screen {
+            @media screen {   
                 .defaut_invisible{display:none}
 }
 
@@ -54,7 +54,7 @@ margin: auto;
 @endsection
 @section('page-header')
 						<!--Page header-->
-						<div class="page-header">
+						<div id="hidden"  class="page-header">
 							<div class="page-leftheader">
 								<h4 class="page-title mb-0">Retrait </h4>
 								<ol class="breadcrumb">
@@ -73,8 +73,8 @@ margin: auto;
 @section('content')
 
 
-<div class=" container-fluid">   
-    <div class="div position-ref">  
+<div class="impression_visible container-fluid">   
+    <div class="div  defaut_invisible position-ref">  
         <div class=" content p-5 row">
             <div class="col-12 total mb-2" style="background:#fff;">
                <div class="row espace">
@@ -111,10 +111,10 @@ margin: auto;
                               <div class="col">Caisse ...... : 001 CAISSE AUXIL. 1 . COC.Bonoumin</div>
                               <div class="col">Guichetier ...... : 001</div>
                               <div class="col">Gestionnaire ...... :  </div>
-                              <div class="col">Nom du débiteur ...... : {{$investi->name_deposant}} {{$investi->prename_deposant}} </div>
-                              <div class="col">Adresse du débiteur ...... :  {{$investi->add_deposant}}</div>
+                              {{-- <div class="col">Nom du débiteur ...... : {{$investi->name_deposant}} {{$investi->prename_deposant}} </div>
+                              <div class="col">Adresse du débiteur ...... :  {{$investi->add_deposant}}</div> --}}
                               <div class="col">Pays de residence ...... : 225 - COTE D'IVOIRE</div>
-                              <div class="col">Motif ........... : {{$investi->motif}}</div>
+                              {{-- <div class="col">Motif ........... : {{$investi->motif}}</div> --}}
                             </div>
                             {{-- <div class="col-md-2">
                             </div> --}}
@@ -147,7 +147,7 @@ margin: auto;
                     </div> <br>
 
                     <div class="mt-3">
-                        <div style="color:#262626" class="row">
+                        {{-- <div style="color:#262626" class="row">
                             <div class="col-md-3 text-left">
                               <div class="col">Montant ...... : </div>
                                <div class="col">Timbre ............ :  </div>  
@@ -159,7 +159,7 @@ margin: auto;
                                 @else
                                 <div class="col">{{ number_format(0, 0, ',', ' ') }} XOF </div> 
                                 @endif
-                            </div>
+                            </div> --}}
                             {{-- <div class="col-md-3">
                               <div class="col"></div>
                               <div class="col">Taxe ......... : </div>
@@ -167,26 +167,53 @@ margin: auto;
                             <div class="col-md-3">
                                 <div class="col"> {{ number_format(0, 0, ',', ' ') }} XOF </div>
                             </div> --}}
-                        </div> 
+                        {{-- </div>  --}}
                     </div> <br>
-
-
                     <div class="mt-3 ">
                         <div style="color:#262626" class="row">
                             <div class="col-md-10 text-left">
-                              <div class="col">Montant recu</div>
-                              <div class="col">Montant rendu </div>
+                              <div class="col">Montant debité</div>
+                              {{-- <div class="col">Montant rendu </div> --}}
                             </div>
                             {{-- <div class="col-md-2">
                             </div> --}}
                             <div class="col-md-2">
-                              <div class="col">{{ number_format($investi->montantR, 0, ',', ' ') }}</div>
-                              <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div>
+                              <div class="col">
+
+                                @if ($investi->jalon == 'Oui')
+																		<div style="display:none" >{{$v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100   }}</div>
+																			@if($investi->compteur = 1)
+																				{{-- <td>{{$v + $investi->montant }}</td>   --}}
+																				<div style="display:none" >{{$viol = $v + $investi->montant}} </div>  
+																		        <div class="col">{{ number_format($viol, 0, ',', ' ') }}</div> 
+																			@else
+																				Impossible 
+																			@endif
+
+                                @else 
+                                                                            <div style="display:none" >{{$v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $investi->forfait->duree) /100))}}</div> 
+                                                                            <div style="display:none" >{{$v1 = $v0/$investi->forfait->duree}}</div> 
+   
+                                                                            @if ($investi->compteur > 1)
+                                                                                 {{-- <td> {{$v1}}</td>  --}}
+                                                                                 <div class="col">{{ number_format($v1, 0, ',', ' ') }}</div>  
+                                                                            @elseif($investi->compteur = 1)
+                                                                                {{-- <td> </td>   --}}
+                                                                                <div style="display:none" >{{$vtrack = $v1 + $investi->montant }} </div>  
+                                                                                <div class="col">{{ number_format($vtrack, 0, ',', ' ') }}</div> 
+                                                                            @else		
+                                                                            Impossible
+                                                                            @endif
+
+
+
+                                @endif
+
+                              </div>
+                              {{-- <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div> --}}
                             </div>
                         </div> 
-                    </div> <br>
-
-                    
+                    </div> <br>      
                     <div class="mt-3 ">
                         <div style="color:#262626" class="row">
                             <div class="col-md-9 text-left">
@@ -206,13 +233,43 @@ margin: auto;
                             {{-- <div class="col-md-2">
                             </div> --}}
                             <div class="col-md-3">
-                              <div class="col">{{ number_format($investi->montant, 0, ',', ' ') }}</div>
+                              <div class="col">
+                                  {{-- {{ number_format($investi->montant, 0, ',', ' ') }} --}}
+
+                                  @if ($investi->jalon == 'Oui')
+                                  <div style="display:none" >{{$v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100   }}</div>
+                                      @if($investi->compteur = 1)
+                                          {{-- <td>{{$v + $investi->montant }}</td>   --}}
+                                          <div style="display:none" >{{$viol = $v + $investi->montant}} </div>  
+                                          <div class="col">{{ number_format($viol, 0, ',', ' ') }}</div> 
+                                      @else
+                                          Impossible 
+                                      @endif
+
+                         @else 
+                                      <div style="display:none" >{{$v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $investi->forfait->duree) /100))}}</div> 
+                                      <div style="display:none" >{{$v1 = $v0/$investi->forfait->duree}}</div> 
+
+                                      @if ($investi->compteur > 1)
+                                           {{-- <td> {{$v1}}</td>  --}}
+                                           <div class="col">{{ number_format($v1, 0, ',', ' ') }}</div>  
+                                      @elseif($investi->compteur = 1)
+                                          {{-- <td> </td>   --}}
+                                          <div style="display:none" >{{$vtrack = $v1 + $investi->montant }} </div>  
+                                          <div class="col">{{ number_format($vtrack, 0, ',', ' ') }}</div> 
+                                      @else		
+                                      Impossible
+                                      @endif
+
+
+
+                       @endif
+
+                                </div>
                               <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                             </div>
                         </div> 
                     </div> <br>
-
-
 
                     <div class="mt-3 col-md-12">
                         <div style="color:#262626" class="row">
@@ -265,10 +322,10 @@ margin: auto;
                              <div class="col">Caisse ...... : 001 CAISSE AUXIL. 1 . COC.Bonoumin</div>
                              <div class="col">Guichetier ...... : 001</div>
                              <div class="col">Gestionnaire ...... :  </div>
-                             <div class="col">Nom du débiteur ...... : {{$investi->name_deposant}} {{$investi->prename_deposant}} </div>
-                             <div class="col">Adresse du débiteur ...... :  {{$investi->add_deposant}}</div>
+                             {{-- <div class="col">Nom du débiteur ...... : {{$investi->name_deposant}} {{$investi->prename_deposant}} </div>
+                             <div class="col">Adresse du débiteur ...... :  {{$investi->add_deposant}}</div> --}}
                              <div class="col">Pays de residence ...... : 225 - COTE D'IVOIRE</div>
-                             <div class="col">Motif ........... : {{$investi->motif}}</div>
+                             {{-- <div class="col">Motif ........... : {{$investi->motif}}</div> --}}
                            </div>
                            {{-- <div class="col-md-2">
                            </div> --}}
@@ -301,7 +358,7 @@ margin: auto;
                    </div> <br>
 
                    <div class="mt-3">
-                       <div style="color:#262626" class="row">
+                       {{-- <div style="color:#262626" class="row">
                            <div class="col-md-3 text-left">
                              <div class="col">Montant ...... : </div>
                               <div class="col">Timbre ............ :  </div>  
@@ -313,7 +370,7 @@ margin: auto;
                                @else
                                <div class="col">{{ number_format(0, 0, ',', ' ') }} XOF </div> 
                                @endif
-                           </div>
+                           </div> --}}
                            {{-- <div class="col-md-3">
                              <div class="col"></div>
                              <div class="col">Taxe ......... : </div>
@@ -321,26 +378,53 @@ margin: auto;
                            <div class="col-md-3">
                                <div class="col"> {{ number_format(0, 0, ',', ' ') }} XOF </div>
                            </div> --}}
-                       </div> 
+                       {{-- </div>  --}}
                    </div> <br>
-
-
                    <div class="mt-3 ">
                        <div style="color:#262626" class="row">
                            <div class="col-md-10 text-left">
-                             <div class="col">Montant recu</div>
-                             <div class="col">Montant rendu </div>
+                             <div class="col">Montant debité</div>
+                             {{-- <div class="col">Montant rendu </div> --}}
                            </div>
                            {{-- <div class="col-md-2">
                            </div> --}}
                            <div class="col-md-2">
-                             <div class="col">{{ number_format($investi->montantR, 0, ',', ' ') }}</div>
-                             <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div>
+                             <div class="col">
+
+                               @if ($investi->jalon == 'Oui')
+                                                                       <div style="display:none" >{{$v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100   }}</div>
+                                                                           @if($investi->compteur = 1)
+                                                                               {{-- <td>{{$v + $investi->montant }}</td>   --}}
+                                                                               <div style="display:none" >{{$viol = $v + $investi->montant}} </div>  
+                                                                               <div class="col">{{ number_format($viol, 0, ',', ' ') }}</div> 
+                                                                           @else
+                                                                               Impossible 
+                                                                           @endif
+
+                               @else 
+                                                                           <div style="display:none" >{{$v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $investi->forfait->duree) /100))}}</div> 
+                                                                           <div style="display:none" >{{$v1 = $v0/$investi->forfait->duree}}</div> 
+  
+                                                                           @if ($investi->compteur > 1)
+                                                                                {{-- <td> {{$v1}}</td>  --}}
+                                                                                <div class="col">{{ number_format($v1, 0, ',', ' ') }}</div>  
+                                                                           @elseif($investi->compteur = 1)
+                                                                               {{-- <td> </td>   --}}
+                                                                               <div style="display:none" >{{$vtrack = $v1 + $investi->montant }} </div>  
+                                                                               <div class="col">{{ number_format($vtrack, 0, ',', ' ') }}</div> 
+                                                                           @else		
+                                                                           Impossible
+                                                                           @endif
+
+
+
+                               @endif
+
+                             </div>
+                             {{-- <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div> --}}
                            </div>
                        </div> 
-                   </div> <br>
-
-                   
+                   </div> <br>      
                    <div class="mt-3 ">
                        <div style="color:#262626" class="row">
                            <div class="col-md-9 text-left">
@@ -360,13 +444,43 @@ margin: auto;
                            {{-- <div class="col-md-2">
                            </div> --}}
                            <div class="col-md-3">
-                             <div class="col">{{ number_format($investi->montant, 0, ',', ' ') }}</div>
+                             <div class="col">
+                                 {{-- {{ number_format($investi->montant, 0, ',', ' ') }} --}}
+
+                                 @if ($investi->jalon == 'Oui')
+                                 <div style="display:none" >{{$v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100   }}</div>
+                                     @if($investi->compteur = 1)
+                                         {{-- <td>{{$v + $investi->montant }}</td>   --}}
+                                         <div style="display:none" >{{$viol = $v + $investi->montant}} </div>  
+                                         <div class="col">{{ number_format($viol, 0, ',', ' ') }}</div> 
+                                     @else
+                                         Impossible 
+                                     @endif
+
+                        @else 
+                                     <div style="display:none" >{{$v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $investi->forfait->duree) /100))}}</div> 
+                                     <div style="display:none" >{{$v1 = $v0/$investi->forfait->duree}}</div> 
+
+                                     @if ($investi->compteur > 1)
+                                          {{-- <td> {{$v1}}</td>  --}}
+                                          <div class="col">{{ number_format($v1, 0, ',', ' ') }}</div>  
+                                     @elseif($investi->compteur = 1)
+                                         {{-- <td> </td>   --}}
+                                         <div style="display:none" >{{$vtrack = $v1 + $investi->montant }} </div>  
+                                         <div class="col">{{ number_format($vtrack, 0, ',', ' ') }}</div> 
+                                     @else		
+                                     Impossible
+                                     @endif
+
+
+
+                      @endif
+
+                               </div>
                              <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                            </div>
                        </div> 
                    </div> <br>
-
-
 
                    <div class="mt-3 col-md-12">
                        <div style="color:#262626" class="row">
@@ -391,7 +505,7 @@ margin: auto;
 
 
 
-<div class="row">
+<div  id="hidden" class="row">
 <div class="col-md-1">
 
 </div>
@@ -416,7 +530,7 @@ margin: auto;
         @endif</h3>
     </div>
 
-    <div id="hidden" class="card-body">
+    <div class="card-body">
         <div  class="row">
             <div class="col-md-1">
 

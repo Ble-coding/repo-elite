@@ -6,8 +6,10 @@ use App\Helpers\Nut;
 use App\Models\Depot;
 use App\Models\Piece;
 use App\Models\Solde;
+use App\Models\Credit;
 use App\Helpers\Helper;
 use App\Models\Retrait;
+use App\Models\Withadral;
 use App\Models\Particulier;
 use Illuminate\Http\Request;
 use App\Mail\DepotMarkdownMail;
@@ -16,7 +18,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Withadral;
 
 class DepotsController extends Controller 
 {
@@ -110,10 +111,13 @@ class DepotsController extends Controller
         
         $depot->timbre = request('timbre');
         
+        $timbre = 100;
 
         
         if ($depot->timbre == 'Oui') {
-            $depot->montantD = $montantD + 100;
+            // $depot->montantD = $montantD + $timbre ;
+            $depot->montantD = $montantD;
+            
             $depot->montantR = $montantR;
         //    dd(  $depot->montantR);
             if($depot->montantR > $montantD){
@@ -132,7 +136,7 @@ class DepotsController extends Controller
             } 
             
         } else{ 
-            $depot->montantD = $montantD - 100;
+            $depot->montantD = $montantD - $timbre ;
             $depot->montantR = $montantR;
             
             if($depot->montantR > $depot->montantD){
@@ -145,16 +149,23 @@ class DepotsController extends Controller
         }
         
  
-$depot->save();
+        $depot->save();
        
         
         $solde = Solde::where([
             ['particulier_id', '=', $request->particulier_id],
         ])->with('particulier')->first();
 
+        $recois = Credit::where([
+            ['id', '=', 1],
+        ])->first();
+
+       
     
         if ($solde) {
             $solde->increment('montantD', $request->montantD);
+            $recois->increment('montant',  $timbre );
+
         } 
         else {
             
@@ -181,10 +192,19 @@ $depot->save();
             
                     $sodle->timbre = request('timbre');
 
+                    $diminuer = 35000;
                     
                     
         if ($sodle->timbre == 'Oui') {
-        $sodle->montantD = $montantD + 100;
+        // $sodle->montantD = $montantD + 100;
+
+     
+
+        $cred = $montantD - $diminuer;
+        $sodle->montantD = $cred;
+
+        // $ajoutCompteCredit = $diminuer 
+
         $sodle->montantR = $montantR;
         //    dd(  $sodle->montantR);
         if($sodle->montantR > $montantD){
@@ -203,19 +223,35 @@ $depot->save();
         } 
 
         } else{ 
-        $sodle->montantD = $montantD - 100;
+        // $sodle->montantD = $montantD - 100;
+
+        $cred = ($montantD - $timbre) - $diminuer;
+        $sodle->montantD = $cred;
+
         $sodle->montantR = $montantR;
 
         if($sodle->montantR > $sodle->montantD){
-            $sodle->rendu = $sodle->montantR  - $montantD  ;
+            $sodle->rendu = $sodle->montantR  - $montantD;
         } elseif($sodle->montantR < $sodle->montantD){
             return view('404'); 
         }elseif($sodle->montantR =  $sodle->montantD){
             $sodle->rendu = 0;
         }   
-}
-            
 
+         }
+ 
+        //  $credit = new Credit();
+
+        // $recois = Credit::where([
+        //     ['id', '=', 1],
+        // ])->first();
+
+       
+        $recois->increment('montant',  ($diminuer + $timbre));
+        //  $credit->save();
+            
+      
+        
             $sodle->save();
 
 
@@ -272,6 +308,7 @@ public function storeded(Request $request , Solde $depot)
         if($request->input('montant') > $solde->montantD){
         return view('404');    
     } elseif($request->input('montant') <= $solde->montantD){
+      
         $retrait = new Retrait();
         $reference = Helper::Generator(new Retrait, 'reference', 8, 'REF');
         $retrait->reference = $reference;
@@ -284,8 +321,14 @@ public function storeded(Request $request , Solde $depot)
     $retrait->piece_id = request('piece_id');
     $retrait->motif = request('motif');
         $retrait->montant = $request->input('montant');
-        $retrait->save();
+
+        $restant = $solde->montantD - $retrait->montant ;
+        // dd( $restant );
+        if( $restant >= 5000){
+            $retrait->save();
         $solde->decrement('montantD', $retrait->montant);
+        }else{ return view('407');}
+        
         // Mail::to($solde->particulier->email)->send(new RetraitMarkdownMail($retrait));
     }
 
@@ -338,7 +381,16 @@ public function storeded(Request $request , Solde $depot)
     public function print(Depot $depot)
     {   
 
-        $chiffre =  Nut::convert_number_to_words( $depot->montantD);
+        // $chiffre =  Nut::convert_number_to_words( $depot->montantD);
+
+        if ($depot->timbre == "Oui") {
+            $v = $depot->montantD + 100;
+            $chiffre =  Nut::convert_number_to_words( $v);
+        }     
+           else  {
+            $chiffre =  Nut::convert_number_to_words( $depot->montantD);
+    
+           }
 
         // $pourcentage = ($vente->montant * $bonus ) / 100;
         // $rachat =  $pourcentage + $vente->montant;
@@ -455,6 +507,7 @@ $depot->save();
             'solde_id' => 'required|integer',
             'piece_id' => 'required|integer',
             'montantD' => 'required|integer',
+            // 'montant' => 'required|integer',
             'montantR' => 'required|integer',
             'rendu' => 'required|integer',
         ]);    

@@ -165,7 +165,14 @@ margin: auto;
                             {{-- <div class="col-md-2">
                             </div> --}}
                             <div class="col-md-3">
-                              <div class="col">{{ number_format($depose->montantD, 0, ',', ' ') }}</div>
+                              {{-- <div class="col">{{ number_format($depose->montantD, 0, ',', ' ') }}</div> --}}
+                              @if ($depose->timbre == "Oui")
+                              <div style="display:none" class="col"> {{ $v = $depose->montantD + 100}}  </div>  
+                             <div class="col">{{ number_format($v, 0, ',', ' ') }} </div>  
+                            @else
+                            <div class="col">{{ number_format($depose->montantD, 0, ',', ' ') }} </div> 
+                            @endif
+
                               <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                             </div>
                         </div> 
@@ -223,7 +230,7 @@ margin: auto;
                            {{-- <div class="col-md-2">
                            </div> --}}
                            <div class="col-md-2 mt-7">
-                             <div class="col">{{$depose->society->name}} {{$depose->society->prename}}</div>
+                             <div class="col">{{$depose->society->name}}</div>
                              <div class="col">{{$depose->society->address}}  </div>
                            </div>
                        </div> 
@@ -279,7 +286,14 @@ margin: auto;
                            {{-- <div class="col-md-2">
                            </div> --}}
                            <div class="col-md-3">
-                             <div class="col">{{ number_format($depose->montantD, 0, ',', ' ') }}</div>
+                             {{-- <div class="col">{{ number_format($depose->montantD, 0, ',', ' ') }}</div> --}}
+                             @if ($depose->timbre == "Oui")
+                             <div style="display:none" class="col"> {{ $v = $depose->montantD + 100}}  </div>  
+                            <div class="col">{{ number_format($v, 0, ',', ' ') }} </div>  
+                           @else
+                           <div class="col">{{ number_format($depose->montantD, 0, ',', ' ') }} </div> 
+                           @endif
+
                              <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                            </div>
                        </div> 

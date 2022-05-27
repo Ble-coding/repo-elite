@@ -245,8 +245,12 @@
 																			{{-- @can('show-soldes') --}}
 																			{{-- <a href="{{ route('solde.soldes.show' , ['solde' => $solde->id]) }}" style="background-color:#fff" class="btn btn-">👀</a> --}}
 																			{{-- @endcan --}}
-	
+
+																			@if ($depose->montantD > 5000)
 																			<a href="{{ route('depose.deposes.stored' , ['depose' => $depose->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																			@endif
+	
+														
 																			{{-- @can('edit-soldes')
 																			<a href="{{ route('solde.soldes.edit' , ['solde' => $solde->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a>
 																			@endcan

@@ -165,7 +165,14 @@ margin: auto;
                             {{-- <div class="col-md-2">
                             </div> --}}
                             <div class="col-md-3">
-                              <div class="col">{{ number_format($depositary->montantD, 0, ',', ' ') }}</div>
+                              {{-- <div class="col">{{ number_format($depositary->montantD, 0, ',', ' ') }}</div> --}}
+                              @if ($depositary->timbre == "Oui")
+                              <div style="display:none" class="col"> {{ $v = $depositary->montantD + 100}}  </div>  
+                             <div class="col">{{ number_format($v, 0, ',', ' ') }} </div>  
+                            @else
+                            <div class="col">{{ number_format($depositary->montantD, 0, ',', ' ') }} </div> 
+                            @endif
+
                               <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                             </div>
                         </div> 
@@ -279,7 +286,14 @@ margin: auto;
                            {{-- <div class="col-md-2">
                            </div> --}}
                            <div class="col-md-3">
-                             <div class="col">{{ number_format($depositary->montantD, 0, ',', ' ') }}</div>
+                             {{-- <div class="col">{{ number_format($depositary->montantD, 0, ',', ' ') }}</div> --}}
+                             @if ($depositary->timbre == "Oui")
+                             <div style="display:none" class="col"> {{ $v = $depositary->montantD + 100}}  </div>  
+                            <div class="col">{{ number_format($v, 0, ',', ' ') }} </div>  
+                           @else
+                           <div class="col">{{ number_format($depositary->montantD, 0, ',', ' ') }} </div> 
+                           @endif
+
                              <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                            </div>
                        </div> 

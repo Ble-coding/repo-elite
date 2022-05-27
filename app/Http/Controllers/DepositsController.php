@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Validator;
-use App\Models\Sold;
-use App\Helpers\Helper; 
-use App\Models\Deposit;
-use App\Models\Piece;
 use App\Helpers\Nut;
+use App\Models\Sold;
+use App\Models\Piece;
+use App\Models\Credit;
+use App\Models\Deposit;
+use App\Helpers\Helper; 
 use App\Models\Withadral;
 use App\Models\Entreprise;
 use Illuminate\Http\Request;
@@ -47,7 +48,7 @@ class DepositsController extends Controller
     'entreprises',
    'listDeposits',
     'withadrals',
-    'pieces',
+    'pieces'
     ));
     }
 
@@ -76,7 +77,7 @@ class DepositsController extends Controller
     {
 
         $deposit = new Deposit();
-        $reference = Helper::Generator(new Deposit, 'referenece', 8, 'REF');
+        $reference = Helper::Generator(new Deposit, 'reference', 8, 'REF');
 
    
         $deposit->entreprise_id = request('entreprise_id');
@@ -94,11 +95,12 @@ class DepositsController extends Controller
         $montantR = request('montantR');
         
         $deposit->timbre = request('timbre');
-        
+        $timbre = 100;
 
         
         if ($deposit->timbre == 'Oui') {
-            $deposit->montantD = $montantD + 100;
+            // $deposit->montantD = $montantD + $timbre;
+            $deposit->montantD = $montantD;
             $deposit->montantR = $montantR;
         //    dd(  $deposit->montantR);
             if($deposit->montantR > $montantD){
@@ -117,7 +119,7 @@ class DepositsController extends Controller
             } 
             
         } else{ 
-            $deposit->montantD = $montantD - 100;
+            $deposit->montantD = $montantD - $timbre;
             $deposit->montantR = $montantR;
             
             if($deposit->montantR > $deposit->montantD){
@@ -129,9 +131,10 @@ class DepositsController extends Controller
             } 
         }
         
- 
-$deposit->save();
-       
+        $deposit->save();
+            $recois = Credit::where([
+                ['id', '=', 1],
+            ])->first();
         
         $solde = Sold::where([
             ['entreprise_id', '=', $request->entreprise_id],
@@ -139,7 +142,9 @@ $deposit->save();
 
     
         if ($solde) {
-            $solde->increment('montantD', $request->montantD);
+        
+            $solde->increment('montantD', $request->montantD);        
+            $recois->increment('montant',  $timbre );
         } 
         else {
             
@@ -148,7 +153,7 @@ $deposit->save();
                     $sodle = new Sold();    
                     
 
-                    $sodle->entreprise_id = request('entreprise_id');
+                    
                 
                     $sodle->motif = request('motif');
                     $sodle->name_deposant = request('name_deposant');
@@ -165,11 +170,29 @@ $deposit->save();
                     $montantR = request('montantR');
             
                     $sodle->timbre = request('timbre');
+                    $sodle->entreprise_id = request('entreprise_id');
 
+                       $formesJ = Entreprise::where([
+                         ['id', '=', $sodle->entreprise_id],
+                        ])->first();
+
+                        if($formesJ->forme_id == 4){
+                            $diminuer = 35000;
+                        }else{
+                            $diminuer = 60000;
+                        }
+                    
+
+                        // dd($formesJ->forme_id);
                     
                     
         if ($sodle->timbre == 'Oui') {
-        $sodle->montantD = $montantD + 100;
+        // $sodle->montantD = $montantD + 100;
+
+        $cred = $montantD - $diminuer;
+        $sodle->montantD = $cred;
+
+
         $sodle->montantR = $montantR;
         //    dd(  $sodle->montantR);
         if($sodle->montantR > $montantD){
@@ -188,18 +211,31 @@ $deposit->save();
         } 
 
         } else{ 
-        $sodle->montantD = $montantD - 100;
-        $sodle->montantR = $montantR;
+        // $sodle->montantD = $montantD - 100;
 
-        if($sodle->montantR > $sodle->montantD){
-            $sodle->rendu = $sodle->montantR  - $montantD  ;
-        } elseif($sodle->montantR < $sodle->montantD){
-            return view('404'); 
-        }elseif($sodle->montantR =  $sodle->montantD){
-            $sodle->rendu = 0;
-        } 
-}
-            
+        
+            $cred = ($montantD - $timbre) - $diminuer;
+            $sodle->montantD = $cred;
+
+            $sodle->montantR = $montantR;
+
+            if($sodle->montantR > $sodle->montantD){
+                $sodle->rendu = $sodle->montantR  - $montantD  ;
+            } elseif($sodle->montantR < $sodle->montantD){
+                return view('404'); 
+            }elseif($sodle->montantR =  $sodle->montantD){
+                $sodle->rendu = 0;
+            } 
+        }
+        // $credit = new Credit();
+
+        // $recois = Credit::where([
+        //     ['id', '=', 1],
+        // ])->first();
+
+       
+        $recois->increment('montant',  ($diminuer + $timbre));
+        // $credit->save();
 
             $sodle->save();
 
@@ -255,9 +291,16 @@ $deposit->save();
         $withadral->numpiece = request('numpiece'); 
     $withadral->piece_id = request('piece_id');
         $withadral->montant = $request->input('montant');
-        $withadral->save();
-        $sold->decrement('montantD', $withadral->montant);
-        Mail::to($sold->entreprise->email)->send(new WithadralMarkdownMail($withadral));
+        
+        
+
+        $restant = $sold->montantD - $withadral->montant ;
+        // dd( $restant );
+        if( $restant >= 5000){
+            $withadral->save();
+            $sold->decrement('montantD', $withadral->montant);
+            // Mail::to($sold->entreprise->email)->send(new WithadralMarkdownMail($withadral));
+        }else{ return view('407');}
     }
 
     return Redirect::route('deposit.deposits.index')->with('message', 'Un retrait de '.(number_format($withadral->montant, 0, ',', ' ')). ' à été effectué sur le compte '.  $withadral->sold->entreprise->code . ' de ' . $withadral->sold->entreprise->name .', par ' .$withadral->name_retirant. ' '.$withadral->prename_retirant. '.');
@@ -277,7 +320,17 @@ $deposit->save();
     public function print(Deposit $deposit)
     {   
 
-        $chiffre =  Nut::convert_number_to_words( $deposit->montantD);
+       
+
+        if ($deposit->timbre == "Oui") {
+            $v = $deposit->montantD + 100;
+            $chiffre =  Nut::convert_number_to_words( $v);
+        }     
+           else  {
+            $chiffre =  Nut::convert_number_to_words( $deposit->montantD);
+    
+           }
+        
 
         // $pourcentage = ($vente->montant * $bonus ) / 100;
         // $rachat =  $pourcentage + $vente->montant;

@@ -52,7 +52,7 @@
                     <i class="fe fe-phone"></i>
                 </div>
             </div>
-            <input  value="{{ old('tel_retirant') ?? $widraw->tel_retirant }}" class="form-control @error('tel_retirant') is-invalid @enderror" type="tel" placeholder="{{ __('Tel retirant') }}" id="tel_retirant" name="tel_retirant">
+            <input  value="{{ old('tel_retirant') ?? $widraw->tel_retirant }}" class="form-control @error('tel_retirant') is-invalid @enderror" type="tel" placeholder="{{ __('Tel débiteur') }}" id="tel_retirant" name="tel_retirant">
             @error('tel_retirant')
                 <div class="invalid-feedback">
                     {{ $errors->first('tel_retirant') }}

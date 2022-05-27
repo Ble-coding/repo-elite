@@ -11,6 +11,7 @@ use App\Models\Investissement;
 use Illuminate\Support\Facades\DB;
 use Spatie\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Credit;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,8 @@ class HomeController extends Controller
     {
 
         // $nbrClients = Depot::withCount('client')->get();
+        $nbrTransferts = DB::table('transferts')->where('status', 1)->count('id');
+
         $nbrParticuliers = DB::table('depots')->count('particulier_id');
         $sumMontantDepotEpargne = DB::table('depots')->sum('montantD');
 
@@ -41,10 +44,13 @@ class HomeController extends Controller
         $sumMontantDeposeCourant = DB::table('deposes')->sum('montantD');
 
         $forfaits = Forfait::paginate(5);
+
+        $soldeElite = Credit::sum('montant');
   
 
         return view('home' , compact('forfaits','nbrClients','nbrParticuliers','sumMontantDepositaryCourant',
-        'sumMontantDepositEpargne','nbrEntreprises','sumMontantDepotEpargne','nbrSocietys','sumMontantDeposeCourant'));
+        'sumMontantDepositEpargne','nbrEntreprises','sumMontantDepotEpargne','nbrSocietys',
+        'sumMontantDeposeCourant', 'nbrTransferts','soldeElite'));
 
 
     //     $dataPoints = [];

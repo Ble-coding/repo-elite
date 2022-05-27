@@ -13,13 +13,13 @@
 									<li class="breadcrumb-item active" aria-current="page"><a href="#">Morris Charts</a></li>
 								</ol>
 							</div>
-							<div class="page-rightheader">
+							{{-- <div class="page-rightheader">
 								<div class="btn btn-list">
 									<a href="#" class="btn btn-info"><i class="fe fe-settings mr-1"></i> General Settings </a>
 									<a href="#" class="btn btn-danger"><i class="fe fe-printer mr-1"></i> Print </a>
 									<a href="#" class="btn btn-warning"><i class="fe fe-shopping-cart mr-1"></i> Buy Now </a>
 								</div>
-							</div>
+							</div> --}}
 						</div>
 						<!--End Page header-->
 @endsection
@@ -29,7 +29,7 @@
 							<div class="col-lg-6">
 								<div class="card">
 									<div class="card-header">
-										<div class="card-title">Depot et retrait Compte epargne entreprise</div>
+										<div class="card-title">Depot et retrait Compte epargne client</div>
 									</div>
 									<div class="card-body">
 										<div class="morris-wrapper-demo" id="morrisBar1"></div>

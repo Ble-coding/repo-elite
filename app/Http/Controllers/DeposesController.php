@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Validator;
+use App\Helpers\Nut;
 use App\Models\Sod; 
+use App\Models\Piece;
+use App\Models\Credit;
 use App\Models\Depose;
 use App\Models\Widraw;
 use App\Helpers\Helper;
@@ -16,8 +19,6 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use App\Events\DeposeHasRegisteredEvent;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Piece;
-use App\Helpers\Nut;
 
 
 class DeposesController extends Controller
@@ -67,7 +68,7 @@ class DeposesController extends Controller
     {
 
         $depose = new Depose();
-        $reference = Helper::Generator(new Depose, 'referenece', 8, 'REF');
+        $reference = Helper::Generator(new Depose, 'reference', 8, 'REF');
 
    
         $depose->society_id = request('society_id');
@@ -85,10 +86,12 @@ class DeposesController extends Controller
         
         $depose->timbre = request('timbre');
         
+        $timbre = 100;
 
         
         if ($depose->timbre == 'Oui') {
-            $depose->montantD = $montantD + 100;
+            // $depose->montantD = $montantD + $timbre;
+            $depose->montantD = $montantD;
             $depose->montantR = $montantR;
         //    dd(  $depose->montantR);
             if($depose->montantR > $montantD){
@@ -107,7 +110,7 @@ class DeposesController extends Controller
             } 
             
         } else{ 
-            $depose->montantD = $montantD - 100;
+            $depose->montantD = $montantD - $timbre;
             $depose->montantR = $montantR;
             
             if($depose->montantR > $depose->montantD){
@@ -120,16 +123,23 @@ class DeposesController extends Controller
         }
         
  
-$depose->save();
-       
+
+        $depose->save();
         
         $solde = Sod::where([
             ['society_id', '=', $request->society_id],
         ])->with('society')->first();
 
+        $recois = Credit::where([
+            ['id', '=', 1],
+        ])->first();
+
+
     
         if ($solde) {
+        
             $solde->increment('montantD', $request->montantD);
+            $recois->increment('montant',  $timbre );
         } 
         else {
             
@@ -156,10 +166,26 @@ $depose->save();
             
                     $sodle->timbre = request('timbre');
 
+                    $formesJ = Society::where([
+                        ['id', '=', $sodle->society_id],
+                       ])->first();
+
+                       if($formesJ->forme_id == 4){
+                           $diminuer = 35000;
+                       }else{
+                           $diminuer = 60000;
+                       }
+
                     
                     
         if ($sodle->timbre == 'Oui') {
-        $sodle->montantD = $montantD + 100;
+        // $sodle->montantD = $montantD + 100;
+
+        // $cred = ($montantD + 100) - $diminuer;
+        $cred = $montantD - $diminuer;
+        $sodle->montantD = $cred;
+
+
         $sodle->montantR = $montantR;
         //    dd(  $sodle->montantR);
         if($sodle->montantR > $montantD){
@@ -178,18 +204,31 @@ $depose->save();
         } 
 
         } else{ 
-        $sodle->montantD = $montantD - 100;
-        $sodle->montantR = $montantR;
+        // $sodle->montantD = $montantD - 100;
 
-        if($sodle->montantR > $sodle->montantD){
-            $sodle->rendu = $sodle->montantR  - $montantD  ;
-        } elseif($sodle->montantR < $sodle->montantD){
-            return view('404'); 
-        }elseif($sodle->montantR =  $sodle->montantD){
-            $sodle->rendu = 0;
-        } 
-}
-            
+            // $cred = ($montantD - 100) - $diminuer;
+            $cred = ($montantD - $timbre) - $diminuer;
+            $sodle->montantD = $cred;
+
+            $sodle->montantR = $montantR;
+
+            if($sodle->montantR > $sodle->montantD){
+                $sodle->rendu = $sodle->montantR  - $montantD  ;
+            } elseif($sodle->montantR < $sodle->montantD){
+                return view('404'); 
+            }elseif($sodle->montantR =  $sodle->montantD){
+                $sodle->rendu = 0;
+            } 
+        }
+        // $credit = new Credit();
+
+        // $recois = Credit::where([
+        //     ['id', '=', 1],
+        // ])->first();
+
+       
+        $recois->increment('montant',  ($diminuer + $timbre));
+        // $credit->save();
 
             $sodle->save();
 
@@ -246,9 +285,16 @@ $depose->save();
         $widraw->numpiece = request('numpiece'); 
          $widraw->piece_id = request('piece_id');
         $widraw->montant = $request->input('montant');
-        $widraw->save();
+       
+
+        $restant = $solde->montantD - $widraw->montant ;
+        // dd( $restant );
+        if( $restant >= 5000){
+            $widraw->save();
         $solde->decrement('montantD', $widraw->montant);
         // Mail::to($solde->society->email)->send(new WidrawMarkdownMail($widraw));
+        }else{ return view('407');}
+
     }
 
     return Redirect::route('depose.deposes.index')->with('message', 'Un retrait de '.(number_format($widraw->montant, 0, ',', ' ')). ' à été effectué sur le compte '.  $widraw->sod->society->code . ' de ' . $widraw->sod->society->name .', par ' .$widraw->name_retirant. ' '.$widraw->prename_retirant. '.');
@@ -258,7 +304,16 @@ $depose->save();
     public function print(Depose $depose)
     {   
 
-        $chiffre =  Nut::convert_number_to_words( $depose->montantD);
+        // $chiffre =  Nut::convert_number_to_words( $depose->montantD);
+
+        if ($depose->timbre == "Oui") {
+            $v = $depose->montantD + 100;
+            $chiffre =  Nut::convert_number_to_words( $v);
+        }     
+           else  {
+            $chiffre =  Nut::convert_number_to_words( $depose->montantD);
+    
+           }
 
         // $pourcentage = ($vente->montant * $bonus ) / 100;
         // $rachat =  $pourcentage + $vente->montant;

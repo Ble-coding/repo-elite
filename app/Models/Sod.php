@@ -26,6 +26,9 @@ class Sod extends Model
     public function transferts(){
         return $this->hasMany('App\Models\Transfert');
     }
+    public function validates(){
+        return $this->hasMany('App\Models\Validate');
+    }
     public function widraws(){
         return $this->hasMany('App\Models\Widraw');
     }

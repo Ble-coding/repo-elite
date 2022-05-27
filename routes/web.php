@@ -38,7 +38,25 @@ Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->middl
 // Route::delete('/visiteur/{visiteur}', [App\Http\Controllers\VisiteursController::class, 'destroy'])->name('visiteur.destroy');
 // Route::put('/visiteur/{visiteur}/restore', [App\Http\Controllers\VisiteursController::class, 'restore'])->name('visiteur.restore');
  
-Route::resource('/transferts', 'App\Http\Controllers\TransfertsController');
+// Route::resource('/transferts', 'App\Http\Controllers\TransfertsController');
+
+Route::get('/transferts', [App\Http\Controllers\TransfertsController::class, 'index'])->name('transferts.index');
+
+Route::prefix('transferts')->name('transfert.')->group(function() {
+Route::post('/transferts', [App\Http\Controllers\TransfertsController::class, 'store'])->name('transferts.store');
+Route::get('/transferts/{transfert}', [App\Http\Controllers\TransfertsController::class, 'show'])->name('transferts.show');
+Route::get('/transferts/{transfert}/edit', [App\Http\Controllers\TransfertsController::class, 'edit'])->name('transferts.edit');
+Route::get('/validates/{transfert}/stored/', [App\Http\Controllers\TransfertsController::class, 'stored'])->name('validates.stored');
+Route::post('/validates', [App\Http\Controllers\TransfertsController::class, 'storeded'])->name('validates.storeded');
+// Route::get('/prints/{transfert}/print/', [App\Http\Controllers\TransfertsController::class, 'print'])->name('prints.printer');
+// Route::get('/vers/{vente}/print/', [App\Http\Controllers\ElitesController::class, 'vers'])->name('printers.printer');
+
+Route::patch('/transferts/{transfert}', [App\Http\Controllers\TransfertsController::class, 'update'])->name('transferts.update');
+Route::delete('/transferts/{transfert}', [App\Http\Controllers\TransfertsController::class, 'destroy'])->name('transferts.destroy');
+// Route::put('/transferts/{transfert}/restore', [App\Http\Controllers\TransfertsController::class, 'restore'])->name('transferts.restore');
+
+});
+
 
 
 Route::prefix('elite')->name('elite.')->group(function() {

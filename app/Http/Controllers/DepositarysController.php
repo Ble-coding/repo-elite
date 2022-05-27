@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Validator;
+use App\Helpers\Nut;
 use App\Models\Sode;
-use App\Models\Remove; 
+use App\Models\Piece;
+use App\Models\Credit;
 use App\Helpers\Helper;
+use App\Models\Remove; 
 use App\Models\Client;    
 use App\Models\Depositary;
 use Illuminate\Http\Request;
@@ -16,8 +19,6 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use App\Events\DepositaryHasRegisteredEvent;
-use App\Helpers\Nut;
-use App\Models\Piece;
 
 
 
@@ -81,7 +82,7 @@ class DepositarysController extends Controller
     {
 
         $depositary = new Depositary();
-        $reference = Helper::Generator(new Depositary, 'referenece', 8, 'REF');
+        $reference = Helper::Generator(new Depositary, 'reference', 8, 'REF');
         // $code = Helper::IDGenerator(new Vente, 'code', 6, '40');
         // $bonus = Valeur::where('id', 1)->select('pourcentage')->first()['pourcentage'];
    
@@ -100,11 +101,14 @@ class DepositarysController extends Controller
         $montantR = request('montantR');
         
         $depositary->timbre = request('timbre');
+
+        $timbre = 100;
         
 
         
         if ($depositary->timbre == 'Oui') {
-            $depositary->montantD = $montantD + 100;
+            // $depositary->montantD = $montantD + $timbre;
+            $depositary->montantD = $montantD;
             $depositary->montantR = $montantR;
         //    dd(  $depositary->montantR);
             if($depositary->montantR > $montantD){
@@ -123,7 +127,7 @@ class DepositarysController extends Controller
             } 
             
         } else{ 
-            $depositary->montantD = $montantD - 100;
+            $depositary->montantD = $montantD - $timbre;
             $depositary->montantR = $montantR;
             
             if($depositary->montantR > $depositary->montantD){
@@ -136,16 +140,22 @@ class DepositarysController extends Controller
         }
         
  
-$depositary->save();
-       
+        $depositary->save();
         
         $solde = Sode::where([
             ['client_id', '=', $request->client_id],
         ])->with('client')->first();
 
+        $recois = Credit::where([
+            ['id', '=', 1],
+        ])->first();
+
+
     
         if ($solde) {
+    
             $solde->increment('montantD', $request->montantD);
+            $recois->increment('montant',  $timbre );
         } 
         else {
             
@@ -172,10 +182,15 @@ $depositary->save();
             
                     $sodle->timbre = request('timbre');
 
+                    $diminuer = 35000;
                     
                     
         if ($sodle->timbre == 'Oui') {
-        $sodle->montantD = $montantD + 100;
+        // $sodle->montantD = $montantD + 100;
+        // $cred = ($montantD + 100) - $diminuer;
+        $cred = $montantD - $diminuer;
+        $sodle->montantD = $cred;
+
         $sodle->montantR = $montantR;
         //    dd(  $sodle->montantR);
         if($sodle->montantR > $montantD){
@@ -194,17 +209,31 @@ $depositary->save();
         } 
 
         } else{ 
-        $sodle->montantD = $montantD - 100;
-        $sodle->montantR = $montantR;
+        // $sodle->montantD = $montantD - 100;
+        //  $cred = ($montantD - 100) - $diminuer;
+        $cred = ($montantD - $timbre) - $diminuer;
+            $sodle->montantD = $cred;
+            $sodle->montantR = $montantR;
 
-        if($sodle->montantR > $sodle->montantD){
-            $sodle->rendu = $sodle->montantR  - $montantD  ;
-        } elseif($sodle->montantR < $sodle->montantD){
-            return view('404'); 
-        }elseif($sodle->montantR =  $sodle->montantD){
-            $sodle->rendu = 0;
-        } 
-}
+            if($sodle->montantR > $sodle->montantD){
+                $sodle->rendu = $sodle->montantR  - $montantD  ;
+            } elseif($sodle->montantR < $sodle->montantD){
+                return view('404'); 
+            }elseif($sodle->montantR =  $sodle->montantD){
+                $sodle->rendu = 0;
+            } 
+        }
+
+        
+        // $credit = new Credit();
+
+        // $recois = Credit::where([
+        //     ['id', '=', 1],
+        // ])->first();
+
+       
+        $recois->increment('montant',  ($diminuer + $timbre));
+        // $credit->save();
             
 
             $sodle->save();
@@ -273,11 +302,17 @@ public function storeded(Request $request , Sode $depositary)
         $remove->prename_retirant = request('prename_retirant'); 
         $remove->tel_retirant = request('tel_retirant'); 
         $remove->numpiece = request('numpiece'); 
-    $remove->piece_id = request('piece_id');
+        $remove->piece_id = request('piece_id');
         $remove->montant = $request->input('montant');
-        $remove->save();
-        $sode->decrement('montantD', $remove->montant);
-        // Mail::to($sode->client->email)->send(new RemoveMarkdownMail($remove));
+       
+
+        $restant = $sode->montantD - $remove->montant ;
+        // dd( $restant );
+        if( $restant >= 5000){
+            $remove->save();
+            $sode->decrement('montantD', $remove->montant);
+            // Mail::to($sode->client->email)->send(new RemoveMarkdownMail($remove));
+        }else{ return view('407');}
     }
 
     return Redirect::route('depositary.depositarys.index')->with('message', 'Un retrait de '.(number_format($remove->montant, 0, ',', ' ')). ' à été effectué sur le compte '.  $remove->sode->client->code . ' de ' . $remove->sode->client->name . ' '. $remove->sode->client->prename.'.');
@@ -287,7 +322,16 @@ public function storeded(Request $request , Sode $depositary)
     public function print(Depositary $depositary)
     {   
 
-        $chiffre =  Nut::convert_number_to_words( $depositary->montantD);
+        // $chiffre =  Nut::convert_number_to_words( $depositary->montantD);
+
+        if ($depositary->timbre == "Oui") {
+            $v = $depositary->montantD + 100;
+            $chiffre =  Nut::convert_number_to_words( $v);
+        }     
+           else  {
+            $chiffre =  Nut::convert_number_to_words( $depositary->montantD);
+    
+           }
 
         // $pourcentage = ($vente->montant * $bonus ) / 100;
         // $rachat =  $pourcentage + $vente->montant;

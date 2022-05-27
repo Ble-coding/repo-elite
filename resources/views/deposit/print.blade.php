@@ -161,11 +161,20 @@ margin: auto;
                             <div class="col-md-9 text-left">
                               <div class="col">Nous portons au credit du compte n° <span class="mr-2">{{$deposit->entreprise->code}}</span>   XOF :</div>
                               <div class="col">Soit {{ $chiffre }}  </div>
+                             
                             </div>
                             {{-- <div class="col-md-2">
                             </div> --}}
-                            <div class="col-md-3">
-                              <div class="col">{{ number_format($deposit->montantD, 0, ',', ' ') }}</div>
+                             <div class="col-md-3">
+                              {{-- <div class="col">{{ number_format($deposit->montantD, 0, ',', ' ') }}</div> --}}
+
+                               @if ($deposit->timbre == "Oui")
+                               <div style="display:none" class="col"> {{ $v = $deposit->montantD + 100}}  </div>  
+                              <div class="col">{{ number_format($v, 0, ',', ' ') }} </div>  
+                             @else
+                             <div class="col">{{ number_format($deposit->montantD, 0, ',', ' ') }} </div> 
+                             @endif
+
                               <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                             </div>
                         </div> 
@@ -223,7 +232,7 @@ margin: auto;
                            {{-- <div class="col-md-2">
                            </div> --}}
                            <div class="col-md-2 mt-7">
-                             <div class="col">{{$deposit->entreprise->name}} {{$deposit->entreprise->prename}}</div>
+                             <div class="col">{{$deposit->entreprise->name}}</div>
                              <div class="col">{{$deposit->entreprise->address}}  </div>
                            </div>
                        </div> 
@@ -275,11 +284,20 @@ margin: auto;
                            <div class="col-md-9 text-left">
                              <div class="col">Nous portons au credit du compte n° <span class="mr-2">{{$deposit->entreprise->code}}</span>   XOF :</div>
                              <div class="col">Soit {{ $chiffre }}  </div>
+                            
                            </div>
                            {{-- <div class="col-md-2">
                            </div> --}}
                            <div class="col-md-3">
-                             <div class="col">{{ number_format($deposit->montantD, 0, ',', ' ') }}</div>
+                             {{-- <div class="col">{{ number_format($deposit->montantD, 0, ',', ' ') }}</div> --}}
+
+                              @if ($deposit->timbre == "Oui")
+                              <div style="display:none" class="col"> {{ $v = $deposit->montantD + 100}}  </div>  
+                             <div class="col">{{ number_format($v, 0, ',', ' ') }} </div>  
+                            @else
+                            <div class="col">{{ number_format($deposit->montantD, 0, ',', ' ') }} </div> 
+                            @endif
+
                              <div class="col">Valeur : {{\Carbon\Carbon::now()->format('d/m/Y')}} </div>
                            </div>
                        </div> 

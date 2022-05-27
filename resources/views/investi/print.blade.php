@@ -110,10 +110,10 @@ margin: auto;
                               <div class="col">Caisse ...... : 001 CAISSE AUXIL. 1 . COC.Bonoumin</div>
                               <div class="col">Guichetier ...... : 001</div>
                               <div class="col">Gestionnaire ...... :  </div>
-                              <div class="col">Nom du remettant ...... : {{$investi->name_deposant}} {{$investi->prename_deposant}} </div>
-                              <div class="col">Adresse du remettant ...... :  {{$investi->add_deposant}}</div>
+                              {{-- <div class="col">Nom du remettant ...... : {{$investi->name_deposant}} {{$investi->prename_deposant}} </div>
+                              <div class="col">Adresse du remettant ...... :  {{$investi->add_deposant}}</div> --}}
                               <div class="col">Pays de residence ...... : 225 - COTE D'IVOIRE</div>
-                              <div class="col">Motif ........... : {{$investi->motif}}</div>
+                              {{-- <div class="col">Motif ........... : {{$investi->motif}}</div> --}}
                             </div>
                             {{-- <div class="col-md-2">
                             </div> --}}
@@ -146,7 +146,7 @@ margin: auto;
                     </div> <br>
 
                     <div class="mt-3">
-                        <div style="color:#262626" class="row">
+                        {{-- <div style="color:#262626" class="row">
                             <div class="col-md-3 text-left">
                               <div class="col">Montant ...... : </div>
                                <div class="col">Timbre ............ :  </div>  
@@ -158,7 +158,7 @@ margin: auto;
                                 @else
                                 <div class="col">{{ number_format(0, 0, ',', ' ') }} XOF </div> 
                                 @endif
-                            </div>
+                            </div> --}}
                             {{-- <div class="col-md-3">
                               <div class="col"></div>
                               <div class="col">Taxe ......... : </div>
@@ -166,21 +166,21 @@ margin: auto;
                             <div class="col-md-3">
                                 <div class="col"> {{ number_format(0, 0, ',', ' ') }} XOF </div>
                             </div> --}}
-                        </div> 
+                        {{-- </div>  --}}
                     </div> <br>
 
 
                     <div class="mt-3 ">
                         <div style="color:#262626" class="row">
                             <div class="col-md-10 text-left">
-                              <div class="col">Montant recu</div>
-                              <div class="col">Montant rendu </div>
+                              <div class="col">Montant investi</div>
+                              {{-- <div class="col">Montant rendu </div> --}}
                             </div>
                             {{-- <div class="col-md-2">
                             </div> --}}
                             <div class="col-md-2">
-                              <div class="col">{{ number_format($investi->montantR, 0, ',', ' ') }}</div>
-                              <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div>
+                              <div class="col">{{ number_format($investi->montant, 0, ',', ' ') }}</div>
+                              {{-- <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div> --}}
                             </div>
                         </div> 
                     </div> <br>
@@ -264,10 +264,10 @@ margin: auto;
                              <div class="col">Caisse ...... : 001 CAISSE AUXIL. 1 . COC.Bonoumin</div>
                              <div class="col">Guichetier ...... : 001</div>
                              <div class="col">Gestionnaire ...... :  </div>
-                             <div class="col">Nom du remettant ...... : {{$investi->name_deposant}} {{$investi->prename_deposant}} </div>
-                             <div class="col">Adresse du remettant ...... :  {{$investi->add_deposant}}</div>
+                             {{-- <div class="col">Nom du remettant ...... : {{$investi->name_deposant}} {{$investi->prename_deposant}} </div>
+                             <div class="col">Adresse du remettant ...... :  {{$investi->add_deposant}}</div> --}}
                              <div class="col">Pays de residence ...... : 225 - COTE D'IVOIRE</div>
-                             <div class="col">Motif ........... : {{$investi->motif}}</div>
+                             {{-- <div class="col">Motif ........... : {{$investi->motif}}</div> --}}
                            </div>
                            {{-- <div class="col-md-2">
                            </div> --}}
@@ -300,7 +300,7 @@ margin: auto;
                    </div> <br>
 
                    <div class="mt-3">
-                       <div style="color:#262626" class="row">
+                       {{-- <div style="color:#262626" class="row">
                            <div class="col-md-3 text-left">
                              <div class="col">Montant ...... : </div>
                               <div class="col">Timbre ............ :  </div>  
@@ -312,7 +312,7 @@ margin: auto;
                                @else
                                <div class="col">{{ number_format(0, 0, ',', ' ') }} XOF </div> 
                                @endif
-                           </div>
+                           </div> --}}
                            {{-- <div class="col-md-3">
                              <div class="col"></div>
                              <div class="col">Taxe ......... : </div>
@@ -320,21 +320,21 @@ margin: auto;
                            <div class="col-md-3">
                                <div class="col"> {{ number_format(0, 0, ',', ' ') }} XOF </div>
                            </div> --}}
-                       </div> 
+                       {{-- </div>  --}}
                    </div> <br>
 
 
                    <div class="mt-3 ">
                        <div style="color:#262626" class="row">
                            <div class="col-md-10 text-left">
-                             <div class="col">Montant recu</div>
-                             <div class="col">Montant rendu </div>
+                             <div class="col">Montant investi</div>
+                             {{-- <div class="col">Montant rendu </div> --}}
                            </div>
                            {{-- <div class="col-md-2">
                            </div> --}}
                            <div class="col-md-2">
-                             <div class="col">{{ number_format($investi->montantR, 0, ',', ' ') }}</div>
-                             <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div>
+                             <div class="col">{{ number_format($investi->montant, 0, ',', ' ') }}</div>
+                             {{-- <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div> --}}
                            </div>
                        </div> 
                    </div> <br>

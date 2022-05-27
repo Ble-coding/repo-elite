@@ -158,10 +158,10 @@ class EntreprisesController extends Controller
     //     Mail::to($entreprise->email)->send(new EntrepriseMarkdownMail($entreprise));
     // }
 
-    if( $entreprise ){
-        // event(new EntrepriseHasRegisteredEvent($entreprise));
-        Mail::to($entreprise->email)->send(new EntrepriseMarkdownMail($entreprise));
-    }
+    // if( $entreprise ){
+    //     // event(new EntrepriseHasRegisteredEvent($entreprise));
+    //     Mail::to($entreprise->email)->send(new EntrepriseMarkdownMail($entreprise));
+    // }
     
 
     // return Redirect::route('epargne_entreprise.epargne_entreprises.index');
