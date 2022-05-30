@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Nut;
 use App\Models\Sode;
 use App\Models\Client;
+use App\Helpers\Helper;
 use App\Models\Remove; 
 use App\Models\Depositary;
 use Illuminate\Http\Request;
@@ -87,6 +88,8 @@ class RemovesController extends Controller
     public function printer(Remove $remove)
     {   
 
+        $reference = Helper::Generator(new Remove, 'reference', 8, 'REF');
+
         $chiffre =  Nut::convert_number_to_words($remove->montant);
 
         // $pourcentage = ($vente->montant * $bonus ) / 100;
@@ -94,7 +97,7 @@ class RemovesController extends Controller
 
         // $regain =  Nut::convert_number_to_words($rachat);
         return view('remove.printer', compact('remove',
-        'chiffre'
+        'chiffre','reference'
         // ,'bonus','rachats','regain'
     ));
     }

@@ -383,6 +383,9 @@ public function storeded(Request $request , Solde $depot)
 
         // $chiffre =  Nut::convert_number_to_words( $depot->montantD);
 
+        
+        $reference = Helper::Generator(new Depot, 'reference', 8, 'REF');
+
         if ($depot->timbre == "Oui") {
             $v = $depot->montantD + 100;
             $chiffre =  Nut::convert_number_to_words( $v);
@@ -396,7 +399,7 @@ public function storeded(Request $request , Solde $depot)
         // $rachat =  $pourcentage + $vente->montant;
 
         // $regain =  Nut::convert_number_to_words($rachat);
-        return view('depot.print', compact('depot','chiffre'
+        return view('depot.print', compact('depot','chiffre','reference'
         // ,'bonus','rachats','regain'
     ));
     }

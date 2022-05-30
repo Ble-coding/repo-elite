@@ -71,7 +71,7 @@ margin: auto;
                         <!--End Page header-->
 @endsection
 @section('content')
-{{-- impression_visible defaut_invisible --}}
+{{-- impression_visible defaut_invisible --}} 
 <div class=" container-fluid"> 
     <div class="div position-ref">
         <div class=" content p-5 row">
@@ -81,7 +81,9 @@ margin: auto;
                     <img src="{{URL::asset('assets/images/brand/embleme.png')}}" width="100"
                     height="100"  class="" alt="ELITE ALLIANCE">
                     <div style="font-size: 16px" class="text-center col-12">
-                        <i> BORDEREAU DE VERSEMENT ESPECES N° {{$depot->reference}}</i> 
+                        {{-- <i> BORDEREAU DE VERSEMENT ESPECES N° {{$depot->reference}}</i>  --}}
+                        <div style="display:none;"> {{ $ref =$reference}}</div> 
+                        <i> BORDEREAU DE VERSEMENT ESPECES N° {{$ref}}</i> 
                     </div>
                     <div style="color:#262626" class="text-center mt-3 row">
                         <div class="col-md-6">
@@ -205,7 +207,8 @@ margin: auto;
                    <img src="{{URL::asset('assets/images/brand/embleme.png')}}" width="100"
                    height="100"  class="" alt="ELITE ALLIANCE">
                    <div style="font-size: 16px" class="text-center col-12">
-                       <i> BORDEREAU DE VERSEMENT ESPECES N° {{$depot->reference}}</i> 
+                    <i> BORDEREAU DE VERSEMENT ESPECES N° {{$ref}}</i> 
+                       {{-- <i> BORDEREAU DE VERSEMENT ESPECES N° {{$depot->reference}}</i>  --}}
                    </div>
                    <div style="color:#262626" class="text-center mt-3 row">
                        <div class="col-md-6">

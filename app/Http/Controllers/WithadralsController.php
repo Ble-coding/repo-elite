@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Nut;
 use App\Models\Sold;
+use App\Helpers\Helper;
 use App\Models\Deposit;
 use App\Models\Withadral;
 use App\Models\Entreprise;
@@ -94,6 +95,7 @@ class WithadralsController extends Controller
     public function printer(Withadral $withadral)
     {   
 
+        $reference = Helper::Generator(new Withadral, 'reference', 8, 'REF');
         $chiffre =  Nut::convert_number_to_words($withadral->montant);
 
         // $pourcentage = ($vente->montant * $bonus ) / 100;
@@ -101,7 +103,7 @@ class WithadralsController extends Controller
 
         // $regain =  Nut::convert_number_to_words($rachat);
         return view('withadral.printer', compact('withadral',
-        'chiffre'
+        'chiffre','reference'
         // ,'bonus','rachats','regain'
     ));
     }

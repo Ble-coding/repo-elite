@@ -322,6 +322,7 @@ public function storeded(Request $request , Sode $depositary)
     public function print(Depositary $depositary)
     {   
 
+        $reference = Helper::Generator(new Depositary, 'reference', 8, 'REF');
         // $chiffre =  Nut::convert_number_to_words( $depositary->montantD);
 
         if ($depositary->timbre == "Oui") {
@@ -338,7 +339,8 @@ public function storeded(Request $request , Sode $depositary)
 
         // $regain =  Nut::convert_number_to_words($rachat);
         return view('depositary.print', compact('depositary','chiffre'
-        // ,'bonus','rachats','regain'
+        // ,'bonus','rachats'
+        ,'reference'
     ));
     }
 

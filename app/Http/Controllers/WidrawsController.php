@@ -6,6 +6,7 @@ use App\Models\Sod;
 use App\Helpers\Nut;
 use App\Models\Depose;
 use App\Models\Widraw;
+use App\Helpers\Helper;
 use App\Models\Society;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -87,6 +88,7 @@ class WidrawsController extends Controller
     public function printer(Widraw $widraw)
     {   
 
+        $reference = Helper::Generator(new Widraw, 'reference', 8, 'REF');
         $chiffre =  Nut::convert_number_to_words($widraw->montant);
 
         // $pourcentage = ($vente->montant * $bonus ) / 100;
@@ -94,7 +96,7 @@ class WidrawsController extends Controller
 
         // $regain =  Nut::convert_number_to_words($rachat);
         return view('widraw.printer', compact('widraw',
-        'chiffre'
+        'chiffre','reference'
         // ,'bonus','rachats','regain'
       ));
     }

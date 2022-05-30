@@ -26,4 +26,8 @@ public function transferts(){
         return $this->hasMany('App\Models\Validate');
     }
 
+    public function recharges(){
+        return $this->hasMany('App\Models\Recharge');
+    }
+
 }

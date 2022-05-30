@@ -15,10 +15,9 @@ class Validate extends Model
     protected $fillable = ['montant',
            'transfert_id',
            'solde_id','olde_id',
-    'sode_id', 'ode_id', 'credit', 'redit',
+    'sode_id', 'ode_id', 'credit_id', 'redit_id',
     'sold_id','old_id',
      'sod_id','od_id',
- 'montant', 
  'code',
        'receive_id','send_id',
 

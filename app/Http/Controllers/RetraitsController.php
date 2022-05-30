@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Nut;
+use App\Helpers\Helper;
 use App\Models\Solde;
 use App\Models\Depot; 
 use App\Models\Retrait;
@@ -109,6 +110,7 @@ class RetraitsController extends Controller
 
     public function printer(Retrait $retrait)
     {   
+        $reference = Helper::Generator(new Retrait, 'reference', 8, 'REF');
 
         $chiffre =  Nut::convert_number_to_words($retrait->montant);
 
@@ -117,7 +119,7 @@ class RetraitsController extends Controller
 
         // $regain =  Nut::convert_number_to_words($rachat);
         return view('retrait.printer', compact('retrait',
-        'chiffre'
+        'chiffre','reference'
         // ,'bonus','rachats','regain'
         ));
     }

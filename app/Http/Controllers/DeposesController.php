@@ -303,6 +303,7 @@ class DeposesController extends Controller
 
     public function print(Depose $depose)
     {   
+        $reference = Helper::Generator(new Depose, 'reference', 8, 'REF');
 
         // $chiffre =  Nut::convert_number_to_words( $depose->montantD);
 
@@ -320,7 +321,8 @@ class DeposesController extends Controller
 
         // $regain =  Nut::convert_number_to_words($rachat);
         return view('depose.print', compact('depose','chiffre'
-        // ,'bonus','rachats','regain'
+        // ,'bonus','rachats'
+        ,'reference'
     ));
     }
 

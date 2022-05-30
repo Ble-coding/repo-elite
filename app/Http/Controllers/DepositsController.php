@@ -321,6 +321,7 @@ class DepositsController extends Controller
     {   
 
        
+        $reference = Helper::Generator(new Deposit, 'reference', 8, 'REF');
 
         if ($deposit->timbre == "Oui") {
             $v = $deposit->montantD + 100;
@@ -337,7 +338,8 @@ class DepositsController extends Controller
 
         // $regain =  Nut::convert_number_to_words($rachat);
         return view('deposit.print', compact('deposit','chiffre'
-        // ,'bonus','rachats','regain'
+        // ,'bonus','rachats'
+        ,'reference'
     ));
     }
 

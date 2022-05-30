@@ -162,7 +162,7 @@
 
                         <div style="font-size: 15px;" class="">
                             <p>Pour ouvrir un Compte Courant, le Client doit s’acquitter des frais d’ouvertures 
-                                <i>ELITE CREDIT</i> 
+                                <i>ELITE CREDIT. </i> 
                                 Les conditions tarifaires sont affichées dans les agences de <i>ELITE ALLIANCE</i> .
                                </p>
                          </div>

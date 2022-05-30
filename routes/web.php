@@ -40,6 +40,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->middl
  
 // Route::resource('/transferts', 'App\Http\Controllers\TransfertsController');
 
+// Route::resource('/recharges', 'App\Http\Controllers\RechargesController');
+
+Route::get('/recharges', [App\Http\Controllers\RechargesController::class, 'index'])->name('recharges.index');
+Route::post('/recharges', [App\Http\Controllers\RechargesController::class, 'store'])->name('recharges.store');
+Route::get('/recharges/{recharge}', [App\Http\Controllers\RechargesController::class, 'show'])->name('recharges.show');
+Route::get('/recharges/{recharge}/edit', [App\Http\Controllers\RechargesController::class, 'edit'])->name('recharges.edit');
+// Route::get('/retires/{recharge}/stored/', [App\Http\Controllers\RechargesController::class, 'stored'])->name('retires.stored');
+Route::post('/retires', [App\Http\Controllers\RechargesController::class, 'storeded'])->name('retires.storeded');
+Route::patch('/recharges/{recharge}', [App\Http\Controllers\RechargesController::class, 'update'])->name('recharges.update');
+Route::delete('/recharges/{recharge}', [App\Http\Controllers\RechargesController::class, 'destroy'])->name('recharges.destroy');
+
+
 Route::get('/transferts', [App\Http\Controllers\TransfertsController::class, 'index'])->name('transferts.index');
 
 Route::prefix('transferts')->name('transfert.')->group(function() {

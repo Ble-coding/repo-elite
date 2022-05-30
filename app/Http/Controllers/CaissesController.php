@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\validatesController;
 use Illuminate\Http\Request;
 
-class ValidatesControllerController extends Controller
+class CaissesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +40,10 @@ class ValidatesControllerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\validatesController  $validatesController
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(validatesController $validatesController)
+    public function show($id)
     {
         //
     }
@@ -52,10 +51,10 @@ class ValidatesControllerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\validatesController  $validatesController
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(validatesController $validatesController)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +63,10 @@ class ValidatesControllerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\validatesController  $validatesController
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, validatesController $validatesController)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +74,10 @@ class ValidatesControllerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\validatesController  $validatesController
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(validatesController $validatesController)
+    public function destroy($id)
     {
         //
     }
