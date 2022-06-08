@@ -28,7 +28,9 @@
 							</div>
 							<div class="page-rightheader">
 								<div class="btn btn-list">
-									<button data-target="#modaldemo2" data-toggle="modal" style="background:#262626; color:#fff" href="" class="btn btn"><i class="fe fe-plus mr-1"></i>Investir</button> 
+									@can('manage-visiteurs')
+										<button data-target="#modaldemo2" data-toggle="modal" style="background:#262626; color:#fff" href="" class="btn btn"><i class="fe fe-plus mr-1"></i>Investir</button> 
+									@endcan
 								
 											{{-- <button data-target="#modaldemo3" data-toggle="modal" style="background:#ff0017; color:#fff" href="" class="btn btn"><i class="fe fe-minus mr-1"></i>Retrait</button> --}}
 									{{-- <a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a> --}}
@@ -122,8 +124,9 @@
 																	<th class="border-bottom-0 w-15">Montant total</th>
 																	{{-- <th class="border-bottom-0 w-15">Admin</th> --}}
 																	@endcan
-																	{{-- <th class="border-bottom-0 w-15">Actions</th> --}}												
+																	@can('manage-visiteurs')											
 																	<th class="border-bottom-0 w-10">Actions</th>
+																	@endcan
 																	
 															
 															</tr>
@@ -155,10 +158,14 @@
 																		 <div style="display:none">{{$dateviw = \Carbon\Carbon::parse($investi->created_at)->addMonth($investi->forfait->duree)->subDay(1)->format('d/m/Y')}}</div>
 																		<td>{{$dateviw}}  </td> 
 																		@else 
-															 		<div style="display:none">{{$datei = \Carbon\Carbon::now()->format('m')}}</div>
+
+																		<div style="display:none">{{$dateviw = \Carbon\Carbon::parse($investi->created_at)->addMonth(3)->subDay(1)->format('d/m/Y')}}</div>
+																		<td>{{$dateviw}}  </td> 
+
+															 		{{-- <div style="display:none">{{$datei = \Carbon\Carbon::now()->format('m')}}</div>
 																	<div style="display:none">{{$datev = \Carbon\Carbon::now()->addMonth(1)->format('m')}}</div>								
 																	<div style="display:none">{{$date = (int) $datei  }}</div> {{-- 4 --}}
-																	<div style="display:none">{{$datek = (int) $datev }}</div> 
+																	{{-- <div style="display:none">{{$datek = (int) $datev }}</div> 
 																	<div style="display:none">{{$datek = $datev - $date }}</div> 
 															 		<div style="display:none">{{$datep = $datek + $datei }}</div>
 															 		<div style="display:none">{{$dates = "$datep" }}</div>
@@ -172,7 +179,9 @@
 															 		<td>{{$dateRemoveDay}}  </td> 
 																			@else
 															 		<td>Paiement en attente du {{$dateRemoveDay}}</td>	
-																			@endif
+																			@endif  --}}
+
+
 																		@endif																									
 															 		{{-- <div style="display:none">{{$v = $investi->investiman}}</div> 
 															 		<td>{{substr($v, 12, 35)}}</td> --}}
@@ -226,7 +235,7 @@
 																		{{-- <td>{{$investi->user->name}} </td>   --}}
 																		@endcan	
 															  	    @endif 
-																										   									
+																	  @can('manage-visiteurs')								   									
 																	<td>
 																		
 																			{{-- @can('show-investis') --}}
@@ -256,7 +265,7 @@
 																					</div> 
 																				</div> --}}
 																				{{-- @endif  --}}
-																		{{--  --}}
+																		
 															 				{{-- @if ($dat <= $datevi) --}}
 																			 {{-- <button data-target="#modaldemo3" data-toggle="modal" style="background:#eee; color:#ff0017" href="" class="btn btn"><i class="fe fe-minus mr-1"></i></button>			 --}}
 
@@ -266,20 +275,48 @@
 
 																			{{-- @can('show-investis') --}}
 																			{{-- <a href="{{ route('investir.investis.show' , ['investi' => $investi->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>  --}}
+																		
 																			<a href="{{ route('investir.prints.printer' , ['investi' => $investi->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
-																			{{-- @endcan --}}
+																		
 
-
-																			{{-- @if ( \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($investi->created_at))  &&  \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($investi->created_at)->addDay(30)) )
-																		 <a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a> 
+																			{{-- @if ($investi->customer->status == 0) --}}
+																			{{-- @if ( \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($investi->created_at))  &&  \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($investi->created_at)->addDay(90)) )
+																				 <a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a> 
 																			@else
 																		
 																			
 																			@endif --}}
+																			{{-- @else
+																			@endif --}}
 
 
-																			<a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																			@if ($investi->particulier_id !== Null)
+																				@if ($investi->particulier->status == 0)
+																					<a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																				@endif
+																			@elseif($investi->client_id !== Null)
+																				@if ($investi->client->status == 0)
+																					<a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																				@endif
+																			@elseif($investi->customer_id !== Null)
+																				@if ($investi->customer->status == 0)
+																					<a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																				@endif
+																			@else
+																			
+																			@endif
 
+																			
+																			{{-- @elseif($investi->client->status == 0)
+																				<a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																			@elseif($investi->customer->status == 0)
+																				<a href="{{ route('investir.diminishes.stored' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																			@else
+																		 
+																			@endif --}}
+
+
+																		
 																			
 																		
 																			{{-- @endcan --}}
@@ -315,9 +352,10 @@
 																						<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet investissemnt ?');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
 																				</form>   
 																			@endcan	 --}}
+																			@endcan	
 															  
 																	</td> 
-																	@endcan			 
+																	@endcan	 
 															    </tr>
 																@endforeach
 																@else

@@ -91,7 +91,12 @@ class DeposesController extends Controller
         
         if ($depose->timbre == 'Oui') {
             // $depose->montantD = $montantD + $timbre;
-            $depose->montantD = $montantD;
+            // $depose->montantD = $montantD;
+            if($montantD >= 65000){
+                $depose->montantD = $montantD;
+            }else{
+                return view('404'); 
+            }
             $depose->montantR = $montantR;
         //    dd(  $depose->montantR);
             if($depose->montantR > $montantD){
@@ -138,7 +143,7 @@ class DeposesController extends Controller
     
         if ($solde) {
         
-            $solde->increment('montantD', $request->montantD);
+            $solde->increment('montantD', $depose->montantD);
             $recois->increment('montant',  $timbre );
         } 
         else {
@@ -182,9 +187,16 @@ class DeposesController extends Controller
         // $sodle->montantD = $montantD + 100;
 
         // $cred = ($montantD + 100) - $diminuer;
-        $cred = $montantD - $diminuer;
-        $sodle->montantD = $cred;
+        // $cred = $montantD - $diminuer;
+        // $sodle->montantD = $cred;
 
+        if( $montantD > 65000 || $montantD = 65000 ){
+            $cred = $montantD - $diminuer;
+            $sodle->montantD = $cred;
+      }else{
+          return view('404'); 
+      }
+      
 
         $sodle->montantR = $montantR;
         //    dd(  $sodle->montantR);
@@ -207,8 +219,14 @@ class DeposesController extends Controller
         // $sodle->montantD = $montantD - 100;
 
             // $cred = ($montantD - 100) - $diminuer;
-            $cred = ($montantD - $timbre) - $diminuer;
-            $sodle->montantD = $cred;
+           
+
+            if( $montantD > 65000 || $montantD = 65000 ){
+                $cred = ($montantD - $timbre) - $diminuer;
+                $sodle->montantD = $cred;
+          }else{
+              return view('404'); 
+          }
 
             $sodle->montantR = $montantR;
 

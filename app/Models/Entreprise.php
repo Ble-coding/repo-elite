@@ -15,7 +15,7 @@ class Entreprise extends Model
         'cam' ,'caa' ,
         //  'partner' , 'payment' ,
         // 'credit' , 
-        // 'secteur_id', 
+        'status', 
         'name_partner',
         'secteur',
         'forme_id', 'name', 'siege','lieu','tel','name_gerant',
@@ -35,7 +35,9 @@ protected static function booted() {
         $entreprise->user_id = auth()->id();
     });
 }
-
+public function confirmes(){
+    return $this->hasMany('App\Models\Confirme');
+}
 
 public function user(){
     return $this->belongsTo('App\Models\User');

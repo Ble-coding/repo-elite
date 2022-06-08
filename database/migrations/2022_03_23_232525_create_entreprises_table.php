@@ -37,6 +37,7 @@ return new class extends Migration
     $table->string('tel');
     $table->string('email');
     $table->string('capital');
+    $table->bigInteger('status')->default(1);
     $table->string('nationnalite');
     // $table->string('sexe');
     $table->enum('sexe',['F','M'])->default('M');

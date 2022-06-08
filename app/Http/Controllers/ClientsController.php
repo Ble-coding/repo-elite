@@ -9,6 +9,7 @@ use App\Models\Piece;
 use App\Models\Client;
 use App\Helpers\Helper;  
 use App\Models\Suppleant;
+use App\Models\Confirmate;
 use Illuminate\Http\Request;
 use App\Mail\ClientMarkdownMail;
 use Illuminate\Support\Facades\Gate;
@@ -25,10 +26,12 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        // $clients = Client::all();
+        $clients = Client::where('status', 1)->get();
+        $listClients = Client::where('status', 0)->get();
         $partSups = Client::onlyTrashed()->get();
 
-        return view('client.index', compact('clients','partSups'));
+        return view('client.index', compact('clients','partSups','listClients'));
     }
 
     /**
@@ -56,38 +59,39 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'sexe' => 'in:F,M',
-            'situation' => 'in:Marie,Celibataire',
-            'name' => ['required', 'string', 'max:255'],
-            'nationnalite' => ['required', 'string', 'max:255'],
-            'lieu_habitation' => ['required', 'string', 'max:255'],
-            'prename' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'lieu' => ['required', 'string', 'string', 'max:255'],
-            'datenaiss' => ['required', 'string', 'max:255'],
-            'numpiece' => ['required', 'string', 'max:255', 'unique:clients'],
-             'dateexp' => ['required', 'string', 'max:255'],
-            'personne_name' => ['nullable', 'string', 'max:255'],
-            'personne_prename' => ['nullable', 'string', 'max:255'],
-            'image' => 'nullable', 
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'personne_tel' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-            'piece_id' => 'required|integer',
-            'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-            'successeur_name' => ['nullable','string', 'max:255'],  
-            'successeur_prename' => ['nullable','string', 'max:255'],
-            'successeur_tel' =>'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+        $client = new Client();
+        // $request->validate([
+        //     'sexe' => 'in:F,M',
+        //     'situation' => 'in:Marie,Celibataire',
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'nationnalite' => ['required', 'string', 'max:255'],
+        //     'lieu_habitation' => ['required', 'string', 'max:255'],
+        //     'prename' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255'],
+        //     'lieu' => ['required', 'string', 'string', 'max:255'],
+        //     'datenaiss' => ['required', 'string', 'max:255'],
+        //     'numpiece' => ['required', 'string', 'max:255', 'unique:clients'],
+        //      'dateexp' => ['required', 'string', 'max:255'],
+        //     'personne_name' => ['nullable', 'string', 'max:255'],
+        //     'personne_prename' => ['nullable', 'string', 'max:255'],
+        //     'image' => 'nullable', 
+        //     'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'personne_tel' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+        //     'piece_id' => 'required|integer',
+        //     'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+        //     'successeur_name' => ['nullable','string', 'max:255'],  
+        //     'successeur_prename' => ['nullable','string', 'max:255'],
+        //     'successeur_tel' =>'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
 
-            'prof' => ['required', 'string', 'max:255'],
-            'nom_ent'=> ['required', 'string', 'max:255'],
-           'address'=> ['required', 'string', 'max:255'],
-           'tel_ent' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-           'date_deb'=> ['required', 'string', 'max:255'],
-            'type_id'=> 'required|integer',
-            // 'code' => ['required', 'string', 'max:255','unique:clients'],
-        ]);
-
+        //     'prof' => ['required', 'string', 'max:255'],
+        //     'nom_ent'=> ['required', 'string', 'max:255'],
+        //    'address'=> ['required', 'string', 'max:255'],
+        //    'tel_ent' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+        //    'date_deb'=> ['required', 'string', 'max:255'],
+        //     'type_id'=> 'required|integer',
+        //     // 'code' => ['required', 'string', 'max:255','unique:clients'],
+        // ]);
+        $code = Helper::IDGenerator(new Client, 'code', 6, '20');
         $image = array();
         if($files = $request->file('image')){
             foreach ($files as $file) {
@@ -101,59 +105,124 @@ class ClientsController extends Controller
             }
         }
 
+        $client->name = request('name');
+        $client->prename = request('prename');
+        $client->datenaiss = request('datenaiss');
+        $client->lieu = request('lieu');
+        $client->tel = request('tel');
+        $client->email = request('email');
+        $client->nationnalite = request('nationnalite');
+        $client->sexe = request('sexe');
+        $client->lieu_habitation = request('lieu_habitation');
+        $client->situation = request('situation');
+        $client->successeur_name = request('successeur_name');
+        $client->successeur_prename = request('successeur_prename');
+        $client->successeur_tel = request('successeur_tel');
+        $client->personne_name = request('personne_name');
+        $client->prof = request('prof');
+        $client->nom_ent = request('nom_ent');
+        $client->address = request('address');
+        $client->tel_ent = request('tel_ent');
+        $client->date_deb = request('date_deb');
+        $client->personne_prename = request('personne_prename');
+        $client->personne_tel = request('personne_tel');
+        $client->piece_id = request('piece_id');
+        $client->type_id = request('type_id');
+        $client->numpiece = request('numpiece');
+        $client->dateexp = request('dateexp');
+        $client->code = $code;
+        $client->image = implode('|', $image);
+  
+    
+         $client->save();
+
+
         // $code = Helper::IDGenerator(new Client, 'code', 8, '');
-        $code = Helper::IDGenerator(new Client, 'code', 6, '20');
+        
 
         // $code_parrain = Helper::IDGenerator(new Suppleant, 'code_parrain', 5, 'CODRT');
         
-        $client = Client::create([
-            'sexe' => $request->sexe,
-            'situation' => $request->situation,
-            'name' => $request->name,
-            'nationnalite' => $request->nationnalite,
-            'lieu_habitation' => $request->lieu_habitation,
-            'prename' => $request->prename,
+        // $client = Client::create([
+        //     'sexe' => $request->sexe,
+        //     'situation' => $request->situation,
+        //     'name' => $request->name,
+        //     'nationnalite' => $request->nationnalite,
+        //     'lieu_habitation' => $request->lieu_habitation,
+        //     'prename' => $request->prename,
 
-            'email' => $request->email,
-            'lieu' => $request->lieu,
-            'datenaiss' => $request->datenaiss,
-            'numpiece' => $request->numpiece,
+        //     'email' => $request->email,
+        //     'lieu' => $request->lieu,
+        //     'datenaiss' => $request->datenaiss,
+        //     'numpiece' => $request->numpiece,
 
-            'dateexp' => $request->dateexp,
-            'personne_name' => $request->personne_name,
-            'personne_prename' => $request->personne_prename,
-            'personne_tel' => $request->personne_tel,
-            'piece_id' => $request->piece_id,
+        //     'dateexp' => $request->dateexp,
+        //     'personne_name' => $request->personne_name,
+        //     'personne_prename' => $request->personne_prename,
+        //     'personne_tel' => $request->personne_tel,
+        //     'piece_id' => $request->piece_id,
 
-            'tel' => $request->tel,
-            'successeur_name' => $request->successeur_name,
-            'successeur_prename' => $request->successeur_prename,
-            'successeur_tel' => $request->successeur_tel,
+        //     'tel' => $request->tel,
+        //     'successeur_name' => $request->successeur_name,
+        //     'successeur_prename' => $request->successeur_prename,
+        //     'successeur_tel' => $request->successeur_tel,
 
               
-            'prof' => $request->prof,
-            'nom_ent'=> $request->nom_ent,
-           'address'=> $request->address,
-           'tel_ent' => $request->tel_ent,
-           'date_deb'=> $request->date_deb,
-            'type_id'=> $request->type_id,
+        //     'prof' => $request->prof,
+        //     'nom_ent'=> $request->nom_ent,
+        //    'address'=> $request->address,
+        //    'tel_ent' => $request->tel_ent,
+        //    'date_deb'=> $request->date_deb,
+        //     'type_id'=> $request->type_id,
 
 
-            'code' => $code,
+        //     'code' => $code,
             
-            'image' => implode('|', $image),
-        ]);
+        //     'image' => implode('|', $image),
+        // ]);
 
    
 
-        if( $client ){
+        // if( $client ){
             // event(new ClientHasRegisteredEvent($client));
-            Mail::to($client->email)->send(new ClientMarkdownMail($client));
-        }
+        //     Mail::to($client->email)->send(new ClientMarkdownMail($client));
+        // }
         
 
         return Redirect::route('clients.index')->with('message', 'code '. $client->code .'. Félicitation, les informations du client ' . $client->name . ' '. $client->prename.' ont bien été enregistrées.');
 
+    }
+
+    public function stored(Client $client)
+    {   
+
+        // $chiffre =  Nut::convert_number_to_words( $depot->montantD);
+        // $pieces = Piece::all();
+        $confirmate = new Confirmate();
+    
+        return view('client.confirm', compact('client','confirmate'
+        // ,'pieces','chiffre'
+        // ,'bonus','rachats','regain'
+     ));
+    }
+  
+
+public function storeded(Request $request , Client $client)
+{   
+    $confirmate = new Confirmate();
+
+    $confirmate->motif = request('motif');
+        $confirmate->client_id = request('client_id');
+
+        $confirmateId =  Client::where([            
+            [ 'id' , '=', $confirmate->client_id],
+        ])->first();
+
+
+    
+         $confirmate->save();
+         $confirmateId->decrement('status', 1);
+   
+    return Redirect::route('clients.index')->with('message', 'Vous avez validé');
     }
 
 
@@ -287,4 +356,43 @@ class ClientsController extends Controller
         
         return redirect()->route('clients.index')->with('message', 'code '. $client->code .'. Les informations du client ' . $client->name . ' '. $client->prename.' ont bien été restaurées.');
     } 
+
+
+    private function validator(){
+
+        return request()->validate([       
+            'motif' => ['required', 'string'],
+            'client_id' => 'required|integer',
+
+
+            'sexe' => 'in:F,M',
+            'situation' => 'in:Marie,Celibataire',
+            'name' => ['required', 'string', 'max:255'],
+            'nationnalite' => ['required', 'string', 'max:255'],
+            'lieu_habitation' => ['required', 'string', 'max:255'],
+            'prename' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'lieu' => ['required', 'string', 'string', 'max:255'],
+            'datenaiss' => ['required', 'string', 'max:255'],
+            'numpiece' => ['required', 'string', 'max:255', 'unique:clients'],
+             'dateexp' => ['required', 'string', 'max:255'],
+            'personne_name' => ['nullable', 'string', 'max:255'],
+            'personne_prename' => ['nullable', 'string', 'max:255'],
+            'image' => 'nullable', 
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'personne_tel' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+            'piece_id' => 'required|integer',
+            'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+            'successeur_name' => ['nullable','string', 'max:255'],  
+            'successeur_prename' => ['nullable','string', 'max:255'],
+            'successeur_tel' =>'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+
+            'prof' => ['required', 'string', 'max:255'],
+            'nom_ent'=> ['required', 'string', 'max:255'],
+           'address'=> ['required', 'string', 'max:255'],
+           'tel_ent' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+           'date_deb'=> ['required', 'string', 'max:255'],
+            'type_id'=> 'required|integer',
+        ]);    
+    }
 }

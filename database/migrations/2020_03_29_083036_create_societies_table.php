@@ -57,6 +57,7 @@ return new class extends Migration
             $table->string('numpiece');
             $table->string('dateexp');
             $table->binary('image')->nullable();
+            $table->bigInteger('status')->default(1);
             $table->unsignedbigInteger('user_id');
             $table->timestamps();
         

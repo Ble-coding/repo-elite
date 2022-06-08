@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers;  
 
 use Carbon\Carbon;
 use App\Models\Type;
@@ -8,6 +8,7 @@ use App\Models\Piece;
 use App\Models\Customer;
 use App\Helpers\Helper;  
 use App\Models\Suppleant;
+use App\Models\Confirmator;
 use Illuminate\Http\Request; 
 use App\Mail\CustomerMarkdownMail;
 use App\Events\CustomerCreatedEvent;
@@ -26,14 +27,16 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        // $customers = Customer::all();
+        $customers = Customer::where('status', 1)->get();
+        $listCustomers = Customer::where('status', 0)->get();
         $partSups = Customer::onlyTrashed()->get();
         // $posts = Customer::withTrashed()->where('id', 1)->restore();
 
         // dd($partSups);
 
         // $customers = Customer::withcount('investissements')->with('investissements')->get();
-        return view('customer.index', compact('customers','partSups'));
+        return view('customer.index', compact('customers','partSups','listCustomers'));
     }
 
     /**
@@ -58,39 +61,40 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'sexe' => 'in:F,M',
-            'situation' => 'in:Marie,Celibataire',
-            'name' => ['required', 'string', 'max:255'],
-            'nationnalite' => ['required', 'string', 'max:255'],
-            'lieu_habitation' => ['required', 'string', 'max:255'],
-            'prename' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'lieu' => ['required', 'string', 'string', 'max:255'],
-            'datenaiss' => ['required', 'string', 'max:255'],
-            'numpiece' => ['required', 'string', 'max:255'],
-             'dateexp' => ['required', 'string', 'max:255'],
-            'personne_name' => ['nullable', 'string', 'max:255'],
-            'personne_prename' => ['nullable', 'string', 'max:255'],
-            'image' => 'nullable', 
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'personne_tel' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-            'piece_id' => 'required|integer',
-            'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-            'successeur_name' => ['nullable','string', 'max:255'],  
-            'successeur_prename' => ['nullable','string', 'max:255'],
-            'successeur_tel' =>'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+        $customer = new Customer();
+        // $request->validate([
+        //     'sexe' => 'in:F,M',
+        //     'situation' => 'in:Marie,Celibataire',
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'nationnalite' => ['required', 'string', 'max:255'],
+        //     'lieu_habitation' => ['required', 'string', 'max:255'],
+        //     'prename' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255'],
+        //     'lieu' => ['required', 'string', 'string', 'max:255'],
+        //     'datenaiss' => ['required', 'string', 'max:255'],
+        //     'numpiece' => ['required', 'string', 'max:255'],
+        //      'dateexp' => ['required', 'string', 'max:255'],
+        //     'personne_name' => ['nullable', 'string', 'max:255'],
+        //     'personne_prename' => ['nullable', 'string', 'max:255'],
+        //     'image' => 'nullable', 
+        //     'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'personne_tel' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+        //     'piece_id' => 'required|integer',
+        //     'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+        //     'successeur_name' => ['nullable','string', 'max:255'],  
+        //     'successeur_prename' => ['nullable','string', 'max:255'],
+        //     'successeur_tel' =>'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
 
-            'prof' => ['required', 'string', 'max:255'],
-            'nom_ent'=> ['required', 'string', 'max:255'],
-           'address'=> ['required', 'string', 'max:255'],
-           'tel_ent' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-           'date_deb'=> ['required', 'string', 'max:255'],
-            'type_id'=> 'required|integer',
+        //     'prof' => ['required', 'string', 'max:255'],
+        //     'nom_ent'=> ['required', 'string', 'max:255'],
+        //    'address'=> ['required', 'string', 'max:255'],
+        //    'tel_ent' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+        //    'date_deb'=> ['required', 'string', 'max:255'],
+        //     'type_id'=> 'required|integer',
             // 'code' => ['required', 'string', 'max:255','unique:customers'],
           
-        ]);
-
+        // ]);
+        $code = Helper::IDGenerator(new Customer, 'code', 6, '30');
         $image = array();
         if($files = $request->file('image')){
             foreach ($files as $file) {
@@ -104,46 +108,75 @@ class CustomersController extends Controller
             }
         }
 
-        $code = Helper::IDGenerator(new Customer, 'code', 6, '30');
+        $customer->name = request('name');
+        $customer->prename = request('prename');
+        $customer->datenaiss = request('datenaiss');
+        $customer->lieu = request('lieu');
+        $customer->tel = request('tel');
+        $customer->email = request('email');
+        $customer->nationnalite = request('nationnalite');
+        $customer->sexe = request('sexe');
+        $customer->lieu_habitation = request('lieu_habitation');
+        $customer->situation = request('situation');
+        $customer->successeur_name = request('successeur_name');
+        $customer->successeur_prename = request('successeur_prename');
+        $customer->successeur_tel = request('successeur_tel');
+        $customer->personne_name = request('personne_name');
+        $customer->prof = request('prof');
+        $customer->nom_ent = request('nom_ent');
+        $customer->address = request('address');
+        $customer->tel_ent = request('tel_ent');
+        $customer->date_deb = request('date_deb');
+        $customer->personne_prename = request('personne_prename');
+        $customer->personne_tel = request('personne_tel');
+        $customer->piece_id = request('piece_id');
+        $customer->type_id = request('type_id');
+        $customer->numpiece = request('numpiece');
+        $customer->dateexp = request('dateexp');
+        $customer->code = $code;
+        $customer->image = implode('|', $image);
+  
+    
+         $customer->save();
         // $code_parrain = Helper::IDGenerator(new Suppleant, 'code_parrain', 5, 'CODCU');
 
-        $customer = Customer::create([
-            'sexe' => $request->sexe,
-            'situation' => $request->situation,
-            'name' => $request->name,
-            'nationnalite' => $request->nationnalite,
-            'lieu_habitation' => $request->lieu_habitation,
-            'prename' => $request->prename,
+        // $customer = Customer::create([
+        //     'sexe' => $request->sexe,
+        //     'situation' => $request->situation,
+        //     'name' => $request->name,
+        //     'nationnalite' => $request->nationnalite,
+        //     'lieu_habitation' => $request->lieu_habitation,
+        //     'prename' => $request->prename,
 
-            'email' => $request->email,
-            'lieu' => $request->lieu,
-            'datenaiss' => $request->datenaiss,
-            'numpiece' => $request->numpiece,
+        //     'email' => $request->email,
+        //     'lieu' => $request->lieu,
+        //     'datenaiss' => $request->datenaiss,
+        //     'numpiece' => $request->numpiece,
 
-            'dateexp' => $request->dateexp,
-            'personne_name' => $request->personne_name,
-            'personne_prename' => $request->personne_prename,
-            'personne_tel' => $request->personne_tel,
-            'piece_id' => $request->piece_id,
+        //     'dateexp' => $request->dateexp,
+        //     'personne_name' => $request->personne_name,
+        //     'personne_prename' => $request->personne_prename,
+        //     'personne_tel' => $request->personne_tel,
+        //     'piece_id' => $request->piece_id,
 
-            'tel' => $request->tel,
-            'successeur_name' => $request->successeur_name,
-            'successeur_prename' => $request->successeur_prename,
-            'successeur_tel' => $request->successeur_tel,
+        //     'tel' => $request->tel,
+        //     'successeur_name' => $request->successeur_name,
+        //     'successeur_prename' => $request->successeur_prename,
+        //     'successeur_tel' => $request->successeur_tel,
 
               
-            'prof' => $request->prof,
-            'nom_ent'=> $request->nom_ent,
-           'address'=> $request->address,
-           'tel_ent' => $request->tel_ent,
-           'date_deb'=> $request->date_deb,
-            'type_id'=> $request->type_id,
+        //     'prof' => $request->prof,
+        //     'nom_ent'=> $request->nom_ent,
+        //    'address'=> $request->address,
+        //    'tel_ent' => $request->tel_ent,
+        //    'date_deb'=> $request->date_deb,
+        //     'type_id'=> $request->type_id,
 
 
-            'code' => $code,
+        //     'code' => $code,
             
-            'image' => implode('|', $image),
-        ]);
+        //     'image' => implode('|', $image),
+        // ]);
 
         // $suppleant = Suppleant::create([
         //     'name' => $request->name,
@@ -155,15 +188,48 @@ class CustomersController extends Controller
         // ]);
 
  
-        if( $customer ){
+        // if( $customer ){
                // event(new CustomerCreatedEvent($customer));
-            Mail::to($customer->email)->send(new CustomerMarkdownMail($customer));
-        }
+        //     Mail::to($customer->email)->send(new CustomerMarkdownMail($customer));
+        // }
         
 
         return Redirect::route('customers.index')->with('message', 'code-client '. $customer->code.'. Félicitation, les informations du client ' . $customer->name . ' ' . $customer->prename . ' ont bien été enregistrées.');
     }
 
+
+    public function stored(Customer $customer)
+    {   
+
+        // $chiffre =  Nut::convert_number_to_words( $depot->montantD);
+        // $pieces = Piece::all();
+        $confirmator = new Confirmator();
+    
+        return view('customer.confirm', compact('customer','confirmator'
+        // ,'pieces','chiffre'
+        // ,'bonus','rachats','regain'
+     ));
+    }
+  
+
+public function storeded(Request $request , Customer $customer)
+{   
+    $confirmator = new Confirmator();
+
+    $confirmator->motif = request('motif');
+        $confirmator->customer_id = request('customer_id');
+
+        $confirmatorId =  Customer::where([            
+            [ 'id' , '=', $confirmator->customer_id],
+        ])->first();
+
+
+    
+         $confirmator->save();
+         $confirmatorId->decrement('status', 1);
+   
+    return Redirect::route('customers.index')->with('message', 'Vous avez validé');
+    }
     /**
      * Display the specified resource.
      *
@@ -292,6 +358,43 @@ class CustomersController extends Controller
      return redirect()->route('customers.index')->with('message', 'code '. $customer->code .'. Les informations du client ' . $customer->name . ' '. $customer->prename.' ont bien été restaurées.');
     } 
 
+    private function validator(){
+
+        return request()->validate([       
+            'motif' => ['required', 'string'],
+            'customer_id' => 'required|integer',
+
+
+            'sexe' => 'in:F,M',
+            'situation' => 'in:Marie,Celibataire',
+            'name' => ['required', 'string', 'max:255'],
+            'nationnalite' => ['required', 'string', 'max:255'],
+            'lieu_habitation' => ['required', 'string', 'max:255'],
+            'prename' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'lieu' => ['required', 'string', 'string', 'max:255'],
+            'datenaiss' => ['required', 'string', 'max:255'],
+            'numpiece' => ['required', 'string', 'max:255', 'unique:customers'],
+             'dateexp' => ['required', 'string', 'max:255'],
+            'personne_name' => ['nullable', 'string', 'max:255'],
+            'personne_prename' => ['nullable', 'string', 'max:255'],
+            'image' => 'nullable', 
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'personne_tel' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+            'piece_id' => 'required|integer',
+            'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+            'successeur_name' => ['nullable','string', 'max:255'],  
+            'successeur_prename' => ['nullable','string', 'max:255'],
+            'successeur_tel' =>'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+
+            'prof' => ['required', 'string', 'max:255'],
+            'nom_ent'=> ['required', 'string', 'max:255'],
+           'address'=> ['required', 'string', 'max:255'],
+           'tel_ent' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+           'date_deb'=> ['required', 'string', 'max:255'],
+            'type_id'=> 'required|integer',
+        ]);    
+    }
     // public function restore(Customer $customer) 
     // {
     // // $customer   = Customer::withTrashed()->where('id', $customer)->restore();

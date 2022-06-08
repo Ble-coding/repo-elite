@@ -46,6 +46,8 @@ class HomeController extends Controller
         $forfaits = Forfait::paginate(5);
 
         $soldeElite = Credit::sum('montant');
+
+        
   
 
         return view('home' , compact('forfaits','nbrClients','nbrParticuliers','sumMontantDepositaryCourant',

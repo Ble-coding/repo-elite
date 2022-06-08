@@ -42,11 +42,11 @@
             @if(Route::is('admin.forfaits.create') )
             <i class="fe fe-trending-up"></i> 
             @elseif(Route::is('admin.forfaits.edit') )
-            <i class="fe fe-trending-up mr-1"></i> Mensuel
+            <i class="fe fe-trending-up mr-1"></i> Trimestriel
         @endif
         </div>
     </div>
-    <input  value="{{ old('pourcentageM') ?? $forfait->pourcentageM }}" min="1" class="form-control @error('pourcentageM') is-invalid @enderror" type="number" placeholder="{{ __('Pourcentage Mensuel') }}" id="pourcentageM" name="pourcentageM">
+    <input  value="{{ old('pourcentageM') ?? $forfait->pourcentageM }}" min="1" class="form-control @error('pourcentageM') is-invalid @enderror" type="number" placeholder="{{ __('Pourcentage Trimestriel') }}" id="pourcentageM" name="pourcentageM">
     @error('pourcentageM')
              <div class="invalid-feedback">
                                {{ $errors->first('pourcentageM') }}

@@ -640,6 +640,7 @@ $diminish->customer_id = request('customer_id');
     public function print(Investissement $investi)
     {   
 
+        $reference = Helper::Generator(new Investissement, 'reference', 8, 'REF');
         $chiffre =  Nut::convert_number_to_words( $investi->montant);
 
         // $pourcentage = ($vente->montant * $bonus ) / 100;
@@ -647,7 +648,8 @@ $diminish->customer_id = request('customer_id');
 
         // $regain =  Nut::convert_number_to_words($rachat);
         return view('investi.print', compact('investi','chiffre'
-        // ,'bonus','rachats','regain'
+        // ,'bonus','rachats'
+        ,'reference'
         ));
     }
 

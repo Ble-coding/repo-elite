@@ -15,7 +15,7 @@ class Society extends Model
         'email','tel_ent',
         'cam' ,'caa' , 'partner' , 'payment' ,
         'credit' , 
-        // 'secteur_id', 
+        'status', 
         'name_partner',
         'secteur',
         'forme_id', 'name', 'siege','lieu','tel','name_gerant',
@@ -52,6 +52,11 @@ public function forme(){
 // public function deposits(){
 //     return $this->hasMany('App\Models\Deposit');
 // }
+
+public function confires(){
+    return $this->hasMany('App\Models\Confire');
+}
+
 
 public function deposes(){
     return $this->hasMany('App\Models\Depose');

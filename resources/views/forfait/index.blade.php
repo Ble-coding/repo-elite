@@ -77,7 +77,7 @@
 																<th class="align-top border-bottom-0 wd-5"></th>
 																<th class="border-bottom-0 w-20">Libelle</th>
 																<th class="border-bottom-0 w-15">Duree</th>
-																<th class="border-bottom-0 w-30">%Mensuel-%Jalonnement</th>
+																<th class="border-bottom-0 w-30">%Trimestriel-%Jalonnement</th>
 																 <th class="border-bottom-0 w-30">Nombre investissements</th>
 																<th class="border-bottom-0 w-10">Actions</th>
 															</tr>
@@ -162,7 +162,7 @@
 																<th class="border-bottom-0 w-20">Date sup.</th>
 																<th class="border-bottom-0 w-20">Libelle</th>
 																<th class="border-bottom-0 w-15">Duree</th>
-																<th class="border-bottom-0 w-30">%Mensuel-%Jalonnement</th>
+																<th class="border-bottom-0 w-30">%Trimestriel-%Jalonnement</th>
 																 {{-- <th class="border-bottom-0 w-30">Nombre investissements</th> --}}
 																<th class="border-bottom-0 w-10">Actions</th>
 

@@ -59,13 +59,13 @@
                 {{-- @can('manage-visiteurs') --}}
 				<li class=""><a href="#tab1" class="active" data-toggle="tab">Nouveaux clients </a></li>
                 {{-- @endcan --}}
-				@can('manage-particuliers')
+				@can('manage-clients')
 				<li><a href="#tab2" data-toggle="tab">Client</a></li>
 				@endcan
 				{{-- 
 				 <li><a href="{{route('elite.elites.create')}}">Vente</a></li>
 				 --}}
-                @can('manage-visiteurs')
+                @can('manage-investis')
 					<li><a href="#tab3" data-toggle="tab">Liste ventes</a></li>
 					 <li><a href="#tab4" data-toggle="tab">Versement effectués</a></li>
 					 <li><a href="#tab5" data-toggle="tab">Transactions terminées</a></li>
@@ -82,7 +82,7 @@
 		<div class="tab-content">
 		
 
-			@can('manage-particuliers')
+			@can('manage-clients')
                 <div class="tab-pane " id="tab2">				
                     <div class="card col-md-10">
                         <div class="card-header">
@@ -182,7 +182,7 @@
 					</form> 
                 </div> 
        
-				@endcan
+			@endcan
 
 					{{-- @can('manage-visiteurs') --}}
 			<div class="tab-pane active" id="tab1">				
@@ -236,7 +236,7 @@
 																		 @endcan  
 																		
 																		<td>  
-																			@can('manage-particuliers')
+																			@can('manage-clients')
 																			  <a href="{{ route('elite.elites.show' , ['vente' => $vente->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
 																			  @endcan 
 																			  @can('manage-visiteurs')
@@ -298,7 +298,9 @@
 																		{{-- <th class="border-bottom-0 w-30">Admin</th> --}}
 																		@endcan
 																		<th class="border-bottom-0 w-15">Vers</th>
+																		@can('manage-visiteurs')
 																		<th class="border-bottom-0 w-10">Actions</th>
+																		@endcan
 															</tr>
 														</thead>
 														<tbody>
@@ -387,6 +389,7 @@
 																			@endif
 																		 @endif
 																		 {{-- <td>{{$vente->immatricule}} {{$vente->marque}}</td>  --}}
+																		 @can('manage-visiteurs')
 																		<td>
 																		 
 			
@@ -427,7 +430,8 @@
 																			@endif --}}
 			
 																			 
-																		</td>		 
+																		</td>
+																		@endcan 		 
 																</tr>
 																@endforeach
 																@else

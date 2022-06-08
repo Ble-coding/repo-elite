@@ -25,6 +25,7 @@ class Client extends Model
    
    'prof',
    'nom_ent',
+   'status',
   'address',
   'tel_ent',
   'date_deb',
@@ -76,6 +77,11 @@ public function type(){
 public function bonuses(){
     return $this->hasMany('App\Models\Bonus');
 }
+
+public function confirmates(){
+    return $this->hasMany('App\Models\Confirmate');
+}
+
 
 public function sodes(){
     return $this->hasMany('App\Models\Sode');

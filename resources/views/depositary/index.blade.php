@@ -56,13 +56,16 @@
 		<div class="tabs-menu ">
 			<!-- Tabs -->
 			<ul class="nav panel-tabs">
-             @can('manage-visiteurs')
-				 <li class=""><a href="#tab1" class="active" data-toggle="tab">Nouveaux dépots </a></li> 
-					<li class=""><a href="#tab2" data-toggle="tab">Dépots </a></li> 
-				 <li class=""><a href="#tab3" data-toggle="tab">Solde</a></li> 
-				 <li class=""><a href="#tab4" data-toggle="tab">Retraits </a></li> 
-			 @endcan
-
+				@can('manage-investis') 	
+				<li class=""><a  href="#tab1" class="active"  data-toggle="tab">Dépots </a></li> 
+					@endcan
+					@can('manage-visiteurs') 
+					<li class=""><a  href="#tab2"  data-toggle="tab">Nouveaux dépots </a></li>
+					@endcan
+					@can('manage-investis') 	
+					<li class=""><a href="#tab3" data-toggle="tab">Solde</a></li> 
+					<li class=""><a href="#tab4" data-toggle="tab">Retraits </a></li> 
+				@endcan
                
 			</ul>
 		</div>
@@ -70,8 +73,104 @@
 	<div class="panel-body tabs-menu-body">
 		<div class="tab-content">
 
-            @can('manage-visiteurs')
-                <div class="tab-pane active " id="tab1">				
+            @can('manage-investis')
+				<div class="tab-pane active" id="tab1">
+					
+					<div class="card col-md-10">
+						<div class="card-header">
+							<h3 class="card-title">Liste Dépots</h3>
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="row flex-lg-nowrap">
+						<div class="col-12">
+							<div class="row flex-lg-nowrap">
+								<div class="col-12 mb-3">  
+
+
+									<div class="e-panel card">
+										<div class="card-body">
+											<div class="e-table">
+												<div class="table-responsive table-lg mt-3">
+													<table class="table table-bordered border-top text-nowrap" id="example1">
+														<thead>
+															<tr>
+																<th class="align-top border-bottom-0 wd-5"></th>
+																<th class="border-bottom-0 w-20">Date</th>
+																<th class="border-bottom-0 w-20">Numéro compte</th>
+																<th class="border-bottom-0 w-20">Nom & prénoms</th>	
+																<th class="border-bottom-0 w-20">Remettant-tel</th>
+																{{-- <th class="border-bottom-0 w-20">Email</th>--}}
+																<th class="border-bottom-0 w-15">Montant</th> 
+																{{-- <th class="border-bottom-0 w-15">Solde actuel</th> --}}
+																@can('manage-visiteurs')
+																<th class="border-bottom-0 w-10">Actions</th>
+																@endcan
+															</tr>
+														</thead>
+														<tbody>
+															@if(!empty($listDepositarys) && $listDepositarys->count())
+															@foreach($listDepositarys as $depositary)
+																<tr>
+																<th scope="row">{{$depositary->id}}</th>
+																<td>{{\Carbon\Carbon::parse($depositary->updated_at)->format('d/m/Y')}}</td> 
+																<td>{{$depositary->client->code}}</td>
+																	<td>{{$depositary->client->name}} {{$depositary->client->prename}} -- {{$depositary->client->email}} {{$depositary->client->tel}}</td> 
+																	<td>{{$depositary->name_deposant}} {{$depositary->prename_deposant}} -- <br> {{$depositary->tel_deposant}}</td>     
+																	{{-- <td>{{$depositary->email}}</td>            --}} 
+																	<td>{{ number_format($depositary->montantD, 0, ',', ' ') }}</td>        
+																	{{-- <td>{{ number_format($depositary->total_quantity, 0, ',', ' ') }}</td>--}}
+																	@can('manage-visiteurs')
+																	<td>
+
+																				{{-- @if ( \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($depositary->created_at))  &&  \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($depositary->created_at)->addDay(3))    )
+
+																			@else
+																		
+																				@can('edit-depositarys')
+																								<a href="{{ route('depositary.depositarys.edit' , ['depositary' => $depositary->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a>
+																				@endcan
+																			@endif --}}
+																			
+																			<a href="{{ route('depositary.prints.printer' , ['depositary' => $depositary->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
+																			
+																				{{-- @can('delete-depositarys')
+																				<form class="d-inline" method="POST" action="{{ route('depositary.depositarys.destroy' , ['depositary' => $depositary->id]) }}">
+																		@csrf
+																		@method('DELETE')
+																		<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce dépot ?');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
+																								</form>   
+																				@endcan --}}
+																			
+																</td> 
+																@endcan
+																</tr>
+																	@endforeach
+																@else
+																					<tr>
+																							<td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
+																						</tr>
+																@endif
+														
+														</tbody>
+													</table>
+													{{-- <div class="row d-flex justify-content-center">
+														{{ $users->links() }}
+													</div> --}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Row -->
+				</div>
+			@endcan
+
+				@can('manage-visiteurs')
+				<div class="tab-pane" id="tab2">				
                     <div class="card col-md-10">
                         <div class="card-header">
                             <h3 class="card-title">Création</h3>
@@ -111,99 +210,10 @@
 																					</div>
 																					
 																				</form> 
-                </div> 
+                </div> 										
+				@endcan
 
-
-																<div class="tab-pane" id="tab2">
-				
-																	<div class="card col-md-10">
-																		<div class="card-header">
-																			<h3 class="card-title">Liste Dépots</h3>
-																		</div>
-																	</div>
-																	<!-- Row -->
-																	<div class="row flex-lg-nowrap">
-																		<div class="col-12">
-																			<div class="row flex-lg-nowrap">
-																				<div class="col-12 mb-3">  
-												
-												
-																					<div class="e-panel card">
-																						<div class="card-body">
-																							<div class="e-table">
-																								<div class="table-responsive table-lg mt-3">
-																									<table class="table table-bordered border-top text-nowrap" id="example2">
-																										<thead>
-																											<tr>
-																												<th class="align-top border-bottom-0 wd-5"></th>
-																												<th class="border-bottom-0 w-20">Date</th>
-																												<th class="border-bottom-0 w-20">Numéro compte</th>
-																												<th class="border-bottom-0 w-20">Nom & prénoms</th>	
-																												<th class="border-bottom-0 w-20">Remettant-tel</th>
-																												{{-- <th class="border-bottom-0 w-20">Email</th>--}}
-																												<th class="border-bottom-0 w-15">Montant</th> 
-																												{{-- <th class="border-bottom-0 w-15">Solde actuel</th> --}}
-																												<th class="border-bottom-0 w-10">Actions</th>
-																											</tr>
-																										</thead>
-																										<tbody>
-																											@if(!empty($listDepositarys) && $listDepositarys->count())
-																											@foreach($listDepositarys as $depositary)
-																												<tr>
-																												<th scope="row">{{$depositary->id}}</th>
-																												<td>{{\Carbon\Carbon::parse($depositary->updated_at)->format('d/m/Y')}}</td> 
-																												<td>{{$depositary->client->code}}</td>
-																													<td>{{$depositary->client->name}} {{$depositary->client->prename}} -- {{$depositary->client->email}} {{$depositary->client->tel}}</td> 
-																													<td>{{$depositary->name_deposant}} {{$depositary->prename_deposant}} -- <br> {{$depositary->tel_deposant}}</td>     
-																													{{-- <td>{{$depositary->email}}</td>            --}} 
-																													<td>{{ number_format($depositary->montantD, 0, ',', ' ') }}</td>        
-																													{{-- <td>{{ number_format($depositary->total_quantity, 0, ',', ' ') }}</td>--}}
-																													 <td>
-												
-																																{{-- @if ( \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($depositary->created_at))  &&  \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($depositary->created_at)->addDay(3))    )
-												
-																															@else
-																														
-																																@can('edit-depositarys')
-																																				<a href="{{ route('depositary.depositarys.edit' , ['depositary' => $depositary->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a>
-																																@endcan
-																															@endif --}}
-
-																															<a href="{{ route('depositary.prints.printer' , ['depositary' => $depositary->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
-																																{{-- @can('delete-depositarys')
-																																<form class="d-inline" method="POST" action="{{ route('depositary.depositarys.destroy' , ['depositary' => $depositary->id]) }}">
-																														@csrf
-																														@method('DELETE')
-																														<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce dépot ?');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
-																																				</form>   
-																																@endcan --}}
-																															
-																												</td> 
-																
-																												</tr>
-																													@endforeach
-																												@else
-																																	<tr>
-																																			<td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
-																																		</tr>
-																												@endif
-																										
-																										</tbody>
-																									</table>
-																									{{-- <div class="row d-flex justify-content-center">
-																										{{ $users->links() }}
-																									</div> --}}
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<!-- End Row -->
-															</div>
-
+			@can('manage-investis')
 				<div class="tab-pane" id="tab3">
 									<div class="card col-md-10">
 										<div class="card-header">
@@ -219,7 +229,7 @@
 														<div class="card-body">
 															<div class="e-table">
 																<div class="table-responsive table-lg mt-3">
-																	<table class="table table-bordered border-top text-nowrap" id="example4">
+																	<table class="table table-bordered border-top text-nowrap" id="example2">
 																		<thead>
 																			<tr>
 																				<th class="align-top border-bottom-0 wd-5"></th>
@@ -229,7 +239,9 @@
 																				<th class="border-bottom-0 w-20">Proprietaire</th>
 																				<th class="border-bottom-0 w-20">Remettant-tel</th>
 																	<th class="border-bottom-0 w-15">Solde actuel</th>
+																	@can('manage-visiteurs')
 																	<th class="border-bottom-0 w-15">Actions</th>
+																	@endcan
 																</tr>
 															</thead>  
 															<tbody>
@@ -245,15 +257,18 @@
 																	
 																	<td>{{ number_format($depositary->montantD, 0, ',', ' ') }}</td>  
 																	{{-- <td>{{ $solde->montant}}</td>  --}}
-																		 {{-- @can('manage-users')  --}}                                       
+																	@can('manage-visiteurs')                                  
 																		 <td> 
 																			{{-- @can('show-soldes') --}}
 																			{{-- <a href="{{ route('solde.soldes.show' , ['solde' => $solde->id]) }}" style="background-color:#fff" class="btn btn-">👀</a> --}}
 																			{{-- @endcan --}}
-
-																			@if ($depositary->montantD > 5000)
-																				
-																			<a href="{{ route('depositary.depositarys.stored' , ['depositary' => $depositary->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																			@if ($depositary->client->status == 0)
+																				@if ($depositary->montantD > 5000)
+																					
+																				<a href="{{ route('depositary.depositarys.stored' , ['depositary' => $depositary->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																				@endif
+																			@else
+																	
 																			@endif
 	
 																			{{-- @can('edit-soldes')
@@ -270,7 +285,7 @@
 																		
 													                                                                          
 																		 </td>
-																		{{-- @endcan  --}}
+																		@endcan 
 																	 </tr>
 																		 @endforeach
 																	 @else
@@ -293,8 +308,6 @@
 						<!-- End Row -->
 				</div>
 
-
-
 				<div class="tab-pane" id="tab4">
 				
 					<div class="card col-md-10">
@@ -313,7 +326,7 @@
 										<div class="card-body">
 											<div class="e-table">
 												<div class="table-responsive table-lg mt-3">
-													<table class="table table-bordered border-top text-nowrap" id="example1">
+													<table class="table table-bordered border-top text-nowrap" id="example4">
 														<thead>
 															<tr>
 																<th class="align-top border-bottom-0 wd-5"></th>
@@ -324,7 +337,9 @@
 																{{-- <th class="border-bottom-0 w-20">Email</th>--}}
 																<th class="border-bottom-0 w-15">Montant</th> 
 																{{-- <th class="border-bottom-0 w-15">Solde actuel</th> --}}
+																@can('manage-visiteurs')
 																<th class="border-bottom-0 w-10">Actions</th>
+																@endcan
 															</tr>
 														</thead>
 														<tbody>
@@ -339,11 +354,13 @@
 																	{{-- <td>{{$depot->email}}</td>            --}} 
 																	<td>{{ number_format($remove->montant, 0, ',', ' ') }}</td>        
 																	{{-- <td>{{ number_format($depot->total_quantity, 0, ',', ' ') }}</td>--}}
-																	 <td>
-
-																		<a href="{{ route('remove.printer.printer' , ['remove' => $remove->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
+																	@can('manage-visiteurs')
+																	<td>
+																	
+																			<a href="{{ route('remove.printer.printer' , ['remove' => $remove->id]) }}" style="background-color:#262626;" class="btn btn-">🖨️</a>
+																
 																				{{-- @if ( \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($depot->created_at))  &&  \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($depot->created_at)->addDay(3))    )
-
+																						
 																			@else
 																		
 																				@can('edit-depots')
@@ -364,7 +381,7 @@
 																				@endcan --}}
 																			
 																</td> 
-				
+																@endcan
 																</tr>
 																	@endforeach
 																@else
@@ -388,8 +405,6 @@
 					</div>
 					<!-- End Row -->
 				</div>
-
-
 			@endcan
       
 

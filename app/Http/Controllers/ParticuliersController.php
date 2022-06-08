@@ -11,6 +11,7 @@ use App\Helpers\Helper;
 use App\Models\Suppleant;
 // use App\Mail\ParticulierDepotMail;
 use App\Models\Particulier;
+use App\Models\Confirmation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -30,12 +31,13 @@ class ParticuliersController extends Controller
      */
     public function index()  
     {  
-        $particuliers = Particulier::all();
+        $particuliers = Particulier::where('status', 1)->get();
+        $listParticuliers = Particulier::where('status', 0)->get();
         $partSups = Particulier::onlyTrashed()->get();
 
 
         // dd($partSups);
-        return view('particulier.index', compact('particuliers','partSups'));
+        return view('particulier.index', compact('particuliers','partSups','listParticuliers'));
     }
 
 
@@ -66,43 +68,19 @@ class ParticuliersController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'sexe' => 'in:F,M',
-            'situation' => 'in:Marie,Celibataire',
-            'name' => ['required', 'string', 'max:255'],
-            'nationnalite' => ['required', 'string', 'max:255'],
-            'lieu_habitation' => ['required', 'string', 'max:255'],
-            'prename' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'lieu' => ['required', 'string', 'string', 'max:255'],
-            'datenaiss' => ['required', 'string', 'max:255'],
-            'numpiece' => ['required', 'string', 'max:255', 'unique:particuliers'],
-             'dateexp' => ['required', 'string', 'max:255'],
-            'personne_name' => ['nullable', 'string', 'max:255'],
-            'personne_prename' => ['nullable', 'string', 'max:255'],
-            'image' => 'nullable', 
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'personne_tel' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-            'piece_id' => 'required|integer',
-            'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-            'successeur_name' => ['nullable','string', 'max:255'],  
-            'successeur_prename' => ['nullable','string', 'max:255'],
-            'successeur_tel' =>'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-
-            'prof' => ['required', 'string', 'max:255'],
-            'nom_ent'=> ['required', 'string', 'max:255'],
-           'address'=> ['required', 'string', 'max:255'],
-           'tel_ent' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
-           'date_deb'=> ['required', 'string', 'max:255'],
-            'type_id'=> 'required|integer',
-
-            // 'enfants' => ['required', 'array'],
-            // 'enfants.*.name_enfant' =>  'required',
-            // 'enfants.*.prename_enfant' =>  'required',
-            // 'enfants.*.age' =>  'required',
-        ]);
+        // $request->validate([
+           
+        //     // 'status'=> 'required|integer',
+        //     // 'enfants' => ['required', 'array'],
+        //     // 'enfants.*.name_enfant' =>  'required',
+        //     // 'enfants.*.prename_enfant' =>  'required',
+        //     // 'enfants.*.age' =>  'required',
+        // ]);
         
            
+        $particulier = new Particulier();
+
+        $code = Helper::IDGenerator(new Particulier, 'code', 6, '10');
 
         $image = array();
         if($files = $request->file('image')){
@@ -117,48 +95,77 @@ class ParticuliersController extends Controller
             }
         }
 
-         $code = Helper::IDGenerator(new Particulier, 'code', 6, '10');
+        $particulier->name = request('name');
+        $particulier->prename = request('prename');
+        $particulier->datenaiss = request('datenaiss');
+        $particulier->lieu = request('lieu');
+        $particulier->tel = request('tel');
+        $particulier->email = request('email');
+        $particulier->nationnalite = request('nationnalite');
+        $particulier->sexe = request('sexe');
+        $particulier->lieu_habitation = request('lieu_habitation');
+        $particulier->situation = request('situation');
+        $particulier->successeur_name = request('successeur_name');
+        $particulier->successeur_prename = request('successeur_prename');
+        $particulier->successeur_tel = request('successeur_tel');
+        $particulier->personne_name = request('personne_name');
+        $particulier->prof = request('prof');
+        $particulier->nom_ent = request('nom_ent');
+        $particulier->address = request('address');
+        $particulier->tel_ent = request('tel_ent');
+        $particulier->date_deb = request('date_deb');
+        $particulier->personne_prename = request('personne_prename');
+        $particulier->personne_tel = request('personne_tel');
+        $particulier->piece_id = request('piece_id');
+        $particulier->type_id = request('type_id');
+        $particulier->numpiece = request('numpiece');
+        $particulier->dateexp = request('dateexp');
+        $particulier->code = $code;
+        $particulier->image = implode('|', $image);
+  
+    
+         $particulier->save();
 
         //  $code_parrain = Helper::IDGenerator(new Suppleant, 'code_parrain', 5, 'CODPA');
 
     
-        $particulier = Particulier::create([
-            'sexe' => $request->sexe,
-            'situation' => $request->situation,
-            'name' => $request->name,
-            'nationnalite' => $request->nationnalite,
-            'lieu_habitation' => $request->lieu_habitation,
-            'prename' => $request->prename,
+        // $particulier = Particulier::create([
+        //     'sexe' => $request->sexe,
+        //     'situation' => $request->situation,
+        //     'name' => $request->name,
+        //     'nationnalite' => $request->nationnalite,
+        //     'lieu_habitation' => $request->lieu_habitation,
+        //     'prename' => $request->prename,
 
-            'email' => $request->email,
-            'lieu' => $request->lieu,
-            'datenaiss' => $request->datenaiss,
-            'numpiece' => $request->numpiece,
+        //     'email' => $request->email,
+        //     'lieu' => $request->lieu,
+        //     'datenaiss' => $request->datenaiss,
+        //     'numpiece' => $request->numpiece,
 
-            'dateexp' => $request->dateexp,
-            'personne_name' => $request->personne_name,
-            'personne_prename' => $request->personne_prename,
-            'personne_tel' => $request->personne_tel,
-            'piece_id' => $request->piece_id,
+        //     'dateexp' => $request->dateexp,
+        //     'personne_name' => $request->personne_name,
+        //     'personne_prename' => $request->personne_prename,
+        //     'personne_tel' => $request->personne_tel,
+        //     'piece_id' => $request->piece_id,
 
-            'tel' => $request->tel,
-            'successeur_name' => $request->successeur_name,
-            'successeur_prename' => $request->successeur_prename,
-            'successeur_tel' => $request->successeur_tel,
+        //     'tel' => $request->tel,
+        //     'successeur_name' => $request->successeur_name,
+        //     'successeur_prename' => $request->successeur_prename,
+        //     'successeur_tel' => $request->successeur_tel,
 
             
-            'prof' => $request->prof,
-            'nom_ent'=> $request->nom_ent,
-           'address'=> $request->address,
-           'tel_ent' => $request->tel_ent,
-           'date_deb'=> $request->date_deb,
-            'type_id'=> $request->type_id,
+        //     'prof' => $request->prof,
+        //     'nom_ent'=> $request->nom_ent,
+        //    'address'=> $request->address,
+        //    'tel_ent' => $request->tel_ent,
+        //    'date_deb'=> $request->date_deb,
+        //     'type_id'=> $request->type_id,
 
-            'code' => $code,
+        //     'code' => $code,
             
-            'image' => implode('|', $image),
+        //     'image' => implode('|', $image),
 
-        ]);
+        // ]);
   
         // if( $particulier ){
         //     // event(new ParticulierHasRegisteredEvent($particulier));
@@ -225,6 +232,39 @@ class ParticuliersController extends Controller
         return Redirect::route('particuliers.index')->with('message', 'code '. $particulier->code .'. Félicitation, les informations du client ' . $particulier->name . ' '. $particulier->prename.' ont bien été enregistrées.');
     }
 
+
+    public function stored(Particulier $particulier)
+    {   
+
+        // $chiffre =  Nut::convert_number_to_words( $depot->montantD);
+        // $pieces = Piece::all();
+        $confirmation = new Confirmation();
+    
+        return view('particulier.confirm', compact('particulier','confirmation'
+        // ,'pieces','chiffre'
+        // ,'bonus','rachats','regain'
+     ));
+    }
+  
+
+public function storeded(Request $request , Particulier $particulier)
+{   
+    $confirmation = new Confirmation();
+
+    $confirmation->motif = request('motif');
+        $confirmation->particulier_id = request('particulier_id');
+
+        $confirmationId =  Particulier::where([            
+            [ 'id' , '=', $confirmation->particulier_id],
+        ])->first();
+
+
+    
+         $confirmation->save();
+         $confirmationId->decrement('status', 1);
+   
+    return Redirect::route('particuliers.index')->with('message', 'Vous avez validé');
+    }
     public function print(Particulier $particulier)
     {
  
@@ -354,6 +394,44 @@ class ParticuliersController extends Controller
         return redirect()->route('particuliers.index')->with('message', 'code '. $particulier->code .'. Les informations du client ' . $particulier->name . ' '. $particulier->prename.' ont bien été restaurées.');
     } 
 
+
+    private function validator(){
+
+        return request()->validate([       
+            'motif' => ['required', 'string'],
+            'particulier_id' => 'required|integer',
+
+
+            'sexe' => 'in:F,M',
+            'situation' => 'in:Marie,Celibataire',
+            'name' => ['required', 'string', 'max:255'],
+            'nationnalite' => ['required', 'string', 'max:255'],
+            'lieu_habitation' => ['required', 'string', 'max:255'],
+            'prename' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'lieu' => ['required', 'string', 'string', 'max:255'],
+            'datenaiss' => ['required', 'string', 'max:255'],
+            'numpiece' => ['required', 'string', 'max:255', 'unique:particuliers'],
+             'dateexp' => ['required', 'string', 'max:255'],
+            'personne_name' => ['nullable', 'string', 'max:255'],
+            'personne_prename' => ['nullable', 'string', 'max:255'],
+            'image' => 'nullable', 
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'personne_tel' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+            'piece_id' => 'required|integer',
+            'tel' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+            'successeur_name' => ['nullable','string', 'max:255'],  
+            'successeur_prename' => ['nullable','string', 'max:255'],
+            'successeur_tel' =>'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+
+            'prof' => ['required', 'string', 'max:255'],
+            'nom_ent'=> ['required', 'string', 'max:255'],
+           'address'=> ['required', 'string', 'max:255'],
+           'tel_ent' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|',
+           'date_deb'=> ['required', 'string', 'max:255'],
+            'type_id'=> 'required|integer',
+        ]);    
+    }
     // public function restoreAll()
     // {
     //     if (Gate::denies('delete-particuliers')){

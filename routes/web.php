@@ -142,6 +142,8 @@ Route::put('/forfaits/{forfait}/restore', [App\Http\Controllers\ForfaitsControll
 Route::get('/particuliers', [App\Http\Controllers\ParticuliersController::class, 'index' ])->name('particuliers.index');
 Route::get('/particuliers/create', [App\Http\Controllers\ParticuliersController::class, 'create'])->name('particuliers.create');
 Route::post('/particuliers', [App\Http\Controllers\ParticuliersController::class, 'store'])->name('particuliers.store');
+Route::get('/confirms/{particulier}/stored/', [App\Http\Controllers\ParticuliersController::class, 'stored'])->name('confirms.stored');
+Route::post('/confirms', [App\Http\Controllers\ParticuliersController::class, 'storeded'])->name('confirms.storeded');
 Route::get('/particuliers/{particulier}', [App\Http\Controllers\ParticuliersController::class, 'show'])->name('particuliers.show');
 Route::get('/particuliers/print/{particulier}', [App\Http\Controllers\ParticuliersController::class, 'print'])->name('particuliers.print');
 Route::get('/particuliers/{particulier}/edit', [App\Http\Controllers\ParticuliersController::class, 'edit'])->name('particuliers.edit');
@@ -154,6 +156,8 @@ Route::put('/particuliers/{particulier}/restore', [App\Http\Controllers\Particul
 Route::get('/entreprises', [App\Http\Controllers\EntreprisesController::class, 'index' ])->name('entreprises.index');
 Route::get('/entreprises/create', [App\Http\Controllers\EntreprisesController::class, 'create'])->name('entreprises.create');
 Route::post('/entreprises', [App\Http\Controllers\EntreprisesController::class, 'store'])->name('entreprises.store');
+Route::get('/confirmers/{entreprise}/stored/', [App\Http\Controllers\EntreprisesController::class, 'stored'])->name('confirmers.stored');
+Route::post('/confirmers', [App\Http\Controllers\EntreprisesController::class, 'storeded'])->name('confirmers.storeded');
 Route::get('/entreprises/{entreprise}', [App\Http\Controllers\EntreprisesController::class, 'show'])->name('entreprises.show');
 Route::get('/entreprises/print/{entreprise}', [App\Http\Controllers\EntreprisesController::class, 'print'])->name('entreprises.print');
 Route::get('/entreprises/{entreprise}/edit', [App\Http\Controllers\EntreprisesController::class, 'edit'])->name('entreprises.edit');
@@ -167,6 +171,8 @@ Route::put('/entreprises/{entreprise}/restore', [App\Http\Controllers\Entreprise
 Route::get('/clients', [App\Http\Controllers\ClientsController::class, 'index' ])->name('clients.index');
 Route::get('/clients/create', [App\Http\Controllers\ClientsController::class, 'create'])->name('clients.create');
 Route::post('/clients', [App\Http\Controllers\ClientsController::class, 'store'])->name('clients.store');
+Route::get('/confirmes/{client}/stored/', [App\Http\Controllers\ClientsController::class, 'stored'])->name('confirmes.stored');
+Route::post('/confirmes', [App\Http\Controllers\ClientsController::class, 'storeded'])->name('confirmes.storeded');
 Route::get('/clients/{client}', [App\Http\Controllers\ClientsController::class, 'show'])->name('clients.show');
 Route::get('/clients/print/{client}', [App\Http\Controllers\ClientsController::class, 'print'])->name('clients.print');
 Route::get('/clients/{client}/edit', [App\Http\Controllers\ClientsController::class, 'edit'])->name('clients.edit');
@@ -184,6 +190,8 @@ Route::put('/clients/{client}/restore', [App\Http\Controllers\ClientsController:
 Route::get('/customers', [App\Http\Controllers\CustomersController::class, 'index' ])->name('customers.index');
 Route::get('/customers/create', [App\Http\Controllers\CustomersController::class, 'create'])->name('customers.create');
 Route::post('/customers', [App\Http\Controllers\CustomersController::class, 'store'])->name('customers.store');
+Route::get('/confirmators/{customer}/stored/', [App\Http\Controllers\CustomersController::class, 'stored'])->name('confirmators.stored');
+Route::post('/confirmators', [App\Http\Controllers\CustomersController::class, 'storeded'])->name('confirmators.storeded');
 Route::get('/customers/{customer}', [App\Http\Controllers\CustomersController::class, 'show'])->name('customers.show');
 Route::get('/customers/print/{customer}', [App\Http\Controllers\CustomersController::class, 'print'])->name('customers.print');
 Route::get('/customers/{customer}/edit', [App\Http\Controllers\CustomersController::class, 'edit'])->name('customers.edit');
@@ -194,6 +202,8 @@ Route::put('/customers/{customer}/restore', [App\Http\Controllers\CustomersContr
 Route::get('/societies', [App\Http\Controllers\SocietysController::class, 'index' ])->name('societies.index');
 Route::get('/societies/create', [App\Http\Controllers\SocietysController::class, 'create'])->name('societies.create');
 Route::post('/societies', [App\Http\Controllers\SocietysController::class, 'store'])->name('societies.store');
+Route::get('/confirmeres/{society}/stored/', [App\Http\Controllers\SocietysController::class, 'stored'])->name('confirmeres.stored');
+Route::post('/confirmeres', [App\Http\Controllers\SocietysController::class, 'storeded'])->name('confirmeres.storeded');
 Route::get('/societies/{society}', [App\Http\Controllers\SocietysController::class, 'show'])->name('societies.show');
 Route::get('/societies/print/{society}', [App\Http\Controllers\SocietysController::class, 'print'])->name('societies.print');
 Route::get('/societies/{society}/edit', [App\Http\Controllers\SocietysController::class, 'edit'])->name('societies.edit');

@@ -100,7 +100,11 @@ class DepositsController extends Controller
         
         if ($deposit->timbre == 'Oui') {
             // $deposit->montantD = $montantD + $timbre;
-            $deposit->montantD = $montantD;
+            // if($montantD >= 65000){
+                $deposit->montantD = $montantD;
+            // }else{
+            //     return view('404'); 
+            // }
             $deposit->montantR = $montantR;
         //    dd(  $deposit->montantR);
             if($deposit->montantR > $montantD){
@@ -143,7 +147,7 @@ class DepositsController extends Controller
     
         if ($solde) {
         
-            $solde->increment('montantD', $request->montantD);        
+            $solde->increment('montantD',  $deposit->montantD);        
             $recois->increment('montant',  $timbre );
         } 
         else {
@@ -151,8 +155,6 @@ class DepositsController extends Controller
         if($deposit->montantD  ){
             
                     $sodle = new Sold();    
-                    
-
                     
                 
                     $sodle->motif = request('motif');
@@ -189,8 +191,14 @@ class DepositsController extends Controller
         if ($sodle->timbre == 'Oui') {
         // $sodle->montantD = $montantD + 100;
 
-        $cred = $montantD - $diminuer;
-        $sodle->montantD = $cred;
+        if( $montantD > 65000 || $montantD = 65000 ){
+                     $cred = $montantD - $diminuer;
+                $sodle->montantD = $cred;
+            }else{
+                return view('404'); 
+            }
+            
+   
 
 
         $sodle->montantR = $montantR;
@@ -214,8 +222,16 @@ class DepositsController extends Controller
         // $sodle->montantD = $montantD - 100;
 
         
-            $cred = ($montantD - $timbre) - $diminuer;
-            $sodle->montantD = $cred;
+            // $cred = ($montantD - $timbre) - $diminuer;
+            // $sodle->montantD = $cred;
+
+            if( $montantD > 65000 || $montantD = 65000 ){
+                $cred = ($montantD - $timbre) - $diminuer;
+                $sodle->montantD = $cred;
+          }else{
+              return view('404'); 
+          }
+
 
             $sodle->montantR = $montantR;
 

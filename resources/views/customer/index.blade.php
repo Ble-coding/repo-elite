@@ -6,7 +6,7 @@
 		<link href="{{URL::asset('assets/plugins/datatable/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
         <style>
             @media print{
-                #hidden{
+                #hidden{  
                     display : none;
                 }
             }
@@ -24,7 +24,10 @@
 							</div>
 							<div class="page-rightheader">
 								<div class="btn btn-list">
-									<a href="{{route('customers.create')}}" id="hidden"  style="background:#262626; color:#fff" class="btn btn"><i class="fe fe-plus mr-1"></i> Nouveau particulier </a>
+									@can('manage-clients')
+									<a href="{{route('customers.create')}}" id="hidden"  style="background:#262626; color:#fff" class="btn btn"><i class="fe fe-plus mr-1"></i> Nouveau particulier </a>	
+									@endcan
+
 									{{-- <a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a> --}}
 									 {{-- <button data-target="#modaldemo1" data-toggle="modal" style="background:#262626; color:#fff" href="" class="btn btn"><i class="fe fe-plus mr-1"></i>Nouveau particulier</button>  --}}
 									{{-- <a href="#" class="btn btn-warning"><i class="fe fe-shopping-cart mr-1"></i> Buy Now </a> --}}
@@ -71,9 +74,10 @@
 				<div class="tabs-menu ">
 					<!-- Tabs -->
 					<ul class="nav panel-tabs">
-						<li class=""><a href="#tab1" class="active" data-toggle="tab">Particuliers</a></li>
+						<li class=""><a href="#tab1" class="active" data-toggle="tab">En attente</a></li>
+						<li class=""><a href="#tab2" data-toggle="tab">Particuliers</a></li>
 						@can('manage-users')
-							<li><a href="#tab2" data-toggle="tab">Supprimés</a></li>	
+							<li><a href="#tab3" data-toggle="tab">Supprimés</a></li>	
 						@endcan						
 					</ul>
 				</div>
@@ -83,7 +87,7 @@
 					<div class="tab-pane active " id="tab1">				
 						<div class="card col-md-10">
 							<div class="card-header">
-								<h3 class="card-title">Liste particuliers</h3>
+								<h3 class="card-title">Liste particuliers en attente</h3>
 							</div>
 						</div>
 							<!-- Row -->
@@ -99,7 +103,8 @@
 																<thead>
 																	<tr>
 																		<th class="align-top border-bottom-0 wd-5"></th>
-																		<th class="border-bottom-0 w-20">Image</th>
+																		{{-- <th class="border-bottom-0 w-20">Image</th> --}}
+																		<th class="border-bottom-0 w-20">Date C.</th>
 																		<th class="border-bottom-0 w-20">Numéro compte</th>
 																		<th class="border-bottom-0 w-20">Nom & prénoms</th>	
 																		<th class="border-bottom-0 w-15">Date de naissance</th>
@@ -117,17 +122,18 @@
 																	@foreach($customers as $customer)
 																	 <tr>
 																	 <th scope="row">{{$customer->id}}</th>
-																	 @php
+																	 {{-- @php
 																		$image = DB::table('customers')->where('id', 1)->first();
 																		$images = explode('|', $customer->image);
 																	   @endphp  
-																		 <td> 
+																		 <td>  --}}
 																			{{-- <span class="avatar brround avatar-md d-block">	 --}}																			
-																				<div class="user-pic">
+																				{{-- <div class="user-pic">
 																					<img src="{{URL::to($images[0])}}" style="height:40px;width:40px" alt="img" class="avatar avatar-md brround">
-																				</div>
+																				</div> --}}
 																			{{-- </span> --}}
-																		</td>
+																		{{-- </td> --}}
+																		<td>{{\Carbon\Carbon::parse($customer->created_at)->format('d/m/Y')}}</td>
 																		<td>{{$customer->code}}</td>
 																		 <td>{{$customer->name}} {{$customer->prename}}</td>       
 																		 <td>{{\Carbon\Carbon::parse($customer->datenaiss)->format('d/m/Y')}}</td> 
@@ -139,7 +145,14 @@
 																		                                                 
 																		 <td>
 																			{{-- @can('show-customers') --}}
-																			<a href="{{ route('customers.show' , ['customer' => $customer->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
+																			@can('manage-investis')
+																			<a href="{{ route('confirmators.stored' , ['customer' => $customer->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
+																			{{-- <a href="{{ route('' , ['particulier' => $particulier->id]) }}" style="background-color:#fff" class="btn btn-">👀</a> --}}
+																			@endcan 
+
+																			
+
+																			@can('manage-clients') 
 																			<a href="{{ route('customers.print' , ['customer' => $customer->id]) }}" style="background-color:#eee;" class="btn btn-">🖨️</a>
 																			{{-- @endcan --}} 
 																			@can('edit-customers')
@@ -151,7 +164,7 @@
 																				@method('DELETE')
 																				<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client. Cette action est irréversible ?');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
 																		</form>   
-																			   {{-- @endcan --}}
+																			   @endcan
 																			  
 																		 </td>
 					 
@@ -178,8 +191,111 @@
 							</div>
 							<!-- End Row -->
 					</div>
+
+					<div class="tab-pane" id="tab2">				
+						<div class="card col-md-10">
+							<div class="card-header">
+								<h3 class="card-title">Liste particuliers</h3>
+							</div>
+						</div>
+							<!-- Row -->
+							<div class="row flex-lg-nowrap">
+								<div class="col-12">
+									<div class="row flex-lg-nowrap">
+										<div class="col-12 mb-3">
+											<div class="e-panel card">
+												<div class="card-body">
+													<div class="e-table">
+														<div class="table-responsive table-lg mt-3">
+															<table class="table table-bordered border-top text-nowrap" id="example2">
+																<thead>
+																	<tr>
+																		<th class="align-top border-bottom-0 wd-5"></th>
+																		{{-- <th class="border-bottom-0 w-20">Image</th> --}}
+																		<th class="border-bottom-0 w-20">Date C.</th>
+																		<th class="border-bottom-0 w-20">Numéro compte</th>
+																		<th class="border-bottom-0 w-20">Nom & prénoms</th>	
+																		<th class="border-bottom-0 w-15">Date de naissance</th>
+																		{{-- <th class="border-bottom-0 w-30">Email</th> --}}
+																		<th class="border-bottom-0 w-30">Tel</th>
+																		{{-- @can('manage-users')
+																		<th class="border-bottom-0 w-30">Admin</th>
+																		@endcan --}}
+																	
+																		{{-- <th class="border-bottom-0 w-10">Actions</th> --}}
+																	</tr>
+																</thead>
+																<tbody>
+																	@if(!empty($listCustomers) && $listCustomers->count())
+																	@foreach($listCustomers as $listCustomer)
+																	 <tr>
+																	 <th scope="row">{{$listCustomer->id}}</th>
+																	 {{-- @php
+																		$image = DB::table('customers')->where('id', 1)->first();
+																		$images = explode('|', $customer->image);
+																	   @endphp  
+																		 <td>  --}}
+																			{{-- <span class="avatar brround avatar-md d-block">	 --}}																			
+																				{{-- <div class="user-pic">
+																					<img src="{{URL::to($images[0])}}" style="height:40px;width:40px" alt="img" class="avatar avatar-md brround">
+																				</div> --}}
+																			{{-- </span> --}}
+																		{{-- </td> --}}
+																		<td>{{\Carbon\Carbon::parse($listCustomer->created_at)->format('d/m/Y')}}</td>
+																		<td>{{$listCustomer->code}}</td>
+																		 <td>{{$listCustomer->name}} {{$listCustomer->prename}}</td>       
+																		 <td>{{\Carbon\Carbon::parse($listCustomer->datenaiss)->format('d/m/Y')}}</td> 
+																		 {{-- <td></td>  --}}
+																		 <td>{{$listCustomer->tel}} <br> {{$listCustomer->email}}</td>   
+																		  {{-- @can('manage-users')
+																		  <td>{{$customer->user->name}} -- {{implode(' , ', $customer->user->roles()->pluck('name')->toArray())}}</td> 
+																		  @endcan   --}}
+																		                                                 
+																		 {{-- <td> --}}
+																			{{-- @can('show-customers') --}}
+																			{{-- <a href="{{ route('customers.show' , ['customer' => $customer->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
+																			<a href="{{ route('customers.print' , ['customer' => $customer->id]) }}" style="background-color:#eee;" class="btn btn-">🖨️</a> --}}
+																			{{-- @endcan --}} 
+																			{{-- @can('edit-customers')
+																			   <a href="{{ route('customers.edit' , ['customer' => $customer->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a>
+																			   @endcan --}}
+																			   {{-- @can('delete-customers') --}}
+											 								   {{-- <form class="d-inline" method="POST" action="{{ route('customers.destroy' , ['customer' => $customer->id]) }}">
+																				@csrf
+																				@method('DELETE')
+																				<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client. Cette action est irréversible ?');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
+																		</form>    --}}
+																			   {{-- @endcan --}}
+																			  
+																		 {{-- </td> --}}
+					 
+																	 </tr>
+																		 @endforeach
+																	 @else
+																						 <tr>
+																								 <td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
+																							 </tr>
+																	 @endif
+																
+																</tbody>
+															</table>
+															{{-- <div class="row d-flex justify-content-center">
+																{{ $users->links() }}
+															</div> --}}
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+					</div>
+
+
 					@can('manage-users')
-						<div class="tab-pane" id="tab2">				
+						<div class="tab-pane" id="tab3">				
 							<div class="card col-md-10">
 								<div class="card-header">
 									<h3 class="card-title">Liste des particuliers supprimés</h3>
@@ -194,7 +310,7 @@
 												<div class="card-body">
 													<div class="e-table">
 														<div class="table-responsive table-lg mt-3">
-															<table class="table table-bordered border-top text-nowrap" id="example2">
+															<table class="table table-bordered border-top text-nowrap" id="example4">
 																<thead>
 																	<tr>
 																		<th class="align-top border-bottom-0 wd-5"></th>

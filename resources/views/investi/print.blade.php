@@ -81,7 +81,9 @@ margin: auto;
                     <img src="{{URL::asset('assets/images/brand/embleme.png')}}" width="100"
                     height="100"  class="" alt="ELITE ALLIANCE">
                     <div style="font-size: 16px" class="text-center col-12">
-                        <i> BORDEREAU DE VERSEMENT ESPECES N° {{$investi->reference}}</i> 
+                        <div style="display:none;"> {{ $ref =$reference}}</div> 
+                        <i> BORDEREAU DE VERSEMENT ESPECES N° {{$ref}}</i> 
+                        {{-- <i> BORDEREAU DE VERSEMENT ESPECES N° {{$investi->reference}}</i>  --}}
                     </div>
                     <div style="color:#262626" class="text-center mt-3 row">
                         <div class="col-md-6">
@@ -230,12 +232,13 @@ margin: auto;
                  </div>
                </div>
                <div class="p-5 ligne_horizontal">✄</div> 
-               <div class="row espace">
+               <div class="row espace"> 
                 <div class="mt-3 col-md-12">
                    <img src="{{URL::asset('assets/images/brand/embleme.png')}}" width="100"
                    height="100"  class="" alt="ELITE ALLIANCE">
                    <div style="font-size: 16px" class="text-center col-12">
-                       <i> BORDEREAU DE VERSEMENT ESPECES N° {{$investi->reference}}</i> 
+                    <i> BORDEREAU DE VERSEMENT ESPECES N° {{$ref}}</i> 
+                       {{-- <i> BORDEREAU DE VERSEMENT ESPECES N° {{$investi->reference}}</i>  --}}
                    </div>
                    <div style="color:#262626" class="text-center mt-3 row">
                        <div class="col-md-6">

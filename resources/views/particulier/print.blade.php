@@ -87,7 +87,11 @@
                         </div>
 
                         <div class="">
-                            <p>ET Mr <strong>{{$particulier->name}} {{$particulier->prename}}</strong> Résident à {{$particulier->lieu_habitation}},
+                            <p>ET @if ($particulier->sexe == 'M')
+                                Mr
+                            @else
+                                Mme
+                            @endif <strong>{{$particulier->name}} {{$particulier->prename}}</strong> Résident à {{$particulier->lieu_habitation}},
                                 Tel (+225){{$particulier->tel}}, de pays de nationalité {{$particulier->nationnalite}}.
                                 Homme né(e) le {{\Carbon\Carbon::parse($particulier->datenaiss)->format('d/m/Y')}} à {{$particulier->lieu}}.
                                 Titulaire de la pièce d’Immatriculation de type {{$particulier->piece->nom}} N°{{$particulier->numpiece}} dument habilité aux fins des présentes et de leurs suites </p>

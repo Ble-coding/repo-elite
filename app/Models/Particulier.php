@@ -26,6 +26,7 @@ class Particulier extends Model
     
     'prof',
     'nom_ent',
+    'status',
    'address',
    'tel_ent',
    'date_deb',
@@ -49,6 +50,10 @@ public function user(){
 }
 public function depots(){
     return $this->hasMany('App\Models\Depot');
+}
+
+public function confirmations(){
+    return $this->hasMany('App\Models\Confirmation');
 }
 
 public function investissements(){

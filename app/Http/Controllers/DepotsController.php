@@ -26,8 +26,8 @@ class DepotsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    { 
         
         // $soldes = DB::table('soldes')
         //     ->join('particuliers', 'soldes.particulier_id', '=', 'particuliers.id')
@@ -37,6 +37,10 @@ class DepotsController extends Controller
         //      , 'particuliers.email')
         //     ->get();
         // $depots = DB::table('depots')->select('particulier_id', 'montant')->join('soldes', 'depots.particulier_id', '=', 'soldes.particulier_id')->groupBy('particulier_id')->get();
+
+        // $parts = Particulier::where('status',0)->get();
+
+        // $part = $parts->status;
 
         $depots = Solde::with('particulier')->get();
         $listDepots = Depot::with('particulier')->get();
@@ -116,7 +120,13 @@ class DepotsController extends Controller
         
         if ($depot->timbre == 'Oui') {
             // $depot->montantD = $montantD + $timbre ;
-            $depot->montantD = $montantD;
+
+            // if($montantD >= 65000){
+                $depot->montantD = $montantD;
+            // }else{
+            //     return view('404'); 
+            // }
+           
             
             $depot->montantR = $montantR;
         //    dd(  $depot->montantR);
@@ -163,7 +173,7 @@ class DepotsController extends Controller
        
     
         if ($solde) {
-            $solde->increment('montantD', $request->montantD);
+            $solde->increment('montantD', $depot->montantD);
             $recois->increment('montant',  $timbre );
 
         } 
@@ -194,14 +204,19 @@ class DepotsController extends Controller
 
                     $diminuer = 35000;
                     
+
+                    // dd( $montantD );
                     
         if ($sodle->timbre == 'Oui') {
         // $sodle->montantD = $montantD + 100;
 
+        if( $montantD > 65000 || $montantD = 65000 ){
+            $cred = $montantD - $diminuer;
+             $sodle->montantD = $cred;
+        }else{
+            return view('404'); 
+        }
      
-
-        $cred = $montantD - $diminuer;
-        $sodle->montantD = $cred;
 
         // $ajoutCompteCredit = $diminuer 
 
@@ -225,8 +240,13 @@ class DepotsController extends Controller
         } else{ 
         // $sodle->montantD = $montantD - 100;
 
-        $cred = ($montantD - $timbre) - $diminuer;
-        $sodle->montantD = $cred;
+        if( $montantD > 65000 || $montantD = 65000 ){
+            $cred = ($montantD - $timbre) - $diminuer;
+            $sodle->montantD = $cred;
+      }else{
+          return view('404'); 
+      }
+
 
         $sodle->montantR = $montantR;
 

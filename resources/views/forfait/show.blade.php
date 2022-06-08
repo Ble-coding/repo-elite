@@ -55,7 +55,7 @@
 										<div class="row">
 											<div class="col-sm-4 col-md-4">
 												<div class="form-group">
-													<label class="form-label">Pourcentage mensuel</label>
+													<label class="form-label">Pourcentage Trimestriel</label>
 													<input type="" disabled class="form-control" placeholder="{{$forfait->pourcentageM}}">
 												</div>
 											</div>

@@ -45,7 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         //particulier
 
         Gate::define('manage-particuliers', function($particulier) {       
-            return $particulier->hasAnyRole(['Commercial','Administrateur']);
+            return $particulier->hasAnyRole(['Analyste','Commercial','Administrateur']);
         });
 
         Gate::define('show-particuliers', function($particulier) {       
@@ -95,7 +95,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('manage-ventes', function($vente) {       
-            return $vente->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+            return $vente->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-ventes', function($vente) {       
@@ -112,7 +112,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //customer
         Gate::define('manage-customers', function($customer) {       
-            return $customer->hasAnyRole(['Commercial','Administrateur']);
+            return $customer->hasAnyRole(['Analyste','Commercial','Administrateur']);
         });
 
         Gate::define('show-customers', function($customer) {       
@@ -130,7 +130,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //entreprise
         Gate::define('manage-entreprises', function($entreprise) {       
-            return $entreprise->hasAnyRole(['Commercial','Administrateur']);
+            return $entreprise->hasAnyRole(['Analyste','Commercial','Administrateur']);
         });
 
         Gate::define('show-entreprises', function($entreprise) {       
@@ -147,7 +147,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('manage-societys', function($society) {       
-            return $society->hasAnyRole(['Commercial','Administrateur']);
+            return $society->hasAnyRole(['Analyste','Commercial','Administrateur']);
         });
 
         Gate::define('show-societys', function($society) {       
@@ -164,7 +164,7 @@ class AuthServiceProvider extends ServiceProvider
 
           //solde
           Gate::define('manage-soldes', function($solde) {       
-            return $solde->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+            return $solde->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-soldes', function($solde) {       
@@ -182,7 +182,7 @@ class AuthServiceProvider extends ServiceProvider
 
          //solde
          Gate::define('manage-sommes', function($somme) {       
-            return $somme->hasAnyRole(['Comptable','Caissiere', 'Administrateur']);
+            return $somme->hasAnyRole(['Analyste','Comptable','Caissiere', 'Administrateur']);
         });
 
         Gate::define('show-sommes', function($somme) {       
@@ -198,11 +198,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
-
+ 
 
          //solde
          Gate::define('manage-solds', function($sold) {       
-            return $sold->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+            return $sold->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-solds', function($sold) {       
@@ -221,7 +221,7 @@ class AuthServiceProvider extends ServiceProvider
         //depot
 
         Gate::define('manage-investis', function($investi) {       
-            return $investi->hasAnyRole(['Administrateur']);
+            return $investi->hasAnyRole(['Analyste','Administrateur','Caissiere','Comptable']);
         });
 
         Gate::define('show-investis', function($investi) {       
@@ -232,14 +232,34 @@ class AuthServiceProvider extends ServiceProvider
             return $investi->isAdmin();
         });
 
-        Gate::define('delete-investis', function($investi) {
-            return $investi->isAdmin();
+
+        Gate::define('manage-caisses', function($caisse) {       
+            return $caisse->hasAnyRole(['Analyste','Administrateur','Comptable']);
+        });
+
+        Gate::define('delete-caisses', function($caisse) {
+            return $caisse->isAdmin();
+        });
+
+        Gate::define('manage-caisses', function($caisse) {       
+            return $caisse->hasAnyRole(['Administrateur']);
+        });
+
+        Gate::define('show-caisses', function($caisse) {       
+            return $caisse->isAdmin();
+        });
+
+        Gate::define('edit-caisses', function($caisse) {       
+            return $caisse->isAdmin();
+        });
+
+        Gate::define('delete-caisses', function($caisse) {
+            return $caisse->isAdmin();
         });
 
 
-
         Gate::define('manage-depots', function($depot) {       
-            return $depot->hasAnyRole(['Commercial','Administrateur']);
+            return $depot->hasAnyRole(['Analyste','Commercial','Administrateur']);
         });
 
         Gate::define('show-depots', function($depot) {       
@@ -255,7 +275,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manage-depositarys', function($depositary) {       
-            return $depositary->hasAnyRole(['Comptable', 'Caissiere','Administrateur']);
+            return $depositary->hasAnyRole(['Analyste','Comptable', 'Caissiere','Administrateur']);
         });
 
         Gate::define('show-depositarys', function($depositary) {       
@@ -272,7 +292,7 @@ class AuthServiceProvider extends ServiceProvider
 
           //depot
           Gate::define('manage-deposits', function($depot) {       
-            return $depot->hasAnyRole(['Commercial','Administrateur']);
+            return $depot->hasAnyRole(['Analyste','Commercial','Administrateur']);
         });
 
         Gate::define('show-deposits', function($depot) {       
@@ -288,7 +308,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manage-deposes', function($depose) {       
-            return $depose->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+            return $depose->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-deposes', function($depose) {       
@@ -305,7 +325,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('manage-retraits', function($depot) {       
-            return $depot->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+            return $depot->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-retraits', function($depot) {       
@@ -323,7 +343,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('manage-diminishes', function($diminish) {       
-            return $diminish->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+            return $diminish->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-diminishes', function($diminish) {       
@@ -342,7 +362,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //retrait
         Gate::define('manage-removes', function($remove) {       
-            return $remove->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+            return $remove->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-removes', function($remove) {       
@@ -359,7 +379,7 @@ class AuthServiceProvider extends ServiceProvider
 
            //retrait
            Gate::define('manage-retraits', function($retrait) {       
-            return $retrait->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+            return $retrait->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
         });
 
         Gate::define('show-retraits', function($retrait) {       
@@ -377,7 +397,7 @@ class AuthServiceProvider extends ServiceProvider
 
    //withadral
    Gate::define('manage-withadrals', function($withadral) {       
-    return $withadral->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+    return $withadral->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
 });
 
 Gate::define('show-withadrals', function($withadral) {       
@@ -395,7 +415,7 @@ Gate::define('delete-withadrals', function($withadral) {
 
 
 Gate::define('manage-widraws', function($widraw) {       
-    return $widraw->hasAnyRole(['Comptable','Caissiere','Administrateur']);
+    return $widraw->hasAnyRole(['Analyste','Comptable','Caissiere','Administrateur']);
 });
 
 Gate::define('show-widraws', function($widraw) {       

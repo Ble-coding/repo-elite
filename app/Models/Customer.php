@@ -13,7 +13,7 @@ class Customer extends Model
     
     protected $table = 'customers';
     protected $fillable = ['name', 'prename', 'datenaiss','nationnalite','lieu_habitation',
-    'lieu','tel','email',
+    'lieu','tel','email', 'status',
    'sexe',
     'code','personne_name','personne_prename','personne_tel','piece_id','numpiece','dateexp','image',
 
@@ -45,7 +45,9 @@ public function user(){
     return $this->belongsTo('App\Models\User');
 }
 
-
+public function confirmators(){
+    return $this->hasMany('App\Models\Confirmator');
+}
 
 
 public function type(){

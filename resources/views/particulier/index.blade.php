@@ -7,7 +7,7 @@
         <style>
             @media print{
                 #hidden{
-                    display : none;
+                    display : none; 
                 }
             }
         </style>
@@ -24,11 +24,14 @@
 							</div>
 							<div class="page-rightheader">
 								<div class="btn btn-list">
+									@can('manage-clients')
 									<a href="{{route('particuliers.create')}}" id="hidden"  style="background:#262626; color:#fff" class="btn btn"><i class="fe fe-plus mr-1"></i> Nouveau particulier </a>
 									{{-- <a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a> --}}
 									 {{-- <button data-target="#modaldemo1" data-toggle="modal" style="background:#262626; color:#fff" href="" class="btn btn"><i class="fe fe-plus mr-1"></i>Nouveau particulier</button>  --}}
 									{{-- <a href="#" class="btn btn-warning"><i class="fe fe-shopping-cart mr-1"></i> Buy Now </a> --}}
-									{{-- <a class="btn btn-success" data-target="#modaldemo1" data-toggle="modal" href="">Nouveau client</a> --}}
+									{{-- <a class="btn btn-success" data-target="#modaldemo1" data-toggle="modal" href="">Nouveau client</a> --}}		
+									@endcan
+
 										</div>
 							</div>
 						</div>
@@ -71,9 +74,10 @@
 				<div class="tabs-menu ">
 					<!-- Tabs -->
 					<ul class="nav panel-tabs">
-						<li class=""><a href="#tab1" class="active" data-toggle="tab">Particuliers</a></li>
+						<li class=""><a href="#tab1" class="active" data-toggle="tab">En attente</a></li>
+						<li class=""><a href="#tab2" data-toggle="tab">Particuliers</a></li>
 						@can('manage-users')
-							<li><a href="#tab2" data-toggle="tab">Supprimés</a></li>	
+							<li><a href="#tab3" data-toggle="tab">Supprimés</a></li>	
 						@endcan						
 					</ul>
 				</div>
@@ -83,7 +87,7 @@
 					<div class="tab-pane active " id="tab1">				
 						<div class="card col-md-10">
 							<div class="card-header">
-								<h3 class="card-title">Liste particuliers</h3>
+								<h3 class="card-title">Liste particuliers en attente</h3>
 							</div>
 						</div>
 							<!-- Row -->
@@ -99,7 +103,8 @@
 																<thead>
 																	<tr>
 																		<th class="align-top border-bottom-0 wd-5"></th>
-																		<th class="border-bottom-0 w-20">Image</th>
+																		{{-- <th class="border-bottom-0 w-20">Image</th> --}}
+																		<th class="border-bottom-0 w-20">Date C.</th>
 																		<th class="border-bottom-0 w-20">Numéro compte</th>
 																		<th class="border-bottom-0 w-20">Nom & prénoms</th>	
 																		<th class="border-bottom-0 w-15">Date de naissance</th>
@@ -108,8 +113,9 @@
 																		{{-- @can('manage-users')
 																		<th class="border-bottom-0 w-30">Admin</th>
 																		@endcan --}}
-																		
+																		{{-- @can('manage-clients') --}}
 																		<th class="border-bottom-0 w-10">Actions</th>
+																		{{-- @endcan --}}
 																	</tr>
 																</thead>
 																<tbody>
@@ -117,17 +123,16 @@
 																	@foreach($particuliers as $particulier)
 																	 <tr>
 																	 <th scope="row">{{$particulier->id}}</th>
-																	 @php
+																	 {{-- @php
 																		$image = DB::table('particuliers')->where('id', 1)->first();
 																		$images = explode('|', $particulier->image);
 																	   @endphp  
-																		 <td>
-																			{{-- <span class="avatar brround avatar-md d-block">	 --}}																			
+																		 <td>																		
 																				<div class="user-pic">
 																					<img src="{{URL::to($images[0])}}" style="height:40px;width:40px" alt="img" class="avatar avatar-md brround">
 																				</div>
-																			{{-- </span> --}}
-																		</td>
+																		</td> --}}
+																		<td>{{\Carbon\Carbon::parse($particulier->created_at)->format('d/m/Y')}}</td>
 																		<td>{{$particulier->code}}</td>
 																		 <td>{{$particulier->name}} {{$particulier->prename}}</td>       
 																		 <td>{{\Carbon\Carbon::parse($particulier->datenaiss)->format('d/m/Y')}}</td> 
@@ -135,10 +140,13 @@
 																		 {{-- <td></td>      --}}
 																		 {{-- @can('manage-users')
 																		 <td>{{$particulier->user->name}}  --  {{implode(' , ', $particulier->user->roles()->pluck('name')->toArray())}}</td>  
-																		 @endcan                                                 --}}
+																		 @endcan    --}}
+																		 
 																		 <td>
-																			{{-- @can('show-particuliers') --}}
-																			<a href="{{ route('particuliers.show' , ['particulier' => $particulier->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
+																			@can('manage-investis')
+																			<a href="{{ route('confirms.stored' , ['particulier' => $particulier->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
+																			@endcan 
+																			@can('manage-clients') 
 																			<a href="{{ route('particuliers.print' , ['particulier' => $particulier->id]) }}" style="background-color:#eee;" class="btn btn-">🖨️</a>
 																			{{-- @endcan --}} 
 																			@can('edit-particuliers')
@@ -150,9 +158,111 @@
 																				@method('DELETE')
 																				<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?. Cette action est irréversible. ');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
 																		</form>   
-																			   {{-- @endcan --}}
+																		@endcan
 																			  
 																		 </td>
+																		
+					 
+																	 </tr>
+																		 @endforeach
+																	 @else
+																						 <tr>
+																								 <td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
+																							 </tr>
+																	 @endif
+																
+																</tbody>
+															</table>
+															{{-- <div class="row d-flex justify-content-center">
+																{{ $users->links() }}
+															</div> --}}
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row --> 
+					</div>
+
+					<div class="tab-pane" id="tab2">				
+						<div class="card col-md-10">
+							<div class="card-header">
+								<h3 class="card-title">Liste particuliers</h3>
+							</div>
+						</div>
+							<!-- Row -->
+							<div class="row flex-lg-nowrap">
+								<div class="col-12">
+									<div class="row flex-lg-nowrap">
+										<div class="col-12 mb-3">
+											<div class="e-panel card">
+												<div class="card-body">
+													<div class="e-table">
+														<div class="table-responsive table-lg mt-3">
+															<table class="table table-bordered border-top text-nowrap" id="example2">
+																<thead>
+																	<tr>
+																		<th class="align-top border-bottom-0 wd-5"></th>
+																		{{-- <th class="border-bottom-0 w-20">Image</th> --}}
+																		<th class="border-bottom-0 w-20">Date C.</th>
+																		<th class="border-bottom-0 w-20">Numéro compte</th>
+																		<th class="border-bottom-0 w-20">Nom & prénoms</th>	
+																		<th class="border-bottom-0 w-15">Date de naissance</th>
+																		<th class="border-bottom-0 w-30">Email & Tel</th>
+																		{{-- <th class="border-bottom-0 w-30"></th> --}}
+																		{{-- @can('manage-users')
+																		<th class="border-bottom-0 w-30">Admin</th>
+																		@endcan --}}
+																		{{-- @can('manage-clients') --}}
+																		{{-- <th class="border-bottom-0 w-10">Actions</th> --}}
+																		{{-- @endcan --}}
+																	</tr>
+																</thead>
+																<tbody>
+																	@if(!empty($listParticuliers) && $listParticuliers->count())
+																	@foreach($listParticuliers as $listParticulier)
+																	 <tr>
+																	 <th scope="row">{{$listParticulier->id}}</th>
+																	 {{-- @php
+																		$image = DB::table('particuliers')->where('id', 1)->first();
+																		$images = explode('|', $particulier->image);
+																	   @endphp  
+																		 <td>																		
+																				<div class="user-pic">
+																					<img src="{{URL::to($images[0])}}" style="height:40px;width:40px" alt="img" class="avatar avatar-md brround">
+																				</div>
+																		</td> --}}
+																		<td>{{\Carbon\Carbon::parse($listParticulier->created_at)->format('d/m/Y')}}</td>
+																		<td>{{$listParticulier->code}}</td>
+																		 <td>{{$listParticulier->name}} {{$listParticulier->prename}}</td>       
+																		 <td>{{\Carbon\Carbon::parse($listParticulier->datenaiss)->format('d/m/Y')}}</td> 
+																		 <td>{{$listParticulier->email}} <br> {{$listParticulier->tel}}</td> 
+																		 {{-- <td></td>      --}}
+																		 {{-- @can('manage-users')
+																		 <td>{{$particulier->user->name}}  --  {{implode(' , ', $particulier->user->roles()->pluck('name')->toArray())}}</td>  
+																		 @endcan    --}}
+																		 
+																		 {{-- <td>
+
+																			@can('manage-clients') 
+																			<a href="{{ route('particuliers.print' , ['particulier' => $particulier->id]) }}" style="background-color:#eee;" class="btn btn-">🖨️</a> --}}
+																			{{-- @endcan --}} 
+																			{{-- @can('edit-particuliers')
+																			   <a href="{{ route('particuliers.edit' , ['particulier' => $particulier->id]) }}" style="background-color:#262626;" class="btn btn-">✏️</a>
+																			   @endcan --}}
+																			   {{-- @can('delete-particuliers') --}}
+																			   {{-- <form class="d-inline" method="POST" action="{{ route('particuliers.destroy' , ['particulier' => $particulier->id]) }}">
+																				@csrf
+																				@method('DELETE')
+																				<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?. Cette action est irréversible. ');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
+																		</form>   
+																		@endcan
+																			  
+																		 </td> --}}
+																		
 					 
 																	 </tr>
 																		 @endforeach
@@ -177,8 +287,10 @@
 							</div>
 							<!-- End Row -->
 					</div>
+
+
 					@can('manage-users')
-						<div class="tab-pane" id="tab2">				
+						<div class="tab-pane" id="tab3">				
 							<div class="card col-md-10">
 								<div class="card-header">
 									<h3 class="card-title">Liste des particuliers supprimés</h3>
@@ -193,7 +305,7 @@
 												<div class="card-body">
 													<div class="e-table">
 														<div class="table-responsive table-lg mt-3">
-															<table class="table table-bordered border-top text-nowrap" id="example2">
+															<table class="table table-bordered border-top text-nowrap" id="example4">
 																<thead>
 																	<tr>
 																		<th class="align-top border-bottom-0 wd-5"></th>

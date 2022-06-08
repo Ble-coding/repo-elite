@@ -92,8 +92,10 @@
 
 																	<th class="border-bottom-0 w-15">Montant à retiré</th>
 													
-																	{{-- <th class="border-bottom-0 w-15">Actions</th> --}}												
+																	{{-- <th class="border-bottom-0 w-15">Actions</th> --}}	
+																	@can('manage-visiteurs')											
 																	<th class="border-bottom-0 w-10">Actions</th>
+																	@endcan
 																	
 															
 															</tr>
@@ -113,15 +115,20 @@
 																		
 							                            	<td>{{ number_format($investi->total , 0, ',', ' ') }}</td>  
 															
-				
+															@can('manage-visiteurs')	
 																										   									
 																	<td>
-																	
+
+																	@if ($investi->intervenant->status == 0)
 																		@if($investi->total != 0 )
 																			<a href="{{ route('investir.bonus.edited' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
                                                                       @endif
+																	@else
+
+																	@endif
+
 																	</td> 
-																	{{-- @endcan			  --}}
+																	@endcan			 
 															    </tr>
 																@endforeach
 																@else

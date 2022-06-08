@@ -58,7 +58,7 @@ class DepositarysController extends Controller
    
          'listDepositarys',
         'removes',
-        'pieces',
+        'pieces'
         ));
     }
 
@@ -109,6 +109,11 @@ class DepositarysController extends Controller
         if ($depositary->timbre == 'Oui') {
             // $depositary->montantD = $montantD + $timbre;
             $depositary->montantD = $montantD;
+            // if($montantD >= 65000){
+            //     $depositary->montantD = $montantD;
+            // }else{
+            //     return view('404'); 
+            // }
             $depositary->montantR = $montantR;
         //    dd(  $depositary->montantR);
             if($depositary->montantR > $montantD){
@@ -154,7 +159,7 @@ class DepositarysController extends Controller
     
         if ($solde) {
     
-            $solde->increment('montantD', $request->montantD);
+            $solde->increment('montantD', $depositary->montantD);
             $recois->increment('montant',  $timbre );
         } 
         else {
@@ -188,8 +193,15 @@ class DepositarysController extends Controller
         if ($sodle->timbre == 'Oui') {
         // $sodle->montantD = $montantD + 100;
         // $cred = ($montantD + 100) - $diminuer;
-        $cred = $montantD - $diminuer;
-        $sodle->montantD = $cred;
+        
+        if( $montantD > 65000 || $montantD = 65000 ){
+                  $cred = $montantD - $diminuer;
+                  $sodle->montantD = $cred;
+            }else{
+                return view('404'); 
+            }
+            
+      
 
         $sodle->montantR = $montantR;
         //    dd(  $sodle->montantR);
@@ -211,8 +223,17 @@ class DepositarysController extends Controller
         } else{ 
         // $sodle->montantD = $montantD - 100;
         //  $cred = ($montantD - 100) - $diminuer;
-        $cred = ($montantD - $timbre) - $diminuer;
-            $sodle->montantD = $cred;
+        // $cred = ($montantD - $timbre) - $diminuer;
+        //     $sodle->montantD = $cred;
+
+            if( $montantD > 65000 || $montantD = 65000 ){
+                $cred = ($montantD - $timbre) - $diminuer;
+                $sodle->montantD = $cred;
+          }else{
+              return view('404'); 
+          }
+
+
             $sodle->montantR = $montantR;
 
             if($sodle->montantR > $sodle->montantD){

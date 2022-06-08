@@ -94,8 +94,12 @@
                         <div class="">
                             <p>ET la SOCIETE <strong>{{$entreprise->name}}</strong>, dont le siège social est sis à {{$entreprise->siege}}
                             , Tel (+225) {{$entreprise->tel_ent}}, immatriculée au Registre du Commerce et du Crédit Mobilier sous le 
-                                n°{{$entreprise->nr}}, Représentée par Monsieur <strong>{{$entreprise->name_gerant}} {{$entreprise->prename_gerant}}</strong> de pays de nationnalité {{$entreprise->nationnalite}} Homme
-                                né(e) le {{$entreprise->datenais}} à {{$entreprise->lieu}} Domicilié audit siège social, Titulaire de la pièce d’Immatriculation de type {{$entreprise->piece->nom}} N°{{$entreprise->numpiece}}
+                                n°{{$entreprise->nr}}, Représentée par @if ($entreprise->sexe == 'M')
+                                Monsieur
+                            @else
+                                Madame
+                            @endif <strong>{{$entreprise->name_gerant}} {{$entreprise->prename_gerant}}</strong> de pays de nationnalité {{$entreprise->nationnalite}} Homme
+                                né(e) le {{\Carbon\Carbon::parse($entreprise->datenaiss)->format('d/m/Y')}} à {{$entreprise->lieu}} Domicilié audit siège social, Titulaire de la pièce d’Immatriculation de type {{$entreprise->piece->nom}} N°{{$entreprise->numpiece}}
                                 dument habilité aux fins des présentes et de leurs suites </p>
                          </div>
 
