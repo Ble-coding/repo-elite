@@ -996,7 +996,7 @@ class TransfertsController extends Controller
                             
                         $validate->save();
                         $sod->decrement('montantD', $request->montant);
-                        $redit->increment('montantD', $request->montant);
+                        $redit->increment('montant', $request->montant);
                         $idTransfert->decrement('status', 1);
                             } else{
                                 return view('406');
@@ -1299,6 +1299,7 @@ class TransfertsController extends Controller
         $transfert->redit_id = request('redit_id');
 
         $transfert->montant = request('montant'); 
+        $transfert->motif = request('motif'); 
        
     //   dd($transfert->montant);
     // dd($transfert->credit_id);
@@ -2500,6 +2501,7 @@ class TransfertsController extends Controller
     private function validator(){
         return request()->validate([
             'montant' => ['required', 'string', 'max:255'],
+            'motif' => ['required', 'string', 'max:255'],
 
             'send_id' => 'required|integer',  
 

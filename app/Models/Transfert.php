@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory; 
 
 class Transfert extends Model
 {
@@ -15,7 +15,7 @@ class Transfert extends Model
 
     protected $fillable = ['solde_id','olde_id',
     'sode_id', 'ode_id', 'credit_id', 'redit_id',
-    'sold_id','old_id',
+    'sold_id','old_id', 'motif',
      'sod_id','od_id',
  'montant', 'code',  'status',
        'receive_id','send_id',

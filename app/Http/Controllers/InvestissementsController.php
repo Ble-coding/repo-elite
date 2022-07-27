@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers; 
+namespace App\Http\Controllers;
 
 use App\Helpers\Nut;
 use App\Models\Trac;
 use App\Models\Bonus;
 use App\Models\Somme;
-// use Illuminate\Support\Facades\Mail; 
+// use Illuminate\Support\Facades\Mail;
 use App\Models\Client;
 use App\Models\Envoie;
 use App\Models\Recept;
@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Choice;
 
 
 class InvestissementsController extends Controller
@@ -35,16 +36,16 @@ class InvestissementsController extends Controller
 
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
+    {
 
-        
+
         $sumMontantInvesti = DB::table('sommes')->sum('montant');
 
-//         $investis = DB::table('investissements')     
+//         $investis = DB::table('investissements')
 //         ->join('sommes', 'investissements.customer_id', '=', 'sommes.customer_id')
 //         ->join('customers', 'investissements.customer_id', '=', 'customers.id')
 //         ->join('forfaits', 'investissements.forfait_id', '=', 'forfaits.id')
@@ -61,13 +62,13 @@ class InvestissementsController extends Controller
          $investis = Investissement::where('status', 1)->with('client','customer','particulier','forfait')
         ->get();
 
-        $transactions = Investissement::where('status', 0)->with('customer','particulier','forfait', 'client',)
+        $transactions = Investissement::where('status', 0)->with('customer','particulier','forfait', 'client')
         ->get();
 
         $sommes = Somme::where('status', 1)->with('customer','forfait', 'customer','client','particulier')
         ->get();
 
-      
+
 
 
     //     $custom = Customer::all();
@@ -125,19 +126,20 @@ class InvestissementsController extends Controller
 // $formatter = NumberFormatter::create('fr_FR', \NumberFormatter::SPELLOUT);
 // $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, 0);
 // $formatter->setAttribute(\NumberFormatter::ROUNDING_MODE, \NumberFormatter::ROUND_HALFUP);
- 
-// dd($formatter->format(1522530)); 
+
+// dd($formatter->format(1522530));
 
 
-    // dd($particuliers);  
+    // dd($particuliers);
 
         // $customers = $result->merge($clients);
 
- 
+        $choices = Choice::all();
         $suppleants = Customer::all();
         $customers = Customer::all();
         $particuliers = Particulier::all();
         $clients = Client::all();
+        $godfathers = Client::all();
         $envoies = Envoie::all();
 
         // $resulte = $custome->merge($particulieres);
@@ -145,19 +147,19 @@ class InvestissementsController extends Controller
         // $clientse = Client::get();
 
         // $suppleants = $resulte->merge($clientse);
-     
+
 
 
         $investi = new Investissement();
         $forfaits = Forfait::all();
 
-       
+
         $diminishes = Diminish::with('customer','forfait')
         ->get();
 
-    
 
-     
+
+
     //     $diminishes = DB::table('diminishes')
     //         ->join('sommes', 'diminishes.customer_id', '=', 'sommes.customer_id')
     //         ->join('customers', 'diminishes.customer_id', '=', 'customers.id')
@@ -166,7 +168,7 @@ class InvestissementsController extends Controller
     //     ->select('diminishes.*', 'forfaits.*', 'sommes.montant AS total_quantity', 'customers.name',
     //     'customers.prename', 'customers.tel',
     //     'customers.code',
-    //     'customers.email' 
+    //     'customers.email'
     //     //  , 'suppleants.name AS name_parrain',
     //     //  'suppleants.prename AS prename_parrain', 'suppleants.tel AS tel_parrain'
     //     //  , 'suppleants.code_parrain','suppleants.prof AS prof_parrain'
@@ -175,44 +177,51 @@ class InvestissementsController extends Controller
     // ->get();
     //    $now = now();
 
- 
+
 
     //  dd($customers);
 
     return view('investi.index' , compact('investis', 'investi', 'particuliers', 'forfaits',
     'diminishes', 'sumMontantInvesti','suppleants','sommes','transactions','customers'
-    ,'particuliers','clients','envoies'
+    ,'particuliers','clients','envoies','godfathers','choices'
         ));
-  
 
-       
-    }  
+
+
+    }
 
 
      public function initial()
-    {  
-        $bonus = Bonus::with('intervenant')->where('total', '!=', 0)->get();
-        $tracs = Trac::with('intervenant')->get();
-        $recepts = Recept::with('intervenant')->get();
+    {
+        $bonus = Bonus::with('intervenant','godfather')->where('total', '!=', 0)->get();
+        $tracs = Trac::with('intervenant','godfather')->get();
+        $recepts = Recept::with('intervenant','godfather')->get();
         return view('investi.initial' , compact('bonus','tracs','recepts'));
     }
 
     public function edited(Bonus $investi)
-    {   
-    return view('investi.recept', compact('investi'));
+    {
+        $reference = Helper::Generator(new Investissement, 'reference', 8, 'REF');
+        $chiffre =  Nut::convert_number_to_words( $investi->total);
+
+
+    return view('investi.recept', compact('investi','reference','chiffre'));
+
     }
 
- 
+
     public function enregistre(Request $request, Bonus $investi)
     {
-      
-        
+
+
+
         $total = Bonus::where('id', request('code_bonus'))->select('total')->first()['total'];
 
         // dd(request('code_bonus'));
                 $recept = new Recept();
-                $recept->code_bonus  = request('code_bonus'); 
+                $recept->code_bonus  = request('code_bonus');
                 $recept->intervenant_id  = request('intervenant_id');
+                $recept->godfather_id  = request('godfather_id');
 
                 // dd(request('intervenant_id'));
 
@@ -221,19 +230,28 @@ class InvestissementsController extends Controller
              ['id', '=',  $recept->code_bonus],
         ])->with('intervenant')->first();
 
-   
-              if($solde) 
-              {  
-                $recept->montant = $total;
-                $recept->save();
-                $solde->decrement('total', $recept->montant);
-                // Mail::to($solde->intervenant->email)->send(new BonusMarkdownMail($investi));
-              }     
-               
-       
+           $sold = Bonus::where([
+            ['godfather_id', '=',  $recept->godfather_id],
+             ['id', '=',  $recept->code_bonus],
+        ])->with('intervenant')->first();
 
-    return redirect()->route('investir.bonus.initial')->with('message', 'Félicitation, le retrait de bonus de a bien été enregistré.');
+
+              if($solde)
+              {
+                $recept->montant = $total;
+              } elseif($sold){
+                  $recept->montant = $total;
+              }
+               $recept->save();
+                $solde->decrement('total', $recept->montant);
+                 // Mail::to($solde->intervenant->email)->send(new BonusMarkdownMail($investi));
+
+
+    return redirect()->route('investir.bonus.initial')->with('message', 'Félicitation, le retrait de bonus a bien été enregistré.');
     }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -250,20 +268,23 @@ class InvestissementsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
-
-        
             $investi = new Investissement();
             $reference = Helper::Generator(new Investissement, 'reference', 8, 'REF');
-           
-          
+
+
             $bonus = Parrainage::where('id', 1)->select('bonus')->first()['bonus'];
             $duree = Forfait::where('id', request('forfait_id'))->select('duree')->first()['duree'];
             $pourcentageJ = Forfait::where('id', request('forfait_id'))->select('pourcentageJ')->first()['pourcentageJ'];
-            $pourcentageM = Forfait::where('id', request('forfait_id'))->select('pourcentageM')->first()['pourcentageM'];            
+            $pourcentageM = Forfait::where('id', request('forfait_id'))->select('pourcentageM')->first()['pourcentageM'];
             $min = Forfait::where('id', request('forfait_id'))->select('montantMin')->first()['montantMin'];
             $max = Forfait::where('id', request('forfait_id'))->select('montantMax')->first()['montantMax'];
+            $time = 3;
+            $timeDiamant = 1;
+            $recup = 4;
+            $silver = 1;
+            $diamant = 1;
 
             $investi->choix = request('choix');
             $investi->reference = $reference;
@@ -272,21 +293,30 @@ class InvestissementsController extends Controller
             $investi->particulier_id = request('particulier_id');
             $investi->client_id = request('client_id');
             $investi->envoie_id = request('envoie_id');
+            $investi->choice_id = request('choice_id');
             $investi->customer_id = request('customer_id');
             $investi->jalon = request('jalon');
+            $investi->forfait_id = request('forfait_id');
 
             if ($investi->jalon == 'Oui') {
                 $investi->compteur = 1;
-            } else{ 
-                $investi->compteur = $duree;
+            } else{
+                // $investi->compteur = $duree;
+                if($investi->forfait_id == 1){
+                    $investi->compteur = $silver;
+                } elseif($investi->forfait_id == 2){
+                    $investi->compteur = $diamant;
+                }else{
+                    $investi->compteur = $recup;
+                }
             }
-            
+
             // if($investi->jalon == 'Oui'){
             //     $investiJt = ($investi->montant * $pourcentageJ ) / 100 ;
             //     $investiJ =  $investiJt + $investi->montant;
             //     $investi->retire =   $investiJ;
             // } else{
-              
+
             //     $retire = (($investi->montant * ($pourcentageM * $duree) /100 ) / 2);
             //     $investi->retire = $retire;
             //     // $sommeMm = ($somme->montant * ($pourcentageM * $duree ) / 100);
@@ -298,13 +328,13 @@ class InvestissementsController extends Controller
                 // $investi->suppleant = request('suppleant');
                 $investi->intervenant_id = request('intervenant_id');
             } else{
-                $investi->intervenant_id = Null;             
+                $investi->intervenant_id = Null;
             }
             $investi->bonus =   $investi->intervenant_id ==  '' ? 0 : $bonus;
-            $investi->forfait_id = request('forfait_id');
+
             // $investi->compteur = request('forfait_id');
 
-      
+            // dd($investi->forfait_id);
 
             if($min <= request('montant') && request('montant') <= $max ){
                 $investi->montant = request('montant');
@@ -315,14 +345,14 @@ class InvestissementsController extends Controller
                 //      ['intervenant', '=', $request->intervenant],
                 //     ['forfait_id', '=', $request->forfait_id],
                 // ])->with('forfait')->first();
-               
+
 
                 // if ($somme) {
                 //     $somme->increment('montant', $request->montant);
-                //     } 
+                //     }
                 // else {
                     //  Somme::create($this->validator());
-                            $somme = new Somme();                          
+                            $somme = new Somme();
                             $somme->montant = request('montant');
                             $somme->choix = request('choix');
                             // $somme->status = 1;
@@ -331,22 +361,102 @@ class InvestissementsController extends Controller
                             $somme->client_id = request('client_id');
                             $somme->customer_id = request('customer_id');
                             $somme->envoie_id = request('envoie_id');
+                            $somme->choice_id = request('choice_id');
                             $somme->jalon = request('jalon');
+
                             if($somme->jalon == 'Oui'){
-                                $sommeJm = ($somme->montant * $pourcentageJ ) / 100 ;
-                                $sommeJ =  $sommeJm + $somme->montant;
-                                $somme->retire =   $sommeJ;
-                                $somme->total =   $sommeJ;
-                                $somme->soustract =  $sommeJ;
-                                $somme->compteur = 1;
+                                if($investi->forfait_id == 4){
+                                    $sommeJm = ($somme->montant * $pourcentageJ ) / 100 ;
+                                    $sommeJ =  3000000;
+                                    $somme->retire =   $sommeJ;
+                                    $somme->total =   $sommeJ;
+                                    $somme->soustract =  $sommeJ;
+                                    $somme->compteur = 1;
+                                }elseif($investi->forfait_id == 5)
+                                {
+                                    $sommeJm = ($somme->montant * $pourcentageJ ) / 100 ;
+                                    $sommeJ =  6000000;
+                                    $somme->retire =   $sommeJ;
+                                    $somme->total =   $sommeJ;
+                                    $somme->soustract =  $sommeJ;
+                                    $somme->compteur = 1;
+                                }else{
+                                    $sommeJm = ($somme->montant * $pourcentageJ ) / 100 ;
+                                    $sommeJ =  $sommeJm + $somme->montant;
+                                    $somme->retire =   $sommeJ;
+                                    $somme->total =   $sommeJ;
+                                    $somme->soustract =  $sommeJ;
+                                    $somme->compteur = 1;
+                                }
                             } else{
-                              
-                                $sommeMm = ( $somme->montant * ($pourcentageM / 100) * $duree  );
-                                $sommeM = $sommeMm/$duree ;
-                                $somme->retire = $sommeM;
-                                $somme->total = $sommeMm + $somme->montant;
-                                $somme->soustract =  $sommeMm + $somme->montant;
-                                $somme->compteur = $duree;
+                                 if($investi->forfait_id == 4){
+                                    $sommeMm = ( $somme->montant * ($pourcentageM / 100) * $duree  );
+                                    $sommeM = 200000 ;
+                                    $somme->retire = $sommeM;
+                                    $somme->total = $sommeM * $duree;
+                                     $somme->soustract =  $sommeM * $duree;
+                                    $somme->compteur = $duree;
+                                }elseif($investi->forfait_id == 5)
+                                {
+                                    $sommeMm = ( $somme->montant * ($pourcentageM / 100) * $duree  );
+                                    $sommeM = 400000 ;
+                                    $somme->retire = $sommeM;
+                                    $somme->total = $sommeM * $duree;
+                                    $somme->soustract =  $sommeM * $duree;
+                                    $somme->compteur = $duree;
+                                }else{
+                                            // $sommeMm = ( $somme->montant * ($pourcentageM / 100) * $duree  );
+
+                                        if($investi->forfait_id == 1){
+                                            $sommeMm = ( $somme->montant * ($pourcentageM / 100) * $silver  );
+                                        } elseif($investi->forfait_id == 2){
+                                            $sommeMm = ( $somme->montant * ($pourcentageM / 100) * $timeDiamant  );
+                                        }else{
+                                            $sommeMm = ( $somme->montant * ($pourcentageM / 100) * $time  );
+                                        }
+                                        // $sommeM = $sommeMm/$duree ;
+                                        // $sommeM = $sommeMm/$time ;
+
+
+                                        if($investi->forfait_id == 1){
+                                            $sommeM = $somme->montant + $sommeMm;
+                                            $sommeV = $sommeM  ;
+                                        } elseif($investi->forfait_id == 2){
+                                            $sommeM = ($sommeMm * 2 ) + $somme->montant;
+                                            $sommeV = $sommeMm  ;
+                                        }else{
+                                            $sommeM = $sommeMm/$time ;
+                                        }
+
+                                        if($investi->forfait_id == 1){
+                                            $sommeT = $sommeMm;
+                                        }elseif($investi->forfait_id == 2){
+                                            $sommeT = $sommeMm + $sommeV;
+                                        }else{
+                                            $sommeT = $sommeM;
+                                        }
+                                        // $somme->retire = $sommeM;
+                                        $somme->retire = $sommeM;
+                                        // $somme->total = $sommeMm + $somme->montant;
+                                        if($investi->forfait_id == 1 ||$investi->forfait_id == 2){
+                                            $somme->total = $sommeT + $somme->montant;
+                                              $somme->soustract =  $sommeT + $somme->montant;
+                                        }else{
+                                            $somme->total = $sommeMm + $sommeM + $somme->montant;
+                                            $somme->soustract =  $sommeMm + $sommeM + $somme->montant;
+                                        }
+
+                                        // $somme->compteur = $duree;
+                                        if($investi->forfait_id == 1){
+                                            $somme->compteur = $silver;
+                                        } elseif($investi->forfait_id == 2){
+                                            $somme->compteur = $diamant;
+                                        }else{
+                                            $somme->compteur = $recup;
+                                        }
+
+
+                                }
                             }
 
                             if($somme->choix == 'Oui'){
@@ -354,13 +464,14 @@ class InvestissementsController extends Controller
 
 
                                  $trac = new Trac();
-                                $trac->montantB = request('montant'); 
+                                $trac->montantB = request('montant');
                                 // $trac->investiman = request('investiman');
                                 $trac->particulier_id = request('particulier_id');
                                 $trac->client_id = request('client_id');
-                                
+
                                 $trac->customer_id = request('customer_id');
                                 $trac->intervenant_id = request('intervenant_id');
+                                $trac->godfather_id = request('godfather_id');
                                 $trac->bonus =  $bonus;
                                 $trac->total = $trac->montantB * ($trac->bonus) / 100;
                                 $trac->save();
@@ -373,58 +484,59 @@ class InvestissementsController extends Controller
                                     ['client_id', '=',  $trac->client_id],
                                     // ['intervenant', '=',   $trac->total],
                                 ])->with('intervenant')->first();
-                        
-                            
+
+
                                 if ($solde) {
-                                    
+
                                     $solde->increment('total', $trac->total);
-                                } 
+                                }
                                 else {
                                     $ajout = new Bonus();
-                                $ajout->montantB = request('montant'); 
+                                $ajout->montantB = request('montant');
                                 // $ajout->investiman= request('investiman');
                                 $ajout->particulier_id = request('particulier_id');
-                                $ajout->client_id = request('client_id');                           
+                                $ajout->client_id = request('client_id');
                                 $ajout->customer_id = request('customer_id');
                                 $ajout->intervenant_id = request('intervenant_id');
+                                $ajout->godfather_id = request('godfather_id');
                                 $ajout->bonus =  $bonus;
                                 $ajout->total = $ajout->montantB * ($ajout->bonus) / 100;
-                                $ajout->save();
+                                 $ajout->save();
                                 }
 
-                                
-                                   
+
                             } else{
                                 $somme->intervenant_id = Null;
                             }
                             $somme->bonus =   $somme->intervenant_id  ==  '' ? 0 : $bonus;
                             $somme->forfait_id = request('forfait_id');
-                    
+
+
 
                             // dd($somme->total);
                             $somme->save();
                     // }
- 
+
                     // dd($somme->intervenant = request('intervenant'));
                 $investi->save();
 
-                
+
 
                 // if( $investi ){
                 //     Mail::to($investi->particulier->email)->send(new InvestMarkdownMail($investi));
                 // }
-                
+
                     return back()->with('message', 'id-inv '. $investi->id.'. Félicitation, les informations de l\'investissement ont bien été enregistrées.');
             }else{
                 return back()->with('error', 'Investissement invalide, car le montant est inférieur au montant minimal ou supérieur  au montant maximal requis pour le forfait.');
             }
-               
- 
-    
+
+
+
         // if( $depot ){
         //     Mail::to($depot->particulier->email)->send(new DepotMarkdownMail($depot));
         // }
-        
+
 
 
     }
@@ -434,68 +546,133 @@ class InvestissementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- 
+
     public function stored(Investissement $investi)
-    {   
-       
+    {
+
+        $reference = Helper::Generator(new Investissement, 'reference', 8, 'REF');
+        $time = 3;
+        $timeDiamant = 1;
+        $recup = 4;
+        $silver = 1;
+        $diamant = 1;
+
+
+
 
         if ($investi->jalon == 'Oui'){
-            $v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100 ;
-            if($investi->compteur = 1){
+
+            if($investi->forfait_id == 4){
+                $v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100 ;
+                if($investi->compteur = 1){
+                $viol =  3000000;
+                $chiffre =  Nut::convert_number_to_words($viol);
+                }
+            }elseif($investi->forfait_id == 5){
+                $v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100 ;
+                if($investi->compteur = 1){
+                $viol = 6000000;
+                $chiffre =  Nut::convert_number_to_words($viol);
+                }
+            }else
+            {
+                $v = ($investi->montant * $investi->forfait->pourcentageJ ) / 100 ;
+                if($investi->compteur = 1){
                 $viol = $v + $investi->montant;
                 $chiffre =  Nut::convert_number_to_words($viol);
+                }
             }
+
         }
 
         else {
-           $v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $investi->forfait->duree) /100)); 
-           $v1 = $v0/$investi->forfait->duree;
 
-            if ($investi->compteur > 1) {
+            if($investi->forfait_id == 4){
+                $v1 = 200000;
                 $chiffre =  Nut::convert_number_to_words($v1);
-            }
-           
-       
-            else if($investi->compteur = 1) {
-                $vtrack = $v1 + $investi->montant;
+            }elseif($investi->forfait_id == 5){
+                $v1 = 400000;
+                $chiffre =  Nut::convert_number_to_words($v1);
+            }else
+            {
 
-                $chiffre =  Nut::convert_number_to_words($vtrack);
+                // $v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $investi->forfait->duree) /100));
+
+
+                if($investi->forfait_id == 1){
+                    $v0 = ($investi->montant *  ($investi->forfait->pourcentageM / 100) * $timeDiamant  );
+                    $v1 = ($v0) + $investi->montant;
+                    $v2 =  $v1;
+                } elseif($investi->forfait_id == 2){
+                    $v0 = ($investi->montant *  ($investi->forfait->pourcentageM / 100) * $timeDiamant  );
+                    $v1 = ($v0 * 2) + $investi->montant;
+                    $v2 =  $v1;
+
+                }else{
+                    $v0 = ($investi->montant * (($investi->forfait->pourcentageM  * $time) /100));
+                    // $v1 = $v0/$investi->forfait->duree;
+                    $v1 = $v0/$time;
+                    $v2 = $v0 + $v1;
+                }
+                // $sommeM = $sommeMm/$duree ;
+                // $sommeM = $sommeMm/$time ;
+
+
+
+                 if ($investi->compteur > 1) {
+                     $chiffre =  Nut::convert_number_to_words($v1);
+                 }
+
+
+                 elseif($investi->compteur = 1) {
+                    if($investi->forfait_id == 1){
+                        $vtrack = $v1 ;
+                        $chiffre =  Nut::convert_number_to_words($vtrack);
+                    }elseif($investi->forfait_id == 2){
+                        $vtrack = $v1 ;
+                        $chiffre =  Nut::convert_number_to_words($vtrack);
+                    }else{
+                        $vtrack = $v1 + $investi->montant;
+                        $chiffre =  Nut::convert_number_to_words($vtrack);
+                    }
+                 }
             }
-          
-               
+
+
+
         }
-                                 
 
-    return view('investi.dimi', compact('investi','chiffre'));
+
+    return view('investi.dimi', compact('investi','chiffre','reference'));
     }
 
 
 public function storeded(Request $request , Investissement $investi)
-{   
-     
-     
+{
+
+
     $diminish = new Diminish();
-  
-    
+
+
     // $diminish->investiman = request('investiman');
-    
-  
+
+
     // $diminish->envoie_id = request('envoie_id');
-    
-    $diminish->jalon = request('jalon'); 
+
+    $diminish->jalon = request('jalon');
     $diminish->forfait_id = request('forfait_id');
     $diminish->code_inv = request('code_inv');
  $diminish->particulier_id = request('particulier_id');
 $diminish->client_id = request('client_id');
 $diminish->customer_id = request('customer_id');
 
- 
+
     // dd( $diminish->code_inv);
 
     // $value = $diminish->particulier_id + $diminish->client_id + $diminish->customer_id;
 
 
-    
+
 
                  $somme = Somme::where([
                     //  ['investiman', '=', $diminish->investiman],
@@ -527,8 +704,8 @@ $diminish->customer_id = request('customer_id');
                 ['id', '=', $diminish->code_inv],
                ['forfait_id', '=', $diminish->forfait_id],
            ])->with('forfait')->first()['montant'];
-        
-        
+
+
 
                 $sommeRetire =  Somme::where([
                     // ['envoie_id', '=', $diminish->envoie_id],
@@ -540,7 +717,7 @@ $diminish->customer_id = request('customer_id');
                     ['id', '=', $diminish->code_inv],
                    ['forfait_id', '=', $diminish->forfait_id],
                 ])->with('forfait')->first()['retire'];
-            
+
                 $sommeTotal =  Somme::where([
                     // ['envoie_id', '=', $diminish->envoie_id],
                     // ['investiman', '=',  $trac->investiman],
@@ -551,7 +728,7 @@ $diminish->customer_id = request('customer_id');
                     ['id', '=', $diminish->code_inv],
                    ['forfait_id', '=', $diminish->forfait_id],
                 ])->with('forfait')->first()['total'];
-            
+
                 $sommeDuree =  Somme::where([
                     // ['envoie_id', '=', $diminish->envoie_id],
                     // ['investiman', '=',  $trac->investiman],
@@ -563,7 +740,7 @@ $diminish->customer_id = request('customer_id');
                    ['forfait_id', '=', $diminish->forfait_id],
                 ])->with('forfait')->first()['compteur'];
 
-                $investissementDuree =  Investissement::where([            
+                $investissementDuree =  Investissement::where([
                     [ 'id' , '=', $diminish->code_inv],
                 ])->with('forfait')->first();
 
@@ -572,12 +749,12 @@ $diminish->customer_id = request('customer_id');
                 // $compteur = $investi->compteur ;
 
                 // dd($compteur);
-               
+
                 if($somme->jalon == 'Oui'){
                     // dd($somme->jalon);
-                    if($sommeDuree = 1) 
+                    if($sommeDuree = 1)
                     {
-                        $diminish->montant  =  $sommeTotal ;                    
+                        $diminish->montant  =  $sommeTotal ;
                         if( $investissementDuree){
                             $diminish->save();
                             $somme->decrement('soustract', $diminish->montant);
@@ -590,10 +767,11 @@ $diminish->customer_id = request('customer_id');
                             // Mail::to($solde->particulier->email)->send(new DiminishMarkdownMail($diminish));
                         }
                     } else{
-                        return view('404'); 
+                        return view('404');
                     }
                 }
                 else{
+
                     if($sommeDuree > 1)
                     {
                         $diminish->montant  =  $sommeRetire ;
@@ -605,40 +783,73 @@ $diminish->customer_id = request('customer_id');
                               // Mail::to($solde->particulier->email)->send(new DiminishMarkdownMail($diminish));
                         }
                     } elseif($sommeDuree = 1){
-                        $diminish->montant  =  $sommeRetire +  $sommeMontant;
-                        if( $investissementDuree ){
-                            $diminish->save();
-                            $somme->decrement('soustract', $diminish->montant);
-                            $somme->decrement('compteur', 1);
-                            $somme->decrement('status', 1);
-                            $somme->update(['date_termine' => now()]);
-                            $investissementDuree->decrement('compteur', 1);
-                            $investissementDuree->decrement('status', 1);
-                            $investissementDuree->update(['date_termine' => now()]);
-                              // Mail::to($solde->particulier->email)->send(new DiminishMarkdownMail($diminish));
+
+                        if( $diminish->forfait_id == 4 || $diminish->forfait_id == 5){
+                            $diminish->montant  =  $sommeRetire ;
+                            if( $investissementDuree){
+                                $diminish->save();
+                                $somme->decrement('soustract', $diminish->montant);
+                                $somme->decrement('compteur', 1);
+                                $somme->decrement('status', 1);
+                                $somme->update(['date_termine' => now()]);
+                                $investissementDuree->decrement('compteur', 1);
+                                $investissementDuree->decrement('status', 1);
+                                $investissementDuree->update(['date_termine' => now()]);
+                                  // Mail::to($solde->particulier->email)->send(new DiminishMarkdownMail($diminish));
+                            }
                         }
+                        // elseif($diminish->forfait_id == 6){
+                        //     $diminish->montant  =  $sommeRetire ;
+                        //     if( $investissementDuree){
+                        //         $diminish->save();
+                        //         $somme->decrement('soustract', $diminish->montant);
+                        //         $somme->decrement('compteur', 1);
+                        //         $investissementDuree->decrement('compteur', 1);
+                        //           // Mail::to($solde->particulier->email)->send(new DiminishMarkdownMail($diminish));
+                        //     }
+                        // }
+                            else {
+                                if($diminish->forfait_id == 1 || $diminish->forfait_id == 2){
+                                    $diminish->montant  =   $sommeRetire ;
+                                }else{
+                                    $diminish->montant  =  $sommeRetire +  $sommeMontant;
+                                }
+
+                                if( $investissementDuree ){
+                                $diminish->save();
+                                $somme->decrement('soustract', $diminish->montant);
+                                $somme->decrement('compteur', 1);
+                                $somme->decrement('status', 1);
+                                $somme->update(['date_termine' => now()]);
+                                $investissementDuree->decrement('compteur', 1);
+                                $investissementDuree->decrement('status', 1);
+                                $investissementDuree->update(['date_termine' => now()]);
+                                // Mail::to($solde->particulier->email)->send(new DiminishMarkdownMail($diminish));
+                            }
+                        }
+
                     } else{
-                        return view('404');    
+                        return view('404');
                     }
                 }
-           
 
 
-  
 
-   
 
-   
-    
+
+
+
+
+
     // dd($diminish->intervenant);
-   
-  
-  
+
+
+
     return Redirect::route('investir.investis.index')->with('message', 'Félicitation, le retrait a bien été enregistré.');
     }
 
     public function print(Investissement $investi)
-    {   
+    {
 
         $reference = Helper::Generator(new Investissement, 'reference', 8, 'REF');
         $chiffre =  Nut::convert_number_to_words( $investi->montant);
@@ -653,7 +864,22 @@ $diminish->customer_id = request('customer_id');
         ));
     }
 
-  
+   public function printer(Bonus $investi)
+    {
+        $reference = Helper::Generator(new Bonus, 'reference', 8, 'REF');
+
+        $bonus = Parrainage::where('id', 1)->select('bonus')->first()['bonus'];
+
+        $take = $investi->montantB * ($bonus /100) ;
+         $chiffre =  Nut::convert_number_to_words( $take);
+
+        return view('investi.printer', compact('investi','chiffre'
+        ,'bonus'
+        // ,'rachats'
+        ,'reference'
+        ));
+    }
+
 
     /**
      * Display the specified resource.
@@ -676,7 +902,7 @@ $diminish->customer_id = request('customer_id');
     {
         if (Gate::denies('edit-investis')){
             return redirect()->route('investi.index');
-        } 
+        }
 //         $customs = intervenant::selectRaw("
 //         id ,
 //         code ,prename ,email , tel ,name
@@ -750,7 +976,7 @@ $diminish->customer_id = request('customer_id');
     {
         if (Gate::denies('delete-investis')){
             return redirect()->route('investir.investis.index');
-        } 
+        }
         $investi->delete();
         return redirect()->route('investir.investis.index')->with('message', 'Félicitation, investissement a bien été supprimé.');
     }
@@ -764,6 +990,8 @@ $diminish->customer_id = request('customer_id');
             'intervenant_id' => 'required|integer',
             'client_id' => 'required|integer',
             'envoie_id' => 'required|integer',
+            'choice_id' => 'required|integer',
+            'godfather_id' => 'required|integer',
             'particulier_id' => 'required|integer',
             'montant' => 'required|integer',
             'suppleant' => ['required', 'string'],

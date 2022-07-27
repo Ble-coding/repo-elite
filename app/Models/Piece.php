@@ -21,8 +21,8 @@ class Piece extends Model
         return $this->hasMany('App\Models\Particulier');
     }
 
-    public function pieces(){
-        return $this->hasMany('App\Models\Piece');
+    public function clients(){
+        return $this->hasMany('App\Models\Client');
     }
     public function entreprises(){
         return $this->hasMany('App\Models\Entreprise');
@@ -37,6 +37,14 @@ class Piece extends Model
         return $this->hasMany('App\Models\Deposit');
     }
 
+    public function generals(){
+        return $this->hasMany('App\Models\General');
+    }
+
+    
+    public function conjoints(){
+        return $this->hasMany('App\Models\Conjoint');
+    }
 
     public function ventes(){
         return $this->hasMany('App\Models\Vente');

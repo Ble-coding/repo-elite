@@ -18,15 +18,15 @@ Route::get('/', function () {
 });
 
 Route::get('/404', function () {
-    return view('404');   
-});  
+    return view('404');
+});
 
 
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->middleware(['auth'])->name('home');
 // Route::get('home/chart', [App\Http\Controllers\HomeController::class, 'chart']);
- 
+
 
 
 // Route::get('/visiteur', [App\Http\Controllers\VisiteursController::class, 'index' ])->name('visiteur.index');
@@ -37,7 +37,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->middl
 // Route::patch('/visiteur/{visiteur}', [App\Http\Controllers\VisiteursController::class, 'update'])->name('visiteur.update');
 // Route::delete('/visiteur/{visiteur}', [App\Http\Controllers\VisiteursController::class, 'destroy'])->name('visiteur.destroy');
 // Route::put('/visiteur/{visiteur}/restore', [App\Http\Controllers\VisiteursController::class, 'restore'])->name('visiteur.restore');
- 
+
 // Route::resource('/transferts', 'App\Http\Controllers\TransfertsController');
 
 // Route::resource('/recharges', 'App\Http\Controllers\RechargesController');
@@ -131,9 +131,9 @@ Route::put('/forfaits/{forfait}/restore', [App\Http\Controllers\ForfaitsControll
 // Route::get('/visiteurs/create', [App\Http\Controllers\ElitesController::class, 'create'])->name('visiteurs.create');
 
 
-//forfaits  
+//forfaits
 // Route::prefix('admin')->middleware('can:manage-users')->name('admin.')->group(function() {
-  
+
 // });
 
 
@@ -181,7 +181,38 @@ Route::delete('/clients/{client}', [App\Http\Controllers\ClientsController::clas
 Route::put('/clients/{client}/restore', [App\Http\Controllers\ClientsController::class, 'restore'])->name('clients.restore');
 
 
+// Route::resource('/bancaires', 'App\Http\Controllers\BancairesController');
 
+
+
+Route::get('/bancaires', [App\Http\Controllers\BancairesController::class, 'index' ])->name('bancaires.index');
+Route::get('/bancaires/create', [App\Http\Controllers\BancairesController::class, 'create'])->name('bancaires.create');
+Route::post('/bancaires', [App\Http\Controllers\BancairesController::class, 'store'])->name('bancaires.store');
+Route::get('/confirmebancaires/{bancaire}/stored/', [App\Http\Controllers\BancairesController::class, 'stored'])->name('confirmebancaires.stored');
+Route::post('/confirmebancaire', [App\Http\Controllers\BancairesController::class, 'storeded'])->name('confirmebancaires.storeded');
+Route::get('/bancaires/{bancaire}', [App\Http\Controllers\BancairesController::class, 'show'])->name('bancaires.show');
+Route::get('/bancaires/print/{bancaire}', [App\Http\Controllers\BancairesController::class, 'print'])->name('bancaires.print');
+Route::get('/bancaires/{bancaire}/edit', [App\Http\Controllers\BancairesController::class, 'edit'])->name('bancaires.edit');
+Route::patch('/bancaires/{bancaire}', [App\Http\Controllers\BancairesController::class, 'update'])->name('bancaires.update');
+Route::delete('/bancaires/{bancaire}', [App\Http\Controllers\BancairesController::class, 'destroy'])->name('bancaires.destroy');
+//Route::put('/bancaires/{bancaire}/restore', [App\Http\Controllers\BancairesController::class, 'restore'])->name('bancaires.restore');
+
+
+
+
+Route::get('/bancarisations', [App\Http\Controllers\BancarisationsController::class, 'index' ])->name('bancarisations.index');
+Route::get('/bancarisations/create', [App\Http\Controllers\BancarisationsController::class, 'create'])->name('bancarisations.create');
+Route::post('/bancarisations', [App\Http\Controllers\BancarisationsController::class, 'store'])->name('bancarisations.store');
+Route::get('/confirmebancarisations/{bancarisation}/stored/', [App\Http\Controllers\BancarisationsController::class, 'stored'])->name('confirmebancarisations.stored');
+Route::post('/confirmebancarisations', [App\Http\Controllers\BancarisationsController::class, 'storeded'])->name('confirmebancarisations.storeded');
+Route::get('/bancarisations/{bancarisation}', [App\Http\Controllers\BancarisationsController::class, 'show'])->name('bancarisations.show');
+Route::get('/bancarisations/print/{bancarisation}', [App\Http\Controllers\BancarisationsController::class, 'print'])->name('bancarisations.print');
+Route::get('/bancarisations/{bancarisation}/edit', [App\Http\Controllers\BancarisationsController::class, 'edit'])->name('bancarisations.edit');
+Route::patch('/bancarisation/{bancarisation}', [App\Http\Controllers\BancarisationsController::class, 'update'])->name('bancarisations.update');
+Route::delete('/bancarisations/{bancarisation}', [App\Http\Controllers\BancarisationsController::class, 'destroy'])->name('bancarisations.destroy');
+
+
+Route::resource('/applications', 'App\Http\Controllers\AppliquersController');
 
 
 
@@ -211,7 +242,7 @@ Route::patch('/societies/{society}', [App\Http\Controllers\SocietysController::c
 Route::delete('/societies/{society}', [App\Http\Controllers\SocietysController::class, 'destroy'])->name('societies.destroy');
 Route::put('/societies/{society}/restore', [App\Http\Controllers\SocietysController::class, 'restore'])->name('societies.restore');
 
-Route::resource('/parrains', 'App\Http\Controllers\ParrainagesController'); 
+Route::resource('/parrains', 'App\Http\Controllers\ParrainagesController');
 Route::resource('/valeurs', 'App\Http\Controllers\ValeursController');
 
 //particulier
@@ -365,6 +396,7 @@ Route::prefix('investir')->name('investir.')->group(function() {
 Route::get('/investis', [App\Http\Controllers\InvestissementsController::class, 'index' ])->name('investis.index');
 Route::get('/bonus', [App\Http\Controllers\InvestissementsController::class, 'initial' ])->name('bonus.initial');
 Route::get('/bonus/{investi}/edited/', [App\Http\Controllers\InvestissementsController::class, 'edited'])->name('bonus.edited');
+Route::get('/printers/{investi}/printer/', [App\Http\Controllers\InvestissementsController::class, 'printer'])->name('prints.printing');
 Route::post('/bonus', [App\Http\Controllers\InvestissementsController::class, 'enregistre'])->name('bonus.enregistre');
 Route::post('/investis', [App\Http\Controllers\InvestissementsController::class, 'store'])->name('investis.store');
 // Route::post('/diminishes', [App\Http\Controllers\InvestissementsController::class, 'stored'])->name('diminishes.stored');

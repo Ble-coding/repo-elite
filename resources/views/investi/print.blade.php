@@ -176,13 +176,17 @@ margin: auto;
                         <div style="color:#262626" class="row">
                             <div class="col-md-10 text-left">
                               <div class="col">Montant investi</div>
-                              {{-- <div class="col">Montant rendu </div> --}}
+                              <div class="col">MODELE </div>
+                              <div class="col">Durée </div>
+                              <div class="col">Jalonnement </div>
                             </div>
                             {{-- <div class="col-md-2">
                             </div> --}}
                             <div class="col-md-2">
                               <div class="col">{{ number_format($investi->montant, 0, ',', ' ') }}</div>
-                              {{-- <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div> --}}
+                              <div class="col">{{$investi->forfait->libelle_Forfait }}  </div>
+                              <div class="col">{{$investi->forfait->duree }}  </div>
+                            <div class="col">{{$investi->jalon }}  </div>
                             </div>
                         </div> 
                     </div> <br>
@@ -328,19 +332,23 @@ margin: auto;
 
 
                    <div class="mt-3 ">
-                       <div style="color:#262626" class="row">
-                           <div class="col-md-10 text-left">
-                             <div class="col">Montant investi</div>
-                             {{-- <div class="col">Montant rendu </div> --}}
-                           </div>
-                           {{-- <div class="col-md-2">
-                           </div> --}}
-                           <div class="col-md-2">
-                             <div class="col">{{ number_format($investi->montant, 0, ',', ' ') }}</div>
-                             {{-- <div class="col">{{ number_format($investi->rendu, 0, ',', ' ') }}  </div> --}}
-                           </div>
-                       </div> 
-                   </div> <br>
+                    <div style="color:#262626" class="row">
+                        <div class="col-md-10 text-left">
+                          <div class="col">Montant investi</div>
+                          <div class="col">MODELE </div>
+                          <div class="col">Durée </div>
+                          <div class="col">Jalonnement </div>
+                        </div>
+                        {{-- <div class="col-md-2">
+                        </div> --}}
+                        <div class="col-md-2">
+                          <div class="col">{{ number_format($investi->montant, 0, ',', ' ') }}</div>
+                          <div class="col">{{$investi->forfait->libelle_Forfait }}  </div>
+                          <div class="col">{{$investi->forfait->duree }}  </div>
+                          <div class="col">{{$investi->jalon }}  </div>
+                        </div>
+                    </div> 
+                </div>  <br>
 
                    
                    <div class="mt-3 ">

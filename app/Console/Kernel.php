@@ -2,6 +2,13 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
+use App\Models\Sod;
+use App\Models\Sode;
+use App\Models\Sold;
+use App\Models\Solde;
+use App\Models\Credit;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +22,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('month:update')->everyMinute();
+       
     }
 
     /**

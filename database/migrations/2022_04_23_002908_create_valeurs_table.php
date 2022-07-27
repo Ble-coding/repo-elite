@@ -11,15 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    // public function up()
-    // {
-    //     Schema::create('valeurs', function (Blueprint $table) {
-    //         $table->id();
-    //         $table->string('pourcentage')->default(0);
-    //$table->string('typing')->default('unique');
-    //         $table->timestamps();
-    //     });
-    // }
+    public function up()
+    {
+        Schema::create('valeurs', function (Blueprint $table) {
+            $table->id();
+            $table->string('pourcentage')->default(0);
+    // $table->string('typing')->default('unique');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

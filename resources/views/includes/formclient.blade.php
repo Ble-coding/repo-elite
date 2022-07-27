@@ -6,7 +6,7 @@
                 <div class="input-group-text">
                     <i class="fe fe-user"></i>
                 </div>
-            </div>
+            </div> 
             <input  value="{{ old('name') ?? $client->name }}" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="{{ __('Nom') }}" id="name" name="name">
             @error('name')
                 <div class="invalid-feedback">
@@ -300,6 +300,8 @@
     </div>
     @enderror
 </div>
+
+
      @if(Route::is('clients.create') )
 <div class="input-group mb-4">
     <div class="form-group col-md-6 mb-4"> 

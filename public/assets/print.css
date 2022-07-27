@@ -1,0 +1,23 @@
+
+    #hidden{
+        display : none;
+    }
+
+    @media print {
+        tr.vendorListHeading {
+            background-color: #1a4567 !important;
+            -webkit-print-color-adjust: exact;
+        }
+    }
+
+    @media print {
+        .vendorListHeading th {
+            color: white !important;
+        }
+    }
+    /*
+    .position-ref .content .total .espace table thead #renseigne{background-color:#262626!important}
+
+    .impression_visible{display:block} */
+
+

@@ -54,7 +54,7 @@
                                 @endif <strong>{{$society->name_gerant}} {{$society->prename_gerant}}</strong> de pays de nationnalité {{$society->nationnalite}} Homme
                                     né(e) le {{\Carbon\Carbon::parse($society->datenaiss)->format('d/m/Y')}} à {{$society->lieu}} Domicilié audit siège social, Titulaire de la pièce d’Immatriculation de type {{$society->piece->nom}} N°{{$society->numpiece}}
                                     expirant le {{\Carbon\Carbon::parse($society->dateexp)->format('d/m/Y')}},  @if ( $society->situation == 'Celibataire')
-                                    A mentionné(e) être célibataire.
+                                    a mentionné(e) être célibataire.
                                   @else
                                   A mentionné(e) être marié(e) à {{$society->successeur_name}} {{$society->successeur_prename}} dont le contact est {{$society->successeur_tel}}.
                                   @endif.</p>

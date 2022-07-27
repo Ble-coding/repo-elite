@@ -13,7 +13,7 @@ class Solde extends Model
     protected $fillable = ['montantD','montantR',
     'particulier_id','rendu','prename_deposant','tel_deposant','motif',
     'name_deposant','piece_id','numpiece','reference','timbre','add_deposant',
-    // 'user_id'
+    'actif'
 ];
 
 

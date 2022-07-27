@@ -17,7 +17,15 @@ class Envoie extends Model
     ];
 
 
+    public function generals(){
+        return $this->hasMany('App\Models\General');
+    }
+
     public function transferts(){
         return $this->hasMany('App\Models\Transfert');
+    }
+
+    public function bancaires(){
+        return $this->hasMany('App\Models\Bancaire');
     }
 }

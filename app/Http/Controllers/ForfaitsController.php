@@ -26,11 +26,13 @@ class ForfaitsController extends Controller
         // $forfait = new Forfait();
         // $forfaits = Forfait::all();
         $forfaits = Forfait::withcount('investissements')->with('investissements')->get();
+        // $forfaitOnlys = Forfait::withcount('investissements')->with('investissements')->whereBetween('id', [4, 6])->get();
         $partSups = Forfait::onlyTrashed()->get();
 
   
         // dd($forfait);
         return view('forfait.index', compact('forfaits','partSups'
+        // ,'forfaitOnlys'
         ));
     }
 

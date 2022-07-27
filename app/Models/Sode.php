@@ -14,7 +14,8 @@ class Sode extends Model
 
     protected $fillable = ['montantD','montantR',
     'client_id','rendu','prename_deposant','tel_deposant','motif',
-    'name_deposant','piece_id','numpiece','reference','timbre','add_deposant'
+    'name_deposant','piece_id','numpiece','reference','timbre','add_deposant',
+    'actif'
 ];
 
  

@@ -18,6 +18,7 @@ class Somme extends Model
     //     'jalon',
 
         'montant',
+        'choice_id',
     'envoie_id',
      'customer_id',
      'client_id',

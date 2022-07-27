@@ -172,7 +172,8 @@
 																		<th class="border-bottom-0 w-20">Expediteur</th>
 																		<th class="border-bottom-0 w-20">Reception</th>	
 																		<th class="border-bottom-0 w-20">Destinataire</th>	
-																		<th class="border-bottom-0 w-15">Montant</th>																
+																		<th class="border-bottom-0 w-15">Montant</th>	
+																		<th class="border-bottom-0 w-15">Motif</th>																
 																		<th class="border-bottom-0 w-10">Actions</th>
 															</tr>
 														</thead>
@@ -229,7 +230,7 @@
 
 
 																	<td>{{ number_format($transfert->montant, 0, ',', ' ') }}</td> 
-																	
+																		<td>{{$transfert->motif}}</td> 
 																	<td>  
 																		<a href="{{ route('transfert.validates.stored' , ['transfert' => $transfert->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
 																			{{-- @can('manage-particuliers')

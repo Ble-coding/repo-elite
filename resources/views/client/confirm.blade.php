@@ -24,7 +24,6 @@
 @section('content')
 
 
-
 <div class="row">
     <div class="col-md-1">
     </div>
@@ -56,8 +55,8 @@
                       A mentionné(e) être célibataire.
                     @else
                     A mentionné(e) être marié(e) à {{$client->successeur_name}} {{$client->successeur_prename}} dont le contact est {{$client->successeur_tel}}.
-                    @endif.</p>  
-                       
+                    @endif</p>  
+                            </p>
                        
                         
  <p>En cas d'urgence nom et personne à contacter, @if ( $client->personne_name !== Null
@@ -150,7 +149,6 @@
     </div>
 
 </div>
-
 
 <div class="row">
 <div class="col-md-1">

@@ -20,9 +20,11 @@ return new class extends Migration
             $table->string('montant');
             // $table->string('investiman');
             $table->unsignedbigInteger('envoie_id')->index()->nullable();
+            $table->unsignedbigInteger('choice_id')->index()->nullable();
             $table->unsignedbigInteger('particulier_id')->index()->nullable();
             $table->unsignedbigInteger('client_id')->index()->nullable();
             $table->unsignedbigInteger('intervenant_id')->index()->nullable();
+            $table->unsignedbigInteger('godfather_id')->index()->nullable();
             $table->enum('choix',['Oui','Non'])->default('Non');
             $table->enum('jalon',['Oui','Non'])->default('Non');
             // $table->string('suppleant')->nullable();
@@ -40,7 +42,9 @@ return new class extends Migration
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('envoie_id')->references('id')->on('envoies');
+            $table->foreign('choice_id')->references('id')->on('choices');
             $table->foreign('intervenant_id')->references('id')->on('customers');
+            $table->foreign('godfather_id')->references('id')->on('clients');
             $table->foreign('particulier_id')->references('id')->on('particuliers');
         });
     }

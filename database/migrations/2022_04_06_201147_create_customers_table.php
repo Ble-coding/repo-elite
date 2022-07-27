@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('datenaiss');
             $table->string('lieu');
             $table->string('tel');
-            $table->bigInteger('status')->default(1);
+            // $table->bigInteger('status')->default(1);
             $table->string('email');
             $table->string('nationnalite');
             // $table->string('sexe');

@@ -107,7 +107,16 @@
 															 		<th scope="row">{{$investi->id}}</th>
                                                                      <td>{{\Carbon\Carbon::parse($investi->created_at)->format('d/m/Y')}}</td>						  
 															 		
-															 		<td>{{$investi->intervenant->name}} {{$investi->intervenant->prename}}</td>
+																 @if($investi->godfather_id !== Null)
+																	 <td>{{$investi->godfather->name}} {{$investi->godfather->prename}} <br>
+																		{{$investi->godfather->email}} {{$investi->godfather->tel}}</td>
+																 @elseif($investi->intervenant_id !== Null)
+																 <td>{{$investi->intervenant->name}} {{$investi->intervenant->prename}} <br>
+																	{{$investi->intervenant->email}} {{$investi->intervenant->tel}}</td>
+																 @else
+																  
+																 @endif
+															 		{{-- <td>{{$investi->godfather_id}} </td> --}}
 
 																	@can('manage-users') 	
 																	<td>{{ number_format($investi->montantB, 0, ',', ' ') }}</td> 
@@ -119,13 +128,26 @@
 																										   									
 																	<td>
 
-																	@if ($investi->intervenant->status == 0)
-																		@if($investi->total != 0 )
-																			<a href="{{ route('investir.bonus.edited' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
-                                                                      @endif
-																	@else
+																
 
+
+																	@if($investi->godfather_id !== Null)
+																			{{-- @if($investi->godfather->status == 0) --}}
+																				@if($investi->total != 0 )
+																					<a href="{{ route('investir.bonus.edited' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																				@endif
+																			{{-- @endif --}}
+																	@elseif($investi->intervenant_id !== Null)
+																			{{-- @if($investi->intervenant->status == 0) --}}
+																				@if($investi->total != 0 )
+																					<a href="{{ route('investir.bonus.edited' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
+																				@endif
+																			{{-- @endif --}}
+																	@else
+																	 
 																	@endif
+																	
+																	
 
 																	</td> 
 																	@endcan			 
@@ -189,7 +211,15 @@
 															 		<th scope="row">{{$investi->id}}</th>
                                                                      <td>{{\Carbon\Carbon::parse($investi->created_at)->format('d/m/Y')}}</td>						  
 															 		
-															 		<td>{{$investi->intervenant->name}} {{$investi->intervenant->prename}} -- {{$investi->intervenant->tel}}  {{$investi->intervenant->email}}</td>
+															 	 @if($investi->godfather_id !== Null)
+																	 <td>{{$investi->godfather->name}} {{$investi->godfather->prename}} <br>
+																		{{$investi->godfather->email}} {{$investi->godfather->tel}}</td>
+																 @elseif($investi->intervenant_id !== Null)
+																 <td>{{$investi->intervenant->name}} {{$investi->intervenant->prename}} <br>
+																	{{$investi->intervenant->email}} {{$investi->intervenant->tel}}</td>
+																 @else
+																  
+																 @endif
 
 																	{{-- @can('manage-users') 	
 																	<td>{{ number_format($investi->montantB, 0, ',', ' ') }}</td> 
@@ -199,12 +229,12 @@
 															
 				
 																										   									
-																	{{-- <td>
+																	<td>
 																	
-																		@if($investi->total != 0 )
-																			<a href="{{ route('investir.bonus.edited' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-"><i class="fe fe-minus mr-1"></i></a>
-                                                                      @endif
-																	</td>  --}}
+																		{{-- @if($investi->total != 0 ) --}}
+																			<a href="{{ route('investir.prints.printing' , ['investi' => $investi->id]) }}" style="background-color:#eee;" class="btn btn-">🖨️</a>
+                                                                      {{-- @endif --}}
+																	</td> 
 																	{{-- @endcan			  --}}
 															    </tr>
 																@endforeach
@@ -240,7 +270,7 @@
 										<div class="card-body">
 											<div class="e-table">
 												<div class="table-responsive table-lg mt-3">
-													<table class="table table-bordered border-top text-nowrap" id="example-1">
+													<table class="table table-bordered border-top text-nowrap" id="example4">
 														<thead>
 															<tr>
 																<th class="align-top border-bottom-0 wd-5"></th>
@@ -266,7 +296,15 @@
 															 		<th scope="row">{{$investi->id}}</th>
                                                                      <td>{{\Carbon\Carbon::parse($investi->created_at)->format('d/m/Y')}}</td>						  
 															 		
-															 		<td>{{$investi->intervenant->name}} {{$investi->intervenant->prename}} --  {{$investi->intervenant->tel}}  {{$investi->intervenant->email}}</td>
+																	 @if($investi->godfather_id !== Null)
+																	 <td>{{$investi->godfather->name}} {{$investi->godfather->prename}}<br>
+																		{{$investi->godfather->email}} {{$investi->godfather->tel}}</td>
+																 @elseif($investi->intervenant_id !== Null)
+																 <td> {{$investi->intervenant->name}} {{$investi->intervenant->prename}} <br>
+																	{{$investi->intervenant->email}} {{$investi->intervenant->tel}}   </td>
+																 @else
+																  
+																 @endif
 
 																	@can('manage-users') 	
 																	<td>{{ number_format($investi->montantB, 0, ',', ' ') }}</td> 

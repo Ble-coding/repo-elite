@@ -1,0 +1,1 @@
+E:\php\php.exe E:\dossier_compta\artisan schedule:work

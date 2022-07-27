@@ -47,6 +47,7 @@
 			<!-- Tabs -->
 			<ul class="nav panel-tabs">
 				<li class=""><a href="#tab1" class="active" data-toggle="tab">Forfaits</a></li>
+				{{-- <li class=""><a href="#tab2"  data-toggle="tab">Special</a></li> --}}
 				@can('manage-users')
 					<li><a href="#tab2" data-toggle="tab">Supprimés</a></li>	
 				@endcan						
@@ -90,7 +91,21 @@
 																 <td>{{$forfait->libelle_Forfait}}</td>
 																 <td>{{$forfait->duree}}</td>
 																	 {{-- <td>{{\Carbon\Carbon::parse($forfait->duree)->format('m/Y')}}</td>  --}}
-																 <td>{{$forfait->pourcentageM}}% -{{$forfait->pourcentageJ}}%</td> 
+																 <td>
+																	@if ($forfait->libelle_Forfait == "MODELE PLATINIUM")
+																		<div style="display:none" >{{$v1 = 200000}}</div> 
+																		<div style="display:none" >{{$v2 = 3000000}}</div> 
+																		{{ number_format($v1, 0, ',', ' ') }} (Mensuel) - <br>
+																		{{ number_format($v2, 0, ',', ' ') }} (1 an Jalonnement)
+																	@elseif($forfait->libelle_Forfait == "MODELE PLATINIUM PLUS")
+																		<div style="display:none" >{{$v1 = 400000}}</div> 
+																		<div style="display:none" >{{$v2 = 6000000}}</div>
+																		{{ number_format($v1, 0, ',', ' ') }} (Mensuel) - <br>
+																		{{ number_format($v2, 0, ',', ' ') }} (1 an Jalonnement)
+																	@else
+																		{{$forfait->pourcentageM}}% -{{$forfait->pourcentageJ}}%
+																	@endif
+																</td> 
 
 																 
 																
@@ -138,7 +153,9 @@
 					<!-- End Row -->
 				
 			</div>
-		
+
+
+			
 				<div class="tab-pane" id="tab2">				
 					<div class="card col-md-10">
 						<div class="card-header">
@@ -154,7 +171,7 @@
 										<div class="card-body">
 											<div class="e-table">
 												<div class="table-responsive table-lg mt-3">
-													<table class="table table-bordered border-top text-nowrap" id="example2">
+													<table class="table table-bordered border-top text-nowrap" id="example4">
 														<thead>
 															<tr>
 						

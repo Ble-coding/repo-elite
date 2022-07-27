@@ -23,7 +23,6 @@
 @endsection
 @section('content')
 
-
 <div class="row">
     <div class="col-md-1">
     </div>
@@ -55,7 +54,7 @@
                       A mentionné(e) être célibataire.
                     @else
                     A mentionné(e) être marié(e) à {{$particulier->successeur_name}} {{$particulier->successeur_prename}} dont le contact est {{$particulier->successeur_tel}}.
-                    @endif.</p>  
+                    @endif</p>  
                             </p>
                        
                         
@@ -149,7 +148,6 @@
     </div>
 
 </div>
-
 
 <div class="row">
 <div class="col-md-1">

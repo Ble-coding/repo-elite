@@ -333,6 +333,19 @@
                     @enderror
                 </div>
             </div>
+              <div class="form-group col-md-6 mb-0"> 
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fe fe-italic"></i>
+                    </div>
+                    <input id="motif" type="text" class="form-control @error('motif') is-invalid @enderror" name="motif" value="{{ old('motif') ?? $transfert->motif  }}"  autocomplete="motif" placeholder="{{ __('Motif') }}" autofocus>
+                    @error('motif')
+                        <div class="invalid-feedback">
+                                {{ $errors->first('motif') }}
+                        </div>
+                    @enderror
+                </div>
+              </div>
         </div>
 
        

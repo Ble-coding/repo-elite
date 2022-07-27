@@ -11,14 +11,12 @@ return new class extends Migration
      *
      * @return void
      */
-    // public function up()
-    // {
-    //     Schema::create('types', function (Blueprint $table) {
-    //         $table->id();
-    //         $table->string('name');  
-    //         $table->timestamps();
-    //     });
-    // }
+    public function up()
+    {
+        Schema::table('assurances', function (Blueprint $table) {
+            $table->softDeletes();
+        });
+    }
 
     /**
      * Reverse the migrations.
@@ -27,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::table('assurances', function (Blueprint $table) {
+            //
+        });
     }
 };

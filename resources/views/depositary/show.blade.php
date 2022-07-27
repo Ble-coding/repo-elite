@@ -23,7 +23,7 @@
 							<div class="page-rightheader">
 								<div class="btn btn-list">
 									{{-- <a href="#" class="btn btn-info"><i class="fe fe-settings mr-1"></i> General Settings </a> --}}
-									<a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a> 
+									<a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a>
 									{{-- <a href="#" class="btn btn-warning"><i class="fe fe-shopping-cart mr-1"></i> Buy Now </a> --}}
 								</div>
 							</div>
@@ -43,7 +43,7 @@
 										</div>
 									</div>
 								</div>
-								
+
 							</div>
 							<div class="col-xl-9 col-lg-8">
 								<div class="card">
@@ -64,7 +64,7 @@
 													<label class="form-label">Solde Total</label>
 													<input type="" disabled class="form-control" placeholder="{{$depositary->sode->montant}}">
 												</div>
-											</div>																	
+											</div>
 									</div>
 								</div>
 							</div>

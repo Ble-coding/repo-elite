@@ -14,7 +14,7 @@ class Trac extends Model
     protected $fillable = [
 
         'montantB',
-    // 'investiman',
+    'godfather_id',
      'customer_id',
      'client_id',
      'intervenant_id',
@@ -23,6 +23,9 @@ class Trac extends Model
     // 'user_id'
 ];
 
+public function godfather(){
+    return $this->belongsTo('App\Models\Client');
+}
 public function customer(){
     return $this->belongsTo('App\Models\Customer');
 }

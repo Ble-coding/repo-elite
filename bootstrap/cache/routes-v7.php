@@ -82,7 +82,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::IZ18ioVeeeArRYCY',
+            '_route' => 'generated::7MRzBLqPHYZPTYLc',
           ),
           1 => NULL,
           2 => 
@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::H8GIT2X6jUgzRNxk',
+            '_route' => 'generated::MZDTABu1f6Fc8EtS',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::4cjsBxcrXjiFCTde',
+            '_route' => 'generated::tejcbOrzCSI4XHLN',
           ),
           1 => NULL,
           2 => 
@@ -142,7 +142,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ZVlRRc2fK1K6rxHr',
+            '_route' => 'generated::zyJRfBZZz0mMXMid',
           ),
           1 => NULL,
           2 => 
@@ -735,6 +735,212 @@ app('router')->setCompiledRoutes(
           2 => 
           array (
             'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/bancaires' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancaires.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancaires.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/bancaires/create' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancaires.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/confirmebancaire' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'confirmebancaires.storeded',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/bancarisations' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancarisations.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancarisations.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/bancarisations/create' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancarisations.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/confirmebancarisations' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'confirmebancarisations.storeded',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/applications' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'applications.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'applications.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/applications/create' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'applications.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
           ),
           3 => NULL,
           4 => false,
@@ -1718,7 +1924,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::y51zHBbCCPeuIPzW',
+            '_route' => 'generated::NuF0l0UoScW4JYxB',
           ),
           1 => NULL,
           2 => 
@@ -1754,7 +1960,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::V890QwQvJh7Lqisj',
+            '_route' => 'generated::vuMY3ezczXqFz49g',
           ),
           1 => NULL,
           2 => 
@@ -1884,7 +2090,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::l7pT0VglHO8k1u55',
+            '_route' => 'generated::uDasCwWsA87Y4EUV',
           ),
           1 => NULL,
           2 => 
@@ -1919,7 +2125,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/re(?|charges/([^/]++)(?|(*:32)|/edit(*:44)|(*:51))|trait/(?|retraits/([^/]++)(?|(*:88)|/restore(*:103))|prints/([^/]++)/printer(*:135))|move/(?|removes/([^/]++)(?|(*:171)|/restore(*:187))|prints/([^/]++)/printer(*:219))|set\\-password/([^/]++)(*:250))|/transferts/(?|transferts/([^/]++)(?|(*:296)|/edit(*:309)|(*:317))|validates/([^/]++)/stored(*:351))|/e(?|lite/(?|decaisses/([^/]++)/stord(*:397)|vente(?|s/([^/]++)(?|(*:426)|/restore(*:442))|/([^/]++)/edit(*:465))|rachats/([^/]++)/stored(*:497)|prints/([^/]++)/print(*:526))|ntreprises/(?|([^/]++)(*:557)|print/([^/]++)(*:579)|([^/]++)(?|/(?|edit(*:606)|restore(*:621))|(*:630))))|/admin/(?|users/([^/]++)(?|(*:668)|/(?|edit(*:684)|restore(*:699))|(*:708))|forfaits/([^/]++)(?|(*:737)|/(?|edit(*:753)|restore(*:768))|(*:777)))|/c(?|onfirm(?|s/([^/]++)/stored(*:818)|e(?|r(?|s/([^/]++)/stored(*:851)|es/([^/]++)/stored(*:877))|s/([^/]++)/stored(*:903))|ators/([^/]++)/stored(*:933))|lients/(?|([^/]++)(*:960)|print/([^/]++)(*:982)|([^/]++)(?|/(?|edit(*:1009)|restore(*:1025))|(*:1035)))|ustomers/(?|([^/]++)(*:1066)|print/([^/]++)(*:1089)|([^/]++)(?|/(?|edit(*:1117)|restore(*:1133))|(*:1143))))|/par(?|ticuliers/(?|([^/]++)(*:1183)|print/([^/]++)(*:1206)|([^/]++)(?|/(?|edit(*:1234)|restore(*:1250))|(*:1260)))|rains/([^/]++)(?|(*:1288)|/edit(*:1302)|(*:1311)))|/so(?|cieties/(?|([^/]++)(*:1347)|print/([^/]++)(*:1370)|([^/]++)(?|/(?|edit(*:1398)|restore(*:1414))|(*:1424)))|ld(?|e/soldes/([^/]++)(?|(*:1460)|/edit(*:1474)|(*:1483))|/solds/([^/]++)(?|(*:1511)|/edit(*:1525)|(*:1534)))|d(?|e/sodes/([^/]++)(?|(*:1568)|/edit(*:1582)|(*:1591))|/sods/([^/]++)(?|(*:1618)|/edit(*:1632)|(*:1641)))|mme/sommes/([^/]++)(?|(*:1674)|/edit(*:1688)|(*:1697)))|/v(?|aleurs/([^/]++)(?|(*:1731)|/edit(*:1745)|(*:1754))|erify\\-email/([^/]++)/([^/]++)(*:1794))|/d(?|epo(?|t/(?|depots/([^/]++)(?|(*:1838)|/(?|edit(*:1855)|restore(*:1871))|(*:1881))|prints/([^/]++)/print(*:1912)|retraits/([^/]++)/stored(*:1945))|s(?|it(?|ary/(?|depositarys/([^/]++)(?|(*:1994)|/(?|edit(*:2011)|restore(*:2027))|(*:2037))|prints/([^/]++)/print(*:2068)|removes/([^/]++)/stored(*:2100))|/(?|deposits/([^/]++)(?|(*:2134)|/(?|edit(*:2151)|restore(*:2167))|(*:2177))|prints/([^/]++)/print(*:2208)|withadrals/([^/]++)/stored(*:2243)))|e/(?|deposes/([^/]++)(?|(*:2278)|/(?|edit(*:2295)|restore(*:2311))|(*:2321))|prints/([^/]++)/print(*:2352)|widraws/([^/]++)/stored(*:2384))))|iminish/diminishes/([^/]++)(?|(*:2426)))|/wi(?|thadral/(?|withadrals/([^/]++)(?|(*:2476)|/restore(*:2493))|prints/([^/]++)/printer(*:2526))|draw/(?|prints/([^/]++)/printer(*:2567)|widraws/([^/]++)(?|(*:2595)|/restore(*:2612))))|/investir/(?|bonus/([^/]++)/edited(*:2658)|investis/([^/]++)(?|(*:2687)|/edit(*:2701)|(*:2710))|prints/([^/]++)/print(*:2741)|diminishes/([^/]++)/stored(*:2776)))/?$}sDu',
+      0 => '{^(?|/re(?|charges/([^/]++)(?|(*:32)|/edit(*:44)|(*:51))|trait/(?|retraits/([^/]++)(?|(*:88)|/restore(*:103))|prints/([^/]++)/printer(*:135))|move/(?|removes/([^/]++)(?|(*:171)|/restore(*:187))|prints/([^/]++)/printer(*:219))|set\\-password/([^/]++)(*:250))|/transferts/(?|transferts/([^/]++)(?|(*:296)|/edit(*:309)|(*:317))|validates/([^/]++)/stored(*:351))|/e(?|lite/(?|decaisses/([^/]++)/stord(*:397)|vente(?|s/([^/]++)(?|(*:426)|/restore(*:442))|/([^/]++)/edit(*:465))|rachats/([^/]++)/stored(*:497)|prints/([^/]++)/print(*:526))|ntreprises/(?|([^/]++)(*:557)|print/([^/]++)(*:579)|([^/]++)(?|/(?|edit(*:606)|restore(*:621))|(*:630))))|/a(?|dmin/(?|users/([^/]++)(?|(*:671)|/(?|edit(*:687)|restore(*:702))|(*:711))|forfaits/([^/]++)(?|(*:740)|/(?|edit(*:756)|restore(*:771))|(*:780)))|pplications/([^/]++)(?|(*:813)|/edit(*:826)|(*:834)))|/c(?|onfirm(?|s/([^/]++)/stored(*:875)|e(?|r(?|s/([^/]++)/stored(*:908)|es/([^/]++)/stored(*:934))|s/([^/]++)/stored(*:960)|banca(?|ires/([^/]++)/stored(*:996)|risations/([^/]++)/stored(*:1029)))|ators/([^/]++)/stored(*:1061))|lients/(?|([^/]++)(*:1089)|print/([^/]++)(*:1112)|([^/]++)(?|/(?|edit(*:1140)|restore(*:1156))|(*:1166)))|ustomers/(?|([^/]++)(*:1197)|print/([^/]++)(*:1220)|([^/]++)(?|/(?|edit(*:1248)|restore(*:1264))|(*:1274))))|/par(?|ticuliers/(?|([^/]++)(*:1314)|print/([^/]++)(*:1337)|([^/]++)(?|/(?|edit(*:1365)|restore(*:1381))|(*:1391)))|rains/([^/]++)(?|(*:1419)|/edit(*:1433)|(*:1442)))|/banca(?|ires/(?|([^/]++)(*:1478)|print/([^/]++)(*:1501)|([^/]++)(?|/edit(*:1526)|(*:1535)))|risation(?|s/(?|([^/]++)(*:1570)|print/([^/]++)(*:1593)|([^/]++)(?|/edit(*:1618)|(*:1627)))|/([^/]++)(*:1647)))|/so(?|cieties/(?|([^/]++)(*:1683)|print/([^/]++)(*:1706)|([^/]++)(?|/(?|edit(*:1734)|restore(*:1750))|(*:1760)))|ld(?|e/soldes/([^/]++)(?|(*:1796)|/edit(*:1810)|(*:1819))|/solds/([^/]++)(?|(*:1847)|/edit(*:1861)|(*:1870)))|d(?|e/sodes/([^/]++)(?|(*:1904)|/edit(*:1918)|(*:1927))|/sods/([^/]++)(?|(*:1954)|/edit(*:1968)|(*:1977)))|mme/sommes/([^/]++)(?|(*:2010)|/edit(*:2024)|(*:2033)))|/v(?|aleurs/([^/]++)(?|(*:2067)|/edit(*:2081)|(*:2090))|erify\\-email/([^/]++)/([^/]++)(*:2130))|/d(?|epo(?|t/(?|depots/([^/]++)(?|(*:2174)|/(?|edit(*:2191)|restore(*:2207))|(*:2217))|prints/([^/]++)/print(*:2248)|retraits/([^/]++)/stored(*:2281))|s(?|it(?|ary/(?|depositarys/([^/]++)(?|(*:2330)|/(?|edit(*:2347)|restore(*:2363))|(*:2373))|prints/([^/]++)/print(*:2404)|removes/([^/]++)/stored(*:2436))|/(?|deposits/([^/]++)(?|(*:2470)|/(?|edit(*:2487)|restore(*:2503))|(*:2513))|prints/([^/]++)/print(*:2544)|withadrals/([^/]++)/stored(*:2579)))|e/(?|deposes/([^/]++)(?|(*:2614)|/(?|edit(*:2631)|restore(*:2647))|(*:2657))|prints/([^/]++)/print(*:2688)|widraws/([^/]++)/stored(*:2720))))|iminish/diminishes/([^/]++)(?|(*:2762)))|/wi(?|thadral/(?|withadrals/([^/]++)(?|(*:2812)|/restore(*:2829))|prints/([^/]++)/printer(*:2862))|draw/(?|prints/([^/]++)/printer(*:2903)|widraws/([^/]++)(?|(*:2931)|/restore(*:2948))))|/investir/(?|bonus/([^/]++)/edited(*:2994)|print(?|ers/([^/]++)/printer(*:3031)|s/([^/]++)/print(*:3056))|investis/([^/]++)(?|(*:3086)|/edit(*:3100)|(*:3109))|diminishes/([^/]++)/stored(*:3145)))/?$}sDu',
     ),
     3 => 
     array (
@@ -2662,7 +2868,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      668 => 
+      671 => 
       array (
         0 => 
         array (
@@ -2685,7 +2891,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      684 => 
+      687 => 
       array (
         0 => 
         array (
@@ -2708,7 +2914,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      699 => 
+      702 => 
       array (
         0 => 
         array (
@@ -2730,7 +2936,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      708 => 
+      711 => 
       array (
         0 => 
         array (
@@ -2771,7 +2977,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      737 => 
+      740 => 
       array (
         0 => 
         array (
@@ -2794,7 +3000,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      753 => 
+      756 => 
       array (
         0 => 
         array (
@@ -2817,7 +3023,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      768 => 
+      771 => 
       array (
         0 => 
         array (
@@ -2839,7 +3045,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      777 => 
+      780 => 
       array (
         0 => 
         array (
@@ -2880,7 +3086,95 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      818 => 
+      813 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'applications.show',
+          ),
+          1 => 
+          array (
+            0 => 'application',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      826 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'applications.edit',
+          ),
+          1 => 
+          array (
+            0 => 'application',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      834 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'applications.update',
+          ),
+          1 => 
+          array (
+            0 => 'application',
+          ),
+          2 => 
+          array (
+            'PUT' => 0,
+            'PATCH' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'applications.destroy',
+          ),
+          1 => 
+          array (
+            0 => 'application',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      875 => 
       array (
         0 => 
         array (
@@ -2903,7 +3197,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      851 => 
+      908 => 
       array (
         0 => 
         array (
@@ -2926,7 +3220,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      877 => 
+      934 => 
       array (
         0 => 
         array (
@@ -2949,7 +3243,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      903 => 
+      960 => 
       array (
         0 => 
         array (
@@ -2972,7 +3266,53 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      933 => 
+      996 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'confirmebancaires.stored',
+          ),
+          1 => 
+          array (
+            0 => 'bancaire',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      1029 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'confirmebancarisations.stored',
+          ),
+          1 => 
+          array (
+            0 => 'bancarisation',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      1061 => 
       array (
         0 => 
         array (
@@ -2995,7 +3335,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      960 => 
+      1089 => 
       array (
         0 => 
         array (
@@ -3018,7 +3358,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      982 => 
+      1112 => 
       array (
         0 => 
         array (
@@ -3041,7 +3381,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1009 => 
+      1140 => 
       array (
         0 => 
         array (
@@ -3064,7 +3404,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1025 => 
+      1156 => 
       array (
         0 => 
         array (
@@ -3086,7 +3426,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1035 => 
+      1166 => 
       array (
         0 => 
         array (
@@ -3127,7 +3467,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1066 => 
+      1197 => 
       array (
         0 => 
         array (
@@ -3150,7 +3490,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1089 => 
+      1220 => 
       array (
         0 => 
         array (
@@ -3173,7 +3513,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1117 => 
+      1248 => 
       array (
         0 => 
         array (
@@ -3196,7 +3536,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1133 => 
+      1264 => 
       array (
         0 => 
         array (
@@ -3218,7 +3558,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1143 => 
+      1274 => 
       array (
         0 => 
         array (
@@ -3259,7 +3599,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1183 => 
+      1314 => 
       array (
         0 => 
         array (
@@ -3282,7 +3622,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1206 => 
+      1337 => 
       array (
         0 => 
         array (
@@ -3305,7 +3645,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1234 => 
+      1365 => 
       array (
         0 => 
         array (
@@ -3328,7 +3668,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1250 => 
+      1381 => 
       array (
         0 => 
         array (
@@ -3350,7 +3690,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1260 => 
+      1391 => 
       array (
         0 => 
         array (
@@ -3391,7 +3731,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1288 => 
+      1419 => 
       array (
         0 => 
         array (
@@ -3414,7 +3754,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1302 => 
+      1433 => 
       array (
         0 => 
         array (
@@ -3437,7 +3777,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1311 => 
+      1442 => 
       array (
         0 => 
         array (
@@ -3479,7 +3819,230 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1347 => 
+      1478 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancaires.show',
+          ),
+          1 => 
+          array (
+            0 => 'bancaire',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      1501 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancaires.print',
+          ),
+          1 => 
+          array (
+            0 => 'bancaire',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      1526 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancaires.edit',
+          ),
+          1 => 
+          array (
+            0 => 'bancaire',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      1535 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancaires.update',
+          ),
+          1 => 
+          array (
+            0 => 'bancaire',
+          ),
+          2 => 
+          array (
+            'PATCH' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancaires.destroy',
+          ),
+          1 => 
+          array (
+            0 => 'bancaire',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      1570 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancarisations.show',
+          ),
+          1 => 
+          array (
+            0 => 'bancarisation',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      1593 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancarisations.print',
+          ),
+          1 => 
+          array (
+            0 => 'bancarisation',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      1618 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancarisations.edit',
+          ),
+          1 => 
+          array (
+            0 => 'bancarisation',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      1627 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancarisations.destroy',
+          ),
+          1 => 
+          array (
+            0 => 'bancarisation',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      1647 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'bancarisations.update',
+          ),
+          1 => 
+          array (
+            0 => 'bancarisation',
+          ),
+          2 => 
+          array (
+            'PATCH' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      1683 => 
       array (
         0 => 
         array (
@@ -3502,7 +4065,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1370 => 
+      1706 => 
       array (
         0 => 
         array (
@@ -3525,7 +4088,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1398 => 
+      1734 => 
       array (
         0 => 
         array (
@@ -3548,7 +4111,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1414 => 
+      1750 => 
       array (
         0 => 
         array (
@@ -3570,7 +4133,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1424 => 
+      1760 => 
       array (
         0 => 
         array (
@@ -3611,7 +4174,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1460 => 
+      1796 => 
       array (
         0 => 
         array (
@@ -3634,7 +4197,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1474 => 
+      1810 => 
       array (
         0 => 
         array (
@@ -3657,7 +4220,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1483 => 
+      1819 => 
       array (
         0 => 
         array (
@@ -3699,7 +4262,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1511 => 
+      1847 => 
       array (
         0 => 
         array (
@@ -3722,7 +4285,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1525 => 
+      1861 => 
       array (
         0 => 
         array (
@@ -3745,7 +4308,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1534 => 
+      1870 => 
       array (
         0 => 
         array (
@@ -3787,7 +4350,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1568 => 
+      1904 => 
       array (
         0 => 
         array (
@@ -3810,7 +4373,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1582 => 
+      1918 => 
       array (
         0 => 
         array (
@@ -3833,7 +4396,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1591 => 
+      1927 => 
       array (
         0 => 
         array (
@@ -3875,7 +4438,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1618 => 
+      1954 => 
       array (
         0 => 
         array (
@@ -3898,7 +4461,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1632 => 
+      1968 => 
       array (
         0 => 
         array (
@@ -3921,7 +4484,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1641 => 
+      1977 => 
       array (
         0 => 
         array (
@@ -3963,7 +4526,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1674 => 
+      2010 => 
       array (
         0 => 
         array (
@@ -3986,7 +4549,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1688 => 
+      2024 => 
       array (
         0 => 
         array (
@@ -4009,7 +4572,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1697 => 
+      2033 => 
       array (
         0 => 
         array (
@@ -4051,7 +4614,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1731 => 
+      2067 => 
       array (
         0 => 
         array (
@@ -4074,7 +4637,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1745 => 
+      2081 => 
       array (
         0 => 
         array (
@@ -4097,7 +4660,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1754 => 
+      2090 => 
       array (
         0 => 
         array (
@@ -4139,7 +4702,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1794 => 
+      2130 => 
       array (
         0 => 
         array (
@@ -4163,7 +4726,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1838 => 
+      2174 => 
       array (
         0 => 
         array (
@@ -4186,7 +4749,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1855 => 
+      2191 => 
       array (
         0 => 
         array (
@@ -4209,7 +4772,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1871 => 
+      2207 => 
       array (
         0 => 
         array (
@@ -4231,7 +4794,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1881 => 
+      2217 => 
       array (
         0 => 
         array (
@@ -4272,7 +4835,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1912 => 
+      2248 => 
       array (
         0 => 
         array (
@@ -4295,7 +4858,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1945 => 
+      2281 => 
       array (
         0 => 
         array (
@@ -4318,7 +4881,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1994 => 
+      2330 => 
       array (
         0 => 
         array (
@@ -4341,7 +4904,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2011 => 
+      2347 => 
       array (
         0 => 
         array (
@@ -4364,7 +4927,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2027 => 
+      2363 => 
       array (
         0 => 
         array (
@@ -4386,7 +4949,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2037 => 
+      2373 => 
       array (
         0 => 
         array (
@@ -4427,7 +4990,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2068 => 
+      2404 => 
       array (
         0 => 
         array (
@@ -4450,7 +5013,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2100 => 
+      2436 => 
       array (
         0 => 
         array (
@@ -4473,7 +5036,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2134 => 
+      2470 => 
       array (
         0 => 
         array (
@@ -4496,7 +5059,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2151 => 
+      2487 => 
       array (
         0 => 
         array (
@@ -4519,7 +5082,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2167 => 
+      2503 => 
       array (
         0 => 
         array (
@@ -4541,7 +5104,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2177 => 
+      2513 => 
       array (
         0 => 
         array (
@@ -4582,7 +5145,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2208 => 
+      2544 => 
       array (
         0 => 
         array (
@@ -4605,7 +5168,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2243 => 
+      2579 => 
       array (
         0 => 
         array (
@@ -4628,7 +5191,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2278 => 
+      2614 => 
       array (
         0 => 
         array (
@@ -4651,7 +5214,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2295 => 
+      2631 => 
       array (
         0 => 
         array (
@@ -4674,7 +5237,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2311 => 
+      2647 => 
       array (
         0 => 
         array (
@@ -4696,7 +5259,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2321 => 
+      2657 => 
       array (
         0 => 
         array (
@@ -4737,7 +5300,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2352 => 
+      2688 => 
       array (
         0 => 
         array (
@@ -4760,7 +5323,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2384 => 
+      2720 => 
       array (
         0 => 
         array (
@@ -4783,7 +5346,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2426 => 
+      2762 => 
       array (
         0 => 
         array (
@@ -4844,7 +5407,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2476 => 
+      2812 => 
       array (
         0 => 
         array (
@@ -4905,7 +5468,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2493 => 
+      2829 => 
       array (
         0 => 
         array (
@@ -4927,7 +5490,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2526 => 
+      2862 => 
       array (
         0 => 
         array (
@@ -4950,7 +5513,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2567 => 
+      2903 => 
       array (
         0 => 
         array (
@@ -4973,7 +5536,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2595 => 
+      2931 => 
       array (
         0 => 
         array (
@@ -5034,7 +5597,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2612 => 
+      2948 => 
       array (
         0 => 
         array (
@@ -5056,7 +5619,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2658 => 
+      2994 => 
       array (
         0 => 
         array (
@@ -5079,7 +5642,53 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2687 => 
+      3031 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'investir.prints.printing',
+          ),
+          1 => 
+          array (
+            0 => 'investi',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      3056 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'investir.prints.printer',
+          ),
+          1 => 
+          array (
+            0 => 'investi',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      3086 => 
       array (
         0 => 
         array (
@@ -5102,7 +5711,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2701 => 
+      3100 => 
       array (
         0 => 
         array (
@@ -5125,7 +5734,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2710 => 
+      3109 => 
       array (
         0 => 
         array (
@@ -5166,30 +5775,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      2741 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'investir.prints.printer',
-          ),
-          1 => 
-          array (
-            0 => 'investi',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      2776 => 
+      3145 => 
       array (
         0 => 
         array (
@@ -5336,7 +5922,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::IZ18ioVeeeArRYCY' => 
+    'generated::7MRzBLqPHYZPTYLc' => 
     array (
       'methods' => 
       array (
@@ -5357,7 +5943,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::IZ18ioVeeeArRYCY',
+        'as' => 'generated::7MRzBLqPHYZPTYLc',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5373,7 +5959,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::H8GIT2X6jUgzRNxk' => 
+    'generated::MZDTABu1f6Fc8EtS' => 
     array (
       'methods' => 
       array (
@@ -5390,13 +5976,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:295:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000003a30000000000000000";}";s:4:"hash";s:44:"dZ6UmYjbPuWpqktyoAX9ErgzHQAZkWU3iSMZVb5M058=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000003ab0000000000000000";}";s:4:"hash";s:44:"YG/RXmlvR8TMFV5servUKgJ6vBLuXQ0+KNPGiPHbyrQ=";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::H8GIT2X6jUgzRNxk',
+        'as' => 'generated::MZDTABu1f6Fc8EtS',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5412,7 +5998,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::4cjsBxcrXjiFCTde' => 
+    'generated::tejcbOrzCSI4XHLN' => 
     array (
       'methods' => 
       array (
@@ -5428,13 +6014,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:262:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:44:"function () {
     return \\view(\'welcome\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000003a50000000000000000";}";s:4:"hash";s:44:"RfXm/KGqlMdlg9EqCD/fzjAJh6CtxYePfGqj3UpvXWE=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000003ad0000000000000000";}";s:4:"hash";s:44:"OsrH8eNbHgNU/nYpwdSfgggv2yD+QtHt5FU/0/mnZk4=";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::4cjsBxcrXjiFCTde',
+        'as' => 'generated::tejcbOrzCSI4XHLN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5450,7 +6036,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::ZVlRRc2fK1K6rxHr' => 
+    'generated::zyJRfBZZz0mMXMid' => 
     array (
       'methods' => 
       array (
@@ -5464,15 +6050,15 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:261:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:43:"function () {
-    return \\view(\'404\');   
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000003a70000000000000000";}";s:4:"hash";s:44:"9Wa8M7df6bsC6lcg8gT8nCf3lyv/xORfPTVL1AtAB2Q=";}}',
+        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:258:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:40:"function () {
+    return \\view(\'404\');
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000003af0000000000000000";}";s:4:"hash";s:44:"9vx7xnLMTiEV4Lpo8v7dJ7/YSJvWnvLaN3SxD/alVcw=";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::ZVlRRc2fK1K6rxHr',
+        'as' => 'generated::zyJRfBZZz0mMXMid',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8375,6 +8961,995 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'clients.restore',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancaires.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancaires',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@index',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancaires.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancaires.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancaires/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@create',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@create',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancaires.create',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancaires.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'bancaires',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@store',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@store',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancaires.store',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'confirmebancaires.stored' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'confirmebancaires/{bancaire}/stored',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@stored',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@stored',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'confirmebancaires.stored',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'confirmebancaires.storeded' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'confirmebancaire',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@storeded',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@storeded',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'confirmebancaires.storeded',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancaires.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancaires/{bancaire}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@show',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@show',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancaires.show',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancaires.print' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancaires/print/{bancaire}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@print',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@print',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancaires.print',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancaires.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancaires/{bancaire}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@edit',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@edit',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancaires.edit',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancaires.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PATCH',
+      ),
+      'uri' => 'bancaires/{bancaire}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@update',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@update',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancaires.update',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancaires.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'bancaires/{bancaire}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancairesController@destroy',
+        'controller' => 'App\\Http\\Controllers\\BancairesController@destroy',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancaires.destroy',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancarisations.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancarisations',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@index',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancarisations.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancarisations.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancarisations/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@create',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@create',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancarisations.create',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancarisations.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'bancarisations',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@store',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@store',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancarisations.store',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'confirmebancarisations.stored' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'confirmebancarisations/{bancarisation}/stored',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@stored',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@stored',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'confirmebancarisations.stored',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'confirmebancarisations.storeded' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'confirmebancarisations',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@storeded',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@storeded',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'confirmebancarisations.storeded',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancarisations.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancarisations/{bancarisation}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@show',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@show',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancarisations.show',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancarisations.print' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancarisations/print/{bancarisation}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@print',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@print',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancarisations.print',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancarisations.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'bancarisations/{bancarisation}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@edit',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@edit',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancarisations.edit',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancarisations.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PATCH',
+      ),
+      'uri' => 'bancarisation/{bancarisation}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@update',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@update',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancarisations.update',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'bancarisations.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'bancarisations/{bancarisation}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\BancarisationsController@destroy',
+        'controller' => 'App\\Http\\Controllers\\BancarisationsController@destroy',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'bancarisations.destroy',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'applications.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'applications',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'as' => 'applications.index',
+        'uses' => 'App\\Http\\Controllers\\AppliquersController@index',
+        'controller' => 'App\\Http\\Controllers\\AppliquersController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'applications.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'applications/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'as' => 'applications.create',
+        'uses' => 'App\\Http\\Controllers\\AppliquersController@create',
+        'controller' => 'App\\Http\\Controllers\\AppliquersController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'applications.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'applications',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'as' => 'applications.store',
+        'uses' => 'App\\Http\\Controllers\\AppliquersController@store',
+        'controller' => 'App\\Http\\Controllers\\AppliquersController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'applications.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'applications/{application}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'as' => 'applications.show',
+        'uses' => 'App\\Http\\Controllers\\AppliquersController@show',
+        'controller' => 'App\\Http\\Controllers\\AppliquersController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'applications.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'applications/{application}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'as' => 'applications.edit',
+        'uses' => 'App\\Http\\Controllers\\AppliquersController@edit',
+        'controller' => 'App\\Http\\Controllers\\AppliquersController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'applications.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'applications/{application}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'as' => 'applications.update',
+        'uses' => 'App\\Http\\Controllers\\AppliquersController@update',
+        'controller' => 'App\\Http\\Controllers\\AppliquersController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'applications.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'applications/{application}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'as' => 'applications.destroy',
+        'uses' => 'App\\Http\\Controllers\\AppliquersController@destroy',
+        'controller' => 'App\\Http\\Controllers\\AppliquersController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
       ),
       'fallback' => false,
       'defaults' => 
@@ -13440,6 +15015,43 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'investir.prints.printing' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'investir/printers/{investi}/printer',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\InvestissementsController@printer',
+        'controller' => 'App\\Http\\Controllers\\InvestissementsController@printer',
+        'as' => 'investir.prints.printing',
+        'namespace' => NULL,
+        'prefix' => '/investir',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'investir.bonus.enregistre' => 
     array (
       'methods' => 
@@ -13952,7 +15564,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::y51zHBbCCPeuIPzW' => 
+    'generated::NuF0l0UoScW4JYxB' => 
     array (
       'methods' => 
       array (
@@ -13973,7 +15585,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::y51zHBbCCPeuIPzW',
+        'as' => 'generated::NuF0l0UoScW4JYxB',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14027,7 +15639,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::V890QwQvJh7Lqisj' => 
+    'generated::vuMY3ezczXqFz49g' => 
     array (
       'methods' => 
       array (
@@ -14048,7 +15660,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::V890QwQvJh7Lqisj',
+        'as' => 'generated::vuMY3ezczXqFz49g',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14368,7 +15980,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::l7pT0VglHO8k1u55' => 
+    'generated::uDasCwWsA87Y4EUV' => 
     array (
       'methods' => 
       array (
@@ -14389,7 +16001,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::l7pT0VglHO8k1u55',
+        'as' => 'generated::uDasCwWsA87Y4EUV',
       ),
       'fallback' => false,
       'defaults' => 

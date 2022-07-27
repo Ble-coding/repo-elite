@@ -42,6 +42,25 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin();
         });
 
+
+
+        Gate::define('manage-bancaires', function($bancaire) {       
+            return $bancaire->hasAnyRole(['Analyste','Administrateur']);
+        });
+        Gate::define('show-bancaires', function($bancaire) {       
+            return $bancaire->isAdmin();
+        });
+
+        Gate::define('edit-bancaires', function($bancaire) {       
+            return $bancaire->isAdmin();
+        });
+
+        Gate::define('delete-bancaires', function($bancaire) {
+            return $bancaire->isAdmin();
+        });
+        
+
+
         //particulier
 
         Gate::define('manage-particuliers', function($particulier) {       

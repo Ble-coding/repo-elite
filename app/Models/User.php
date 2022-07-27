@@ -77,6 +77,9 @@ class User extends Authenticatable
     public function recepts(){
         return $this->hasMany('App\Models\Recept');
     }
+    public function mains(){
+        return $this->hasMany('App\Models\Main');
+    }
 
     public function transferts(){
         return $this->hasMany('App\Models\Transfert');
@@ -89,6 +92,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Recept');
     }
 
+    public function generals(){
+        return $this->hasMany('App\Models\General');
+    }
+
+
     public function visiteurs(){
         return $this->hasMany('App\Models\Visiteur');
     }
@@ -100,8 +108,8 @@ class User extends Authenticatable
     public function rachats(){
         return $this->hasMany('App\Models\Rachat');
     }
-    
-    
+
+
     public function valeurs(){
         return $this->hasMany('App\Models\Valeur');
     }
@@ -115,7 +123,7 @@ class User extends Authenticatable
     public function widraws(){
         return $this->hasMany('App\Models\Widraw');
     }
-    
+
     public function clients(){
         return $this->hasMany('App\Models\Client');
     }
@@ -129,7 +137,7 @@ class User extends Authenticatable
     public function investissements(){
         return $this->hasMany('App\Models\Investissement');
     }
-    
+
     public function diminishes(){
         return $this->hasMany('App\Models\Diminish');
     }

@@ -27,16 +27,18 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        // $customers = Customer::all();
-        $customers = Customer::where('status', 1)->get();
-        $listCustomers = Customer::where('status', 0)->get();
+        $customers = Customer::all();
+        // $customers = Customer::where('status', 1)->get();
+        // $listCustomers = Customer::where('status', 0)->get();
         $partSups = Customer::onlyTrashed()->get();
         // $posts = Customer::withTrashed()->where('id', 1)->restore();
 
         // dd($partSups);
 
         // $customers = Customer::withcount('investissements')->with('investissements')->get();
-        return view('customer.index', compact('customers','partSups','listCustomers'));
+        return view('customer.index', compact('customers','partSups'
+        // ,'listCustomers'
+        ));
     }
 
     /**
@@ -212,24 +214,24 @@ class CustomersController extends Controller
     }
   
 
-public function storeded(Request $request , Customer $customer)
-{   
-    $confirmator = new Confirmator();
+// public function storeded(Request $request , Customer $customer)
+// {   
+//     $confirmator = new Confirmator();
 
-    $confirmator->motif = request('motif');
-        $confirmator->customer_id = request('customer_id');
+//     $confirmator->motif = request('motif');
+//         $confirmator->customer_id = request('customer_id');
 
-        $confirmatorId =  Customer::where([            
-            [ 'id' , '=', $confirmator->customer_id],
-        ])->first();
+//         $confirmatorId =  Customer::where([            
+//             [ 'id' , '=', $confirmator->customer_id],
+//         ])->first();
 
 
     
-         $confirmator->save();
-         $confirmatorId->decrement('status', 1);
+//          $confirmator->save();
+//          $confirmatorId->decrement('status', 1);
    
-    return Redirect::route('customers.index')->with('message', 'Vous avez validé');
-    }
+//     return Redirect::route('customers.index')->with('message', 'Vous avez validé');
+// }
     /**
      * Display the specified resource.
      *

@@ -224,7 +224,7 @@
 														<div class="card-body">
 															<div class="e-table">
 																<div class="table-responsive table-lg mt-3">
-																	<table class="table table-bordered border-top text-nowrap" id="example3">
+																	<table class="table table-bordered border-top text-nowrap" id="example2">
 																		<thead>
 																			<tr>
 																				<th class="align-top border-bottom-0 wd-5"></th>

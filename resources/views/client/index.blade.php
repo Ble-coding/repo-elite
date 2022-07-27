@@ -73,8 +73,10 @@
 				<div class="tabs-menu ">
 					<!-- Tabs -->
 					<ul class="nav panel-tabs">
-						<li class=""><a href="#tab1" class="active" data-toggle="tab">En attente</a></li>
-						<li class=""><a href="#tab2" data-toggle="tab">Particuliers</a></li>
+		
+					
+										<li class=""><a href="#tab1" class="active"  data-toggle="tab">En attente</a></li>
+											<li class=""><a href="#tab2"  data-toggle="tab">Particuliers</a></li>
 						@can('manage-users')
 							<li><a href="#tab3" data-toggle="tab">Supprimés</a></li>	
 						@endcan						
@@ -83,7 +85,7 @@
 			</div>
 			<div class="panel-body tabs-menu-body">
 				<div class="tab-content">
-					<div class="tab-pane active " id="tab1">				
+					<div class="tab-pane active" id="tab1">				
 						<div class="card col-md-10">
 							<div class="card-header">
 								<h3 class="card-title">Liste particuliers</h3>
@@ -112,9 +114,9 @@
 																		{{-- @can('manage-users')
 																		<th class="border-bottom-0 w-30">Admin</th>
 																		@endcan --}}
-																		{{-- @can('manage-clients')    --}}
+																	{{--	@can('manage-clients')   --}}
 																		<th class="border-bottom-0 w-10">Actions</th>
-																		{{-- @endcan --}}
+																	{{--	@endcan--}}
 																	</tr>
 																</thead>
 																<tbody>

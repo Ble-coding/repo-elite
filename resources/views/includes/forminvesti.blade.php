@@ -133,126 +133,126 @@
 
 @if(Route::is('investir.investis.edit') )
 
-<div  class="input-group mb-4">
-    <div class="input-group-prepend">
-        <div class="input-group-text">
-            Forfait
-        </div>
-    </div>
-    <select disabled class="form-control select2-show-search @error('forfait_id') is-invalid @enderror" name="forfait_id">
-        <optgroup label="Forfait">
-            @foreach($forfaits as $forfait)														 
-                <option value="{{$forfait->id}}" {{ $investi->forfait_id == $forfait->id ? 'selected' : '' }}> 
-                    {{$forfait->libelle_Forfait }} - {{ $forfait->duree }} mois - {{ $forfait->pourcentageM }} % par mois
-                    - 
-                    {{ $forfait->pourcentageJ }} % si jalonnement (Min:{{ $forfait->montantMin }} Max: {{ $forfait->montantMax }})
-                </option>
-            @endforeach						
-        </optgroup>							
-    </select>
-    @error('forfait_id')
-             <div class="invalid-feedback">
-                               {{ $errors->first('forfait_id') }}
-            </div>
-    @enderror 
-</div>
-
-
-<div  class="input-group mb-4">
-    <div class="input-group-prepend">
-        <div class="input-group-text">
-            Compte
-        </div>
-    </div>
-    <select disabled id="envoie_id"  onchange="mySelectfunction()"  class="form-control select2-show-search  @error('envoie_id') is-invalid @enderror" name="envoie_id">
-        <optgroup label="Compte">
-            @foreach($envoies as $envoie)
-                                <option value="{{ $envoie->id }}" {{  $investi->envoie_id == $envoie->id ? 'selected' :  ''}}>
-                                {{ $envoie->name}} </option>
-                                @endforeach                                  
-        </optgroup>							
-    </select>
-        @error('envoie_id')
-            <div class="invalid-feedback">
-                            {{ $errors->first('envoie_id') }}
-            </div>
-        @enderror  
-</div>
-
-
-<div  class="">
-    <div  id="img1"  class="input-group mb-4"> 
+    <div  class="input-group mb-4">
         <div class="input-group-prepend">
             <div class="input-group-text">
-                Client Epargne
+                Forfait
             </div>
         </div>
-        <select disabled class="form-control select2-show-search @error('particulier_id') is-invalid @enderror" name="particulier_id">
-            <optgroup label="Epargne">
-                <option value="">Choisir</option>	
-                @foreach($particuliers as $particulier)	
-                                    <option value="{{ $particulier->id }}" {{  $investi->particulier_id == $particulier->id ? 'selected' :  ''}}>
-                                        {{ $particulier->code }} --  {{ $particulier->name }} {{ $particulier->prename }}</option>
-                                    @endforeach
-                            
+        <select disabled class="form-control select2-show-search @error('forfait_id') is-invalid @enderror" name="forfait_id">
+            <optgroup label="Forfait">
+                @foreach($forfaits as $forfait)														 
+                    <option value="{{$forfait->id}}" {{ $investi->forfait_id == $forfait->id ? 'selected' : '' }}> 
+                        {{$forfait->libelle_Forfait }} - {{ $forfait->duree }} mois - {{ $forfait->pourcentageM }} % par mois
+                        - 
+                        {{ $forfait->pourcentageJ }} % si jalonnement (Min:{{ $forfait->montantMin }} Max: {{ $forfait->montantMax }})
+                    </option>
+                @endforeach						
             </optgroup>							
         </select>
-            @error('particulier_id')
+        @error('forfait_id')
                 <div class="invalid-feedback">
-                                {{ $errors->first('particulier_id') }}
+                                {{ $errors->first('forfait_id') }}
                 </div>
-            @enderror 
-    </div>
-</div>
-<div  class="">
-    <div  id="img2" class="input-group mb-4"> 
-        <div class="input-group-prepend">
-            <div class="input-group-text">
-                Client Courant
-            </div>
-        </div>
-        <select disabled class="form-control select2-show-search @error('client_id') is-invalid @enderror" name="client_id">
-            <optgroup label="Courant">
-                <option value="">Choisir</option>	
-                @foreach($clients as $client)	
-                <option value="{{ $client->id }}" {{  $investi->client_id == $client->id ? 'selected' :  ''}}>
-                    {{ $client->code }} --  {{ $client->name }} {{ $client->prename }}</option>
-                @endforeach
-                            
-            </optgroup>							
-        </select>
-        @error('client_id')
-        <div class="invalid-feedback">
-                        {{ $errors->first('client_id') }}
-        </div>
-        @enderror 
-    </div>
-</div>
-<div  class="">
-    <div   id="img3" class="input-group mb-4"> 
-        <div class="input-group-prepend">
-            <div class="input-group-text">
-                Client Investissement
-            </div>
-        </div>
-        <select disabled class="form-control select2-show-search @error('customer_id') is-invalid @enderror" name="customer_id">
-            <optgroup label="Investissement">
-                <option value="">Choisir</option>	
-                @foreach($customers as $customer)	
-                <option value="{{ $customer->id }}" {{  $investi->customer_id == $customer->id ? 'selected' :  ''}}>
-                    {{ $customer->code }} --  {{ $customer->name }} {{ $customer->prename }}</option>
-                @endforeach
-                            
-            </optgroup>							
-        </select>
-        @error('customer_id')
-        <div class="invalid-feedback">
-                        {{ $errors->first('customer_id') }}
-        </div>
         @enderror 
     </div>
 
-</div>
+
+    <div  class="input-group mb-4">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                Compte
+            </div>
+        </div>
+        <select disabled id="envoie_id"  onchange="mySelectfunction()"  class="form-control select2-show-search  @error('envoie_id') is-invalid @enderror" name="envoie_id">
+            <optgroup label="Compte">
+                @foreach($envoies as $envoie)
+                                    <option value="{{ $envoie->id }}" {{  $investi->envoie_id == $envoie->id ? 'selected' :  ''}}>
+                                    {{ $envoie->name}} </option>
+                                    @endforeach                                  
+            </optgroup>							
+        </select>
+            @error('envoie_id')
+                <div class="invalid-feedback">
+                                {{ $errors->first('envoie_id') }}
+                </div>
+            @enderror  
+    </div>
+
+
+    <div  class="">
+        <div  id="img1"  class="input-group mb-4"> 
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    Client Epargne
+                </div>
+            </div>
+            <select disabled class="form-control select2-show-search @error('particulier_id') is-invalid @enderror" name="particulier_id">
+                <optgroup label="Epargne">
+                    <option value="">Choisir</option>	
+                    @foreach($particuliers as $particulier)	
+                                        <option value="{{ $particulier->id }}" {{  $investi->particulier_id == $particulier->id ? 'selected' :  ''}}>
+                                            {{ $particulier->code }} --  {{ $particulier->name }} {{ $particulier->prename }}</option>
+                                        @endforeach
+                                
+                </optgroup>							
+            </select>
+                @error('particulier_id')
+                    <div class="invalid-feedback">
+                                    {{ $errors->first('particulier_id') }}
+                    </div>
+                @enderror 
+        </div>
+    </div>
+    <div  class="">
+        <div  id="img2" class="input-group mb-4"> 
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    Client Courant
+                </div>
+            </div>
+            <select disabled class="form-control select2-show-search @error('client_id') is-invalid @enderror" name="client_id">
+                <optgroup label="Courant">
+                    <option value="">Choisir</option>	
+                    @foreach($clients as $client)	
+                    <option value="{{ $client->id }}" {{  $investi->client_id == $client->id ? 'selected' :  ''}}>
+                        {{ $client->code }} --  {{ $client->name }} {{ $client->prename }}</option>
+                    @endforeach
+                                
+                </optgroup>							
+            </select>
+            @error('client_id')
+            <div class="invalid-feedback">
+                            {{ $errors->first('client_id') }}
+            </div>
+            @enderror 
+        </div>
+    </div>
+    <div  class="">
+        <div   id="img3" class="input-group mb-4"> 
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    Client Investissement
+                </div>
+            </div>
+            <select disabled class="form-control select2-show-search @error('customer_id') is-invalid @enderror" name="customer_id">
+                <optgroup label="Investissement">
+                    <option value="">Choisir</option>	
+                    @foreach($customers as $customer)	
+                    <option value="{{ $customer->id }}" {{  $investi->customer_id == $customer->id ? 'selected' :  ''}}>
+                        {{ $customer->code }} --  {{ $customer->name }} {{ $customer->prename }}</option>
+                    @endforeach
+                                
+                </optgroup>							
+            </select>
+            @error('customer_id')
+            <div class="invalid-feedback">
+                            {{ $errors->first('customer_id') }}
+            </div>
+            @enderror 
+        </div>
+
+    </div>
 
 @endif
 
@@ -277,10 +277,55 @@
 </div>
 
 <div style="visibility:hidden ; position:relative" id="ccform">
-    <div class="input-group mb-4">
+
+    <div  class="input-group mb-4">
         <div class="input-group-prepend">
             <div class="input-group-text">
-                Parrain
+                Compte
+            </div>
+        </div>
+        <select id="choice_id"  onchange="mySelectchoice()"  class="form-control select2-show-search  @error('choice_id') is-invalid @enderror" name="choice_id">
+            <optgroup label="Compte">
+                @foreach($choices as $choice)
+                        <option value="{{ $choice->id }}" {{  $investi->choice_id == $choice->id ? 'selected' :  ''}}>
+                          {{ $choice->name}} </option>
+                @endforeach                                  
+            </optgroup>							
+        </select>
+            @error('choice_id')
+                <div class="invalid-feedback">
+                                {{ $errors->first('choice_id') }}
+                </div>
+            @enderror  
+    </div>
+
+    <div id="sup1" class="input-group mb-4">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                Parrain Courant
+            </div>
+        </div>
+        <select class="form-control select2-show-search @error('godfather_id') is-invalid @enderror" name="godfather_id">
+            <optgroup label="Client">
+                <option value="">Choisir</option>
+                @foreach($godfathers as $godfather)														 
+                <option value="{{$godfather->id}}" {{ $investi->godfather_id == $godfather->id ? 'selected' : '' }}> 
+                    {{$godfather->code }} ---  {{ $godfather->name }} {{ $godfather->prename }} --{{ $godfather->email }}  - {{ $godfather->tel }} 
+                </option>
+            @endforeach						
+            </optgroup>							
+        </select>
+        @error('godfather_id')
+                <div class="invalid-feedback">
+                                {{ $errors->first('godfather_id') }}
+                </div>
+        @enderror 
+    </div>
+
+    <div id="sup2" style="display:none;" class="input-group mb-4">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                Parrain Investissement
             </div>
         </div>
         <select class="form-control select2-show-search @error('intervenant_id') is-invalid @enderror" name="intervenant_id">

@@ -11,19 +11,19 @@ class Particulier extends Model
 {
     use HasFactory, SoftDeletes;
 
-    
+
     protected $table = 'particuliers';
     protected $fillable = ['name', 'prename', 'datenaiss','nationnalite','lieu_habitation',
      'lieu','tel','email',
     'sexe',
      'code','personne_name','personne_prename','personne_tel','piece_id','numpiece','dateexp','image',
 
-    
+
     'situation',
     'successeur_name',
     'successeur_prename',
     'successeur_tel',
-    
+
     'prof',
     'nom_ent',
     'status',
@@ -83,5 +83,9 @@ public function type(){
 public function diminishes(){
     return $this->hasMany('App\Models\Diminish');
 }
+public function generals(){
+    return $this->hasMany('App\Models\General');
+}
+
 
 }

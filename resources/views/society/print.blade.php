@@ -4,7 +4,7 @@
         <link href="{{URL::asset('assets/plugins/select2/select2.min.css')}}" rel="stylesheet" />
         <style>
             @media print{
-                
+
 				#hidden{
                     display : none;
                 }
@@ -20,7 +20,7 @@
 }
 
 
-	  
+
         </style>
 @endsection
 @section('page-header')
@@ -35,20 +35,20 @@
                             </div>
                             <div class="page-rightheader">
                                 <div class="btn btn-list">
-                           
-                                    <a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a> 
+
+                                    <a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a>
                                     {{-- <a href="#" class="btn btn-warning"><i class="fe fe-shopping-cart mr-1"></i> Buy Now </a> --}}
                                 </div>
                             </div>
                         </div>
                         <!--End Page header-->
 @endsection
-@section('content') 
+@section('content')
 {{-- --}}
 <div class="container p-5">
 	<div class="row">
 		<div class="col-12 p-3 mb-2" style="background:#fff;">
-           
+
 			<div class="row pt-5">
 
 				<div class=" text-center col-md-12">
@@ -77,9 +77,9 @@
                         </div>
 
                         <div class="">
-                           <p> La société <strong>ELITE CREDIT </strong>, immeuble Zoe, Cocody-Riviera Bonoumin, 
-                            01 BP 235 ABIDJAN 01 ; numéro compte contribuable : CC 2198712 U de droit ivoirien, domiciliée à Abidjan, immatriculée au greffe du tribunal 
-                            de commerce d’Abidjan sous le N° CI-ABJ-03-2021-B17-00076. <p>
+                           <p> La société <strong>ELITE CREDIT </strong>, immeuble Zoe, Cocody-Riviera Bonoumin,
+                            01 BP 235 ABIDJAN 01 ; numéro compte contribuable : CC 2236182 P de droit ivoirien, domiciliée à Abidjan, immatriculée au greffe du tribunal
+                            de commerce d’Abidjan sous le N° CI-ABJ-03-2022-B13-02780. <p>
                         </div>
 
                         <div class="row">
@@ -93,9 +93,13 @@
 
                         <div class="">
                             <p>ET la SOCIETE <strong>{{$society->name}}</strong>, dont le siège social est sis à {{$society->siege}}
-                            , Tel (+225) {{$society->tel_ent}}, immatriculée au Registre du Commerce et du Crédit Mobilier sous le 
-                                n°{{$society->nr}}, Représentée par Monsieur <strong>{{$society->name_gerant}} {{$society->prename_gerant}}</strong> de pays de nationnalité {{$society->nationnalite}} Homme
-                                né(e) le {{$society->datenais}} à {{$society->lieu}} Domicilié audit siège social, Titulaire de la pièce d’Immatriculation de type {{$society->piece->nom}} N°{{$society->numpiece}}
+                            , Tel (+225) {{$society->tel_ent}}, immatriculée au Registre du Commerce et du Crédit Mobilier sous le
+                                n°{{$society->nr}}, Représentée par @if ($society->sexe == 'M')
+                                Monsieur
+                            @else
+                                Madame
+                            @endif <strong>{{$society->name_gerant}} {{$society->prename_gerant}}</strong> de pays de nationnalité {{$society->nationnalite}} Homme
+                                né(e) le {{\Carbon\Carbon::parse($society->datenaiss)->format('d/m/Y')}} à {{$society->lieu}} Domicilié audit siège social, Titulaire de la pièce d’Immatriculation de type {{$society->piece->nom}} N°{{$society->numpiece}}
                                 dument habilité aux fins des présentes et de leurs suites </p>
                          </div>
 
@@ -127,7 +131,7 @@
 
                         <div style="font-size: 15px;" class="">
                             <p>ELITE CREDIT consent à son client
-                                 l’ouverture d’un Compte Courant à condition que ce dernier s’engage à en exécuter les conditions définies aux présentes. Le Compte Courant est un compte de dépôt à vue. 
+                                 l’ouverture d’un Compte Courant à condition que ce dernier s’engage à en exécuter les conditions définies aux présentes. Le Compte Courant est un compte de dépôt à vue.
                                 Toutes les conditions tarifaires relatives au Compte sont affichées dans les agences  <strong>ELITE ALLIANCE</strong>. </p>
                          </div> <br>
 
@@ -142,18 +146,18 @@
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Le délai d’ouverture du Compte Courant est immédiat, sous réserve que 
+                            <p>Le délai d’ouverture du Compte Courant est immédiat, sous réserve que
                                 le dossier d’ouverture du client soit au
                                  complet et que l’étude des pièces constitutives soit satisfaisante.</p>
-                                <p>A l’ouverture du compte, ELITE CREDIT remet à son client 
-                                    une Carte d’Identification Client (CIC). La CIC renseigne son nom et prénom, 
-                                    le numéro de Compte Courant, le numéro de la 
-                                    carte d’identité ainsi que sa signature. Toutes 
-                                    opérations sur le Compte courant requiert la CICI et la carte d’identité aux guichets de  
+                                <p>A l’ouverture du compte, ELITE CREDIT remet à son client
+                                    une Carte d’Identification Client (CIC). La CIC renseigne son nom et prénom,
+                                    le numéro de Compte Courant, le numéro de la
+                                    carte d’identité ainsi que sa signature. Toutes
+                                    opérations sur le Compte courant requiert la CICI et la carte d’identité aux guichets de
                                  <strong>ELITE ALLIANCE</strong>. </p>
                                  <p>En cas de perte de sa CIC, le client peut demander à ELITE CREDIT de lui remettre une nouvelle moyennant
                                       l’acquittement d’un montant forfaitaire qui sera prélevé de son Compte Courant.</p>
-                                      <p>L’ouverture d’un compte Courant permet au Client 
+                                      <p>L’ouverture d’un compte Courant permet au Client
                                           d’accéder aux produits de crédits de ELITE CREDIT.</p>
                          </div> <br>
 
@@ -167,8 +171,8 @@
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Pour ouvrir un Compte Courant, le Client doit s’acquitter des frais d’ouvertures 
-                                <i>ELITE CREDIT. </i> 
+                            <p>Pour ouvrir un Compte Courant, le Client doit s’acquitter des frais d’ouvertures
+                                <i>ELITE CREDIT. </i>
                                 Les conditions tarifaires sont affichées dans les agences de <i>ELITE ALLIANCE</i> .
                                </p>
                          </div>
@@ -188,7 +192,7 @@
                             <p>Le titulaire n’est redevable d’aucune commission de mouvement sur le compte. Cependant, certains frais,
                                  dont notamment ceux associés au retour d’un chèque impayé au retard de paiement d’une échéance de crédit,
                                  à l’édition d’un relevé de Compte, etc., sont perceptible sur le Compte Courant.</p>
-                         </div> <br> 
+                         </div> <br>
 
                          <div class="row mt-3">
                             <div style="font-size: 18px; text-decoration: underline" class="col-md-6">
@@ -203,12 +207,12 @@
                                  ouverts dans le livre de <i>ELITE CREDIT</i> sont Gratuits.
                                </p>
 
-                         </div>  <br> <br> 
-                         <br> 
+                         </div>  <br> <br>
+                         <br>
 
 
 
-                         
+
                          <div class="row mt-3">
                             <div style="font-size: 18px; text-decoration: underline" class="col-md-6">
                                 <strong>ARTICLE 6 : DEPOT MINIMUM</strong>
@@ -219,7 +223,7 @@
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Un dépôt minimum est exigé à l’ouverture du Compte courant. 
+                            <p>Un dépôt minimum est exigé à l’ouverture du Compte courant.
                                 Les conditions en vigueur sont affichées à l’agence <strong>ELITE ALLIANCE</strong>.
                                </p>
 
@@ -241,7 +245,7 @@
                                <p>Tout retrait qui rendrait le solde du compte inférieur au solde minimum est refusé.</p>
                          </div>  <br>
 
-                         
+
                          <div class="row mt-3">
                             <div style="font-size: 18px; text-decoration: underline" class="col-md-6">
                                 <strong>ARTICLE 8 : MOTANT MINIMUM D’OPERATION</strong>
@@ -257,7 +261,7 @@
 Toute opération en dessus du montant minimum sera refusée.</p>
                          </div>  <br>
 
-                         
+
                          <div class="row mt-3">
                             <div style="font-size: 18px; text-decoration: underline" class="col-md-6">
                                 <strong>ARTICLE 9 : DISPONIBILITE DES FONDS</strong>
@@ -268,10 +272,10 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                           <p> Les fonds déposés sur un compte courant 
+                           <p> Les fonds déposés sur un compte courant
                                sont disponibles immédiatement, à la première demande du client, pendant les heures
-                                d’ouvertures des guichets des agences  <strong>ELITE ALLIANCE</strong>. 
-                                Les retraits sont autorisés jusqu’à concurrence des avoirs aux comptes, 
+                                d’ouvertures des guichets des agences  <strong>ELITE ALLIANCE</strong>.
+                                Les retraits sont autorisés jusqu’à concurrence des avoirs aux comptes,
                                 en respectant le montant minimum d’opération et le solde minimum du compte. Le nombre de retraits autorisés sur un compte courant est illimité.</p>
                          </div> <br>
 
@@ -312,7 +316,7 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Le titulaire doit désigner sur le Formulaire d’ouverture de compte s’il désire avoir 
+                            <p>Le titulaire doit désigner sur le Formulaire d’ouverture de compte s’il désire avoir
                                 un cosignataire sur son compte courant. Le cas échéant, ce dernier dispose des mêmes pouvoirs
                                  sur le compte que le titulaire
                                  et les cosignataires d’un même compte sont solidaires pour toutes les opérations qui y sont rattachés.</p>
@@ -327,14 +331,14 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Le titulaire d’un Compte Courant peut désigner un mandataire- et un seul- habilité à réaliser 
-                                des opération (retrait, transfert) sur le compte. Les habilitations conférées aux 
+                            <p>Le titulaire d’un Compte Courant peut désigner un mandataire- et un seul- habilité à réaliser
+                                des opération (retrait, transfert) sur le compte. Les habilitations conférées aux
                                 mandataires cessent automatiquement d’être valides au décès du titulaire du compte.</p>
-                                 <p>Le titulaire doit délimiter l’étendue des pouvoirs du mandataire, 
-                                     que ce soit en termes de montant ; de type d’opérations ou de durée du mandat. Ces habilitations 
-                                     ainsi que l’identité du mandataire sont à renseigner dans la Fiche de Procuration (inclus dans le formulaire 
-                                     de Demande d’Ouverture de Compte) que le client (titulaire) doit impérativement signer. Si le titulaire ne 
-                                     souhaite pas limiter les pouvoirs de son mandataire, il doit insérer la mention 
+                                 <p>Le titulaire doit délimiter l’étendue des pouvoirs du mandataire,
+                                     que ce soit en termes de montant ; de type d’opérations ou de durée du mandat. Ces habilitations
+                                     ainsi que l’identité du mandataire sont à renseigner dans la Fiche de Procuration (inclus dans le formulaire
+                                     de Demande d’Ouverture de Compte) que le client (titulaire) doit impérativement signer. Si le titulaire ne
+                                     souhaite pas limiter les pouvoirs de son mandataire, il doit insérer la mention
                                      néant dans la Fiche de Procuration avant la réception de la notification.</p>
                          </div> <br>
 
@@ -345,14 +349,14 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                             <div class="col-md-6">
 
                             </div>
-                        </div> <br> 
+                        </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Le compte courant offre une palette de service : retrait 
-                                en espèces, dépôt en espèces ou par chèque, virement interne entre Compte de 
+                            <p>Le compte courant offre une palette de service : retrait
+                                en espèces, dépôt en espèces ou par chèque, virement interne entre Compte de
                                <strong> ELITE CREDIT</strong>, remboursement de crédit, etc . Le nombre d’opérations autorisées sur un Compte Courant est illimité.</p>
-                                 <p>Le compte courant retrace toutes les opérations liées à un 
-                                     éventuel crédit du client. En plus des opérations crédit, des dépôts et des retraits, 
+                                 <p>Le compte courant retrace toutes les opérations liées à un
+                                     éventuel crédit du client. En plus des opérations crédit, des dépôts et des retraits,
                                      le compte courant retrace toutes les opérations des services associés.</p>
                          </div>
  <br><br><br><br><br>
@@ -367,7 +371,7 @@ Toute opération en dessus du montant minimum sera refusée.</p>
 
                         <div style="font-size: 15px;" class="">
                             <p>
-                                Un Compte Courant peut être approvisionné par la remise d’un chèque à l’ordre de <strong> ELITE CREDIT</strong>. 
+                                Un Compte Courant peut être approvisionné par la remise d’un chèque à l’ordre de <strong> ELITE CREDIT</strong>.
                                 Pour faire de face aux frais de retour d’un chèque impayé, un solde minimum doit être maintenu dans le compte avant le dépôt du chèque.
                                  <strong> ELITE CREDIT</strong>
                                  prélèvera des frais pour tout retour d’un chèque impayé. Les conditions tarifaires en vigueur sont affichées dans les agences de <strong>ELITE ALLIANCE</strong>.</p>
@@ -387,17 +391,17 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                         <div style="font-size: 15px;" class="">
                             <p>
                                 Une restriction concernant les dépôts supérieurs
-                                 à un certain seuil est instaurée pour appliquer la règlementation relative 
+                                 à un certain seuil est instaurée pour appliquer la règlementation relative
                                 à la « Lutte contre le Blanchissement d’Argent » .</p>
-                                 <p> Au -delà de ce seuil, une demande de justification de la provenance des fonds est un préalable à l’octroi de l’autorisation du dépôt. 
-                                     Les conditions en vigueur relatives à ce seuil sont affichées dans les agences de 
+                                 <p> Au -delà de ce seuil, une demande de justification de la provenance des fonds est un préalable à l’octroi de l’autorisation du dépôt.
+                                     Les conditions en vigueur relatives à ce seuil sont affichées dans les agences de
                                  <strong>ELITE ALLIANCE</strong>.
                                 </p>
                          </div> <br>
 
                          <div class="row mt-3">
                             <div style="font-size: 18px; text-decoration: underline" class="col-md-6">
-                                <strong>ARTICLE 17  : LUTTE CONTRE LE BLANCHIMENT D’ARGENT </strong>
+                                <strong>ARTICLE 17  : CLOTURE D’UN COMPTE COURANT </strong>
                             </div>
                             <div class="col-md-6">
 
@@ -407,8 +411,8 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                         <div style="font-size: 15px;" class="">
                             <p>La clôture d’un Compte Courant est possible à tout moment sous réserve que le Client s’acquitte des frais de clôture.
                                  Les conditions en vigueur sont affichées dans les agences de  <strong>ELITE ALLIANCE</strong>.</p>
-                            <p>Avant de pouvoir procéder à la clôture, tout crédit associé 
-                                au compte courant doit avoir été remboursé intégralement. 
+                            <p>Avant de pouvoir procéder à la clôture, tout crédit associé
+                                au compte courant doit avoir été remboursé intégralement.
                                 Il en est de même avec les frais ; pénalités et commissions dûs par le client. </p>
                          </div> <br>
 
@@ -422,9 +426,9 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Un compte courant qui reste sans mouvement pendant 
-                                une période de 6 mois est déclassé comme « dormant ». Dans ce cas, il ne sera plus possible pour le Client d’enregistrer des mouvements sur le compte, ni au débit ni au crédit. Des procédures spécifiques existent pour réactiver et / ou clôturer un compte déclassé. En cas de solde nul, le compte 
-                                courant sera clôturé automatiquement 6 mois après avoir été déclassé 
+                            <p>Un compte courant qui reste sans mouvement pendant
+                                une période de 6 mois est déclassé comme « dormant ». Dans ce cas, il ne sera plus possible pour le Client d’enregistrer des mouvements sur le compte, ni au débit ni au crédit. Des procédures spécifiques existent pour réactiver et / ou clôturer un compte déclassé. En cas de solde nul, le compte
+                                courant sera clôturé automatiquement 6 mois après avoir été déclassé
                                 comme « dormant »..</p>
                          </div>  <br>
 
@@ -438,12 +442,12 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Nul ne peut effectuer de mouvement sur un Compte Courant dont le titulaire est décédé. 
-                                Cette mesure s’applique également au mandataire 
-                                désigné par procuration. Les habilitations conférées au mandataire 
+                            <p>Nul ne peut effectuer de mouvement sur un Compte Courant dont le titulaire est décédé.
+                                Cette mesure s’applique également au mandataire
+                                désigné par procuration. Les habilitations conférées au mandataire
                                 cessent automatiquement d’être valides au décès du titulaire du compte.</p>
                             <p>Dès que ELITE <strong>CREDIT</strong> est informé de la date du décès de son client, le compte courant est déclassé en compte inactif. Le compte déclassé ne peut plus enregistrer de mouvement, ni au débit ni au crédit.</p>
-                                <p>Au décès du titulaire, le solde disponible sur le compte courant sera mis à disposition de son ayant droit, que le titulaire doit obligatoirement 
+                                <p>Au décès du titulaire, le solde disponible sur le compte courant sera mis à disposition de son ayant droit, que le titulaire doit obligatoirement
                                     désigner lors de l’ouverture du compte sur le Formulaire de <i>Demande d’Ouverture de Compte</i>.</p>
                          </div>
  <br>
@@ -473,14 +477,14 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                         </div> <br>
 
                         <div style="font-size: 15px;" class="">
-                            <p>Moyennant le paiement d’un montant forfaitaire, <strong>ELITE CREDIT</strong> rremet au client qui fait la demande un relevé de son compte courant. Ce relevé retrace toutes les opérations réalisées sur le compte pendant une période donnée.
+                            <p>Moyennant le paiement d’un montant forfaitaire, <strong>ELITE CREDIT</strong> remet au client qui fait la demande un relevé de son compte courant. Ce relevé retrace toutes les opérations réalisées sur le compte pendant une période donnée.
                                  Ce service est facturé selon les conditions en vigueur affichées dans les agences de <strong>ELITE ALLIANCE</strong>.
                                  Le paiement de ce service se fait par prélèvement automatique sur le compte courant du client.
                                 </p>
                                 <p>
-                                    Le client est tenu de signaler en agence de <strong>ELITE ALLIANCE</strong> les erreurs qu’il aurait constatées dans les relevés de son compte courant qui lui sont délivrés. Le client à 30 jours à compter de la date 
-                                    de réception pour les signaler à ELITE <strong>CREDIT</strong>. A défaut de réclamation par écrit dans les 30 jours, 
-                                    les informations reprises dans les relevés sont, 
+                                    Le client est tenu de signaler en agence de <strong>ELITE ALLIANCE</strong> les erreurs qu’il aurait constatées dans les relevés de son compte courant qui lui sont délivrés. Le client à 30 jours à compter de la date
+                                    de réception pour les signaler à ELITE <strong>CREDIT</strong>. A défaut de réclamation par écrit dans les 30 jours,
+                                    les informations reprises dans les relevés sont,
                                     sauf erreur matérielle manifeste, réputées exactes et le client est censé les avoirs approuvées
                                 </p>
                                 <p><strong> ELITE CREDIT<strong> peut à tout moment rectifier les erreurs matérielles commises par elle.</p>
@@ -502,7 +506,7 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                                     <strong>ELITE CREDIT</strong> mettra tout en œuvre pour éviter de faire jouer ce préavis. Aussi, un chèque peut-il être établi à charge pour le client d’effectuer le retrait au
                                      guichet de la banque UBA Partenaire de <strong>ELITE CREDIT</strong>.
                                     </p>
-                         </div><br> 
+                         </div><br>
 
 
                          <div class="row ">
@@ -520,7 +524,7 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                                  compte courant.
                                 </p>
                                 <p>
-                                    Le présent contrat est régie par le droit ivoirien. Les tribunaux ivoiriens seront compétents pour tous les litiges et différends relatifs 
+                                    Le présent contrat est régie par le droit ivoirien. Les tribunaux ivoiriens seront compétents pour tous les litiges et différends relatifs
                                     à l’interprétation et l’exécution de cette convention d’Ouverture de Compte courant.
                                     </p>
                                 <p>Ainsi convenu et signé en 2 exemplaires à Abidjan, le {{\Carbon\Carbon::now()->format('d/m/Y')}}</p>
@@ -529,11 +533,11 @@ Toute opération en dessus du montant minimum sera refusée.</p>
                          <div class="row mb-4">
                             <div class="col-md-6">
                                 <strong>ELITE CREDIT</strong>
-         
+
                             </div>
                             <div class="col-md-6">
                                   <strong>Client</strong><br>
-                                  <p>(Signature à précéder de la                  
+                                  <p>(Signature à précéder de la
                                     mention «  lu et Approuvé »)
                                     </p>
                             </div>
@@ -541,15 +545,15 @@ Toute opération en dessus du montant minimum sera refusée.</p>
 
                         <div class="row mt-9">
                             <div class="col-md-6">
-              
-         
+
+
                             </div>
                             <div class="col-md-6">
-                         
+
                             </div>
                         </div>
-                        
-                     
+
+
 
 				</div>
 			</div>
@@ -561,19 +565,19 @@ Toute opération en dessus du montant minimum sera refusée.</p>
 {{-- <div class="container p-5">
 	<div class="row">
 		<div class="col-12 p-3 mb-2" style="background:#fff;">
-           
+
 			<div class="row pt-5">
 
-			
+
 				<div class="col-md-12">
-                       
 
-                    
-                      
 
-                       
 
-                        
+
+
+
+
+
 				</div>
 			</div>
 		</div>

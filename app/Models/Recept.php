@@ -12,7 +12,7 @@ class Recept extends Model
     protected $table = 'recepts';
 
     protected $fillable = [
-
+'godfather_id',
         'montant',
      'customer_id', 'code_bonus',
     'user_id'
@@ -34,6 +34,9 @@ public function user(){
 
 public function intervenant(){
     return $this->belongsTo('App\Models\Customer');
+}
+public function godfather(){
+    return $this->belongsTo('App\Models\Client');
 }
 
 public function customer(){

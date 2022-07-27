@@ -38,6 +38,7 @@ return new class extends Migration
             $table->unsignedbigInteger('user_id');
             $table->string('code');
             $table->string('montant');
+            $table->string('motif');
             $table->timestamps();
 
             $table->foreign('send_id')->references('id')->on('sends');

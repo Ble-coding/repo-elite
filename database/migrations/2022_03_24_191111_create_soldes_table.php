@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('motif');
             $table->unsignedbigInteger('piece_id');
             $table->string('numpiece')->nullable();
+            $table->unsignedbigInteger('actif')->default(1);
             $table->string('reference');
             // $table->bigInteger('timbre')->default(100);
             $table->enum('timbre',['Oui','Non'])->default('Non');

@@ -28,7 +28,7 @@
 									@can('manage-clients')
 									<a href="{{route('entreprises.create')}}" id="hidden"  style="background:#262626; color:#fff" class="btn btn"><i class="fe fe-plus mr-1"></i> Nouvelle entreprise </a>
 									{{-- <a href="#" id="hidden" onclick="window.print()"   style="background:#ff0017; color:#fff" class="btn btn"><i class="fe fe-printer mr-1"></i> Imprimer </a> --}}
-									{{-- <a href="#" class="btn btn-warning"><i class="fe fe-shopping-cart mr-1"></i> Buy Now </a> --}}			
+									{{-- <a href="#" class="btn btn-warning"><i class="fe fe-shopping-cart mr-1"></i> Buy Now </a> --}}
 									@endcan
 
 								</div>
@@ -53,14 +53,14 @@
 				<li class=""><a href="#tab1" class="active" data-toggle="tab">En attente</a></li>
 						<li class=""><a href="#tab2" data-toggle="tab">Entreprises</a></li>
 						@can('manage-users')
-							<li><a href="#tab3" data-toggle="tab">Supprimés</a></li>	
-						@endcan								
+							<li><a href="#tab3" data-toggle="tab">Supprimés</a></li>
+						@endcan
 			</ul>
 		</div>
 	</div>
 	<div class="panel-body tabs-menu-body">
 		<div class="tab-content">
-			<div class="tab-pane active " id="tab1">				
+			<div class="tab-pane active " id="tab1">
 				<div class="card col-md-10">
 					<div class="card-header">
 						<h3 class="card-title">Liste entreprises en attente</h3>
@@ -87,7 +87,7 @@
 																<th class="border-bottom-0 w-30">Nom du gérant</th>
 																<th class="border-bottom-0 w-30">Tel gérant</th>
 																{{-- @can('manage-users')
-																<th class="border-bottom-0 w-30">Admin</th>	
+																<th class="border-bottom-0 w-30">Admin</th>
 																@endcan --}}
 																{{-- @can('manage-clients') --}}
 																<th class="border-bottom-0 w-10">Actions</th>
@@ -102,29 +102,29 @@
 																{{-- @php
 																	$image = DB::table('entreprises')->where('id', 1)->first();
 																	$images = explode('|', $entreprise->image);
-																	@endphp  
+																	@endphp
 																		<td> --}}
-																			{{-- <span class="avatar brround avatar-md d-block">	 --}}																			
+																			{{-- <span class="avatar brround avatar-md d-block">	 --}}
 																				{{-- <div class="user-pic">
 																					<img src="{{URL::to($images[0])}}" style="height:40px;width:40px" alt="img" class="avatar avatar-md brround">
 																				</div> --}}
 																			{{-- </span> --}}
 																		{{-- </td> --}}
 																<td>{{\Carbon\Carbon::parse($entreprise->created_at)->format('d/m/Y')}}</td>
-																<td>{{$entreprise->code}}</td>  
-																 <td>{{$entreprise->name}}</td>       
-																 <td>{{$entreprise->forme->name}}</td> 
-																 <td>{{$entreprise->name_gerant}} {{$entreprise->prename_gerant}}</td> 
-																 <td>{{$entreprise->tel}}</td>    
+																<td>{{$entreprise->code}}</td>
+																 <td>{{$entreprise->name}}</td>
+																 <td>{{$entreprise->forme->name}}</td>
+																 <td>{{$entreprise->name_gerant}} {{$entreprise->prename_gerant}}</td>
+																 <td>{{$entreprise->tel}}</td>
 																 {{-- @can('manage-users')
-																 <td>{{$entreprise->user->name}} -- {{implode(' , ', $entreprise->user->roles()->pluck('name')->toArray())}}</td>                                        	 
+																 <td>{{$entreprise->user->name}} -- {{implode(' , ', $entreprise->user->roles()->pluck('name')->toArray())}}</td>
 																 @endcan  --}}
-																
+
 																 <td>
 																	{{-- @can('show-entreprises') --}}
 																	@can('manage-investis')
 																			<a href="{{ route('confirmers.stored', ['entreprise' => $entreprise->id]) }}" style="background-color:#fff" class="btn btn-">👀</a>
-																	@endcan 
+																	@endcan
 																	{{-- <a href="{{ route('entreprises.show' ,  --}}
 																	@can('manage-clients')
 																		<a href="{{ route('entreprises.print' , ['entreprise' => $entreprise->id]) }}" style="background-color:#eee;" class="btn btn-">🖨️</a>
@@ -137,12 +137,12 @@
 																				@csrf
 																				@method('DELETE')
 																				<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?. Cette action est irréversible.');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
-																		</form>   
+																		</form>
 																	@endcan
-																	  
+
 																 </td>
-															
-			 
+
+
 															 </tr>
 																 @endforeach
 															 @else
@@ -150,7 +150,7 @@
 																						 <td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
 																					 </tr>
 															 @endif
-														
+
 														</tbody>
 													</table>
 													{{-- <div class="row d-flex justify-content-center">
@@ -167,8 +167,8 @@
 					<!-- End Row -->
 			</div>
 
-	
-			<div class="tab-pane " id="tab2">				
+
+			<div class="tab-pane " id="tab2">
 				<div class="card col-md-10">
 					<div class="card-header">
 						<h3 class="card-title">Liste entreprises en attente</h3>
@@ -195,7 +195,7 @@
 																<th class="border-bottom-0 w-30">Nom du gérant</th>
 																<th class="border-bottom-0 w-30">Tel gérant</th>
 																{{-- @can('manage-users')
-																<th class="border-bottom-0 w-30">Admin</th>	
+																<th class="border-bottom-0 w-30">Admin</th>
 																@endcan --}}
 																{{-- @can('manage-clients') --}}
 																{{-- <th class="border-bottom-0 w-10">Actions</th> --}}
@@ -210,24 +210,24 @@
 																{{-- @php
 																	$image = DB::table('entreprises')->where('id', 1)->first();
 																	$images = explode('|', $entreprise->image);
-																	@endphp  
+																	@endphp
 																		<td> --}}
-																			{{-- <span class="avatar brround avatar-md d-block">	 --}}																			
+																			{{-- <span class="avatar brround avatar-md d-block">	 --}}
 																				{{-- <div class="user-pic">
 																					<img src="{{URL::to($images[0])}}" style="height:40px;width:40px" alt="img" class="avatar avatar-md brround">
 																				</div> --}}
 																			{{-- </span> --}}
 																		{{-- </td> --}}
 																<td>{{\Carbon\Carbon::parse($listEntreprise->created_at)->format('d/m/Y')}}</td>
-																<td>{{$listEntreprise->code}}</td>  
-																 <td>{{$listEntreprise->name}}</td>       
-																 <td>{{$listEntreprise->forme->name}}</td> 
-																 <td>{{$listEntreprise->name_gerant}} {{$listEntreprise->prename_gerant}}</td> 
-																 <td>{{$listEntreprise->tel}}</td>    
+																<td>{{$listEntreprise->code}}</td>
+																 <td>{{$listEntreprise->name}}</td>
+																 <td>{{$listEntreprise->forme->name}}</td>
+																 <td>{{$listEntreprise->name_gerant}} {{$listEntreprise->prename_gerant}}</td>
+																 <td>{{$listEntreprise->tel}}</td>
 																 {{-- @can('manage-users')
-																 <td>{{$entreprise->user->name}} -- {{implode(' , ', $entreprise->user->roles()->pluck('name')->toArray())}}</td>                                        	 
+																 <td>{{$entreprise->user->name}} -- {{implode(' , ', $entreprise->user->roles()->pluck('name')->toArray())}}</td>
 																 @endcan  --}}
-																	{{-- 																
+																	{{--
 																 <td> --}}
 																	{{-- @can('show-entreprises') --}}
 																	{{-- @can('manage-investis')
@@ -245,12 +245,12 @@
 																				@csrf
 																				@method('DELETE')
 																				<button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?. Cette action est irréversible.');" type="submit" style="background:#ff0017;" class="btn btn">🗑️</a>
-																		</form>   
+																		</form>
 																	@endcan
-																	  
+
 																 </td> --}}
-															
-			 
+
+
 															 </tr>
 																 @endforeach
 															 @else
@@ -258,7 +258,7 @@
 																						 <td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
 																					 </tr>
 															 @endif
-														
+
 														</tbody>
 													</table>
 													{{-- <div class="row d-flex justify-content-center">
@@ -277,7 +277,7 @@
 
 
 			@can('manage-users')
-				<div class="tab-pane" id="tab3">				
+				<div class="tab-pane" id="tab3">
 					<div class="card col-md-10">
 						<div class="card-header">
 							<h3 class="card-title">Liste des entreprises supprimées</h3>
@@ -302,7 +302,7 @@
 																<th class="border-bottom-0 w-20">Nom entreprise</th>
 																<th class="border-bottom-0 w-15">Forme juridique</th>
 																<th class="border-bottom-0 w-30">Nom du gérant</th>
-																<th class="border-bottom-0 w-30">Tel gérant</th>	
+																<th class="border-bottom-0 w-30">Tel gérant</th>
 																{{-- <th class="border-bottom-0 w-30">Email</th> --}}
 																{{-- <th class="border-bottom-0 w-30">Tel</th> --}}
 																{{-- <th class="border-bottom-0 w-30">Admin</th> --}}
@@ -314,27 +314,27 @@
 															@foreach($partSups as $ent)
 															<tr>
 															<th scope="row">{{$ent->id}}</th>
-															<td>{{$ent->deleted_at}}</td>			
+															<td>{{$ent->deleted_at}}</td>
 																<td>{{$ent->code}}</td>
-																<td>{{$ent->name}} {{$ent->tel_ent}}</td>       
-																<td>{{$ent->forme->name}}</td> 
-																<td>{{$ent->name_gerant}}</td> 
-																<td>{{$ent->tel}}</td> 
+																<td>{{$ent->name}} {{$ent->tel_ent}}</td>
+																<td>{{$ent->forme->name}}</td>
+																<td>{{$ent->name_gerant}}</td>
+																<td>{{$ent->tel}}</td>
 																{{-- <td>{{$ent->user->name}} -- {{implode(' , ', $ent->user->roles()->pluck('name')->toArray())}}</td>                                                   --}}
 																<td>
-																	
+
 																	@can('delete-entreprises')
-																	
+
 																<form method="POST"  class="d-inline" action="{{route('entreprises.restore' , ['entreprise' => $entreprise->id]) }}">
 																	@csrf
-																	@method('PUT')																			
-																	<button style="background:#eee; color:#262626" class="btn btn" onclick="return confirm('Êtes-vous sûr de vouloir restaurer les infos de l\'entreprise ?');" type="submit">✔️</button>																			
+																	@method('PUT')
+																	<button style="background:#eee; color:#262626" class="btn btn" onclick="return confirm('Êtes-vous sûr de vouloir restaurer les infos de l\'entreprise ?');" type="submit">✔️</button>
 																</form>
 
 																@endcan
-																	
+
 																</td>
-			
+
 															</tr>
 																@endforeach
 															@else
@@ -342,7 +342,7 @@
 																						<td colspan="10" class="text-center"><i style="color: white"><strong>Aucun enregistrements correspondants trouvés</strong></i></td>
 																					</tr>
 															@endif
-														
+
 														</tbody>
 													</table>
 													{{-- <div class="row d-flex justify-content-center">
@@ -363,9 +363,9 @@
 	</div>
 </div>
 
-					
 
-			
+
+
 @endsection
 @section('js')
 		<!-- INTERNAl Data tables -->

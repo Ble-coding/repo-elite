@@ -30,3 +30,19 @@
 		<script src="{{URL::asset('assets/plugins/simplebar/js/simplebar.min.js')}}"></script>
 		<!-- Custom js-->
 		<script src="{{URL::asset('assets/js/custom.js')}}"></script>		
+
+
+
+
+		 <!-- BEGIN: Vendor JS-->
+		 {{-- <script src="{{URL::asset('assets/vendors/js/vendors.min.js')}}"></script> --}}
+		 <!-- BEGIN Vendor JS-->
+	 
+		 <!-- BEGIN: Page Vendor JS-->
+		 {{-- <script src="{{URL::asset('assets/vendors/js/jquery.repeater.min.js')}}"></script> --}}
+		 <!-- END: Page Vendor JS-->
+	 
+	
+	 
+		 <!-- BEGIN: Page JS-->
+		 <script src="{{URL::asset('assets/vendors/js/form-repeater.min.js')}}"></script>

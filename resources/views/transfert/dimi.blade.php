@@ -100,7 +100,7 @@ margin: auto;
                                                                         {{-- <h1 class="display-3">Salut!</h1> --}}
                                                 
                                                    
-                                                                            <p class="lead">Vous etes sur le point de valider un transfert du compte {{$transfert->send->name}} @if ($transfert->solde_id !== Null)
+                                                                            <p class="lead">Vous êtes sur le point de valider un transfert du compte {{$transfert->send->name}} @if ($transfert->solde_id !== Null)
                                                                                 {{$transfert->solde->particulier->code}} {{$transfert->solde->particulier->name}} {{$transfert->solde->particulier->prename}}
                                                                              @elseif($transfert->sode_id !== Null)
                                                                                  {{$transfert->sode->client->code}} {{$transfert->sode->client->name}} {{$transfert->sode->client->prename}}

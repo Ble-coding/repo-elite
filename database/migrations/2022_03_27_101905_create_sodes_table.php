@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedbigInteger('client_id')->index();
             $table->string('montantD');
             $table->string('montantR');
+            $table->unsignedbigInteger('actif')->default(1);
             $table->string('rendu');
             $table->string('name_deposant')->nullable();
             $table->string('prename_deposant')->nullable();

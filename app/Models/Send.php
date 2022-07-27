@@ -15,7 +15,6 @@ class Send extends Model
         'name',
     ];
 
-
     public function transferts(){
         return $this->hasMany('App\Models\Transfert');
     }

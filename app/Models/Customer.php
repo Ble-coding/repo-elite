@@ -10,19 +10,20 @@ class Customer extends Model
 {
     use HasFactory, SoftDeletes;
 
-    
+
     protected $table = 'customers';
     protected $fillable = ['name', 'prename', 'datenaiss','nationnalite','lieu_habitation',
-    'lieu','tel','email', 'status',
+    'lieu','tel','email',
+    //  'status',
    'sexe',
     'code','personne_name','personne_prename','personne_tel','piece_id','numpiece','dateexp','image',
 
-   
+
    'situation',
    'successeur_name',
    'successeur_prename',
    'successeur_tel',
-   
+
    'prof',
    'nom_ent',
   'address',
@@ -79,5 +80,7 @@ public function diminishes(){
 public function piece(){
     return $this->belongsTo('App\Models\Piece');
     }
-
+    public function generals(){
+        return $this->hasMany('App\Models\General');
+    }
 }

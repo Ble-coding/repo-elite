@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Helpers\Nut;
 use App\Models\Depot;
 use App\Models\Piece;
@@ -52,9 +53,8 @@ class DepotsController extends Controller
            
         // $depots = Depot::distinct()->select('particulier_id')
         // ->groupBy('particulier_id')->get(); 
-
        
-      
+
         return view('depot.index', compact(
             'soldes',
             'depot', 'listDepots',

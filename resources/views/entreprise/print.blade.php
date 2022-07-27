@@ -77,9 +77,9 @@
                         </div>
 
                         <div class="">
-                           <p> La société <strong>ELITE CREDIT </strong>, immeuble Zoe, Cocody-Riviera Bonoumin, 
-                            01 BP 235 ABIDJAN 01 ; numéro compte contribuable : CC 2198712 U de droit ivoirien, domiciliée à Abidjan, immatriculée au greffe du tribunal 
-                            de commerce d’Abidjan sous le N° CI-ABJ-03-2021-B17-00076. <p>
+                                  <p> La société <strong>ELITE CREDIT </strong>, immeuble Zoe, Cocody-Riviera Bonoumin, 
+                            01 BP 235 ABIDJAN 01 ; numéro compte contribuable : CC 2236182 P de droit ivoirien, domiciliée à Abidjan, immatriculée au greffe du tribunal 
+                            de commerce d’Abidjan sous le N° CI-ABJ-03-2022-B13-02780. <p>
                         </div>
 
                         <div class="row">

@@ -10,19 +10,19 @@ class Client extends Model
 {
     use HasFactory ,SoftDeletes;
 
-    
+
     protected $table = 'clients';
     protected $fillable = ['name', 'prename', 'datenaiss','nationnalite','lieu_habitation',
     'lieu','tel','email',
    'sexe',
     'code','personne_name','personne_prename','personne_tel','piece_id','numpiece','dateexp','image',
 
-   
+
    'situation',
    'successeur_name',
    'successeur_prename',
    'successeur_tel',
-   
+
    'prof',
    'nom_ent',
    'status',
@@ -88,12 +88,15 @@ public function sodes(){
 }
 // public function retraits(){
 //     return $this->hasMany('App\Models\Retrait');
-// }  
+// }
 
 public function removes(){
     return $this->hasMany('App\Models\Remove');
 }
 public function piece(){
     return $this->belongsTo('App\Models\Piece');
+    }
+    public function generals(){
+        return $this->hasMany('App\Models\General');
     }
 }

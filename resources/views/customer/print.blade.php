@@ -73,8 +73,8 @@
 
                         <div class="">
                            <p> La société <strong>ELITE CREDIT </strong>, immeuble Zoe, Cocody-Riviera Bonoumin, 
-                            01 BP 235 ABIDJAN 01 ; numéro compte contribuable : CC 2198712 U de droit ivoirien, domiciliée à Abidjan, immatriculée au greffe du tribunal 
-                            de commerce d’Abidjan sous le N° CI-ABJ-03-2021-B17-00076. <p>
+                            01 BP 235 ABIDJAN 01 ; numéro compte contribuable : CC 2236182 P de droit ivoirien, domiciliée à Abidjan, immatriculée au greffe du tribunal 
+                            de commerce d’Abidjan sous le N° CI-ABJ-03-2022-B13-02780. <p>
                         </div>
 
                         <div class="row">
@@ -167,7 +167,7 @@
 
                         <div style="font-size: 15px;" class="">
                             <p>Pour ouvrir un Compte Investissement, le Client doit s’acquitter des frais d’ouvertures de 
-                                <i>ELITE CREDIT</i> 
+                                <i>ELITE CREDIT. </i> 
                                 Les conditions tarifaires sont affichées dans les agences de <i>ELITE ALLIANCE</i> .
                                </p>
                          </div>

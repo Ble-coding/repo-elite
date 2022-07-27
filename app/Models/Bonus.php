@@ -15,7 +15,7 @@ class Bonus extends Model
     protected $fillable = [
 
         'montantB',
-    // 'investiman',
+    'godfather_id',
     'client_id',
     'intervenant_id',
     'particulier_id',
@@ -29,6 +29,10 @@ public function customer(){
 }
 public function intervenant(){
     return $this->belongsTo('App\Models\Customer');
+}
+
+public function godfather(){
+    return $this->belongsTo('App\Models\Client');
 }
 public function client(){
     return $this->belongsTo('App\Models\Client');

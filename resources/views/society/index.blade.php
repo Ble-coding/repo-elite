@@ -62,7 +62,7 @@
 			<div class="tab-pane active " id="tab1">				
 				<div class="card col-md-10">
 					<div class="card-header">
-						<h3 class="card-title">Liste entreprises  en attente</h3>
+						<h3 class="card-title">Liste entreprises en attente</h3>
 					</div>
 				</div>
 					<!-- Row -->
@@ -172,7 +172,7 @@
 			<div class="tab-pane" id="tab2">				
 				<div class="card col-md-10">
 					<div class="card-header">
-						<h3 class="card-title">Liste entreprises  en attente</h3>
+						<h3 class="card-title">Liste entreprises </h3>
 					</div>
 				</div>
 					<!-- Row -->

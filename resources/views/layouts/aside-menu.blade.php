@@ -75,7 +75,7 @@
 								<svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16zm0-11.47L17.74 9 12 13.47 6.26 9 12 4.53z"/></svg>
 							<span class="side-menu__label">Forfaits</span></a>
 						</li>
-		 
+
 						{{-- <li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#')}}">
 								<svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M22 9h-4.79l-4.38-6.56c-.19-.28-.51-.42-.83-.42s-.64.14-.83.43L6.79 9H2c-.55 0-1 .45-1 1 0 .09.01.18.04.27l2.54 9.27c.23.84 1 1.46 1.92 1.46h13c.92 0 1.69-.62 1.93-1.46l2.54-9.27L23 10c0-.55-.45-1-1-1zM12 4.8L14.8 9H9.2L12 4.8zM18.5 19l-12.99.01L3.31 11H20.7l-2.2 8zM12 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
@@ -123,7 +123,7 @@
 								<li><a href="{{route('societies.index')}}" class="slide-item">Entreprises</a></li>
 							</ul>
 						</li>
-						
+
 
 						<li class="slide">
 							<a class="side-menu__item"  href="{{ route('customers.index') }}">
@@ -131,10 +131,10 @@
 							<span class="side-menu__label">Investissements</span></a>
 						</li>
 
-						
+
 						@endcan
 
-					
+
 						@can('manage-soldes')
 						<li class="side-item side-item-category">Comptable</li>
 						<li class="slide">
@@ -164,13 +164,13 @@
 								<li><a class="sub-slide-item" href="{{route('investir.bonus.initial') }}">Retraits Bonus</a></li>
 							</ul>
 		 				</li>
-						 
+
 						@endcan
 
 
-						
 
-					
+
+
 						<li class="side-item side-item-category">Elites Deal Group</li>
 
 						<li class="slide">
@@ -179,8 +179,20 @@
 							<span class="side-menu__label">Elite Deal</span></a>
 						</li>
 
+						@can('manage-bancaires')
+						<li class="side-item side-item-category">Demandes</li>
+						<li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#')}}">
+							            <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M19 3H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 10h3.13c.21.78.67 1.47 1.27 2H5v-2zm14 2h-4.4c.6-.53 1.06-1.22 1.27-2H19v2zm0-4h-5v1c0 1.07-.93 2-2 2s-2-.93-2-2V8H5V5h14v3zm-2 7h-3v1c0 .47-.19.9-.48 1.25-.37.45-.92.75-1.52.75s-1.15-.3-1.52-.75c-.29-.35-.48-.78-.48-1.25v-1H3v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-4zM5 17h3.13c.02.09.06.17.09.25.24.68.65 1.28 1.18 1.75H5v-2zm14 2h-4.4c.54-.47.95-1.07 1.18-1.75.03-.08.07-.16.09-.25H19v2z"></path></svg>
+							<span class="side-menu__label">Credits</span><i class="angle fa fa-angle-right"></i></a>
+							<ul class="slide-menu">
+								<li><a class="sub-slide-item" href="{{ route('bancaires.index') }}">Particulier</a></li>
+								<li><a class="sub-slide-item" href="{{ route('bancarisations.index') }}">Entreprise</a></li>
+							</ul>
+		 				</li>
+						@endcan
 
-						
+
 
 						{{-- @can('manage-deposes')
 							<li class="side-item side-item-category">Transferts</li>
@@ -193,7 +205,7 @@
 						@endcan --}}
 
 
-						
+
 
 						{{-- <li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{URL('#')}}">
@@ -206,7 +218,7 @@
 						</li>  --}}
 						{{-- <li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#')}}">
-								
+
 							<span class="side-menu__label"></span><i class="angle fa fa-angle-right"></i></a>
 							<ul class="slide-menu">
 								<li><a href="{{ route('epargne_particulier.epargne_particuliers.create') }}" class="slide-item"> Enregistrer</a></li>
@@ -257,7 +269,7 @@
 						</li> --}}
 						{{-- <li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#')}}">
-								
+
 							<span class="side-menu__label"></span><i class="angle fa fa-angle-right"></i></a>
 							<ul class="slide-menu">
 								<li><a href="{{url('/' . $page='chart-apex')}}" class="slide-item"> Enregistrer</a></li>
@@ -282,7 +294,7 @@
 								<li><a href="{{url('/' . $page='chart-apex')}}" class="slide-item"> Enregistrer</a></li>
 								<li><a href="{{url('/' . $page='chart-chartist')}}" class="slide-item">Liste</a></li>
 							</ul>
-						</li> --}}					
+						</li> --}}
 						{{-- <li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#')}}">
 							<svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 15v4H5v-4h14m1-2H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1zM7 18.5c-.82 0-1.5-.67-1.5-1.5s.68-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM19 5v4H5V5h14m1-2H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zM7 8.5c-.82 0-1.5-.67-1.5-1.5S6.18 5.5 7 5.5s1.5.68 1.5 1.5S7.83 8.5 7 8.5z"/></svg>

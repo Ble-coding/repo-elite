@@ -7,18 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.    
+     * Run the migrations.
      *
      * @return void
      */
-    // public function up()
-    // {
-    //     Schema::create('envoies', function (Blueprint $table) {
-    //         $table->id();
-    //         $table->string('name')->default('Epargne');
-    //         $table->timestamps();
-    //     });
-    // }
+    public function up()
+    {
+        Schema::create('envoies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->default('Epargne');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

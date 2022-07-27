@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Validate extends Model
+class Validate extends Model  
 {
     use HasFactory, SoftDeletes;
 
     protected $table = 'validates';
-
+ 
     protected $fillable = ['montant',
            'transfert_id',
            'solde_id','olde_id',
     'sode_id', 'ode_id', 'credit_id', 'redit_id',
     'sold_id','old_id',
-     'sod_id','od_id',
+     'sod_id','od_id', 
  'code',
        'receive_id','send_id',
 

@@ -11,14 +11,14 @@ return new class extends Migration
      *
      * @return void
      */
-    // public function up()
-    // {
-    //     Schema::create('parrainages', function (Blueprint $table) {
-    //         $table->id(); 
-    //         $table->string('bonus')->default(0);
-    //         $table->timestamps();
-    //     });
-    // }
+    public function up()
+    {
+        Schema::create('parrainages', function (Blueprint $table) {
+            $table->id();
+            $table->string('bonus')->default(0);
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

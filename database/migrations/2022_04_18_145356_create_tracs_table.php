@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tracs', function (Blueprint $table) {
             $table->id();
             $table->string('montantB');
-            // $table->string('montant');
+            $table->string('godfather_id');
             // $table->string('investiman');
             $table->unsignedbigInteger('customer_id')->index()->nullable();
             $table->unsignedbigInteger('particulier_id')->index()->nullable();

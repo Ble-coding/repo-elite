@@ -1,10 +1,10 @@
 @csrf
 <div class="input-group mb-4">
     <div class="input-group-prepend">
-        <div class="input-group-text"> 
-            <i class="fe fe-user"></i> 
+        <div class="input-group-text">
+            <i class="fe fe-user"></i>
         </div>
-    </div> 
+    </div>
     <input  value="{{ old('name') ?? $user->name }}" class="form-control @error('name') is-invalid @enderror" type="text" placeholder="{{ __('Nom') }}" id="name" name="name">
                  @error('name')
                           <div class="invalid-feedback">
@@ -79,7 +79,7 @@
             </div>
         </div>
         <input name="new-password" class="form-control {{ $errors->has('new-password') ? ' has-error' : '' }}"  id="new-password" type="password"  placeholder="Nouveau mot de passe" required>
-    
+
                 @if ($errors->has('new-password'))
                    <span class="help-block">
                         <strong>{{ $errors->first('new-password') }}</strong>
@@ -96,7 +96,7 @@
             </div>
         </div>
         <input name="new-password-confirm" class="form-control {{ $errors->has('new-password') ? ' has-error' : '' }}"  id="new-password-confirm" type="password"  placeholder="Confirmation mot de passe" required>
-    
+
     </div>
 
 
@@ -118,28 +118,28 @@
     @enderror
 </div>
 <div class="form-row">
-    <div class="form-group col-md-6 mb-4"> 
+    <div class="form-group col-md-6 mb-4">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     <i class="fe fe-type"></i>
-                </div>   
+                </div>
                 <select name="piece_id" id="piece_id" class="@error('piece_id') is-invalid @enderror form-control custom-select select2">
-                    @foreach($pieces as $piece)														
+                    @foreach($pieces as $piece)
                     <option value="{{$piece->id}}" {{ $piece->id ? 'selected' : '' }}>{{ $piece->nom }}</option>
                    @endforeach
-                </select> 
+                </select>
                 @error('piece_id')
                          <div class="invalid-feedback">
                                            {{ $errors->first('piece_id') }}
                         </div>
-                @enderror 
+                @enderror
              </div>
     </div>
-    <div class="form-group col-md-6 mb-4"> 
+    <div class="form-group col-md-6 mb-4">
         <div class="input-group-prepend">
             <div class="input-group-text">
                 <i class="fe fe-check-square"></i>
-            </div>    
+            </div>
             <input id="numpiece" type="text" class="form-control @error('numpiece') is-invalid @enderror" name="numpiece" value="{{ old('numpiece') ?? $user->numpiece  }}"  autocomplete="numpiece" placeholder="{{ __('Numéro de la pièce') }}" autofocus>
             @error('numpiece')
             <div class="invalid-feedback">
@@ -164,11 +164,11 @@
    </div>
 @enderror
             </div> --}}
- 
-            {{-- 
 
-                       
-                                    
+            {{--
+
+
+
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -177,7 +177,7 @@
                                         </div>
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="{{ __('Confirmation mot de passe') }}">
                                     </div> --}}
-                                
+
 
 
 
@@ -186,20 +186,20 @@
     <div class="form-label">Roles</div>
     <div class="custom-controls-stacked">
         @foreach($roles as $role)
-        <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input"
-            type="checkbox" name="roles[]" value="{{$role->id}}" id="{{$role->id}}"
-            @if ($user->roles->pluck('id')->contains($role->id))
-                    checked                
-            @endif>
-            <label for="{{$role->id}}" class="custom-control-label">{{$role->name}}</label>
-        </label>
-        @error('roles"')
-        <div class="invalid-feedback">
-            {{ $errors->first('roles"') }}
-        </div>  
-        @enderror
-        @endforeach	
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"
+                type="checkbox" name="roles[]" value="{{$role->id}}" id="{{$role->id}}"
+                @if ($user->roles->pluck('id')->contains($role->id))
+                        checked
+                @endif>
+                <label for="{{$role->id}}" class="custom-control-label">{{$role->name}}</label>
+            </label>
+            @error('roles"')
+            <div class="invalid-feedback">
+                {{ $errors->first('roles"') }}
+            </div>
+            @enderror
+        @endforeach
     </div>
 </div>
 
@@ -207,5 +207,4 @@
     <a href="#" class="btn btn-primary">Confirm  Details</a>
 </div> --}}
 
-						
-							
+
